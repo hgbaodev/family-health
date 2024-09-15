@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ant-modal .ant-modal-header {
+  margin-bottom: 14px;
+}
+
+.ant-form-item-explain-error {
+  font-size: 13px;
+}
+
+.table-assignment.ant-table-wrapper
+  .ant-table.ant-table-middle
+  .ant-table-tbody
+  .ant-table-wrapper:only-child
+  .ant-table {
+  margin-inline: 0;
+}
