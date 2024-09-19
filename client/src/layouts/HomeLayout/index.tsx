@@ -1,8 +1,12 @@
 import { Button, Layout, Space, Typography } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import logo from "../../assets/logo.png";
-import { Outlet } from "react-router-dom";
-import { GithubOutlined, TwitterOutlined, FacebookOutlined } from '@ant-design/icons';
+import { Link, Outlet } from "react-router-dom";
+import {
+  GithubOutlined,
+  TwitterOutlined,
+  FacebookOutlined,
+} from "@ant-design/icons";
 
 const { Header } = Layout;
 
@@ -36,15 +40,21 @@ const HomeLayout = () => {
         <Outlet />
       </Content>
       <Footer className="text-center bg-white py-8">
-      <div className="mb-4">
+        <div className="mb-4">
           <Space size="large">
-            <GithubOutlined href='https://github.com/hgbaodev' className="text-2xl hover:text-blue-500 transition-colors duration-300 cursor-pointer" />
-            <TwitterOutlined href='https://x.com/hgbaodev' className="text-2xl hover:text-blue-500 transition-colors duration-300 cursor-pointer" />
-            <FacebookOutlined href='https://www.facebook.com/fanpage.hgbaodev' className="text-2xl hover:text-blue-500 transition-colors duration-300 cursor-pointer" />
+            <Link to="https://github.com/hgbaodev">
+              <GithubOutlined className="text-2xl hover:text-blue-500 transition-colors duration-300 cursor-pointer" />
+            </Link>
+            <Link to="https://x.com/hgbaodev">
+              <TwitterOutlined className="text-2xl hover:text-blue-500 transition-colors duration-300 cursor-pointer" />
+            </Link>
+            <Link to="https://www.facebook.com/fanpage.hgbaodev">
+              <FacebookOutlined className="text-2xl hover:text-blue-500 transition-colors duration-300 cursor-pointer" />
+            </Link>
           </Space>
         </div>
         <Typography.Text className="text-gray-600">
-          Ant Design ©{new Date().getFullYear()} Created by hgbaodev
+          Ant Design ©{new Date().getFullYear()} Created by <span className="font-bold">hgbaodev</span>
         </Typography.Text>
       </Footer>
     </Layout>

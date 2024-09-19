@@ -11,10 +11,9 @@ const EnterEmail = () => {
 
   return (
     <Space direction="vertical" className="p-10 w-full bg-white rounded-xl">
-      <Title level={3}>Quên mật khẩu</Title>
+      <Title level={3}>Forgot Password</Title>
       <p>
-        Vui lòng nhập địa chỉ email của bạn, hệ thống sẽ gửi một mã xác thực để
-        khôi phục mật khẩu.
+        Please enter your email address, the system will send a verification code to reset your password.
       </p>
       <Form
         form={form}
@@ -29,21 +28,21 @@ const EnterEmail = () => {
             {
               required: true,
               whitespace: true,
-              message: "Vui lòng nhập email!",
+              message: "Please enter your email!",
             },
           ]}
         >
-          <Input variant="filled" placeholder="Nhập email tài khoản " />
+          <Input variant="filled" placeholder="Enter your account email" />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit" className="w-full">
-            Đặt lại mật khẩu
+            Reset Password
           </Button>
         </Form.Item>
       </Form>
       <p className="mb-2">
         <Link className="text-primary" to="/auth/login">
-          Đăng nhập
+          Login
         </Link>
       </p>
     </Space>
@@ -59,21 +58,20 @@ const EnterEmail = () => {
 //   };
 //   return (
 //     <Space direction="vertical" className="p-10 w-full">
-//       <Title level={3}>Nhập mã OTP</Title>
+//       <Title level={3}>Enter OTP</Title>
 //       <p>
-//         Mã OTP gồm 7 ký tự đã được gửi đến email của bạn. Vui lòng nhập mã OTP
-//         để xác nhận
+//         A 7-character OTP has been sent to your email. Please enter the OTP to confirm.
 //       </p>
 //       <Form layout="vertical" requiredMark="optional">
 //         <Form.Item
 //           className="text-center"
-//           label="Mã OTP"
+//           label="OTP"
 //           name="otp"
 //           rules={[
 //             {
 //               required: true,
 //               whitespace: true,
-//               message: "Vui lòng nhập mã OTP!",
+//               message: "Please enter the OTP!",
 //             },
 //           ]}
 //         >
@@ -87,7 +85,7 @@ const EnterEmail = () => {
 //         </Form.Item>
 //         <Form.Item>
 //           <Button type="primary" className="w-full">
-//             Xác nhận
+//             Confirm
 //           </Button>
 //         </Form.Item>
 //       </Form>
@@ -100,9 +98,9 @@ const EnterEmail = () => {
   
 //   return (
 //     <Space direction="vertical" className="p-10 w-full">
-//       <Title level={3}>Đặt lại mật khẩu</Title>
+//       <Title level={3}>Reset Password</Title>
 //       <p>
-//         Vui lòng nhập mật khẩu mới của bạn. Mật khẩu phải có ít nhất 6 ký tự
+//         Please enter your new password. The password must be at least 6 characters long.
 //       </p>
 //       <Form
 //         form={form}
@@ -111,17 +109,17 @@ const EnterEmail = () => {
 //         validateTrigger="onBlur"
 //       >
 //         <Form.Item
-//           label="Mật khẩu mới"
+//           label="New Password"
 //           name="password"
 //           rules={[
-//             { required: true, message: "Vui lòng nhập mật khẩu!" },
+//             { required: true, message: "Please enter the password!" },
 //             {
 //               min: 6,
-//               message: "Mật khẩu phải có ít nhất 6 ký tự",
+//               message: "The password must be at least 6 characters long.",
 //             },
 //           ]}
 //         >
-//           <Input.Password variant="filled" placeholder="Nhập mật khẩu mới" />
+//           <Input.Password variant="filled" placeholder="Enter your new password" />
 //         </Form.Item>
 //         <Form.Item>
 //           <Button
@@ -129,7 +127,7 @@ const EnterEmail = () => {
 //             htmlType="submit"
 //             className="w-full"
 //           >
-//             Đặt lại mật khẩu
+//             Reset Password
 //           </Button>
 //         </Form.Item>
 //       </Form>
