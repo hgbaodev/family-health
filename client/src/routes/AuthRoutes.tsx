@@ -11,17 +11,17 @@ export const AuthRoutes = {
       children: [
         {
           path: "login",
-          element: <LoginPage/>
+          element: <LoginPage />
         },
         {
           path: "register",
-          element: <RegisterPage/>
+          element: <RegisterPage />
         },
         {
           path: "forgot-password",
-          element: <ForgotPasswordPage />,
+          element: <ForgotPasswordPage />
         },
       ]
     }
   ]
-}
+};

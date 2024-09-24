@@ -1,15 +1,16 @@
 package com.hgbaodev.backend;
 
-import com.hgbaodev.backend.auth.AuthenticationService;
-import com.hgbaodev.backend.auth.RegisterRequest;
+import com.hgbaodev.backend.service.AuthenticationService;
+import com.hgbaodev.backend.request.auth.RegisterRequest;
+import com.hgbaodev.backend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import static com.hgbaodev.backend.user.Role.ADMIN;
-import static com.hgbaodev.backend.user.Role.MANAGER;
+import static com.hgbaodev.backend.enums.Role.ADMIN;
+import static com.hgbaodev.backend.enums.Role.MANAGER;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
@@ -21,26 +22,41 @@ public class BackendApplication {
 
 	@Bean
 	public CommandLineRunner commandLineRunner(
-			AuthenticationService service
+			AuthenticationService service,
+			UserRepository userRepository
 	) {
 		return args -> {
-			var admin = RegisterRequest.builder()
-					.firstname("Admin")
-					.lastname("Admin")
-					.email("admin@mail.com")
-					.password("password")
-					.role(ADMIN)
-					.build();
-			System.out.println("Admin token: " + service.register(admin).getAccessToken());
-
-			var manager = RegisterRequest.builder()
-					.firstname("Admin")
-					.lastname("Admin")
-					.email("manager@mail.com")
-					.password("password")
-					.role(MANAGER)
-					.build();
-			System.out.println("Manager token: " + service.register(manager).getAccessToken());
+			registerIfNotExists(service, userRepository, createAdminRequest());
+			registerIfNotExists(service, userRepository, createManagerRequest());
 		};
+	}
+
+	private void registerIfNotExists(AuthenticationService service, UserRepository userRepository, RegisterRequest request) {
+		if (!userRepository.existsByEmail(request.getEmail())) {
+			String token = service.register(request).getAccessToken();
+			System.out.println(request.getRole() + " token: " + token);
+		} else {
+			System.out.println("User with email " + request.getEmail() + " already exists.");
+		}
+	}
+
+	private RegisterRequest createAdminRequest() {
+		return RegisterRequest.builder()
+				.firstname("Admin")
+				.lastname("Admin")
+				.email("admin@mail.com")
+				.password("password")
+				.role(ADMIN)
+				.build();
+	}
+
+	private RegisterRequest createManagerRequest() {
+		return RegisterRequest.builder()
+				.firstname("Admin")
+				.lastname("Admin")
+				.email("manager@mail.com")
+				.password("password")
+				.role(MANAGER)
+				.build();
 	}
 }

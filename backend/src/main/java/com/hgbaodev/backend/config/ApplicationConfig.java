@@ -1,7 +1,6 @@
 package com.hgbaodev.backend.config;
 
-import com.hgbaodev.backend.auditing.ApplicationAuditAware;
-import com.hgbaodev.backend.user.UserRepository;
+import com.hgbaodev.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

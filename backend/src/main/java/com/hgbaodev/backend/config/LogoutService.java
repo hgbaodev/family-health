@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.config;
 
-import com.hgbaodev.backend.token.TokenRepository;
+import com.hgbaodev.backend.repository.TokenRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

@@ -2,10 +2,15 @@ server:
   port: 3001
 
 spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
   datasource:
     url: jdbc:mysql://localhost:3306/j2ee
     username: root
-    password:
+    password: # Điền mật khẩu của bạn
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     generate-ddl: true
@@ -16,6 +21,6 @@ application:
   security:
     jwt:
       secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
-      expiration: 86400000 # a day
+      expiration: 86400000 # 1 day in milliseconds
       refresh-token:
-        expiration: 604800000 # 7 days
+        expiration: 604800000 # 7 days in milliseconds
