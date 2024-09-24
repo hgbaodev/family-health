@@ -13,9 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 
-import static com.hgbaodev.backend.user.Permission.*;
-import static com.hgbaodev.backend.user.Role.ADMIN;
-import static com.hgbaodev.backend.user.Role.MANAGER;
+import static com.hgbaodev.backend.enums.Permission.*;
 import static org.springframework.http.HttpMethod.*;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -63,9 +61,7 @@ public class SecurityConfiguration {
                         logout.logoutUrl("/api/v1/auth/logout")
                                 .addLogoutHandler(logoutHandler)
                                 .logoutSuccessHandler((request, response, authentication) -> SecurityContextHolder.clearContext())
-                )
-        ;
-
+                );
         return http.build();
     }
 }

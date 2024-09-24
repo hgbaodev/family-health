@@ -1,16 +1,24 @@
 import DashboardLayout from "../layouts/DashboardLayout";
+import DashBoardPage from "../pages/manager/DashBoardPage";
+import MemberPage from "../pages/manager/MemberPage";
+
+// Lazy load components
 
 export const DashboardRoutes = {
   children: [
     {
-      path: "/management",
+      path: "/manager",
       element: <DashboardLayout />,
       children: [
         {
           path: "",
-          element: <h2>Hello hgbaodev</h2>
+          element: <DashBoardPage />
         },
+        {
+          path: "members",
+          element: <MemberPage/> // You can lazy load this too if it becomes a separate component
+        }
       ]
     }
   ]
-}
+};
