@@ -10,8 +10,8 @@ spring:
   datasource:
     url: jdbc:mysql://localhost:3306/j2ee
     username: root
-    password: # Điền mật khẩu của bạn
-    driver-class-name: com.mysql.jdbc.Driver
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     generate-ddl: true
     hibernate:
@@ -24,3 +24,8 @@ application:
       expiration: 86400000 # 1 day in milliseconds
       refresh-token:
         expiration: 604800000 # 7 days in milliseconds
+
+openai:
+  api:
+    key: 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
+    url: https://api.openai.com/v1/chat/completions

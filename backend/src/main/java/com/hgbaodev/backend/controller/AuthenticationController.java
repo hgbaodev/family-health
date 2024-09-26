@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.controller;
 
+import com.hgbaodev.backend.enums.Role;
 import com.hgbaodev.backend.request.auth.LoginRequest;
 import com.hgbaodev.backend.response.ApiResponse;
 import com.hgbaodev.backend.response.AuthenticationResponse;
@@ -26,6 +27,7 @@ public class AuthenticationController {
   public ResponseEntity<ApiResponse<AuthenticationResponse>> register(
           @Valid @RequestBody RegisterRequest request
   ) {
+    request.setRole(Role.USER);
     AuthenticationResponse authResponse = service.register(request);
     ApiResponse<AuthenticationResponse> response = new ApiResponse<>(
             HttpStatus.OK.value(),

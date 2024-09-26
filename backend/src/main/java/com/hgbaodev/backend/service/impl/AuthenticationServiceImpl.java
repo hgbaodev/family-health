@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.service.impl;
 
-import com.hgbaodev.backend.config.JwtService;
+import com.hgbaodev.backend.service.JwtService;
 import com.hgbaodev.backend.enums.TokenType;
 import com.hgbaodev.backend.model.Token;
 import com.hgbaodev.backend.model.User;
@@ -21,6 +21,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -204,6 +207,22 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         ApiResponse<AuthenticationResponse> apiResponse = new ApiResponse<>(200,"Get infomation successlly", authResponse);
         return ResponseEntity.ok(apiResponse);
+    }
+
+    public User getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            throw new UsernameNotFoundException("No authenticated user found");
+        }
+
+        String userEmail;
+        if (authentication.getPrincipal() instanceof UserDetails) {
+            userEmail = ((UserDetails) authentication.getPrincipal()).getUsername();
+        } else {
+            userEmail = authentication.getPrincipal().toString();
+        }
+        return repository.findByEmail(userEmail)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
     }
 
 }

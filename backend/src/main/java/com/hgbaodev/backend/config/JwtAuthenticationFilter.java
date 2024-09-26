@@ -2,6 +2,7 @@ package com.hgbaodev.backend.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hgbaodev.backend.repository.TokenRepository;
+import com.hgbaodev.backend.service.JwtService;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.servlet.FilterChain;

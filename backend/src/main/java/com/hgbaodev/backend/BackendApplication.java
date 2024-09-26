@@ -9,8 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
-import static com.hgbaodev.backend.enums.Role.ADMIN;
-import static com.hgbaodev.backend.enums.Role.MANAGER;
+import static com.hgbaodev.backend.enums.Role.*;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
@@ -45,18 +44,18 @@ public class BackendApplication {
 				.firstname("Admin")
 				.lastname("Admin")
 				.email("admin@mail.com")
-				.password("password")
+				.password("12345678")
 				.role(ADMIN)
 				.build();
 	}
 
 	private RegisterRequest createManagerRequest() {
 		return RegisterRequest.builder()
-				.firstname("Admin")
-				.lastname("Admin")
-				.email("manager@mail.com")
-				.password("password")
-				.role(MANAGER)
+				.firstname("User")
+				.lastname("User")
+				.email("user@mail.com")
+				.password("12345678")
+				.role(USER)
 				.build();
 	}
 }
