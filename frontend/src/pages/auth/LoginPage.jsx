@@ -6,7 +6,6 @@ import { useLogin } from "~/api/auth/login";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
-
   const mutation = useLogin({
     onSuccess: () => {
       message.success("Login successful");
@@ -70,7 +69,7 @@ const LoginPage = () => {
           <Input.Password variant="filled" placeholder="Enter your password" />
         </Form.Item>
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="w-full">
+          <Button loading={mutation.isPending} type="primary" htmlType="submit" className="w-full">
             Login
           </Button>
         </Form.Item>

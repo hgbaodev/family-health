@@ -11,19 +11,19 @@ export const login = ({ email, password }) => {
   });
 };
 
-export const useLogin = ({ mutationConfig }) => {
-  const { onSuccess, onError, ...restConfig } = mutationConfig || {};
+export const useLogin = (options = {}) => {
+  const { onSuccess, onError, ...restConfig } = options;
   const setUser = useAuthStore((state) => state.setUser);
 
   return useMutation({
+    mutationFn: login,
     onSuccess: (data, ...args) => {
       setUser(data);
       onSuccess?.(data, ...args);
     },
-    onError: (...args) => {
-      onError?.(...args);
+    onError: (error, ...args) => {
+      onError?.(error, ...args);
     },
     ...restConfig,
-    mutationFn: login,
   });
 };

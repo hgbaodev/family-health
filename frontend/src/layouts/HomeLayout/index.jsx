@@ -1,7 +1,7 @@
 import { Button, Layout, Space, Typography } from "antd";
 import { Content, Footer } from "antd/es/layout/layout";
 import logo from "../../assets/logo.png";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import {
   GithubOutlined,
   TwitterOutlined,
@@ -11,6 +11,9 @@ import {
 const { Header } = Layout;
 
 const HomeLayout = () => {
+
+  const navigate = useNavigate();
+
   return (
     <Layout className="min-h-screen bg-gradient-to-b from-green-50 to-blue-50">
       <Header className="flex justify-between items-center bg-white shadow-md">
@@ -28,8 +31,8 @@ const HomeLayout = () => {
           <Space>
             <Button
               type="primary"
-              href="/auth/login"
               className="bg-green-500 hover:bg-green-600 transition-colors duration-300"
+              onClick={() => navigate("/auth/login")}   
             >
               Login
             </Button>
@@ -54,7 +57,8 @@ const HomeLayout = () => {
           </Space>
         </div>
         <Typography.Text className="text-gray-600">
-          Ant Design ©{new Date().getFullYear()} Created by <span className="font-bold">hgbaodev</span>
+          Ant Design ©{new Date().getFullYear()} Created by{" "}
+          <span className="font-bold">hgbaodev</span>
         </Typography.Text>
       </Footer>
     </Layout>
