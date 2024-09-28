@@ -2,24 +2,19 @@ import { useMutation } from "@tanstack/react-query";
 import { api } from "~/axios/api";
 import { useAuthStore } from "~/stores/auth/authStore";
 
-export const login = ({ email, password }) => {
-  return api.post(`/auth/login`, {
-    email,
-    password,
-  });
+export const me = () => {
+  return api.get(`/auth/me`);
 };
 
-export const useLogin = (options = {}) => {
+export const useMe = (options = {}) => {
   const { onSuccess, onError, ...restConfig } = options;
   const { setUser, setIsAuthenticated, setIsLoaded } = useAuthStore((state) => state);
 
   return useMutation({
-    mutationFn: login,
+    mutationFn: me,
     onSuccess: (data, ...args) => {
       const result = data.data;
       setUser(result.user);
-      localStorage.setItem("access_token", result.access_token);
-      localStorage.setItem("refresh_token", result.refresh_token);
       setIsAuthenticated(true);
       setIsLoaded(true);
       onSuccess?.(data, ...args);
@@ -28,8 +23,6 @@ export const useLogin = (options = {}) => {
       onError?.(error, ...args);
       setIsLoaded(true);
       setIsAuthenticated(false);
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
     },
     ...restConfig,
   });

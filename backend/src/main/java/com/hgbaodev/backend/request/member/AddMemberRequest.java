@@ -30,6 +30,7 @@ public class AddMemberRequest {
   @NotBlank(message = "Relationship is required")
   private String relationship;
 
+  @NotBlank(message = "BloodType is required")
   @Pattern(regexp = "A|B|AB|O", message = "BloodType must be A, B, AB, or O")
   private String bloodType;
 

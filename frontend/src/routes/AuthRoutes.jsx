@@ -1,7 +1,11 @@
 import AuthLayout from "~/layouts/AuthLayout";
-import ForgotPasswordPage from "~/pages/auth/ForgotPasswordPage";
-import LoginPage from "~/pages/auth/LoginPage";
-import RegisterPage from "~/pages/auth/RegisterPage";
+import Loadable from "~/components/Loadable";
+import React from "react";
+import AuthRoute from "~/guards/AuthRoute";
+
+const LoginPage = Loadable(React.lazy(() => import("~/pages/auth/LoginPage")));
+const RegisterPage = Loadable(React.lazy(() => import("~/pages/auth/RegisterPage")));
+const ForgotPasswordPage = Loadable(React.lazy(() => import("~/pages/auth/ForgotPasswordPage")));
 
 export const AuthRoutes = {
   children: [
@@ -11,15 +15,15 @@ export const AuthRoutes = {
       children: [
         {
           path: "login",
-          element: <LoginPage />
+          element: <AuthRoute component={LoginPage} />
         },
         {
           path: "register",
-          element: <RegisterPage />
+          element: <AuthRoute component={RegisterPage} />
         },
         {
           path: "forgot-password",
-          element: <ForgotPasswordPage />
+          element: <AuthRoute component={ForgotPasswordPage} />
         },
       ]
     }

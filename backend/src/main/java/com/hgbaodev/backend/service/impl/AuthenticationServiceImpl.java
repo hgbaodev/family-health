@@ -72,12 +72,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if(!repository.existsByEmail(request.getEmail())) {
             throw new IllegalStateException("Email not found");
         }
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (Exception e) {
+            return null;
+        }
+
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         var jwtToken = jwtService.generateToken(user);
@@ -175,8 +180,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             return ResponseEntity.badRequest().body(errorResponse);
         }
 
-        final String refreshToken = authHeader.substring(7);
-        final String userEmail = jwtService.extractUsername(refreshToken);
+        final String access_token = authHeader.substring(7);
+        final String userEmail = jwtService.extractUsername(access_token);
 
         if (userEmail == null) {
             ApiResponse<String> errorResponse = new ApiResponse<>(400,"Invalid refresh token", null);
@@ -186,18 +191,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var user = this.repository.findByEmail(userEmail)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        if (!jwtService.isTokenValid(refreshToken, user)) {
+        if (!jwtService.isTokenValid(access_token, user)) {
             ApiResponse<String> errorResponse = new ApiResponse<>(400,"Refresh token is not valid", null);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorResponse);
         }
 
-        var accessToken = jwtService.generateToken(user);
-        revokeAllUserTokens(user);
-        saveUserToken(user, accessToken);
+
 
         var authResponse = AuthenticationResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
+                .accessToken(access_token)
+                .refreshToken("")
                 .user(UserResponse.builder()
                         .firstname(user.getFirstname())
                         .lastname(user.getLastname())

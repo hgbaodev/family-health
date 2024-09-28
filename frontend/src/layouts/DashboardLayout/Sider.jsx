@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Layout, Drawer, Grid, Space, Typography } from "antd";
 import MenuCustom from "./Menu";
 import logo from "../../assets/logo.png";
+import { useNavigate } from "react-router-dom";
 
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
@@ -9,6 +10,7 @@ const { useBreakpoint } = Grid;
 function ResponsiveSider({ collapsed, setCollapsed }) {
   const [isMobile, setIsMobile] = useState(false);
   const screens = useBreakpoint();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsMobile(!screens.lg);
@@ -40,9 +42,16 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
           width="240"
         >
           <>
-            <Space className="flex flex-col items-center justify-center p-4">
-              <img src={logo} className="w-12 h-12"/>
-              <Typography.Title level={4} className="text-green-600">FamilyHealth</Typography.Title>
+            <Space
+              className="flex flex-col items-center justify-center p-4 cursor-pointer"
+              onClick={() => {
+                navigate("/manager");
+              }}
+            >
+              <img src={logo} className="w-14 h-14" />
+              <Typography.Title level={4} color="text-green-600">
+                FamilyHealth
+              </Typography.Title>
             </Space>
             <MenuCustom
               mode="inline"

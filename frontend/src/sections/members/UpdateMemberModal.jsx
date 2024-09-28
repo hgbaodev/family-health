@@ -3,8 +3,6 @@ import { Button, Form, Input, Modal } from "antd";
 const UpdateMemberModal= ({ open, handleCancel, selectedMember }) => {
   const [form] = Form.useForm();
 
-  console.log(selectedMember);
-
   const onFinish = (values) => {
     console.log(values);
   };

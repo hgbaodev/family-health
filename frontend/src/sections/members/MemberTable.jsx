@@ -1,38 +1,32 @@
 import { ExportOutlined } from "@ant-design/icons";
-import { Button, Flex, Input, Table, Tag } from "antd";
+import { Button, Input, Table, Tag } from "antd";
 import useMemberColumns from "./MemberColum";
 import { ROW_PER_PAGE } from "../../config/constants";
-import { useMembers } from "../../api/members/get-members";
 import { useState } from "react";
+import { useMembers } from "../../api/members/get-members";
 
 export const MemberTable = () => {
   const columns = useMemberColumns();
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
 
-  const { data: members, isLoading } = useMembers({
-    page,
-    keyword,
-    size: ROW_PER_PAGE,
-  });
-
-
-  console.log(members, isLoading);
+  const { data: members, isLoading } = useMembers({ page, size: ROW_PER_PAGE, keyword });
 
   return (
     <>
       <Table
         columns={columns}
-        dataSource={[]}
+        dataSource={members}
         size="middle"
         pagination={{
-          current: 1,
-          pageSize: 8,
-          total: 0,
+          current: page,
+          pageSize: ROW_PER_PAGE,
+          total: members?.length || 0,
+          onChange: (newPage) => setPage(newPage),
         }}
-        loading={false}
+        loading={isLoading}
         title={() => (
-          <Flex justify="space-between">
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Input.Search
               placeholder="Search employee..."
               className="w-[250px]"
@@ -43,9 +37,9 @@ export const MemberTable = () => {
               }}
             />
             <Button icon={<ExportOutlined />}>
-              Export<Tag color="blue">Coming Soon</Tag>
+              Export <Tag color="blue">Coming Soon</Tag>
             </Button>
-          </Flex>
+          </div>
         )}
       />
     </>

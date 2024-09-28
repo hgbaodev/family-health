@@ -1,15 +1,23 @@
 import { Form, Input, Space, Button, message } from "antd";
 import Title from "antd/es/typography/Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useLogin } from "~/api/auth/login";
+import { useAuthStore } from "~/stores/auth/authStore";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
+  const { user, isAuthenticated } = useAuthStore((state) => state); 
+  console.log({
+    user,
+    isAuthenticated,
+  });
+  const navigate = useNavigate();
   const mutation = useLogin({
     onSuccess: () => {
       message.success("Login successful");
       form.resetFields();
+      navigate("/manager")
     },
     onError: (error) => {
       message.error(error.message || "Login failed");

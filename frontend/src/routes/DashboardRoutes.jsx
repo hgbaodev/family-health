@@ -1,10 +1,10 @@
-
-
-// Lazy load components
-
+import React from "react";
 import DashboardLayout from "~/layouts/DashboardLayout";
-import DashBoardPage from "~/pages/manager/DashBoardPage";
-import MemberPage from "~/pages/manager/MemberPage";
+import Loadable from "~/components/Loadable";
+import PrivateRoute from "~/guards/PrivateRoute";
+
+const DashBoardPage = Loadable(React.lazy(() => import("~/pages/manager/DashBoardPage")));
+const MemberPage = Loadable(React.lazy(() => import("~/pages/manager/MemberPage")));
 
 export const DashboardRoutes = {
   children: [
@@ -14,11 +14,11 @@ export const DashboardRoutes = {
       children: [
         {
           path: "",
-          element: <DashBoardPage />
+          element: <PrivateRoute component={DashBoardPage} />
         },
         {
           path: "members",
-          element: <MemberPage /> // You can lazy load this too if it becomes a separate component
+          element: <PrivateRoute component={MemberPage} />
         }
       ]
     }

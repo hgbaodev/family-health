@@ -1,4 +1,7 @@
-import NotFoundPage from "~/pages/error/not-found";
+import React from "react";
+import Loadable from "~/components/Loadable";
+
+const NotFoundPage = Loadable(React.lazy(() => import("~/pages/error/not-found")));
 
 export const ErrorRoutes = {
   children: [
@@ -7,4 +10,4 @@ export const ErrorRoutes = {
       element: <NotFoundPage />,
     }
   ]
-}
+};

@@ -1,17 +1,15 @@
 import { PlusSquareOutlined } from "@ant-design/icons";
 import { Button, Flex, Space } from "antd";
-import { useState } from "react";
 import ConfirmModal from "~/components/modals/ConfirmModal";
 import PageHeader from "~/components/page-header";
 import CreateMemberModal from "~/sections/members/CreateMemberModal";
 import { MemberTable } from "~/sections/members/MemberTable";
 import UpdateMemberModal from "~/sections/members/UpdateMemberModal";
+import { useMembersStore } from "~/stores/members/memberStore";
 
 
 const MemberPage = () => {
-  const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [openCreateModal, setOpenCreateModal] = useState(false);
-  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useMembersStore((state) => state);
 
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);

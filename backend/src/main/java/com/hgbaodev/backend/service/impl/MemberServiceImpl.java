@@ -4,6 +4,9 @@ import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.repository.MemberRepository;
 import com.hgbaodev.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -40,7 +43,12 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> getAllMembers() {
-        return memberRepository.findAll();
+    public Page<Member> getAllMembers(int page, int size, String keyword) {
+        Pageable pageable = PageRequest.of(page - 1, size);  // page is 0-based
+        if (keyword != null && !keyword.isEmpty()) {
+            return memberRepository.findByKeyword(keyword, pageable);
+        }
+        return memberRepository.findAll(pageable);  // Use pageable for pagination
     }
+
 }

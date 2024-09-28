@@ -10,6 +10,7 @@ import com.hgbaodev.backend.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -74,13 +75,20 @@ public class MemberController {
     }
 
     @GetMapping
-    public ResponseEntity<ApiResponse<?>> getAllMembers() {
-        List<Member> members = memberService.getAllMembers();
+    public ResponseEntity<ApiResponse<List<Member>>> getAllMembers(
+            @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "8") int size,
+            @RequestParam(defaultValue = "") String keyword) {
+        Page<Member> membersPage = memberService.getAllMembers(page, size, keyword);
+
+        List<Member> membersContent = membersPage.getContent();
+
         ApiResponse<List<Member>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
                 "Get list member successfully",
-                members
+                membersContent
         );
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

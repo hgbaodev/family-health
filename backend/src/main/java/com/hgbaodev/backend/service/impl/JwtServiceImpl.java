@@ -61,6 +61,8 @@ public class JwtServiceImpl implements JwtService {
             UserDetails userDetails,
             long expiration
     ) {
+        long oneDayInMillis = 24 * 60 * 60 * 1000;
+        expiration = oneDayInMillis;
         return Jwts
                 .builder()
                 .setClaims(extraClaims)

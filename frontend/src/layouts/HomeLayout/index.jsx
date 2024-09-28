@@ -7,10 +7,12 @@ import {
   TwitterOutlined,
   FacebookOutlined,
 } from "@ant-design/icons";
+import { useAuthStore } from "~/stores/auth/authStore";
 
 const { Header } = Layout;
 
 const HomeLayout = () => {
+  const { isAuthenticated } = useAuthStore();
 
   const navigate = useNavigate();
 
@@ -29,13 +31,23 @@ const HomeLayout = () => {
         </div>
         <div>
           <Space>
-            <Button
-              type="primary"
-              className="bg-green-500 hover:bg-green-600 transition-colors duration-300"
-              onClick={() => navigate("/auth/login")}   
-            >
-              Login
-            </Button>
+            {isAuthenticated ? (
+              <Button
+                type="primary"
+                className="bg-green-500 hover:bg-green-600 transition-colors duration-300"
+                onClick={() => navigate("/manager")}
+              >
+                Dashboard
+              </Button>
+            ) : (
+              <Button
+                type="primary"
+                className="bg-green-500 hover:bg-green-600 transition-colors duration-300"
+                onClick={() => navigate("/auth/login")}
+              >
+                Login
+              </Button>
+            )}
           </Space>
         </div>
       </Header>

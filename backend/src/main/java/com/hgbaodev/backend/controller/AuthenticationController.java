@@ -42,6 +42,13 @@ public class AuthenticationController {
       @Valid @RequestBody LoginRequest request
   ) {
     AuthenticationResponse authResponse = service.authenticate(request);
+    if(authResponse == null) {
+      return new ResponseEntity<>(new ApiResponse<>(
+              HttpStatus.UNAUTHORIZED.value(),
+              "Login Failed",
+              authResponse
+      ), HttpStatus.UNAUTHORIZED);
+    }
     ApiResponse<AuthenticationResponse> response = new ApiResponse<>(
             HttpStatus.OK.value(),
             "Login successful",
