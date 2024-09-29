@@ -3,6 +3,7 @@ package com.hgbaodev.backend.controller;
 import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.request.member.AddMemberRequest;
+import com.hgbaodev.backend.request.member.UpdateMemberRequest;
 import com.hgbaodev.backend.response.ApiResponse;
 import com.hgbaodev.backend.response.AuthenticationResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
@@ -51,10 +52,26 @@ public class MemberController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Member> updateMember(@PathVariable("id") Integer id, @Validated @RequestBody Member member) {
-        member.setMemberID(id);
+    public ResponseEntity<ApiResponse<?>> updateMember(
+            @PathVariable("id") Integer id,
+            @Valid @RequestBody UpdateMemberRequest updateMemberRequest) {
+        Member member = Member.builder()
+                .memberID(id)
+                .fullName(updateMemberRequest.getFullName())
+                .dateOfBirth(updateMemberRequest.getDateOfBirth())
+                .gender(updateMemberRequest.getGender())
+                .relationship(updateMemberRequest.getRelationship())
+                .bloodType(updateMemberRequest.getBloodType())
+                .height(updateMemberRequest.getHeight())
+                .weight(updateMemberRequest.getWeight())
+                .build();
         Member updatedMember = memberService.updateMember(member);
-        return ResponseEntity.ok(updatedMember);
+        ApiResponse<Member> response = new ApiResponse<>(
+                HttpStatus.OK.value(),
+                "Update member successfully",
+                updatedMember
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

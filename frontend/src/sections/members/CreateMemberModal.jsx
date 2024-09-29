@@ -1,16 +1,19 @@
 import { Button, Form, Input, Modal, Select, DatePicker, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useCreateMember } from "~/api/members/create-member";
+import { useMembersStore } from "~/stores/members/memberStore";
 
 const { Option } = Select;
 
-const CreateMemberModal = ({ open, handleCancel }) => {
+const CreateMemberModal = () => {
   const [form] = Form.useForm();
+
+  const { openCreateModal, setOpenCreateModal } = useMembersStore();
 
   const mutation = useCreateMember({
     onSuccess: () => {
       form.resetFields();
-      handleCancel();
+      setOpenCreateModal(false);
       message.success("Member created successfully");
     },
     onFinish: () => {
@@ -25,8 +28,8 @@ const CreateMemberModal = ({ open, handleCancel }) => {
   return (
     <Modal
       title="Create Member"
-      open={open}
-      onCancel={handleCancel}
+      open={openCreateModal}
+      onCancel={() => setOpenCreateModal(false)}
       footer={null}
     >
       <Form form={form} onFinish={onFinish} className="pt-4" layout="vertical" variant="filled">

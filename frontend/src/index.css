@@ -11,3 +11,13 @@
 .ant-form-item-explain-error {
   font-size: 13px;
 }
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+canvas {
+  width: 98vmin;
+  height: 98vmin;
+}

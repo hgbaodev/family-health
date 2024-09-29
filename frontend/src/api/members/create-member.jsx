@@ -1,4 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getMembersQueryOptions } from "~/api/members/get-members";
 import { api } from "~/axios/api";
 
 export const createMember = ({
@@ -24,9 +25,14 @@ export const createMember = ({
 export const useCreateMember = (options = {}) => {
   const { onSuccess, onError, ...restConfig } = options;
 
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: createMember,
     onSuccess: (data, ...args) => {
+      queryClient.invalidateQueries({
+        queryKey: getMembersQueryOptions.queryKey,
+      });
       onSuccess?.(data, ...args);
     },
     onError: (error, ...args) => {

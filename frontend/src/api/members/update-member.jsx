@@ -2,17 +2,17 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getMembersQueryOptions } from "~/api/members/get-members";
 import { api } from "~/axios/api";
 
-export const deleteMember = (id) => {
-  return api.delete(`/members/${id}`);
+export const updateMember = (id, data) => {
+  return api.put(`/members/${id}`, data);
 };
 
-export const useDeleteMember = (options = {}) => {
+export const useUpdateMember = (options = {}) => {
   const { onSuccess, onError, ...restConfig } = options;
 
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: deleteMember,
+    mutationFn: ({ id, data }) => updateMember(id, data),
     onSuccess: (data, ...args) => {
       queryClient.invalidateQueries({
         queryKey: getMembersQueryOptions.queryKey,

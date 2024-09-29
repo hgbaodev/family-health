@@ -3,8 +3,12 @@ import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteMember } from "~/api/members/delete-member";
+import { useMembersStore } from "~/stores/members/memberStore";
 
 const useMemberColumns = () => {
+
+  const { setOpenUpdateModal, setMember } = useMembersStore((state) => state);
+
   const mutateDelete = useDeleteMember({
     onSuccess: () => {
       message.success("Delete member successfully");
@@ -14,8 +18,9 @@ const useMemberColumns = () => {
     },
   });
 
-  const handleEdit = (id) => {
-    console.log("Edit member with ID: ", id);
+  const handleEdit = (member) => {
+    setMember(member);
+    setOpenUpdateModal(true);
   };
 
   const handleDelete = (id) => {
@@ -72,7 +77,7 @@ const useMemberColumns = () => {
         render: (_, member) => (
           <Space>
             <Button
-              onClick={handleEdit(member.memberID)}
+              onClick={() => handleEdit(member)}
               icon={<EditOutlined />}
             />
             <Popconfirm
