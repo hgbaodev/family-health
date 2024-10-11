@@ -1,7 +1,10 @@
 package com.hgbaodev.backend.service.impl;
 
+import com.hgbaodev.backend.model.Medication;
 import com.hgbaodev.backend.model.Member;
+import com.hgbaodev.backend.repository.MedicationRepository;
 import com.hgbaodev.backend.repository.MemberRepository;
+import com.hgbaodev.backend.service.MedicationService;
 import com.hgbaodev.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -10,46 +13,44 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class MemberServiceImpl implements MemberService {
+public class MedicationServiceImpl implements MedicationService {
 
-    private final MemberRepository memberRepository;
+    private final MedicationRepository medicationRepository;
 
     @Override
-    public Member addMember(Member member) {
-        return memberRepository.save(member);
+    public Medication addMedication(Medication medication) {
+        return medicationRepository.save(medication);
     }
 
     @Override
-    public Member updateMember(Member member) {
-        Member check = memberRepository.findById(member.getMemberID())
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-        member.setUserID(check.getUserID());
-        return memberRepository.save(member);
+    public Medication updateMedication(Medication medication) {
+        Medication check = medicationRepository.findById(medication.getMedicationID())
+                .orElseThrow(() -> new IllegalArgumentException("Medication not found"));
+        medication.setMedicationID(check.getMedicationID());
+        return medicationRepository.save(medication);
     }
 
     @Override
-    public void deleteMember(Integer memberID) {
-        memberRepository.deleteById(memberID);
+    public void deleteMedication(Integer medicationID) {
+        medicationRepository.deleteById(medicationID);
     }
 
     @Override
-    public Member getMemberById(Integer memberID) {
-        return memberRepository.findById(memberID)
-                .orElseThrow(() -> new IllegalArgumentException("Member not found"));
+    public Medication getMedicationById(Integer medicationID) {
+        return medicationRepository.findById(medicationID)
+                .orElseThrow(() -> new IllegalArgumentException("Medication not found"));
     }
 
     @Override
-    public Page<Member> getAllMembers(int page, int size, String keyword) {
+    public Page<Medication> getAllMedications(int page, int size, String keyword) {
         Pageable pageable = PageRequest.of(page - 1, size);
         if (keyword != null && !keyword.isEmpty()) {
-            return memberRepository.findByKeyword(keyword, pageable);
+            return medicationRepository.findByKeyword(keyword, pageable);
         }
-        return memberRepository.findAll(pageable);
+        return medicationRepository.findAll(pageable);
     }
 
 }

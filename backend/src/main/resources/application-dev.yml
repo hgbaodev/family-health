@@ -9,13 +9,14 @@ spring:
       add-mappings: false
   datasource:
     url: jdbc:mysql://localhost:3306/j2ee
-    username: work
-    password: 299792458
+    username: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: update
+    show-sql: true
 
 application:
   security:

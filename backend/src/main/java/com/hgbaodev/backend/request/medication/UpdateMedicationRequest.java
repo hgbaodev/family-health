@@ -1,6 +1,9 @@
-package com.hgbaodev.backend.request.member;
+package com.hgbaodev.backend.request.medication;
 
-import jakarta.validation.constraints.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
+import jakarta.validation.constraints.Size;
 import lombok.*;
 
 @Data
@@ -9,36 +12,23 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class UpdateMemberRequest {
+public class UpdateMedicationRequest {
 
-  private Integer memberID;
+  @NotBlank(message = "Medication name is required")
+  @Size(max = 100, message = "Medication name must not exceed 100 characters")
+  private String name;
 
-  private Integer userID;
+  @NotBlank(message = "Frequency is required")
+  private String frequency;
 
-  @NotBlank(message = "FullName is required")
-  @Size(max = 100, message = "FullName must not exceed 100 characters")
-  private String fullName;
+  @NotNull(message = "Start date is required")
+  @Past(message = "Start date must be a past date")
+  private java.time.LocalDate startDate;
 
-  @NotNull(message = "DateOfBirth is required")
-  @Past(message = "DateOfBirth must be a past date")
-  private java.time.LocalDate dateOfBirth;
+//  @NotNull(message = "End date is required")
+//  @Past(message = "End date must be a past date")
+  private java.time.LocalDate endDate;
 
-  @NotBlank(message = "Gender is required")
-  @Pattern(regexp = "Male|Female|Other", message = "Gender must be Male, Female, or Other")
-  private String gender;
-
-  @NotBlank(message = "Relationship is required")
-  private String relationship;
-
-  @NotBlank(message = "BloodType is required")
-  @Pattern(regexp = "A|B|AB|O", message = "BloodType must be A, B, AB, or O")
-  private String bloodType;
-
-  @NotNull(message = "Height is required")
-  @Min(value = 0, message = "Height must be greater than or equal to 0")
-  private Float height;
-
-  @NotNull(message = "Weight is required")
-  @Min(value = 0, message = "Weight must be greater than or equal to 0")
-  private Float weight;
+//  @NotBlank(message = "Note is required")
+  private String note;
 }
