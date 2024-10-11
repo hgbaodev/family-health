@@ -37,7 +37,7 @@ const CreateEmergencyContactModal = () => {
                 layout="vertical"
             >
                 <Row gutter={16}>
-                    <Col span={12}>
+                    <Col span={24}>
                         <Form.Item
                             label="User ID"
                             name="userID"

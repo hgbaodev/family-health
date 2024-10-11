@@ -2,31 +2,35 @@ import { Button, Form, Input, Modal, Row, Col, message } from "antd";
 import { useUpdateEmergencyContact } from "~/api/emergencyContacts/update-emergencyContact"; 
 import { useEmergencyContactStore } from "~/stores/emergencyContacts/emergencyContactStore"; 
 import { useEffect } from "react";
+import { Flex } from "antd";
 
 // const { Option } = Select;
 
 const UpdateEmergencyContactModal = () => {
   const [form] = Form.useForm();
   const { openUpdateModal, setOpenUpdateModal, emergencyContact } = useEmergencyContactStore((state) => state);
+  console.log("emergencyContact:", emergencyContact);
 
   const mutation = useUpdateEmergencyContact({
     onSuccess: () => {
-      message.success("Emergency contact updated successfully");
       form.resetFields();  // Reset form sau khi cập nhật thành công
-      setOpenUpdateModal(false); // Đóng modal
+      message.success("Emergency contact updated successfully");
+      // setOpenUpdateModal(false); // Đóng modal
     },
     onError: () => {
       message.error("Failed to update emergency contact");
     },
-  });
+  }); 
 
   const onFinish = (values) => {
-    if (emergencyContact?.id) { // Đảm bảo emergencyContact có id
-      mutation.mutate({
-        id: emergencyContact.id,
-        data: values,
-      });
-    }
+    const formattedValues = {
+      ...values,
+    };
+    mutation.mutate({
+      id: emergencyContact.contactID,
+      data: formattedValues,
+    });
+    setOpenUpdateModal(false);
   };
 
   useEffect(() => {
@@ -47,11 +51,12 @@ const UpdateEmergencyContactModal = () => {
       <Form
         className="pt-4"
         layout="vertical"
+        variant="filled"
         form={form}
         onFinish={onFinish}
       >
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="User ID"
               name="userID"
@@ -61,7 +66,7 @@ const UpdateEmergencyContactModal = () => {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Name"
               name="name"
@@ -71,7 +76,7 @@ const UpdateEmergencyContactModal = () => {
             </Form.Item>
           </Col>
 
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Relationship"
               name="relationship"
@@ -80,10 +85,8 @@ const UpdateEmergencyContactModal = () => {
               <Input placeholder="Enter relationship..." />
             </Form.Item>
           </Col>
-        </Row>
 
-        <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Phone Number"
               name="phoneNumber"
@@ -95,27 +98,22 @@ const UpdateEmergencyContactModal = () => {
         </Row>
 
         <Form.Item className="pt-4 m-0">
-          <Row justify="end" gutter={[16, 16]}>
-            <Col>
-              <Button
-                loading={false}
-                type="default"
-                htmlType="reset"
-                onClick={() => form.resetFields()}
-              >
-                Reset
-              </Button>
-            </Col>
-            <Col>
-              <Button
-                loading={false}
-                type="primary"
-                htmlType="submit"
-              >
-                Submit
-              </Button>
-            </Col>
-          </Row>
+          <Flex justify="end" className="gap-3">
+            <Button
+              loading={false}
+              type="default"
+              htmlType="reset"
+            >
+              Reset
+            </Button>
+            <Button
+              loading={false}
+              type="primary"
+              htmlType="submit"
+            >
+              Submit
+            </Button>
+          </Flex>
         </Form.Item>
       </Form>
     </Modal>

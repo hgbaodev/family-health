@@ -5,7 +5,7 @@ export const useEmergencyContactStore = create((set) => ({
   openCreateModal: false,
   openUpdateModal: false,
   openDeleteModal: false,
-  setEmergencyContact: (EmergencyContact) => set({ EmergencyContact }),
+  setEmergencyContact: (emergencyContact) => set({ emergencyContact }),
   setOpenCreateModal: (openCreateModal) => set({ openCreateModal }),
   setOpenUpdateModal: (openUpdateModal) => set({ openUpdateModal }),
   setOpenDeleteModal: (openDeleteModal) => set({ openDeleteModal }),

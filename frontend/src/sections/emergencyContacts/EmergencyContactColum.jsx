@@ -31,8 +31,8 @@ const useEmergencyContactColumns= () => {
     () => [
       {
         title: "#ID",
-        dataIndex: "contactid",
-        key: "contactid",
+        dataIndex: "contactID",
+        key: "contactID",
         align: "center",
       },
 
@@ -52,14 +52,14 @@ const useEmergencyContactColumns= () => {
 
       {
         title: "Phone Number",
-        dataIndex: "phone_number",
-        key: "phone_number",
+        dataIndex: "phoneNumber",
+        key: "phoneNumber",
       },
 
     {
         title: "User ID",
-        dataIndex: "user_id",
-        key: "user_id",
+        dataIndex: "userID",
+        key: "userID",
         },
 
       {

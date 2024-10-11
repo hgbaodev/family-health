@@ -49,7 +49,7 @@ const EmergencyContactPage = () => {
           <EmergencyContactTable/>
         </div>
         <ConfirmModal
-          title={`Are you sure to delete emergency contact ?`}
+          title={`Are you sure to delete emergency contact?`}
           content={'Coming Soon'}
           open={openDeleteModal}
           handleCancel={handleDeleteCancel}

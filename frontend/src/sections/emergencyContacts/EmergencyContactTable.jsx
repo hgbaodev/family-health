@@ -1,16 +1,16 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
-import useEmergencyContact from "./EmergencyContactColum";
+import useEmergencyContactColumns from "./EmergencyContactColum";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
-import useEmergencyContactColumns from "./EmergencyContactColum";
+import { useEmergencyContacts } from "~/api/emergencyContacts/get-emergencyContacts";
 
 export const EmergencyContactTable = () => {
-  const columns =useEmergencyContactColumns();
+  const columns = useEmergencyContactColumns();
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
 
-const { data: emergencyContacts, isLoading, error } = useEmergencyContact({ page, size: ROW_PER_PAGE, keyword });
+const { data: emergencyContacts, isLoading, error } = useEmergencyContacts({ page, size: ROW_PER_PAGE, keyword });
 
 if (error) {
     console.error("Error fetching emergency contacts:", error);

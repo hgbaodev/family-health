@@ -53,7 +53,7 @@ const menuItems = [
     key: "6",
     icon: <ExclamationCircleOutlined />,
     label: "Emergency Contacts",
-    path: "/manager/emergency-contacts",
+    path: "/manager/emergencyContacts",
   },
   {
     key: "7",
