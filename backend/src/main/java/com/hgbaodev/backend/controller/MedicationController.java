@@ -1,111 +1,108 @@
-package com.hgbaodev.backend.controller;
+    package com.hgbaodev.backend.controller;
 
-import com.hgbaodev.backend.model.Member;
-import com.hgbaodev.backend.model.User;
-import com.hgbaodev.backend.request.member.AddMemberRequest;
-import com.hgbaodev.backend.request.member.UpdateMemberRequest;
-import com.hgbaodev.backend.response.ApiResponse;
-import com.hgbaodev.backend.response.AuthenticationResponse;
-import com.hgbaodev.backend.service.AuthenticationService;
-import com.hgbaodev.backend.service.MemberService;
-import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+    import com.hgbaodev.backend.model.Medication;
+    import com.hgbaodev.backend.model.Member;
+    import com.hgbaodev.backend.model.User;
+    import com.hgbaodev.backend.request.medication.AddMedicationRequest;
+    import com.hgbaodev.backend.request.medication.UpdateMedicationRequest;
+    import com.hgbaodev.backend.request.member.AddMemberRequest;
+    import com.hgbaodev.backend.request.member.UpdateMemberRequest;
+    import com.hgbaodev.backend.response.ApiResponse;
+    import com.hgbaodev.backend.service.AuthenticationService;
+    import com.hgbaodev.backend.service.MedicationService;
+    import com.hgbaodev.backend.service.MemberService;
+    import jakarta.validation.Valid;
+    import lombok.RequiredArgsConstructor;
+    import lombok.extern.slf4j.Slf4j;
+    import org.springframework.data.domain.Page;
+    import org.springframework.http.HttpStatus;
+    import org.springframework.http.ResponseEntity;
+    import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+    import java.util.List;
 
-@RestController
-@RequestMapping("/api/v1/members")
-@RequiredArgsConstructor
-@Slf4j
-public class MemberController {
+    @RestController
+    @RequestMapping("/api/v1/medications")
+    @RequiredArgsConstructor
+    @Slf4j
+    public class MedicationController {
 
-    private final MemberService memberService;
-    private final AuthenticationService authenticationService;
+        private final MedicationService medicationService;
+        private final AuthenticationService authenticationService;
 
-    @PostMapping
-    public ResponseEntity<ApiResponse<?>> addMember(@Valid @RequestBody AddMemberRequest addMemberRequest) {
-        User user = authenticationService.getCurrentUser();
-        Member member = Member.builder()
-                .userID(user.getId())
-                .fullName(addMemberRequest.getFullName())
-                .dateOfBirth(addMemberRequest.getDateOfBirth())
-                .gender(addMemberRequest.getGender())
-                .relationship(addMemberRequest.getRelationship())
-                .bloodType(addMemberRequest.getBloodType())
-                .height(addMemberRequest.getHeight())
-                .weight(addMemberRequest.getWeight())
-                .build();
-        log.info(member.toString());
-        Member createdMember = memberService.addMember(member);
-        ApiResponse<Member> response = new ApiResponse<>(
-                HttpStatus.OK.value(),
-                "Get list member successfully",
-                createdMember
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        @PostMapping
+        public ResponseEntity<ApiResponse<?>> addMedication(@Valid @RequestBody AddMedicationRequest addMedicationRequest) {
+//          Lấy recordID từ record được chọn
+            Medication medication = Medication.builder()
+                    .recordID(addMedicationRequest.getRecordID())
+                    .name(addMedicationRequest.getName())
+                    .frequency(addMedicationRequest.getFrequency())
+                    .startDate(addMedicationRequest.getStartDate())
+                    .endDate(addMedicationRequest.getEndDate())
+                    .note(addMedicationRequest.getNote())
+                    .build();
+            Medication createdMedication = medicationService.addMedication(medication);
+            ApiResponse<Medication> response = new ApiResponse<>(
+                    HttpStatus.OK.value(),
+                    "Get list medication successfully",
+                    createdMedication
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        @PutMapping("/{id}")
+        public ResponseEntity<ApiResponse<?>> updateMedication(
+                @PathVariable("id") Integer id,
+                @Valid @RequestBody UpdateMedicationRequest updateMedicationRequest) {
+            Medication medication = Medication.builder()
+                    .medicationID(id)
+                    .name(updateMedicationRequest.getName())
+                    .frequency(updateMedicationRequest.getFrequency())
+                    .startDate(updateMedicationRequest.getStartDate())
+                    .endDate(updateMedicationRequest.getEndDate())
+                    .note(updateMedicationRequest.getNote())
+                    .build();
+            Medication updatedMedication = medicationService.updateMedication(medication);
+            ApiResponse<Medication> response = new ApiResponse<>(
+                    HttpStatus.OK.value(),
+                    "Update medication successfully",
+                    updatedMedication
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        @DeleteMapping("/{id}")
+        public ResponseEntity<Void> deleteMedication(@PathVariable("id") Integer id) {
+            medicationService.deleteMedication(id);
+            return ResponseEntity.noContent().build();
+        }
+
+        @GetMapping("/{id}")
+        public ResponseEntity<ApiResponse<?>> getMemberById(@PathVariable("id") Integer id) {
+            Medication medication = medicationService.getMedicationById(id);
+            ApiResponse<Medication> response = new ApiResponse<>(
+                    HttpStatus.OK.value(),
+                    "Get medication successfully",
+                    medication
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        @GetMapping
+        public ResponseEntity<ApiResponse<List<Medication>>> getAllMembers(
+                @RequestParam(defaultValue = "1") int page,
+                @RequestParam(defaultValue = "8") int size,
+                @RequestParam(defaultValue = "") String keyword) {
+            Page<Medication> medicationsPage = medicationService.getAllMedications(page, size, keyword);
+
+            List<Medication> medicationsContent = medicationsPage.getContent();
+
+            ApiResponse<List<Medication>> response = new ApiResponse<>(
+                    HttpStatus.OK.value(),
+                    "Get list medication successfully",
+                    medicationsContent
+            );
+
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
     }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<?>> updateMember(
-            @PathVariable("id") Integer id,
-            @Valid @RequestBody UpdateMemberRequest updateMemberRequest) {
-        Member member = Member.builder()
-                .memberID(id)
-                .fullName(updateMemberRequest.getFullName())
-                .dateOfBirth(updateMemberRequest.getDateOfBirth())
-                .gender(updateMemberRequest.getGender())
-                .relationship(updateMemberRequest.getRelationship())
-                .bloodType(updateMemberRequest.getBloodType())
-                .height(updateMemberRequest.getHeight())
-                .weight(updateMemberRequest.getWeight())
-                .build();
-        Member updatedMember = memberService.updateMember(member);
-        ApiResponse<Member> response = new ApiResponse<>(
-                HttpStatus.OK.value(),
-                "Update member successfully",
-                updatedMember
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMember(@PathVariable("id") Integer id) {
-        memberService.deleteMember(id);
-        return ResponseEntity.noContent().build();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<?>> getMemberById(@PathVariable("id") Integer id) {
-        Member member = memberService.getMemberById(id);
-        ApiResponse<Member> response = new ApiResponse<>(
-                HttpStatus.OK.value(),
-                "Get member successfully",
-                member
-        );
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @GetMapping
-    public ResponseEntity<ApiResponse<List<Member>>> getAllMembers(
-            @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "8") int size,
-            @RequestParam(defaultValue = "") String keyword) {
-        Page<Member> membersPage = memberService.getAllMembers(page, size, keyword);
-
-        List<Member> membersContent = membersPage.getContent();
-
-        ApiResponse<List<Member>> response = new ApiResponse<>(
-                HttpStatus.OK.value(),
-                "Get list member successfully",
-                membersContent
-        );
-
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-}

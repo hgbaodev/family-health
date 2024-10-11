@@ -1,7 +1,10 @@
 package com.hgbaodev.backend.model;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
@@ -10,34 +13,28 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "members")
-public class Member {
+@Table(name = "medications")
+public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int memberID;
+    private int medicationID;
 
-    @Column(name = "user_id", nullable = false)
-    private int userID;
+    @Column(name = "record_id", nullable = false)
+    private int recordID;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "date_of_birth", nullable = false)
-    private LocalDate dateOfBirth;
+    @Column(name = "frequency")
+    private String frequency;
 
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "start_date", nullable = false)
+    private LocalDate startDate;
 
-    @Column(name = "relationship")
-    private String relationship;
+    @Column(name = "end_date")
+    private LocalDate endDate;
 
-    @Column(name = "blood_type")
-    private String bloodType;
-
-    @Column(name = "height")
-    private float height;
-
-    @Column(name = "weight")
-    private float weight;
+    @Column(name = "note")
+    private String note;
 
 }
