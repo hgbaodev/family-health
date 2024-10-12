@@ -5,7 +5,6 @@
     import com.hgbaodev.backend.request.member.AddMemberRequest;
     import com.hgbaodev.backend.request.member.UpdateMemberRequest;
     import com.hgbaodev.backend.response.ApiResponse;
-    import com.hgbaodev.backend.response.AuthenticationResponse;
     import com.hgbaodev.backend.service.AuthenticationService;
     import com.hgbaodev.backend.service.MemberService;
     import jakarta.validation.Valid;
@@ -14,7 +13,6 @@
     import org.springframework.data.domain.Page;
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
-    import org.springframework.validation.annotation.Validated;
     import org.springframework.web.bind.annotation.*;
 
     import java.util.List;
@@ -45,7 +43,7 @@
             Member createdMember = memberService.addMember(member);
             ApiResponse<Member> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
-                    "Get list member successfully",
+                    "Add member successfully",
                     createdMember
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
@@ -96,7 +94,8 @@
                 @RequestParam(defaultValue = "1") int page,
                 @RequestParam(defaultValue = "8") int size,
                 @RequestParam(defaultValue = "") String keyword) {
-            Page<Member> membersPage = memberService.getAllMembers(page, size, keyword);
+            User user = authenticationService.getCurrentUser();
+            Page<Member> membersPage = memberService.getAllMembers(page, size, keyword, user.getId());
 
             List<Member> membersContent = membersPage.getContent();
 

@@ -69,9 +69,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(LoginRequest request) {
-        if(!repository.existsByEmail(request.getEmail())) {
-            throw new IllegalStateException("Email not found");
-        }
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(

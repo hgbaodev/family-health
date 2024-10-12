@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-    @Query("SELECT m FROM Member m WHERE LOWER(m.fullName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
-    Page<Member> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    @Query("SELECT m FROM Member m WHERE m.userID = :userID AND LOWER(m.fullName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    Page<Member> findByKeyword(@Param("keyword") String keyword, Pageable pageable, Integer userID);
+
+    Page<Member> findAllByUserID(Pageable pageable, @Param("userID") Integer userID);
 }
