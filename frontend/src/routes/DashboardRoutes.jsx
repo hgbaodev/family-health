@@ -34,7 +34,11 @@ export const DashboardRoutes = {
         {
           path: 'vaccinations',
           element: <PrivateRoute component={VaccinationPage} />
-        }
+        },
+        {
+              path: 'emergencyContacts',
+              element: <EmergencyContactPage/>
+        },
       ]
     }
   ]
