@@ -1,6 +1,6 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
-import useEmergencyContactColumns from "./EmergencyContactColum";
+import useEmergencyContactColumns from "./EmergencyContactColumn";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
 import { useEmergencyContacts } from "~/api/emergencyContacts/get-emergencyContacts";

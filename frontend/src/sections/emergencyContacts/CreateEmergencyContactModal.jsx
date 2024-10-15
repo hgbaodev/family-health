@@ -38,13 +38,13 @@ const CreateEmergencyContactModal = () => {
             >
                 <Row gutter={16}>
                     <Col span={24}>
-                        <Form.Item
-                            label="User ID"
-                            name="userID"
-                            rules={[{ required: true, message: "Please enter userID" }]}
-                        >
-                            <Input placeholder="Enter userID..." />
-                        </Form.Item>
+{/*                         <Form.Item */}
+{/*                             label="User ID" */}
+{/*                             name="userID" */}
+{/*                             rules={[{ required: true, message: "Please enter userID" }]} */}
+{/*                         > */}
+{/*                             <Input placeholder="Enter userID..." /> */}
+{/*                         </Form.Item> */}
 
                         <Form.Item
                             label="Name"

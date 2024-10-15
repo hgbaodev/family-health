@@ -28,7 +28,7 @@ public class EmergencyContactController {
     private final AuthenticationService authenticationService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<?>> addEmeregencyContact(@Valid @RequestBody AddEmergencyContactRequest addEmergencyContactRequest){
+    public ResponseEntity<ApiResponse<?>> addEmergencyContact(@Valid @RequestBody AddEmergencyContactRequest addEmergencyContactRequest){
         User user = authenticationService.getCurrentUser();
         if (user == null) {
             return new ResponseEntity<>(new ApiResponse<>(HttpStatus.UNAUTHORIZED.value(), "User not found", null), HttpStatus.UNAUTHORIZED);
@@ -72,19 +72,28 @@ public class EmergencyContactController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteEmergencyContact(@PathVariable("id") Integer id){
-        emergencyContactService.deleteEmergencyContact(id);
-        return  ResponseEntity.noContent().build();
-    }
+    public ResponseEntity<ApiResponse<String>> deleteEmergencyContact(@PathVariable("id") Integer id) {
+        try {
+            // Kiểm tra xem liên hệ khẩn cấp có tồn tại hay không
+            EmergencyContact contact = emergencyContactService.getEmergencyContactById(id);
+            if (contact == null) {
+                return new ResponseEntity<>(new ApiResponse<>(HttpStatus.NOT_FOUND.value(), "Emergency contact not found", null), HttpStatus.NOT_FOUND);
+            }
 
+            emergencyContactService.deleteEmergencyContact(id);
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.OK.value(), "Emergency contact deleted successfully", null), HttpStatus.OK);
+
+        } catch (Exception e) {
+
+            return new ResponseEntity<>(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), "Failed to delete emergency contact: " + e.getMessage(), null), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping
     public  ResponseEntity<ApiResponse<List<EmergencyContact>>> getAllEmergencyContacts(
             @RequestParam(defaultValue =  "1") int page,
             @RequestParam(defaultValue =  "8") int size,
             @RequestParam(defaultValue =  "")  String keyword){
-
-
 
         Page<EmergencyContact> emergencyContactsPage = emergencyContactService.getAllEmergencyContacts(page, size, keyword);
 

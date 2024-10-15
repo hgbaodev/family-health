@@ -74,7 +74,7 @@ const useEmergencyContactColumns= () => {
             <Popconfirm
               title="Delete the emergency contact"
               description="Are you sure to delete this emergency contact?"
-              onConfirm={() => handleDelete(emergencyContact.emergencyContactID)}
+              onConfirm={() => handleDelete(emergencyContact.contactID)}
               okText="Yes"
               cancelText="No"
             >

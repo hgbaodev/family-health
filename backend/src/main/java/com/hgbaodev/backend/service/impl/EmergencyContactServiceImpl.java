@@ -6,6 +6,7 @@ import com.hgbaodev.backend.repository.EmergencyContactRepository;
 import com.hgbaodev.backend.repository.MemberRepository;
 import com.hgbaodev.backend.service.EmergencyContactService;
 import com.hgbaodev.backend.service.MemberService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -54,8 +55,10 @@ public class EmergencyContactServiceImpl implements EmergencyContactService {
     @Override
     public EmergencyContact getEmergencyContactById(Integer contactID) {
         return emergencyContactRepository.findById(contactID)
-                .orElseThrow(() -> new IllegalArgumentException("Emergency contact not found"));
+                .orElseThrow(() -> new EntityNotFoundException("Emergency contact not found for ID: " + contactID));
     }
+
+
 
     @Override
     public Page<EmergencyContact> getAllEmergencyContacts(int page, int size, String keyword) {

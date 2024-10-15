@@ -8,10 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-
-
-
-
 @Repository
 public interface EmergencyContactRepository extends JpaRepository<EmergencyContact, Integer> {
     @Query("SELECT e FROM EmergencyContact e WHERE LOWER(e.name) LIKE LOWER(CONCAT('%', :keyword, '%'))")
