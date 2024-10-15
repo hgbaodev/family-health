@@ -1,5 +1,7 @@
 package com.hgbaodev.backend.service.impl;
 
+import com.hgbaodev.backend.model.Member;
+import com.hgbaodev.backend.model.dto.DataMailDTO;
 import com.hgbaodev.backend.service.JwtService;
 import com.hgbaodev.backend.enums.TokenType;
 import com.hgbaodev.backend.model.Token;
@@ -12,10 +14,16 @@ import com.hgbaodev.backend.response.ApiResponse;
 import com.hgbaodev.backend.response.AuthenticationResponse;
 import com.hgbaodev.backend.response.UserResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
+import com.hgbaodev.backend.service.MailService;
+import com.hgbaodev.backend.utils.Const;
+import io.jsonwebtoken.Claims;
+import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +36,10 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.io.Console;
+import java.util.HashMap;
+import java.util.Map;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -37,6 +49,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
+
+    @Autowired
+    MailService mailService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         if(repository.existsByEmail(request.getEmail())) {
@@ -50,9 +65,23 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(request.getRole())
                 .build();
         var savedUser = repository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        var refreshToken = jwtService.generateRefreshToken(user);
-        saveUserToken(savedUser, jwtToken);
+        // Gửi mail xác nhận
+        try {
+            DataMailDTO dataMail = new DataMailDTO();
+
+            dataMail.setTo(request.getEmail());
+            dataMail.setSubject(Const.SEND_MAIL_SUBJECT.CLIENT_REGISTER);
+
+            Map<String, Object> props = new HashMap<>();
+            props.put("name", request.getFirstname());
+            props.put("username", request.getEmail());
+            props.put("password", request.getPassword());
+            dataMail.setProps(props);
+
+            mailService.sendHTMLMail(dataMail, Const.TEMPLATE_FILE_NAME.CLIENT_REGISTER);
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        }
 
         // Tạo đối tượng UserResponse để đưa vào phản hồi
         UserResponse userResponse = UserResponse.builder()
@@ -62,10 +91,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .build();
 
         return AuthenticationResponse.builder()
-                .accessToken(jwtToken)
-                .refreshToken(refreshToken)
                 .user(userResponse)
                 .build();
+    }
+
+    public void verifyEmail(String username) {
+        var user = repository.findByEmail(username).orElseThrow();
+        user.set_verify(true);
+        repository.save(user);
     }
 
     public AuthenticationResponse authenticate(LoginRequest request) {
@@ -82,6 +115,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
+        if(!user.is_verify()) {
+            return null;
+        }
         var jwtToken = jwtService.generateToken(user);
         var refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);

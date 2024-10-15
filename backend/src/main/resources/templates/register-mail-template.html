@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <link href="http://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css"/>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+        }
+        a.button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #4CAF50;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+<p th:text="${'Xin chào, ' + name}"></p>
+<p>Vui lòng nhấn vào nút bên dưới để xác thực tài khoản của bạn:</p>
+
+<p>
+    <a th:href="@{http://localhost:3000/auth/login(username=${username})}" class="button" >Verify Account</a>
+</p>
+
+<p>Lưu ý: Đây là email tự động, vui lòng không trả lời!</p>
+</body>
+</html>
