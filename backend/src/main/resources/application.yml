@@ -3,3 +3,22 @@ spring:
     name: hgbaodev
   profiles:
     active: dev
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ad3121410155@gmail.com
+    password: cvtw mzti ffal ceol
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+#mailServer:
+#  host: smtp.gmail.com
+#  port: 587
+#  email: mailsender.tutorial.ad3121410155@gmail.com
+#  password: cvtw mzti ffal ceol
+#  protocol: smtp
+#  isSSL: false

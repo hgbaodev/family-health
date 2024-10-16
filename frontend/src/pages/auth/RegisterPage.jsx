@@ -1,10 +1,27 @@
-import { Form, Input, Space, Button } from "antd";
+import { Form, Input, Space, Button, message } from "antd";
 import Title from "antd/es/typography/Title";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
+import { useRegister } from "~/api/auth/register";
 
 const RegisterPage = () => {
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  
+  const registerMutation = useRegister({
+    onSuccess: () => {
+      message.success("Registration successful! Please check your email for verification.");
+      form.resetFields();
+      window.location.replace("https://mail.google.com/"); // Redirect to Email Page
+    },
+    onError: (error) => {
+      message.error(error.message || "Registration failed");
+    },
+  });
+
+  const onFinish = (values) => {
+    registerMutation.mutate(values);
+  };
 
   return (
     <Space direction="vertical" className="p-10 w-full bg-white rounded-xl">
@@ -19,23 +36,38 @@ const RegisterPage = () => {
       </Title>
       <Form
         form={form}
+        onFinish={onFinish}
         layout="vertical"
         requiredMark="optional"
         validateTrigger="onBlur"
         initialValues={{ code: "", password: "" }}
       >
         <Form.Item
-          label="Name"
-          name="name"
+          label="First Name"
+          name="firstname"
           rules={[
             {
               required: true,
               whitespace: true,
-              message: "Please enter your name!",
+              message: "Please enter your first name!",
             },
           ]}
         >
-          <Input variant="filled" placeholder="Enter your name" />
+          <Input variant="filled" placeholder="Enter your first name" />
+        </Form.Item>
+
+        <Form.Item
+          label="Last Name"
+          name="lastname"
+          rules={[
+            {
+              required: true,
+              whitespace: true,
+              message: "Please enter your last name!",
+            },
+          ]}
+        >
+          <Input variant="filled" placeholder="Enter your last name" />
         </Form.Item>
 
         <Form.Item
@@ -74,10 +106,10 @@ const RegisterPage = () => {
       </Form>
 
       <p className="mb-2 flex justify-between">
-        <Link className="text-primary" to="/auth/forgot-password">
+        {/* <Link className="text-primary" to="/auth/forgot-password">
           Forgot password
-        </Link>
-        <Link className="text-primary" to="/auth/login">
+        </Link> */}
+        <Link className="text-primary ml-auto" to="/auth/login">
           Login
         </Link>
       </p>

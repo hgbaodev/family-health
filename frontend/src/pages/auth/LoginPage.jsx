@@ -1,18 +1,43 @@
 import { Form, Input, Space, Button, message } from "antd";
 import Title from "antd/es/typography/Title";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useLogin } from "~/api/auth/login";
+import { useVerify } from "~/api/auth/verify";
 import { useAuthStore } from "~/stores/auth/authStore";
+import { useEffect } from "react";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
-  const { user, isAuthenticated } = useAuthStore((state) => state); 
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const username = queryParams.get("username");
+  const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuthStore((state) => state);
+
+  // Hook for verification based on username
+  const verifyMutation = useVerify({
+    onSuccess: () => {
+      form.setFieldsValue({ email: username });
+      message.success("Your account verified. Please enter your password to login.");
+    },
+    onError: () => {
+      message.error("Verification failed. Please try again.");
+    },
+  });
+
+  // Call verify mutation if username exists in URL
+  useEffect(() => {
+    if (username) {
+      verifyMutation.mutate(username);
+    }
+  }, [username]);
+
   console.log({
     user,
     isAuthenticated,
   });
-  const navigate = useNavigate();
+  
   const mutation = useLogin({
     onSuccess: () => {
       message.success("Login successful");

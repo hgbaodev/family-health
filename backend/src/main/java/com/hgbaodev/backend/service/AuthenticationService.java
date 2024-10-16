@@ -17,6 +17,8 @@ public interface AuthenticationService {
 
   AuthenticationResponse authenticate(LoginRequest request);
 
+  void verifyEmail(String token);
+
   void saveUserToken(User user, String jwtToken);
 
   void revokeAllUserTokens(User user);

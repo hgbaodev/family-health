@@ -30,6 +30,9 @@ public class User implements UserDetails {
   private String email;
   private String password;
 
+  @Column(name = "is_verify", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+  private boolean is_verify;
+
   @Enumerated(EnumType.STRING)
   private Role role;
 
