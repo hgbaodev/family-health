@@ -12,7 +12,7 @@ const RegisterPage = () => {
     onSuccess: () => {
       message.success("Registration successful! Please check your email for verification.");
       form.resetFields();
-      window.location.replace("https://mail.google.com/"); // Redirect to Email Page
+      window.location.replace("http://localhost:3000/auth/login"); // Redirect to Login page
     },
     onError: (error) => {
       message.error(error.message || "Registration failed");
