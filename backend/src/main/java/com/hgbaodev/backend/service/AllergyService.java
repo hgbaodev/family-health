@@ -3,8 +3,6 @@ package com.hgbaodev.backend.service;
 import com.hgbaodev.backend.model.Allergy;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-
-import javax.print.attribute.standard.Severity;
 import java.util.List;
 import java.util.Optional;
 

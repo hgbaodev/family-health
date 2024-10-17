@@ -2,6 +2,10 @@ server:
   port: 3001
 
 spring:
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:/data.sql
   mvc:
     throw-exception-if-no-handler-found: true
   web:
@@ -9,14 +13,15 @@ spring:
       add-mappings: false
   datasource:
     url: jdbc:mysql://localhost:3306/j2ee
-    username: root
-    password:
+    username: work
+    password: 299792458
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     generate-ddl: true
     hibernate:
       ddl-auto: update
     show-sql: true
+    defer-datasource-initialization: true
 
 application:
   security:

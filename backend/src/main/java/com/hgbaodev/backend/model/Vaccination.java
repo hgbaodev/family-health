@@ -16,7 +16,7 @@ import java.util.Date;
 @Table(name = "vaccinations")
 public class Vaccination {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer vaccinationID;
 
     @ManyToOne

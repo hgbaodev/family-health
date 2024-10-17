@@ -1,6 +1,6 @@
 INSERT INTO user (id, email, firstname, lastname, password, role)
 SELECT 3, 'TLieuNhuYen@example.com', 'Trần Liễu', 'Như Yên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User'
-WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'TLieuNhuYien@example.com');
+WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'TLieuNhuYen@example.com');
 
 INSERT INTO user (id, email, firstname, lastname, password, role)
 SELECT 4, 'LongNgaoThien@example.com', 'Long', 'Ngạo Thiên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User'
@@ -8,7 +8,7 @@ WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'LongNgaoThien@example.com');
 
 INSERT INTO user (id, email, firstname, lastname, password, role)
 SELECT 5, 'haonhienau23@example.com', 'Âu', 'Hạo Nhiên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User'
-WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'user3@example.com');
+WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'haonhienau23@example.com');
 
 INSERT INTO user (id, email, firstname, lastname, password, role)
 SELECT 6, 'vuong8dan@example.com', 'Vương', 'Bát Đản', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User'
@@ -134,96 +134,97 @@ WHERE NOT EXISTS (SELECT 1 FROM allergies WHERE member_id = 14 AND allergy_type 
 -- Dữ liệu tương ứng cho user_id từ 2->6
 -- Thêm dữ liệu mẫu vào bảng emergency_contacts
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 2, 'Nguyễn Văn Mười', 'Cha', '0901234567', '123 Đường A, Quận 1, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 2 AND name = 'Nguyễn Văn Mười');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 2, 'Nguyễn Văn Mười', 'Cha', '0901234567', '123 Đường A, Quận 1, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 2 AND name = 'Nguyễn Văn Mười');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 2, 'Lê Thị Mỹ Hạnh', 'Mẹ', '0912345678', '123 Đường A, Quận 1, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 2 AND name = 'Lê Thị Mỹ Hạnh');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 2, 'Lê Thị Mỹ Hạnh', 'Mẹ', '0912345678', '123 Đường A, Quận 1, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 2 AND name = 'Lê Thị Mỹ Hạnh');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 3, 'Trần Trọng Trường', 'Cha', '0923456789', '456 Đường B, Quận 2, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 3 AND name = 'Trần Trọng Trường');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 3, 'Trần Trọng Trường', 'Cha', '0923456789', '456 Đường B, Quận 2, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 3 AND name = 'Trần Trọng Trường');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 3, 'Nguyễn Thị Lam', 'Mẹ', '0934567890', '456 Đường B, Quận 2, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 3 AND name = 'Nguyễn Thị Lam');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 3, 'Nguyễn Thị Lam', 'Mẹ', '0934567890', '456 Đường B, Quận 2, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 3 AND name = 'Nguyễn Thị Lam');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 4, 'Võ Bá Nhân', 'Chồng', '0945678901', '789 Đường C, Quận 3, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 4 AND name = 'Võ Bá Nhân');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 4, 'Võ Bá Nhân', 'Chồng', '0945678901', '789 Đường C, Quận 3, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 4 AND name = 'Võ Bá Nhân');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 4, 'Trương Ngọc Tuyết Mai', 'Vợ', '0956789012', '789 Đường C, Quận 3, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 4 AND name = 'Trương Ngọc Tuyết Mai');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 4, 'Trương Ngọc Tuyết Mai', 'Vợ', '0956789012', '789 Đường C, Quận 3, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 4 AND name = 'Trương Ngọc Tuyết Mai');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 5, 'Phan Tuấn Tú', 'Chú', '0967890123', '321 Đường D, Quận 4, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 5 AND name = 'Phan Tuấn Tú');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 5, 'Phan Tuấn Tú', 'Chú', '0967890123', '321 Đường D, Quận 4, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 5 AND name = 'Phan Tuấn Tú');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 5, 'Phan Thi Mộng', 'Cháu gái', '0978901234', '321 Đường D, Quận 4, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 5 AND name = 'Phan Thi Mộng');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 5, 'Phan Thi Mộng', 'Cháu gái', '0978901234', '321 Đường D, Quận 4, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 5 AND name = 'Phan Thi Mộng');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 6, 'Long Hạo Nhiên', 'Cha', '0989012345', '654 Đường E, Quận 5, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 6 AND name = 'Long Hạo Nhiên');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 6, 'Long Hạo Nhiên', 'Cha', '0989012345', '654 Đường E, Quận 5, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 6 AND name = 'Long Hạo Nhiên');
 
-INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
-SELECT 6, 'Long Kim Ngọc', 'Con gái', '0990123456', '654 Đường E, Quận 5, TP.HCM'
-WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 6 AND name = 'Long Kim Ngọc');
+-- INSERT INTO emergency_contacts (user_id, name, relationship, phone_number, address)
+-- SELECT 6, 'Long Kim Ngọc', 'Con gái', '0990123456', '654 Đường E, Quận 5, TP.HCM'
+-- WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts WHERE user_id = 6 AND name = 'Long Kim Ngọc');
 
 -----Medical Record
 -- V4__insert_medical_records.sql
 
 -- Thêm dữ liệu mẫu vào bảng medicalRecords
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 2, '2023-10-01', 'Dr. Bảo', 'Cánh tay đau khi chạm vào, chảy máu phần mềm, xây xát', 'Nứt xương cánh tay', 'Sát trùng phần mềm, băng bó chỗ nứt xương', 'Khoa chấn thương chỉnh hình'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 2 AND date = '2023-10-01');
 
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 4, '2022-09-11', 'Dr. Vương', 'Đau bụng, đau âm ỉ vùng bụng dưới', 'Co thắt dạ dày', 'Truyền thuốc chống co thắt, kê đơn thuốc uống', 'Khoa cấp cứu'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 4 AND date = '2022-09-11');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 2, '2023-10-01', 'Dr. Bảo', 'Cánh tay đau khi chạm vào, chảy máu phần mềm, xây xát', 'Nứt xương cánh tay', 'Sát trùng phần mềm, băng bó chỗ nứt xương', 'Khoa chấn thương chỉnh hình'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 2 AND date = '2023-10-01');
 
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 3, '2021-11-15', 'Dr. Huy', 'Ho, Sốt', 'Cảm cúm thông thường', 'Uống thuốc', 'Nhà thuốc bệnh viện'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 3 AND date = '2021-11-15');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 4, '2022-09-11', 'Dr. Vương', 'Đau bụng, đau âm ỉ vùng bụng dưới', 'Co thắt dạ dày', 'Truyền thuốc chống co thắt, kê đơn thuốc uống', 'Khoa cấp cứu'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 4 AND date = '2022-09-11');
 
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 5, '2020-12-29', 'Dr. Bảo', 'Xây xát, chảy máu, đau khi chạm vào bàn chân', 'Gãy, dập ngón chân', 'Phẫu thuật chỉnh hình, bó bột vết thương', 'Khoa chấn thương chỉnh hình'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 5 AND date = '2020-12-29');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 7, '2023-11-15', 'Dr. Lâm', 'Đau mắt, giảm thị lực nhẹ', 'Đau mắt đỏ', 'Kê đơn thuốc', 'Khoa mắt'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 7 AND date = '2023-11-15');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 9, '2021-11-15', 'Dr. Trang', 'Sốt trên 39 độ, vài ngày chưa hạ nhiệt', 'Sốt siêu vi', 'Truyền thuốc hạ sốt, kê thuốc uống', 'Nhà thuốc bệnh viện'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 9 AND date = '2021-11-15');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 11, '2023-02-17', 'Dr. Trang', 'Sốt, đắp chăn nhưng vẫn cảm thấy lạnh', 'Sốt rét', 'Kê đơn thuốc sốt đặc trị', 'Khoa cấp cứu'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 11 AND date = '2023-02-17');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 14, '2021-11-17', 'Dr. Bảo', 'Tay trái không cử động được cánh tay trở xuống,xây xát phần mềm', 'Gãy xương', 'Bó bột', 'Khoa chấn thương chỉnh hình'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 14 AND date = '2021-11-17');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 10, '2024-02-10', 'Dr. Huy', 'Đau bụng dữ dội,ói ra máu', 'Chảy máu dạ dày', 'Nội soi, uống thuốc, truyền dịch dinh dưỡng', 'Khoa nội tiêu hóa'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 10 AND date = '2024-02-10');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 6, '2024-02-10', 'Dr. Ngân', 'Da sưng đỏ, sổ mũi, có triệu chứng sốc phản vệ', 'Dị ứng bơ đậu phộng', 'Uống thuốc dị ứng, truyền dịch', 'Khoa dị ứng'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 6 AND date = '2023-10-05');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 8, '2024-02-20', 'Dr.Trang ', 'Sút cân, mặt mũi xanh xao', 'Suy dinh dưỡng', 'Truyền dịch dinh dưỡng', 'Khoa dinh dưỡng'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 8 AND date = '2024-02-20');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 12, '2024-03-02', 'Dr. Long', 'Khó thở,ngứa da,buồn nôn, mệt mỏi kéo dài', 'Suy thận', 'Chạy thận nhân tạo', 'Khoa lọc máu'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 12 AND date = '2024-03-02');
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 12, '2024-04-02', 'Dr. Long', 'Khó thở,ngứa da,buồn nôn, mệt mỏi kéo dài', 'Suy thận', 'Chạy thận nhân tạo', 'Khoa lọc máu'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 12 AND date = '2024-04-02');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 3, '2021-11-15', 'Dr. Huy', 'Ho, Sốt', 'Cảm cúm thông thường', 'Uống thuốc', 'Nhà thuốc bệnh viện'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 3 AND date = '2021-11-15');
 
-INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
-SELECT 13, '2024-04-02', 'Dr. Huy  ', 'Hay quên, đau đầu thường xuyên', 'Mất trí nhớ nhẹ', 'Uống thuốc. nghỉ ngơi, thư giãn đầu óc', 'Khoa Thần Kinh'
-WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 2 AND date = '2023-10-05');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 5, '2020-12-29', 'Dr. Bảo', 'Xây xát, chảy máu, đau khi chạm vào bàn chân', 'Gãy, dập ngón chân', 'Phẫu thuật chỉnh hình, bó bột vết thương', 'Khoa chấn thương chỉnh hình'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 5 AND date = '2020-12-29');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 7, '2023-11-15', 'Dr. Lâm', 'Đau mắt, giảm thị lực nhẹ', 'Đau mắt đỏ', 'Kê đơn thuốc', 'Khoa mắt'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 7 AND date = '2023-11-15');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 9, '2021-11-15', 'Dr. Trang', 'Sốt trên 39 độ, vài ngày chưa hạ nhiệt', 'Sốt siêu vi', 'Truyền thuốc hạ sốt, kê thuốc uống', 'Nhà thuốc bệnh viện'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 9 AND date = '2021-11-15');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 11, '2023-02-17', 'Dr. Trang', 'Sốt, đắp chăn nhưng vẫn cảm thấy lạnh', 'Sốt rét', 'Kê đơn thuốc sốt đặc trị', 'Khoa cấp cứu'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 11 AND date = '2023-02-17');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 14, '2021-11-17', 'Dr. Bảo', 'Tay trái không cử động được cánh tay trở xuống,xây xát phần mềm', 'Gãy xương', 'Bó bột', 'Khoa chấn thương chỉnh hình'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 14 AND date = '2021-11-17');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 10, '2024-02-10', 'Dr. Huy', 'Đau bụng dữ dội,ói ra máu', 'Chảy máu dạ dày', 'Nội soi, uống thuốc, truyền dịch dinh dưỡng', 'Khoa nội tiêu hóa'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 10 AND date = '2024-02-10');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 6, '2024-02-10', 'Dr. Ngân', 'Da sưng đỏ, sổ mũi, có triệu chứng sốc phản vệ', 'Dị ứng bơ đậu phộng', 'Uống thuốc dị ứng, truyền dịch', 'Khoa dị ứng'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 6 AND date = '2023-10-05');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 8, '2024-02-20', 'Dr.Trang ', 'Sút cân, mặt mũi xanh xao', 'Suy dinh dưỡng', 'Truyền dịch dinh dưỡng', 'Khoa dinh dưỡng'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 8 AND date = '2024-02-20');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 12, '2024-03-02', 'Dr. Long', 'Khó thở,ngứa da,buồn nôn, mệt mỏi kéo dài', 'Suy thận', 'Chạy thận nhân tạo', 'Khoa lọc máu'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 12 AND date = '2024-03-02');
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 12, '2024-04-02', 'Dr. Long', 'Khó thở,ngứa da,buồn nôn, mệt mỏi kéo dài', 'Suy thận', 'Chạy thận nhân tạo', 'Khoa lọc máu'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 12 AND date = '2024-04-02');
+
+-- INSERT INTO medicalRecords (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
+-- SELECT 13, '2024-04-02', 'Dr. Huy  ', 'Hay quên, đau đầu thường xuyên', 'Mất trí nhớ nhẹ', 'Uống thuốc. nghỉ ngơi, thư giãn đầu óc', 'Khoa Thần Kinh'
+-- WHERE NOT EXISTS (SELECT 1 FROM medicalRecords WHERE member_id = 2 AND date = '2023-10-05');
 ------Documents
 
 -- Thêm dữ liệu mẫu vào bảng documents
@@ -367,60 +368,60 @@ SELECT 14, 'Gabapentin', '300mg', '2024-01-10', '2024-02-10'
 WHERE NOT EXISTS (SELECT 1 FROM medications WHERE name = 'Gabapentin' AND record_id = 14);
 ------Vacinations
 -- Dữ liệu tương ứng cho các thành viên trong bảng vaccinations
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 1, 'Vaccine ngừa cúm', '2024-01-15', '2025-01-15'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 1, 'Vaccine ngừa cúm', '2024-01-15'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 1 AND vaccine_name = 'Vaccine ngừa cúm');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 2, 'Vaccine ngừa viêm gan B', '2024-02-20', '2025-02-20'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 2, 'Vaccine ngừa viêm gan B', '2024-02-20'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 2 AND vaccine_name = 'Vaccine ngừa viêm gan B');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 3, 'Vaccine ngừa sởi', '2024-03-10', '2025-03-10'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 3, 'Vaccine ngừa sởi', '2024-03-10'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 3 AND vaccine_name = 'Vaccine ngừa sởi');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 4, 'Vaccine ngừa tả', '2024-04-05', '2025-04-05'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 4, 'Vaccine ngừa tả', '2024-04-05'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 4 AND vaccine_name = 'Vaccine ngừa tả');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 5, 'Vaccine ngừa rubella', '2024-05-18', '2025-05-18'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 5, 'Vaccine ngừa rubella', '2024-05-18'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 5 AND vaccine_name = 'Vaccine ngừa rubella');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 6, 'Vaccine ngừa ho gà', '2024-06-22', '2025-06-22'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 6, 'Vaccine ngừa ho gà', '2024-06-22'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 6 AND vaccine_name = 'Vaccine ngừa ho gà');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 7, 'Vaccine ngừa quai bị', '2024-07-15', '2025-07-15'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 7, 'Vaccine ngừa quai bị', '2024-07-15'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 7 AND vaccine_name = 'Vaccine ngừa quai bị');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 8, 'Vaccine ngừa COVID-19', '2024-08-10', '2025-08-10'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 8, 'Vaccine ngừa COVID-19', '2024-08-10'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 8 AND vaccine_name = 'Vaccine ngừa COVID-19');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 9, 'Vaccine ngừa sốt xuất huyết', '2024-09-05', '2025-09-05'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 9, 'Vaccine ngừa sốt xuất huyết', '2024-09-05'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 9 AND vaccine_name = 'Vaccine ngừa sốt xuất huyết');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 10, 'Vaccine ngừa bạch hầu', '2024-10-01', '2025-10-01'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 10, 'Vaccine ngừa bạch hầu', '2024-10-01'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 10 AND vaccine_name = 'Vaccine ngừa bạch hầu');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 11, 'Vaccine ngừa HPV', '2024-11-12', '2025-11-12'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 11, 'Vaccine ngừa HPV', '2024-11-12'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 11 AND vaccine_name = 'Vaccine ngừa HPV');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 12, 'Vaccine ngừa viêm não Nhật Bản', '2024-12-20', '2025-12-20'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 12, 'Vaccine ngừa viêm não Nhật Bản', '2024-12-20'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 12 AND vaccine_name = 'Vaccine ngừa viêm não Nhật Bản');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 13, 'Vaccine ngừa bệnh dại', '2024-01-05', '2025-01-05'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 13, 'Vaccine ngừa bệnh dại', '2024-01-05'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 13 AND vaccine_name = 'Vaccine ngừa bệnh dại');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered, next_due_date)
-SELECT 14, 'Vaccine ngừa cúm mùa', '2024-02-14', '2025-02-14'
+INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+SELECT 14, 'Vaccine ngừa cúm mùa', '2024-02-14'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 14 AND vaccine_name = 'Vaccine ngừa cúm mùa');
 
 
