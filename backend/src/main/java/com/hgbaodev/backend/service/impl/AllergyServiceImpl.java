@@ -1,11 +1,8 @@
 package com.hgbaodev.backend.service.impl;
 
 import com.hgbaodev.backend.model.Allergy;
-import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.repository.AllergyRepository;
-import com.hgbaodev.backend.repository.MemberRepository;
 import com.hgbaodev.backend.service.AllergyService;
-import com.hgbaodev.backend.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -13,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import javax.print.attribute.standard.Severity;
-import java.util.List;
 import java.util.Optional;
 
 @Service

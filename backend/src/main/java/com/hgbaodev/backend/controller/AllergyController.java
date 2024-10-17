@@ -1,13 +1,10 @@
 package com.hgbaodev.backend.controller;
 
 import com.hgbaodev.backend.model.Allergy;
-import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.request.allergy.AddAllergyRequest;
 import com.hgbaodev.backend.request.allergy.UpdateAllergyRequest;
-import com.hgbaodev.backend.request.member.UpdateMemberRequest;
 import com.hgbaodev.backend.response.ApiResponse;
-import com.hgbaodev.backend.response.AuthenticationResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.AllergyService;
 import jakarta.validation.Valid;
@@ -16,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
