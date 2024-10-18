@@ -1,0 +1,51 @@
+{
+  "LandingPage": {
+    "Title": "Chào mừng đến với Bảng điều khiển Sức khỏe của bạn",
+    "Description": "Quản lý và theo dõi hồ sơ sức khỏe gia đình bạn trong không gian kỹ thuật số an toàn và tiện lợi.",
+    "HealthTracking": "Theo dõi Sức khỏe",
+    "DataSecurity": "Bảo mật Dữ liệu",
+    "Family": "Gia đình",
+    "HealthTrackingDescription": "Ghi lại và quản lý thông tin sức khỏe cho từng thành viên trong gia đình.",
+    "DataSecurityDescription": "Dữ liệu sức khỏe của gia đình bạn được mã hóa và bảo vệ an toàn.",
+    "FamilyManagement": "Quản lý Gia đình",
+    "FamilyManagementDescription": "Dễ dàng thêm và quản lý hồ sơ sức khỏe cho nhiều thành viên trong gia đình.",
+    "Login": "Đăng nhập",
+    "Dashboard": "Quản lý"
+  },
+  "LoginPage": {
+    "Name": "FamilyHealth",
+    "Welcome": "Chào mừng đến với",
+    "Login": "Đăng nhập",
+    "Email": "Email",
+    "EnterYourEmail": "Nhập email của bạn",
+    "Password": "Mật khẩu",
+    "EnterYourPassword": "Nhập mật khẩu của bạn",
+    "ForgotPassword": "Quên mật khẩu?",
+    "Register": "Đăng ký"
+  },
+  "RegisterPage": {
+    "Name": "FamilyHealth",
+    "Welcome": "Welcome to",
+    "Register": "Đăng ký",
+    "FirstName": "First Name",
+    "EnterYourFirstName": "Nhập tên đệm của bạn",
+    "LastName": "Last Name",
+    "EnterYourLastName": "Nhập tên của bạn",
+    "Email": "Email",
+    "EnterYourEmail": "Nhập email của bạn",
+    "Password": "Password",
+    "EnterYourPassword": "Nhập mật khẩu",
+    "Login": "Đăng nhập"
+  },
+  "Dashboard": "Bảng điều khiển",
+  "Members": "Thành viên",
+  "Medical Records": "Hồ sơ y tế",
+  "Appointments": "Cuộc hẹn",
+  "Medications": "Thuốc",
+  "Emergency Contacts": "Liên hệ khẩn cấp",
+  "Allergies": "Dị ứng",
+  "Vaccinations": "Tiêm chủng",
+  "Account Settings": "Cài đặt tài khoản",
+  "Reports & Stats": "Báo cáo & Thống kê",
+  "Help & Support": "Trợ giúp & Hỗ trợ"
+}

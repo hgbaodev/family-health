@@ -8,11 +8,14 @@ import {
   FacebookOutlined,
 } from "@ant-design/icons";
 import { useAuthStore } from "~/stores/auth/authStore";
+import LanguageSwitcher from "~/components/LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const { Header } = Layout;
 
 const HomeLayout = () => {
   const { isAuthenticated } = useAuthStore();
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -31,6 +34,7 @@ const HomeLayout = () => {
         </div>
         <div>
           <Space>
+            <LanguageSwitcher />
             {isAuthenticated ? (
               <Button
                 type="primary"
@@ -45,7 +49,7 @@ const HomeLayout = () => {
                 className="bg-green-500 hover:bg-green-600 transition-colors duration-300"
                 onClick={() => navigate("/auth/login")}
               >
-                Login
+                {t("LandingPage.Login")}
               </Button>
             )}
           </Space>

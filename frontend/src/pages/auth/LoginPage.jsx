@@ -6,6 +6,7 @@ import { useLogin } from "~/api/auth/login";
 import { useVerify } from "~/api/auth/verify";
 import { useAuthStore } from "~/stores/auth/authStore";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -14,6 +15,8 @@ const LoginPage = () => {
   const username = queryParams.get("username");
   const navigate = useNavigate();
   const { user, isAuthenticated } = useAuthStore((state) => state);
+
+  const { t } = useTranslation();
 
   // Hook for verification based on username
   const verifyMutation = useVerify({
@@ -31,7 +34,7 @@ const LoginPage = () => {
     if (username) {
       verifyMutation.mutate(username);
     }
-  }, [username]);
+  }, [username, verifyMutation]);
 
   console.log({
     user,
@@ -60,12 +63,12 @@ const LoginPage = () => {
         <img src={logo} alt="logo" className="w-24 mx-auto" />
       </Link>
       <Title level={4} className="text-center">
-        Welcome to{" "}
+        {t("LoginPage.Welcome")}{" "}
         <span className="text-1xl font-bold ml-2 text-green-600">
-          FamilyHealth
+        {t("LoginPage.Name")}
         </span>
       </Title>
-      <Title level={3}>Login</Title>
+      <Title level={3}>{t("LoginPage.Login")}</Title>
       <Form
         form={form}
         onFinish={onFinish}
@@ -75,7 +78,7 @@ const LoginPage = () => {
         initialValues={{ code: "", password: "" }}
       >
         <Form.Item
-          label="Email"
+          label={t("LoginPage.Email")}
           name="email"
           rules={[
             {
@@ -85,11 +88,11 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input variant="filled" placeholder="Enter your email" />
+          <Input variant="filled" placeholder={t("LoginPage.EnterYourEmail")} />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label={t("LoginPage.Password")}
           name="password"
           rules={[
             { required: true, message: "Please enter your password!" },
@@ -99,20 +102,20 @@ const LoginPage = () => {
             },
           ]}
         >
-          <Input.Password variant="filled" placeholder="Enter your password" />
+          <Input.Password variant="filled" placeholder={t("LoginPage.EnterYourPassword")} />
         </Form.Item>
         <Form.Item>
           <Button loading={mutation.isPending} type="primary" htmlType="submit" className="w-full">
-            Login
+            {t("LoginPage.Login")}
           </Button>
         </Form.Item>
       </Form>
       <p className="mb-2 flex justify-between">
         <Link className="text-primary" to="/auth/forgot-password">
-          Forgot password
+          {t("LoginPage.ForgotPassword")}
         </Link>
         <Link className="text-primary" to="/auth/register">
-          Register
+          {t("LoginPage.Register")}
         </Link>
       </p>
     </Space>
