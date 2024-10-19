@@ -1,38 +1,51 @@
 import { Typography, Card, Row, Col } from "antd";
 import { HeartOutlined, SafetyOutlined, TeamOutlined } from "@ant-design/icons";
 import SphereCanvas from "~/components/SphereCanvas";
+import { useTranslation } from "react-i18next"; // Correct import
 
 const { Title, Paragraph } = Typography;
 
 const HomePage = () => {
+  const { t } = useTranslation(); // Correct hook
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       <Row gutter={[32, 32]} align="middle">
         <Col xs={24} md={12}>
           <Title className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-            Family Medical Diary
+            {t("LandingPage.Title")}
           </Title>
           <Paragraph className="text-lg text-gray-600 mb-8">
-            Manage and track your family health records in a secure and convenient
-            digital space.
+            {t("LandingPage.Description")}
           </Paragraph>
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={8}>
               <FeatureItem
-                icon={<HeartOutlined style={{ fontSize: "2rem", color: "#16a34a" }} />}
-                title="Health Tracking"
+                icon={
+                  <HeartOutlined
+                    style={{ fontSize: "2rem", color: "#16a34a" }}
+                  />
+                }
+                title={t("LandingPage.HealthTracking")}
               />
             </Col>
             <Col xs={24} sm={8}>
               <FeatureItem
-                icon={<SafetyOutlined style={{ fontSize: "2rem", color: "#2563eb" }} />}
-                title="Data Security"
+                icon={
+                  <SafetyOutlined
+                    style={{ fontSize: "2rem", color: "#2563eb" }}
+                  />
+                }
+                title={t("LandingPage.DataSecurity")}
               />
             </Col>
             <Col xs={24} sm={8}>
               <FeatureItem
-                icon={<TeamOutlined style={{ fontSize: "2rem", color: "#7c3aed" }} />}
-                title="Family"
+                icon={
+                  <TeamOutlined
+                    style={{ fontSize: "2rem", color: "#7c3aed" }}
+                  />
+                }
+                title={t("LandingPage.Family")}
               />
             </Col>
           </Row>
@@ -46,23 +59,29 @@ const HomePage = () => {
       <Row gutter={[32, 32]} className="mt-16">
         <Col xs={24} md={8}>
           <FeatureCard
-            title="Health Tracking"
-            description="Record and manage health information for each family member."
-            icon={<HeartOutlined style={{ fontSize: "3rem", color: "#16a34a" }} />}
+            title={t("LandingPage.HealthTracking")}
+            description={t("LandingPage.HealthTrackingDescription")}
+            icon={
+              <HeartOutlined style={{ fontSize: "3rem", color: "#16a34a" }} />
+            }
           />
         </Col>
         <Col xs={24} md={8}>
           <FeatureCard
-            title="Data Security"
-            description="Your family's health data is encrypted and securely protected."
-            icon={<SafetyOutlined style={{ fontSize: "3rem", color: "#2563eb" }} />}
+            title={t("LandingPage.DataSecurity")}
+            description={t("LandingPage.DataSecurityDescription")}
+            icon={
+              <SafetyOutlined style={{ fontSize: "3rem", color: "#2563eb" }} />
+            }
           />
         </Col>
         <Col xs={24} md={8}>
           <FeatureCard
-            title="Family Management"
-            description="Easily add and manage health profiles for multiple family members."
-            icon={<TeamOutlined style={{ fontSize: "3rem", color: "#7c3aed" }} />}
+            title={t("LandingPage.FamilyManagement")}
+            description={t("LandingPage.FamilyManagementDescription")}
+            icon={
+              <TeamOutlined style={{ fontSize: "3rem", color: "#7c3aed" }} />
+            }
           />
         </Col>
       </Row>
@@ -83,7 +102,9 @@ const FeatureCard = ({ title, description, icon }) => (
     cover={<div className="py-6">{icon}</div>}
   >
     <Card.Meta
-      title={<span className="text-xl font-semibold text-gray-800">{title}</span>}
+      title={
+        <span className="text-xl font-semibold text-gray-800">{title}</span>
+      }
       description={<span className="text-gray-600">{description}</span>}
     />
   </Card>

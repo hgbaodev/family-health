@@ -6,6 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Header } from "antd/es/layout/layout";
 import UserDropdown from "./UserDropdown";
+import LanguageSwitcher from "~/components/LanguageSwitcher";
 
 const HeaderLayout = ({ collapsed, setCollapsed }) => {
   return (
@@ -22,6 +23,7 @@ const HeaderLayout = ({ collapsed, setCollapsed }) => {
         />
       </Space>
       <Space>
+        <LanguageSwitcher />
         <UserDropdown />
       </Space>
     </Header>

@@ -14,7 +14,7 @@ import static com.hgbaodev.backend.enums.Role.*;
 
 @SpringBootApplication
 @EnableJpaAuditing(auditorAwareRef = "auditorAware")
-//@EnableJpaRepositories(basePackages = "com.hgbaodev.backend.repository")
+@EnableJpaRepositories(basePackages = "com.hgbaodev.backend.repository")
 public class BackendApplication {
 
 	public static void main(String[] args) {
