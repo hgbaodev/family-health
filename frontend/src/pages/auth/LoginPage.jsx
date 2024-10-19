@@ -84,8 +84,12 @@ const LoginPage = () => {
             {
               required: true,
               whitespace: true,
-              message: "Please enter your email!",
+              message: t("LoginPage.PleaseEnterYourEmail"),
             },
+            {
+              type: "email",
+              message: t("LoginPage.PleaseEnterAValidEmail"),
+            }
           ]}
         >
           <Input variant="filled" placeholder={t("LoginPage.EnterYourEmail")} />
@@ -95,10 +99,10 @@ const LoginPage = () => {
           label={t("LoginPage.Password")}
           name="password"
           rules={[
-            { required: true, message: "Please enter your password!" },
+            { required: true, message: t("LoginPage.PleaseEnterYourPassword") },
             {
               min: 6,
-              message: "Password must be at least 6 characters",
+              message: t("LoginPage.PasswordMustBeAtLeast6Characters"),
             },
           ]}
         >

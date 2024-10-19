@@ -20,19 +20,31 @@ const HomePage = () => {
           <Row gutter={[16, 16]}>
             <Col xs={24} sm={8}>
               <FeatureItem
-                icon={<HeartOutlined style={{ fontSize: "2rem", color: "#16a34a" }} />}
+                icon={
+                  <HeartOutlined
+                    style={{ fontSize: "2rem", color: "#16a34a" }}
+                  />
+                }
                 title={t("LandingPage.HealthTracking")}
               />
             </Col>
             <Col xs={24} sm={8}>
               <FeatureItem
-                icon={<SafetyOutlined style={{ fontSize: "2rem", color: "#2563eb" }} />}
+                icon={
+                  <SafetyOutlined
+                    style={{ fontSize: "2rem", color: "#2563eb" }}
+                  />
+                }
                 title={t("LandingPage.DataSecurity")}
               />
             </Col>
             <Col xs={24} sm={8}>
               <FeatureItem
-                icon={<TeamOutlined style={{ fontSize: "2rem", color: "#7c3aed" }} />}
+                icon={
+                  <TeamOutlined
+                    style={{ fontSize: "2rem", color: "#7c3aed" }}
+                  />
+                }
                 title={t("LandingPage.Family")}
               />
             </Col>
@@ -49,21 +61,27 @@ const HomePage = () => {
           <FeatureCard
             title={t("LandingPage.HealthTracking")}
             description={t("LandingPage.HealthTrackingDescription")}
-            icon={<HeartOutlined style={{ fontSize: "3rem", color: "#16a34a" }} />}
+            icon={
+              <HeartOutlined style={{ fontSize: "3rem", color: "#16a34a" }} />
+            }
           />
         </Col>
         <Col xs={24} md={8}>
           <FeatureCard
             title={t("LandingPage.DataSecurity")}
             description={t("LandingPage.DataSecurityDescription")}
-            icon={<SafetyOutlined style={{ fontSize: "3rem", color: "#2563eb" }} />}
+            icon={
+              <SafetyOutlined style={{ fontSize: "3rem", color: "#2563eb" }} />
+            }
           />
         </Col>
         <Col xs={24} md={8}>
           <FeatureCard
             title={t("LandingPage.FamilyManagement")}
             description={t("LandingPage.FamilyManagementDescription")}
-            icon={<TeamOutlined style={{ fontSize: "3rem", color: "#7c3aed" }} />}
+            icon={
+              <TeamOutlined style={{ fontSize: "3rem", color: "#7c3aed" }} />
+            }
           />
         </Col>
       </Row>
@@ -84,7 +102,9 @@ const FeatureCard = ({ title, description, icon }) => (
     cover={<div className="py-6">{icon}</div>}
   >
     <Card.Meta
-      title={<span className="text-xl font-semibold text-gray-800">{title}</span>}
+      title={
+        <span className="text-xl font-semibold text-gray-800">{title}</span>
+      }
       description={<span className="text-gray-600">{description}</span>}
     />
   </Card>
