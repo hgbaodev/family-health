@@ -43,9 +43,6 @@ export const DashboardRoutes = {
         {
             path: 'help-support',
             element: <PrivateRoute component= {HelpPage} />
-        },
-          path: 'emergencyContacts',
-          element: <PrivateRoute component= {EmergencyContactPage} />
         }
       ]
     }
