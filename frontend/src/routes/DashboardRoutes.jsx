@@ -18,7 +18,7 @@ export const DashboardRoutes = {
       children: [
         {
           path: '',
-          element: <PrivateRoute component={DashBoardPage} />
+          element: <DashBoardPage />
         },
         {
           path: 'members',
@@ -44,6 +44,7 @@ export const DashboardRoutes = {
             path: 'help-support',
             element: <PrivateRoute component= {HelpPage} />
         },
+        {
           path: 'emergencyContacts',
           element: <PrivateRoute component= {EmergencyContactPage} />
         }

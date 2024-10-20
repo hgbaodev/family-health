@@ -15,7 +15,6 @@ import { useTranslation } from "react-i18next";
 const MenuConfig = () => {
   const { t } = useTranslation();
 
-
   const menuItems = [
     {
       key: "0",
