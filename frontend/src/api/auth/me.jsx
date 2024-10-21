@@ -11,6 +11,7 @@ export const useMe = (options = {}) => {
   const { setUser, setIsAuthenticated, setIsLoaded } = useAuthStore((state) => state);
 
   return useMutation({
+    suspense: true,
     mutationFn: me,
     onSuccess: (data, ...args) => {
       const result = data.data;
