@@ -2,11 +2,14 @@ import { Layout, Button, Input, Form, message, Card, Typography } from "antd";
 import { MailOutlined, InfoCircleOutlined, CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 
+
+
 const { Content } = Layout;
 const { TextArea } = Input;
 const { Title, Paragraph } = Typography;
 
 const SupportRequestForm = ({ supportRequest, setSupportRequest, handleSendSupportRequest }) => (
+
   <Form layout="vertical">
     <Form.Item
       label={<span className="font-semibold text-lg">Nội dung yêu cầu hỗ trợ <InfoCircleOutlined /></span>}

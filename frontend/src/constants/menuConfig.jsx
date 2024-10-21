@@ -50,7 +50,7 @@ const MenuConfig = () => {
       key: "6",
       icon: <ExclamationCircleOutlined />,
       label: t("Emergency Contacts"),
-      path: "/manager/emergencyContacts",
+      path: "/manager/emergency-contacts",
     },
     {
       key: "7",

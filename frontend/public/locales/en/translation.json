@@ -54,6 +54,56 @@
     "Login": "Login",
     "ForgotPassword":"Forgot password?"
   },
+  "DashBoardPage": {
+    "Welcome": "Welcome to your Dashboard",
+    "Description": "Here you can manage your content and settings"
+
+  },
+
+  "MemberPage": {
+    "CreateMember": "Create Member",
+    "FullName": "Full Name",
+    "DateOfBirth": "Date of Birth",
+    "Gender": "Gender",
+    "Relationship" : "Relationship",
+    "BloodType" : "Blood Type",
+    "Height" : "Height (m)",
+    "Weight": "Weight (kg)"
+
+  },
+  "AllergyPage": {
+    "MemberID": "#MemberID",
+    "AllergyType": "Allergy Type",
+    "Severity": "Severity",
+    "Symptoms": "Symptoms"
+  },
+  "EmergencyContactPage": {
+    "Name": "Name",
+    "Relationship": "Relationship",
+    "Phone Number": "Phone Number",
+    "User ID": "User ID"
+
+
+  },
+  "MedicationPage": {
+    "Medication Name": "Medication Name",
+    "Frequency": "Frequency",
+    "Start Date": "Start Date",
+    "End Date": "End Date",
+    "Note" : "Note"
+
+
+  },
+
+
+
+  "VaccinationPage": {
+    "Date Administered": "Date Administered",
+    "Member Name": "Member Name",
+    "Vaccine Name": "Vaccine Name"
+
+  },
+
   "Dashboard": "Dashboard",
   "Members": "Members",
   "Medical Records": "Medical Records",
@@ -64,5 +114,13 @@
   "Vaccinations": "Vaccinations",
   "Account Settings": "Account Settings",
   "Reports & Stats": "Reports & Stats",
-  "Help & Support": "Help & Support"
+  "Help & Support": "Help & Support",
+  "warning delete": "Are you sure to delete ?",
+  "Coming Soon" : "Coming Soon",
+  "ID": "#ID",
+  "Action": "Action",
+  "MemberID": "MemberID"
+
+
+
 }
