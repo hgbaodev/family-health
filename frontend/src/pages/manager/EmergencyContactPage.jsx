@@ -6,10 +6,13 @@ import CreateEmergencyContactModal from "~/sections/emergencyContacts/CreateEmer
 import { EmergencyContactTable } from "~/sections/emergencyContacts/EmergencyContactTable";
 import UpdateEmergencyContactModal from "~/sections/emergencyContacts/UpdateEmergencyContactModal";
 import { useEmergencyContactStore } from "~/stores/emergencyContacts/emergencyContactStore";
+import { useTranslation } from "react-i18next";
 
 
 
 const EmergencyContactPage = () => {
+  const {t} = useTranslation();
+
     const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useEmergencyContactStore((state) => state);
 
     const handleDeleteCancel = () => {
@@ -32,8 +35,8 @@ const EmergencyContactPage = () => {
       <>
         <Flex align="center" justify="space-between" className="mb-2">
           <PageHeader
-            heading="Emergency Contacts"
-            links={[{ title: "DashBoard", href: "/emergencyContacts" }, { title: "EmergencyContact" }]}
+            heading={t("Emergency Contacts")}
+            links={[{ title: t("Dashboard"), href: "/emergencyContacts" }, { title: t("Emergency Contacts") }]}
           />
           <Space>
             <Button

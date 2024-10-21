@@ -4,8 +4,10 @@ import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useEmergencyContactStore } from "~/stores/emergencyContacts/emergencyContactStore";
 import { useDeleteEmergencyContact } from "~/api/emergencyContacts/delete-emergencyContact";
+import { useTranslation } from "react-i18next";
 
 const useEmergencyContactColumns= () => {
+  const {t} = useTranslation();
 
   const { setOpenUpdateModal, setEmergencyContact } = useEmergencyContactStore((state) => state);
 
@@ -30,7 +32,7 @@ const useEmergencyContactColumns= () => {
   return useMemo(
     () => [
       {
-        title: "#ID",
+        title: t("ID"),
         dataIndex: "contactID",
         key: "contactID",
         align: "center",
@@ -38,32 +40,32 @@ const useEmergencyContactColumns= () => {
 
 
       {
-        title: "Name",
+        title: t("EmergencyContactPage.Name"),
         dataIndex: "name",
         key: "name",
         align: "center",
       },
 
       {
-        title: "Relationship",
+        title: t("EmergencyContactPage.Relationship"),
         dataIndex: "relationship",
         key: "relationship",
       },
 
       {
-        title: "Phone Number",
+        title: t("EmergencyContactPage.Phone Number"),
         dataIndex: "phoneNumber",
         key: "phoneNumber",
       },
 
     {
-        title: "User ID",
+        title: t("EmergencyContactPage.User ID"),
         dataIndex: "userID",
         key: "userID",
         },
 
       {
-        title: "Action",
+        title: t("Action"),
         key: "action",
         render: (_, emergencyContact) => (
           <Space>

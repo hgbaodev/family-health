@@ -5,8 +5,10 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { useVaccinationsStore } from "~/stores/vaccinations/vaccinationStore";
 import { useDeleteVaccination } from "~/api/vaccinations/delete-vaccination";
+import { useTranslation } from "react-i18next";
 
 const useVaccinationColumns = () => {
+  const {t} = useTranslation();
 
   const { setOpenUpdateModal, setVaccination } = useVaccinationsStore((state) => state);
 
@@ -31,32 +33,32 @@ const useVaccinationColumns = () => {
   return useMemo(
     () => [
       {
-        title: "#ID",
+        title: t("ID"),
         dataIndex: "vaccinationID",
         key: "vaccinationID",
         align: "center",
       },
       {
-        title: "Date Administered",
+        title: t("VaccinationPage.Date Administered"),
         dataIndex: "dateAdministered",
         key: "dateAdministered",
         align: "center",
         render: (text) => moment(text).format("YYYY-MM-DD HH:mm:ss"),
       },
       {
-        title: "Member Name",
+        title: t("VaccinationPage.Member Name"),
         key: "memberName",
         align: "center",
         render: (_, vaccination) => vaccination.member.fullName,
       },
       {
-        title: "Vaccine Name",
+        title: t("VaccinationPage.Vaccine Name"),
         dataIndex: "vaccineName", 
         key: "vaccineName",
         align: "center",
       },
       {
-        title: "Action",
+        title: t("Action"),
         key: "action",
         render: (_, vaccination) => (
           <Space>

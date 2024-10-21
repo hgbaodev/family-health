@@ -6,11 +6,13 @@ import CreateMemberModal from "~/sections/members/CreateMemberModal";
 import { MemberTable } from "~/sections/members/MemberTable";
 import UpdateMemberModal from "~/sections/members/UpdateMemberModal";
 import { useMembersStore } from "~/stores/members/memberStore";
+import { useTranslation } from "react-i18next";
+
 
 
 const MemberPage = () => {
   const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useMembersStore((state) => state);
-
+  const {t} = useTranslation();
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);
   };
@@ -31,8 +33,8 @@ const MemberPage = () => {
     <>
       <Flex align="center" justify="space-between" className="mb-2">
         <PageHeader
-          heading="Members"
-          links={[{ title: "DashBoard", href: "/manager" }, { title: "Member" }]}
+          heading={t("Members")}
+          links={[{ title: t("Dashboard"), href: "/manager" }, { title: t("Members") }]}
         />
         <Space>
           <Button
@@ -48,7 +50,7 @@ const MemberPage = () => {
         <MemberTable/>
       </div>
       <ConfirmModal
-        title={`Are you sure to delete Member ?`}
+        title={'t("warning_delete.Member")'}
         content={'Coming Soon'}
         open={openDeleteModal}
         handleCancel={handleDeleteCancel}
