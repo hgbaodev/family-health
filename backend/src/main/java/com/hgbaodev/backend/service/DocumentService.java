@@ -10,7 +10,7 @@ public interface DocumentService {
     Document addDocument(Document document);
     Document updateDocument(Document document);
     void deleteDocument(Integer documentID);
-    Page<Document> getAllDocuments(int page,int size, String keyword);
+    Page<Document> getAllDocuments(int page,int size, String keyword,Integer userID);
     //Search
     Optional<Document> findDocumentById(Integer documentID);
 }

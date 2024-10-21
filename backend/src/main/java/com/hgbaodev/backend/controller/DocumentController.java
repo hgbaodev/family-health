@@ -1,7 +1,9 @@
 package com.hgbaodev.backend.controller;
 
 import com.hgbaodev.backend.model.Document;
+import com.hgbaodev.backend.model.MedicalRecord;
 import com.hgbaodev.backend.model.User;
+import com.hgbaodev.backend.repository.MedicalRecordRepository;
 import com.hgbaodev.backend.request.document.UpdateDocumentRequest;
 import com.hgbaodev.backend.request.document.AddDocumentRequest;
 import com.hgbaodev.backend.response.ApiResponse;
@@ -25,11 +27,15 @@ import java.util.Optional;
 public class DocumentController {
     private final DocumentService documentService;
     private final AuthenticationService authenticationService;
+    private final MedicalRecordRepository medicalRecordRepository;
 
     @PostMapping
 
     public ResponseEntity<ApiResponse<?>> addDocument(@Valid @RequestBody AddDocumentRequest addDocumentRequest) {
         User user = authenticationService.getCurrentUser();
+
+        MedicalRecord medicalRecord = medicalRecordRepository.findById(addDocumentRequest.getRecordID())
+                .orElseThrow(() -> new RuntimeException("MedicalRecord not found"));
         Document document = Document.builder()
                 .recordID(addDocumentRequest.getRecordID())
                 .fileName(addDocumentRequest.getFileName())
@@ -51,6 +57,8 @@ public class DocumentController {
     public ResponseEntity<ApiResponse<?>> updateDocument(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateDocumentRequest updateDocumentRequest) {
+        MedicalRecord medicalRecord = medicalRecordRepository.findById(updateDocumentRequest.getRecordID())
+                .orElseThrow(() -> new RuntimeException("MedicalRecord not found"));
         Document document = Document.builder()
                 .documentID(id)
                 .recordID(updateDocumentRequest.getRecordID())
@@ -87,7 +95,9 @@ public class DocumentController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "8") int size,
             @RequestParam(defaultValue = "") String keyword) {
-        Page<Document> documentsPage = documentService.getAllDocuments(page,size,keyword);
+        User user = authenticationService.getCurrentUser();
+        System.out.println("Current userID: "+user.getId());
+        Page<Document> documentsPage = documentService.getAllDocuments(page,size,keyword,user.getId());
         List<Document> documents = documentsPage.getContent();
         ApiResponse<List<Document>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
