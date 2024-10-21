@@ -3,16 +3,19 @@ import Title from "antd/es/typography/Title";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
 import { useRegister } from "~/api/auth/register";
+import { useTranslation } from "react-i18next";
 
 const RegisterPage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
   
   const registerMutation = useRegister({
     onSuccess: () => {
       message.success("Registration successful! Please check your email for verification.");
       form.resetFields();
-      window.location.replace("https://mail.google.com/"); // Redirect to Email Page
+      navigate(`/auth/login`);
     },
     onError: (error) => {
       message.error(error.message || "Registration failed");
@@ -29,10 +32,10 @@ const RegisterPage = () => {
         <img src={logo} alt="logo" className="w-24 mx-auto" />
       </Link>
       <Title level={4} className="text-center">
-        Welcome to <span className="text-1xl font-bold ml-2 text-green-600">FamilyHealth</span>
+        {t("RegisterPage.Welcome")} <span className="text-1xl font-bold ml-2 text-green-600">FamilyHealth</span>
       </Title>
       <Title level={3}>
-        Register
+        {t("RegisterPage.Register"  )}
       </Title>
       <Form
         form={form}
@@ -43,74 +46,78 @@ const RegisterPage = () => {
         initialValues={{ code: "", password: "" }}
       >
         <Form.Item
-          label="First Name"
+          label={t("RegisterPage.FirstName")}
           name="firstname"
           rules={[
             {
               required: true,
               whitespace: true,
-              message: "Please enter your first name!",
+              message: t("RegisterPage.PleaseEnterYourFirstName"),
             },
           ]}
         >
-          <Input variant="filled" placeholder="Enter your first name" />
+          <Input variant="filled" placeholder={t("RegisterPage.EnterYourFirstName")} />
         </Form.Item>
 
         <Form.Item
-          label="Last Name"
+          label={t("RegisterPage.LastName")}
           name="lastname"
           rules={[
             {
               required: true,
               whitespace: true,
-              message: "Please enter your last name!",
+              message: t("RegisterPage.PleaseEnterYourLastName"),
             },
           ]}
         >
-          <Input variant="filled" placeholder="Enter your last name" />
+          <Input variant="filled" placeholder={t("RegisterPage.EnterYourLastName")} />
         </Form.Item>
 
         <Form.Item
-          label="Email"
+          label={t("RegisterPage.Email")}
           name="email"
           rules={[
             {
               required: true,
               whitespace: true,
-              message: "Please enter your email!",
+              message: t("RegisterPage.PleaseEnterYourEmail"),
             },
+            {
+              type: "email",
+              message: t("RegisterPage.PleaseEnterAValidEmail"),
+            }
           ]}
         >
-          <Input variant="filled" placeholder="Enter your email" />
+          <Input variant="filled" placeholder={t("RegisterPage.EnterYourEmail")} />
         </Form.Item>
 
         <Form.Item
-          label="Password"
+          label={t("RegisterPage.Password")}
           name="password"
           rules={[
-            { required: true, message: "Please enter your password!" },
+            { required: true, message: t("Register.PleaseEnterYourPassword") },
             {
               min: 6,
-              message: "Password must be at least 6 characters",
+              message: t("RegisterPage.PasswordMustBeAtLeast6Characters"),
             },
           ]}
         >
-          <Input.Password variant="filled" placeholder="Enter your password" />
+          <Input.Password variant="filled" placeholder={t("RegisterPage.EnterYourPassword")} />
         </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit" className="w-full">
-            Register
+            {t("RegisterPage.Register")}
           </Button>
         </Form.Item>
       </Form>
 
       <p className="mb-2 flex justify-between">
-        {/* <Link className="text-primary" to="/auth/forgot-password">
-          Forgot password
-        </Link> */}
+        <Link className="text-primary" to="/auth/forgot-password">
+          {t("RegisterPage.ForgotPassword")}
+        </Link>
         <Link className="text-primary ml-auto" to="/auth/login">
-          Login
+          {t("RegisterPage.Login")}
         </Link>
       </p>
     </Space>

@@ -32,7 +32,7 @@ const EmergencyContactPage = () => {
       <>
         <Flex align="center" justify="space-between" className="mb-2">
           <PageHeader
-            heading="emergencyContacts"
+            heading="Emergency Contacts"
             links={[{ title: "DashBoard", href: "/emergencyContacts" }, { title: "EmergencyContact" }]}
           />
           <Space>
