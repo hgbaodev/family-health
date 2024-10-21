@@ -10,6 +10,7 @@ const AllergyPage = Loadable(React.lazy(() => import('~/pages/manager/AllergyPag
 const MedicationPage = Loadable(React.lazy(() => import('~/pages/manager/MedicationPage')));
 const EmergencyContactPage = Loadable(React.lazy(() => import('~/pages/manager/EmergencyContactPage')));
 const HelpPage = Loadable(React.lazy(() => import('~/pages/manager/HelpPage')));
+// const AccountSetting =Loadable(React.lazy(() => import('~/pages/manager/AccountSettingPage')));
 export const DashboardRoutes = {
   children: [
     {
@@ -37,17 +38,18 @@ export const DashboardRoutes = {
           element: <PrivateRoute component={VaccinationPage} />
         },
         {
-            path: 'emergencyContacts',
+            path: 'emergency-contacts',
             element: <PrivateRoute component= {EmergencyContactPage} />
         },
+//         {
+//           path: 'account-settings',
+//           element: <PrivateRoute component= {AccountSettingPage} />
+//         },
         {
             path: 'help-support',
             element: <PrivateRoute component= {HelpPage} />
-        },
-        {
-          path: 'emergency-contacts',
-          element: <PrivateRoute component= {EmergencyContactPage} />
         }
+
       ]
     }
   ]
