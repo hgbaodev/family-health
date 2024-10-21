@@ -38,12 +38,12 @@ public class AllergyServiceImpl implements AllergyService {
     }
 
     @Override
-    public Page<Allergy> getAllAllergies(int page, int size, String keyword) {
+    public Page<Allergy> getAllAllergies(int page, int size, String keyword,Integer userID) {
         Pageable pageable = PageRequest.of(page - 1, size);
         if (keyword != null && !keyword.isEmpty()) {
-            return allergyRepository.findByKeyword(keyword, pageable);
+            return allergyRepository.findByKeyword(keyword, pageable,userID);
         }
-        return allergyRepository.findAll(pageable);
+        return allergyRepository.getAllergiesByUserID(userID,pageable);
     }
     @Override
     public Optional<Allergy> findAllergyById(Integer allergyID){

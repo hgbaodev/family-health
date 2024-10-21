@@ -84,7 +84,8 @@ public class AllergyController {
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "8") int size,
             @RequestParam(defaultValue = "") String keyword) {
-        Page<Allergy> alleriesPage = allergyService.getAllAllergies(page,size,keyword);
+        User user = authenticationService.getCurrentUser();
+        Page<Allergy> alleriesPage = allergyService.getAllAllergies(page,size,keyword, user.getId());
         List<Allergy> allergies = alleriesPage.getContent();
         ApiResponse<List<Allergy>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),

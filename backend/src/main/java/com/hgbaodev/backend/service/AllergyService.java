@@ -11,7 +11,7 @@ public interface AllergyService {
     Allergy addAllergy(Allergy allergy);
     Allergy updateAllergy(Allergy allergy);
     void deleteAllergy(Integer allergyID);
-    Page<Allergy> getAllAllergies(int page, int size,String keyword);
+    Page<Allergy> getAllAllergies(int page, int size,String keyword,Integer userID);
     //Search
     Optional <Allergy> findAllergyById(Integer allergyID);
 //    Page<Allergy> findBySeverity(String severity,Pageable pageable);
