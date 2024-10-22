@@ -6,7 +6,7 @@ import { useAllergiesStore } from "~/stores/allergies/allergyStore";
 import { useTranslation } from "react-i18next";
 
 const useAllergyColumns = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const { setOpenUpdateModal, setAllergy } = useAllergiesStore(
     (state) => state
@@ -82,7 +82,7 @@ const useAllergyColumns = () => {
         ),
       },
     ],
-    []
+    [t]
   );
 };
 

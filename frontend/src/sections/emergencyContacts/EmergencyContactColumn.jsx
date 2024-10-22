@@ -7,7 +7,7 @@ import { useDeleteEmergencyContact } from "~/api/emergencyContacts/delete-emerge
 import { useTranslation } from "react-i18next";
 
 const useEmergencyContactColumns= () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const { setOpenUpdateModal, setEmergencyContact } = useEmergencyContactStore((state) => state);
 
@@ -89,7 +89,7 @@ const useEmergencyContactColumns= () => {
         ),
       },
     ],
-    []
+    [t]
   );
 };
 

@@ -22,6 +22,7 @@ export const AllergyTable = () => {
         columns={columns}
         dataSource={allergies}
         size="middle"
+        rowKey={(record) => record.allergyID}
         pagination={{
           current: page,
           pageSize: ROW_PER_PAGE,

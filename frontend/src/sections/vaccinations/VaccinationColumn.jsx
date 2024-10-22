@@ -8,7 +8,7 @@ import { useDeleteVaccination } from "~/api/vaccinations/delete-vaccination";
 import { useTranslation } from "react-i18next";
 
 const useVaccinationColumns = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const { setOpenUpdateModal, setVaccination } = useVaccinationsStore((state) => state);
 
@@ -82,7 +82,7 @@ const useVaccinationColumns = () => {
         ),
       },
     ],
-    []
+    [t]
   );
 };
 

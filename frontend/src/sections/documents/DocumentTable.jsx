@@ -1,6 +1,6 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
-import useDocumentColumns from "./DocumentColumns";
+import useDocumentColumns from "./DocumentColumn";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
 import { useDocuments } from "~/api/documents/get-documents";
@@ -28,6 +28,7 @@ export const DocumentTable = () => {
           total: documents?.length || 0,
           onChange: (newPage) => setPage(newPage),
         }}
+        rowKey={(record) => record.documentID}
         loading={isLoading}
         title={() => (
           <div style={{ display: "flex", justifyContent: "space-between" }}>

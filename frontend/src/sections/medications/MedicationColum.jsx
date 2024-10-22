@@ -7,7 +7,7 @@ import { useMedicationsStore} from "~/stores/medications/medicationStore";
 import { useTranslation } from "react-i18next";
 
 const useMedicationColumns = () => {
-  const {t} = useTranslation();
+  const { t } = useTranslation();
 
   const { setOpenUpdateModal, setMedication } = useMedicationsStore((state) => state);
 
@@ -90,7 +90,7 @@ const useMedicationColumns = () => {
         ),
       },
     ],
-    []
+    [t]
   );
 };
 

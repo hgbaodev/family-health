@@ -1,6 +1,6 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
-import useMemberColumns from "./MemberColum";
+import useMemberColumns from "./MemberColumn";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
 import { useMembers } from "../../api/members/get-members";

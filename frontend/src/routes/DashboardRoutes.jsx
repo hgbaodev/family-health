@@ -1,7 +1,6 @@
 import React from 'react';
 import DashboardLayout from '~/layouts/DashboardLayout';
 import Loadable from '~/components/Loadable';
-import PrivateRoute from '~/guards/PrivateRoute';
 import VaccinationPage from '~/pages/manager/VaccinationPage';
 
 const DashBoardPage = Loadable(React.lazy(() => import('~/pages/manager/DashBoardPage')));
@@ -25,23 +24,23 @@ export const DashboardRoutes = {
         },
         {
           path: 'members',
-          element: <PrivateRoute component={MemberPage} />
+          element: <MemberPage />
         },
         {
           path: 'allergies',
-          element: <PrivateRoute component={AllergyPage} />
+          element: <AllergyPage />
         },
         {
           path: 'medications' ,
-          element: <PrivateRoute component={MedicationPage} />
+          element: <MedicationPage />
         },
         {
           path: 'vaccinations',
-          element: <PrivateRoute component={VaccinationPage} />
+          element: <VaccinationPage />
         },
         {
             path: 'emergency-contacts',
-            element: <PrivateRoute component= {EmergencyContactPage} />
+            element: <EmergencyContactPage />
         },
 //         {
 //           path: 'account-settings',
@@ -49,15 +48,15 @@ export const DashboardRoutes = {
 //         },
         {
           path: 'medical-records',
-          element: <PrivateRoute component={MedicalRecordPage} />
+          element: <MedicalRecordPage />
         },
         {
           path: 'documents',
-          element: <PrivateRoute component={DocumentPage} />
+          element: <DocumentPage />
         },
         {
             path: 'help-support',
-            element: <PrivateRoute component= {HelpPage} />
+            element: <HelpPage />
         }
 
       ]
