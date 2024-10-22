@@ -1,16 +1,12 @@
     package com.hgbaodev.backend.controller;
 
     import com.hgbaodev.backend.model.Medication;
-    import com.hgbaodev.backend.model.Member;
     import com.hgbaodev.backend.model.User;
     import com.hgbaodev.backend.request.medication.AddMedicationRequest;
     import com.hgbaodev.backend.request.medication.UpdateMedicationRequest;
-    import com.hgbaodev.backend.request.member.AddMemberRequest;
-    import com.hgbaodev.backend.request.member.UpdateMemberRequest;
     import com.hgbaodev.backend.response.ApiResponse;
     import com.hgbaodev.backend.service.AuthenticationService;
     import com.hgbaodev.backend.service.MedicationService;
-    import com.hgbaodev.backend.service.MemberService;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
@@ -93,7 +89,8 @@
                 @RequestParam(defaultValue = "1") int page,
                 @RequestParam(defaultValue = "8") int size,
                 @RequestParam(defaultValue = "") String keyword) {
-            Page<Medication> medicationsPage = medicationService.getAllMedications(page, size, keyword);
+            User user = authenticationService.getCurrentUser();
+            Page<Medication> medicationsPage = medicationService.getAllMedications(page, size, keyword, user.getId());
 
             List<Medication> medicationsContent = medicationsPage.getContent();
 

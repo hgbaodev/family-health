@@ -38,10 +38,9 @@ const useMedicalRecordColumns = () => {
         align: "center",
       },
       {
-        title: "#MemberID",
-        dataIndex: "memberID",
-        key: "memberID",
-        align: "center",
+        title: "Member name",
+        dataIndex: "memberName",
+        key: "memberName"
       },
       {
         title: "Date",

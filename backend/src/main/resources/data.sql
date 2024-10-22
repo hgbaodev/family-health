@@ -224,7 +224,7 @@ WHERE NOT EXISTS (SELECT 1 FROM medical_records WHERE member_id = 12 AND date = 
 
 INSERT INTO medical_records (member_id, date, doctor, symptoms, diagnosis, treatment, facility_name)
 SELECT 13, '2024-04-02', 'Dr. Huy  ', 'Hay quên, đau đầu thường xuyên', 'Mất trí nhớ nhẹ', 'Uống thuốc. nghỉ ngơi, thư giãn đầu óc', 'Khoa Thần Kinh'
-WHERE NOT EXISTS (SELECT 1 FROM medical_records WHERE member_id = 2 AND date = '2024-04-02');
+WHERE NOT EXISTS (SELECT 1 FROM medical_records WHERE member_id = 13 AND date = '2024-04-02'); 
 ----Documents
 
 -- Thêm dữ liệu mẫu vào bảng documents

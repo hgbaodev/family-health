@@ -36,16 +36,14 @@ const useAllergyColumns = () => {
         align: "center",
       },
       {
-        title: "#MemberID",
-        dataIndex: "memberID",
-        key: "memberID",
-        align: "center",
+        title: "Member name",
+        dataIndex: "memberName",
+        key: "memberName",
       },
       {
         title: "Allergy Type",
         dataIndex: "allergyType",
-        key: "allergyType",
-        align: "center",
+        key: "allergyType", 
       },
       {
         title: "Severity",

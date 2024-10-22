@@ -21,6 +21,11 @@ export const DocumentTable = () => {
       <Table
         columns={columns}
         dataSource={documents}
+        onRow={(item) => {
+          return {
+            onDoubleClick: () => console.log(item)
+          }
+        }}
         size="middle"
         pagination={{
           current: page,
