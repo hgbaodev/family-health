@@ -5,6 +5,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Data
 @Builder
@@ -14,11 +15,11 @@ import java.time.LocalTime;
 @Setter
 public class AddAppointmentRequest {
 
-  @NotNull(message = "MemberID is required")
-  private int memberID;
+  @NotNull(message = "MemberId is required")
+  private Integer memberID;
 
   @NotNull(message = "Time is required")
-  private LocalTime time;
+  private Date time;
 
   @NotBlank(message = "Doctor is required")
   private String doctor;

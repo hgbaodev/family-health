@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.time.LocalTime;
+import java.util.Date;
 
 @Data
 @Builder
@@ -14,10 +15,10 @@ import java.time.LocalTime;
 public class UpdateAppointmentRequest {
 
   @NotNull(message = "MemberID is required")
-  private int memberID;
+  private Integer memberID;
 
   @NotNull(message = "Time is required")
-  private LocalTime time;
+  private Date time;
 
   @NotBlank(message = "Doctor is required")
   private String doctor;

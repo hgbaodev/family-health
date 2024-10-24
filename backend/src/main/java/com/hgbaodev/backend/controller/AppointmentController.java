@@ -1,12 +1,16 @@
     package com.hgbaodev.backend.controller;
 
+    import com.hgbaodev.backend.model.Appointment;
     import com.hgbaodev.backend.model.Member;
-    import com.hgbaodev.backend.model.User;
-    import com.hgbaodev.backend.request.member.AddMemberRequest;
-    import com.hgbaodev.backend.request.member.UpdateMemberRequest;
+    import com.hgbaodev.backend.model.Vaccination;
+    import com.hgbaodev.backend.request.appointment.AddAppointmentRequest;
+    import com.hgbaodev.backend.request.appointment.UpdateAppointmentRequest;
+    import com.hgbaodev.backend.request.vaccication.AddVaccinationRequest;
+    import com.hgbaodev.backend.request.vaccication.UpdateVaccinationRequest;
     import com.hgbaodev.backend.response.ApiResponse;
-    import com.hgbaodev.backend.service.AuthenticationService;
+    import com.hgbaodev.backend.service.AppointmentService;
     import com.hgbaodev.backend.service.MemberService;
+    import com.hgbaodev.backend.service.VaccinationService;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
@@ -23,88 +27,72 @@
     @Slf4j
     public class AppointmentController {
 
+        private final AppointmentService appointmentService;
         private final MemberService memberService;
-        private final AuthenticationService authenticationService;
 
         @PostMapping
-        public ResponseEntity<ApiResponse<?>> addMember(@Valid @RequestBody AddMemberRequest addMemberRequest) {
-            User user = authenticationService.getCurrentUser();
-            Member member = Member.builder()
-                    .userID(user.getId())
-                    .fullName(addMemberRequest.getFullName())
-                    .dateOfBirth(addMemberRequest.getDateOfBirth())
-                    .gender(addMemberRequest.getGender())
-                    .relationship(addMemberRequest.getRelationship())
-                    .bloodType(addMemberRequest.getBloodType())
-                    .height(addMemberRequest.getHeight())
-                    .weight(addMemberRequest.getWeight())
+        public ResponseEntity<ApiResponse<?>> addAppointment(@Valid @RequestBody AddAppointmentRequest addAppointmentRequest) {
+            Member member = memberService.getMemberById(addAppointmentRequest.getMemberID());
+            Appointment appointment = Appointment.builder()
+                    .member(member)
+                    .doctor(addAppointmentRequest.getDoctor())
+                    .time(addAppointmentRequest.getTime())
+                    .location(addAppointmentRequest.getLocation())
                     .build();
-            log.info(member.toString());
-            Member createdMember = memberService.addMember(member);
-            ApiResponse<Member> response = new ApiResponse<>(
+            Appointment createdAppointment = appointmentService.addAppointment(appointment);
+            ApiResponse<Appointment> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
-                    "Add member successfully",
-                    createdMember
+                    "Add appointment successfully",
+                    createdAppointment
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
         @PutMapping("/{id}")
-        public ResponseEntity<ApiResponse<?>> updateMember(
+        public ResponseEntity<ApiResponse<?>> updateAppointment(
                 @PathVariable("id") Integer id,
-                @Valid @RequestBody UpdateMemberRequest updateMemberRequest) {
-            Member member = Member.builder()
-                    .memberID(id)
-                    .fullName(updateMemberRequest.getFullName())
-                    .dateOfBirth(updateMemberRequest.getDateOfBirth())
-                    .gender(updateMemberRequest.getGender())
-                    .relationship(updateMemberRequest.getRelationship())
-                    .bloodType(updateMemberRequest.getBloodType())
-                    .height(updateMemberRequest.getHeight())
-                    .weight(updateMemberRequest.getWeight())
+                @Valid @RequestBody UpdateAppointmentRequest updateAppointmentRequest) {
+            Member member = memberService.getMemberById(updateAppointmentRequest.getMemberID());
+            Appointment appointment = Appointment.builder()
+                    .appointmentID(id)
+                    .member(member)
+                    .doctor(updateAppointmentRequest.getDoctor())
+                    .time(updateAppointmentRequest.getTime())
+                    .location(updateAppointmentRequest.getLocation())
                     .build();
-            Member updatedMember = memberService.updateMember(member);
-            ApiResponse<Member> response = new ApiResponse<>(
+            Appointment updatedAppointment = appointmentService.updateAppointment(appointment);
+            ApiResponse<Appointment> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
-                    "Update member successfully",
-                    updatedMember
+                    "Update appointment successfully",
+                    updatedAppointment
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
         @DeleteMapping("/{id}")
-        public ResponseEntity<Void> deleteMember(@PathVariable("id") Integer id) {
-            memberService.deleteMember(id);
-            return ResponseEntity.noContent().build();
-        }
-
-        @GetMapping("/{id}")
-        public ResponseEntity<ApiResponse<?>> getMemberById(@PathVariable("id") Integer id) {
-            Member member = memberService.getMemberById(id);
-            ApiResponse<Member> response = new ApiResponse<>(
+        public ResponseEntity<ApiResponse<?>> deleteAppointment(@PathVariable("id") Integer id) {
+            appointmentService.deleteAppointment(id);
+            ApiResponse<Appointment> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
-                    "Get member successfully",
-                    member
+                    "Delete appointment successfully",
+                    null
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 
-        @GetMapping
-        public ResponseEntity<ApiResponse<List<Member>>> getAllMembers(
-                @RequestParam(defaultValue = "1") int page,
-                @RequestParam(defaultValue = "8") int size,
-                @RequestParam(defaultValue = "") String keyword) {
-            User user = authenticationService.getCurrentUser();
-            Page<Member> membersPage = memberService.getAllMembers(page, size, keyword, user.getId());
-
-            List<Member> membersContent = membersPage.getContent();
-
-            ApiResponse<List<Member>> response = new ApiResponse<>(
+        @GetMapping("")
+        public ResponseEntity<ApiResponse<?>> getAllAppointments(
+                @RequestParam(name = "page", defaultValue = "1") int page,
+                @RequestParam(name = "size", defaultValue = "10") int size,
+                @RequestParam(name = "keyword", required = false) String keyword) {
+            Page<Appointment> appointments = appointmentService.getAllAppointments(page, size, keyword);
+            List<Appointment> appointmentsList = appointments.getContent();
+            ApiResponse<List<Appointment>> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
-                    "Get list member successfully",
-                    membersContent
+                    "Get all appointments successfully",
+                    appointmentsList
             );
-
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
+
     }

@@ -1,17 +1,23 @@
+import { startTransition } from "react";
 import { Navigate } from "react-router-dom";
+import { useMe } from "~/api/auth/me";
 import { useAuthStore } from "~/stores/auth/authStore";
 
 const PrivateRoute = ({ component: Component }) => {
-  const { isAuthenticated, isLoaded } = useAuthStore((state) => state);
+  const setUser = useAuthStore((state) => state.setUser);
+  const { isError } = useMe({
+    onSuccess: (data) => {
+      startTransition(() => {
+        setUser(data.data);
+      });   
+    },  
+  });
 
-  if (isLoaded) {
-    if (!isAuthenticated) {
-      return <Navigate to="/auth/login" replace={true} />;
-    }
-    return <Component />;
-  } else {
-    return <Navigate to="/auth/login" replace={true} />;
+  if (isError) {
+    return <Navigate to="/auth/login" replace />;
   }
+
+  return <Component />;
 };
 
 export default PrivateRoute;

@@ -21,6 +21,7 @@ if (error) {
         columns={columns}
         dataSource={emergencyContacts}
         size="middle"
+        rowKey={(record) => record.emergencyContactID}
         pagination={{
           current: page,
           pageSize: ROW_PER_PAGE,

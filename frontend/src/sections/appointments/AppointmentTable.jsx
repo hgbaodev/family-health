@@ -1,52 +1,39 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
-import useMedicalRecordColumn from "./MedialRecordColumns";
-import { useMembers } from "~/api/members/get-members";
+import useAppointmentColumns from "./AppointmentColumn";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
-import { useMedicalRecords } from "~/api/medicalRecords/get-medical-records";
+import { useAppointments } from "~/api/appointments/get-appointment";
 
-export const MedicalRecordTable = () => {
-  const columns = useMedicalRecordColumn();
+export const AppointmentTable = () => {
+  const columns = useAppointmentColumns();
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
 
-  const { data: medicalRecords, isLoading } = useMedicalRecords({
+  const { data: appointments, isLoading } = useAppointments({
     page,
     size: ROW_PER_PAGE,
     keyword,
   });
-  const {data:members} = useMembers({}) 
-  const memberMap = (members || []).reduce((map, member) => {
-    map[member.memberID] = member.fullName;
-    return map;
-  }, {});
 
-  let dataSource = [];
-  if (medicalRecords !== undefined) {
-    dataSource = medicalRecords.map(medicalRecord => ({
-      ...medicalRecord,
-      memberName: memberMap[medicalRecord.memberID] || "",
-    }));
-  }
   return (
     <>
       <Table
         columns={columns}
-        dataSource={dataSource}
+        dataSource={appointments}
         size="middle"
-        rowKey={(record) => record.recordID}
+        rowKey={(record) => record.appointmentID}
         pagination={{
           current: page,
           pageSize: ROW_PER_PAGE,
-          total: medicalRecords?.length || 0,
+          total: appointments?.length | 0,
           onChange: (newPage) => setPage(newPage),
         }}
         loading={isLoading}
         title={() => (
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="flex justify-between">
             <Input.Search
-              placeholder="Search medical record..."
+              placeholder="Search employee..."
               className="w-[250px]"
               allowClear
               onSearch={(value) => {

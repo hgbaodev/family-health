@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Date;
 
 @Data
 @Builder
@@ -20,11 +21,12 @@ public class Appointment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int appointmentID;
 
-    @Column(name = "member_id", nullable = false)
-    private int memberID;
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @Column(name = "time", nullable = false)
-    private LocalTime time;
+    private Date time;
 
     @Column(name = "doctor")
     private String doctor;

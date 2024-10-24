@@ -22,7 +22,7 @@ function App() {
             defaultProps: {
               size: "middle",
               bordered: true,
-              scroll: { x: true },
+              scroll: { x: 'max-content' },
             },
           },
         },

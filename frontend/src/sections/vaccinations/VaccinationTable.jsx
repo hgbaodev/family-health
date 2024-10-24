@@ -18,6 +18,7 @@ export const VaccinationTable = () => {
         columns={columns}
         dataSource={vaccinations}
         size="middle"
+        rowKey={(record) => record.vaccinationID}
         pagination={{
           current: page,
           pageSize: ROW_PER_PAGE,

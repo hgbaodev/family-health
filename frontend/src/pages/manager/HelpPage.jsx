@@ -1,9 +1,6 @@
 import { Layout, Button, Input, Form, message, Card, Typography } from "antd";
 import { MailOutlined, InfoCircleOutlined, CheckCircleOutlined, ExclamationCircleOutlined } from "@ant-design/icons";
-import React, { useState } from "react";
-
-
-
+import  { useState } from "react";
 const { Content } = Layout;
 const { TextArea } = Input;
 const { Title, Paragraph } = Typography;
@@ -69,7 +66,7 @@ const HelpPage = () => {
           Chào mừng bạn đến với hệ thống <b>FamilyHealth</b>. Hệ thống giúp bạn quản lý hồ sơ sức khỏe cho cả gia đình một cách dễ dàng và hiệu quả. Dưới đây là một số chức năng chính của hệ thống:
         </Paragraph>
 
-        <ul className="list-disc list-inside space-y-4 list-none pl-0">
+        <ul className="list list-inside space-y-4 list-none pl-0">
           <li><b>1. Trang Members:</b> Quản lý thành viên gia đình</li>
                       <p>Cho phép người dùng tạo và lưu thông tin y tế của từng thành viên trong gia đình, bao gồm tên, tuổi, giới tính, và các thông tin y tế quan trọng khác. Từ đây, bạn có thể xem, chỉnh sửa, và thêm các thành viên mới.</p>
 
