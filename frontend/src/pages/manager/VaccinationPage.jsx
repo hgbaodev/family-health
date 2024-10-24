@@ -6,8 +6,11 @@ import CreateVaccinationModal from "~/sections/vaccinations/CreateVaccinationMod
 import UpdateVaccinationModal from "~/sections/vaccinations/UpdateVaccinationModal";
 import { VaccinationTable } from "~/sections/vaccinations/VaccinationTable";
 import { useVaccinationsStore } from "~/stores/vaccinations/vaccinationStore";
+import { useTranslation } from "react-i18next";
 
 const VaccinationPage = () => {
+  const {t} = useTranslation();
+
   const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useVaccinationsStore((state) => state);
 
   const handleDeleteCancel = () => {
@@ -30,8 +33,8 @@ const VaccinationPage = () => {
     <>
       <Flex align="center" justify="space-between" className="mb-2">
         <PageHeader
-          heading="Vaccinations"
-          links={[{ title: "DashBoard", href: "/manager" }, { title: "Vaccinations" }]}
+          heading={t("Vaccinations")}
+          links={[{ title: t("Dashboard"), href: "/manager" }, { title: t("Vaccinations") }]}
         />
         <Space>
           <Button

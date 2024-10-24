@@ -1,6 +1,6 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
-import useVaccinationColumns from "./VaccinationColum";
+import useVaccinationColumns from "./VaccinationColumn";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
 import { useVaccinations } from "~/api/vaccinations/get-vaccination";

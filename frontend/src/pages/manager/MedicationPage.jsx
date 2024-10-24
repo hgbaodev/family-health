@@ -6,9 +6,11 @@ import CreateMedicationModal from "~/sections/medications/CreateMedicationModal"
 import MedicationTable from "~/sections/medications/MedicationTable"
 import UpdateMedicationModal from "~/sections/medications/UpdateMedicationModal"
 import { useMedicationsStore } from "~/stores/medications/medicationStore";
+import { useTranslation } from "react-i18next";
 
 
 const MedicationPage = () => {
+  const {t} = useTranslation();
   const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useMedicationsStore((state) => state);
 
   const handleDeleteCancel = () => {
@@ -31,8 +33,8 @@ const MedicationPage = () => {
     <>
       <Flex align="center" justify="space-between" className="mb-2">
         <PageHeader
-          heading="Medications"
-          links={[{ title: "DashBoard", href: "/manager" }, { title: "Medication" }]}
+          heading={t("Medications")}
+          links={[{ title:t("Dashboard"), href: "/manager" }, { title:t("Medications") }]}
         />
         <Space>
           <Button

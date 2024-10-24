@@ -2,8 +2,7 @@ import { ConfigProvider, App as AntApp } from "antd";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeRoutes } from "./routes";
-import Root from "~/Root";
-import './i18n';
+import "./i18n";
 
 const queryClient = new QueryClient();
 
@@ -31,11 +30,9 @@ function App() {
       }}
     >
       <QueryClientProvider client={queryClient}>
-        <Root>
-          <AntApp>
-            <RouterProvider router={router} />
-          </AntApp>
-        </Root>
+        <AntApp>
+          <RouterProvider router={router} />
+        </AntApp>
       </QueryClientProvider>
     </ConfigProvider>
   );

@@ -2,10 +2,13 @@ import { Button, Form, Input, Modal, Select, DatePicker, Row, Col, message } fro
 import { Flex } from "antd";
 import { useCreateMember } from "~/api/members/create-member";
 import { useMembersStore } from "~/stores/members/memberStore";
+import { useTranslation } from "react-i18next";
 
 const { Option } = Select;
 
 const CreateMemberModal = () => {
+  const {t} = useTranslation();
+
   const [form] = Form.useForm();
 
   const { openCreateModal, setOpenCreateModal } = useMembersStore();
@@ -27,7 +30,7 @@ const CreateMemberModal = () => {
 
   return (
     <Modal
-      title="Create Member"
+      title={t("MemberPage.CreateMember")}
       open={openCreateModal}
       onCancel={() => setOpenCreateModal(false)}
       footer={null}
@@ -38,7 +41,7 @@ const CreateMemberModal = () => {
             <Form.Item
               label="Full Name"
               name="fullName"
-              rules={[{ required: true, message: "Please enter full name" }]}
+              rules={[{ required: true, message: t("EnterFullName") }]}
             >
               <Input placeholder="Enter full name..." />
             </Form.Item>

@@ -3,8 +3,11 @@ import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteAllergy } from "~/api/allergies/delete-allergies";
 import { useAllergiesStore } from "~/stores/allergies/allergyStore";
+import { useTranslation } from "react-i18next";
 
 const useAllergyColumns = () => {
+  const { t } = useTranslation();
+
   const { setOpenUpdateModal, setAllergy } = useAllergiesStore(
     (state) => state
   );
@@ -30,7 +33,7 @@ const useAllergyColumns = () => {
   return useMemo(
     () => [
       {
-        title: "#ID",
+        title: t("ID"),
         dataIndex: "allergyID",
         key: "allergyID",
         align: "center",
@@ -41,22 +44,28 @@ const useAllergyColumns = () => {
         key: "memberName",
       },
       {
-        title: "Allergy Type",
+        title: t("AllergyPage.MemberID"),
+        dataIndex: "memberID",
+        key: "memberID",
+        align: "center",
+      },
+      {
+        title: t("AllergyPage.AllergyType"),
         dataIndex: "allergyType",
         key: "allergyType", 
       },
       {
-        title: "Severity",
+        title: t("AllergyPage.Severity"),
         dataIndex: "severity",
         key: "severity",
       },
       {
-        title: "Symptoms",
+        title: t("AllergyPage.Symptoms"),
         dataIndex: "symptoms",
         key: "symptoms",
       },
       {
-        title: "Action",
+        title: t("Action"),
         key: "action",
         render: (_, allergy) => (
           <Space>
@@ -77,7 +86,7 @@ const useAllergyColumns = () => {
         ),
       },
     ],
-    []
+    [t]
   );
 };
 

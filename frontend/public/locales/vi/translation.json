@@ -55,6 +55,58 @@
     "Login": "Đăng nhập",
     "ForgotPassword": "Quên mật khẩu?"
   },
+
+  "DashBoardPage": {
+    "Welcome": "Chào mừng đến với bảng điều khiển của bạn",
+    "Description": "Tại đây bạn có thể quản lý nội dung và cài đặt của mình"
+  },
+
+  "MemberPage": {
+    "CreateMember": "Tạo thành viên",
+    "FullName": "Họ và tên",
+    "DateOfBirth": "Ngày sinh",
+    "Gender": "Giới tính",
+    "Relationship" : "Mối quan hệ",
+    "BloodType" : "Nhóm máu",
+    "Height" : "Chiều cao (m)",
+    "Weight": "Cân nặng (kg)"
+  },
+  "AllergyPage": {
+    "MemberID": "#Mã thành viên",
+    "AllergyType": "Kiểu dị ứng",
+    "Severity": "Mức độ nghiêm trọng",
+    "Symptoms": "Triệu chứng"
+
+
+  },
+  "EmergencyContactPage": {
+    "Name": "Tên",
+    "Relationship": "Mối quan hệ",
+    "Phone Number": "Số điện thoại",
+    "User ID": "Mã user"
+
+
+  },
+
+  "MedicationPage": {
+    "Medication Name": "Tên thuốc",
+    "Frequency": "Tính thường xuyên",
+    "Start Date": "Ngày bắt đầu",
+    "End Date": "Ngày kết thúc",
+    "Note" : "Ghi chú"
+
+
+  },
+
+
+  "VaccinationPage": {
+    "Date Administered": "Ngày quản lý",
+    "Member Name": "Tên thành viên",
+    "Vaccine Name": "Tên Vac-xin"
+
+  },
+
+
   "Dashboard": "Bảng điều khiển",
   "Members": "Thành viên",
   "Medical Records": "Hồ sơ y tế",
@@ -65,5 +117,15 @@
   "Vaccinations": "Tiêm chủng",
   "Account Settings": "Cài đặt tài khoản",
   "Reports & Stats": "Báo cáo & Thống kê",
-  "Help & Support": "Trợ giúp & Hỗ trợ"
+  "Help & Support": "Trợ giúp & Hỗ trợ",
+  "warning delete": "Bạn có chắc chắn muốn xóa ?",
+  "Coming Soon" : "Sắp ra mắt",
+  "ID": "#Mã",
+  "Action": "Hành động"
+
+
+
+
+
 }
+
