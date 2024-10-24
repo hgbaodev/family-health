@@ -2,13 +2,23 @@ import { Button, Form, Input, Modal, Select, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useCreateAllergy } from "~/api/allergies/create-allergy";
 import { useAllergiesStore } from "~/stores/allergies/allergyStore";
-
-const { Option } = Select;
+import { useMembers } from "../../api/members/get-members";
+import { useMemo } from "react";
 
 const CreateAllergyModal = () => {
   const [form] = Form.useForm();
-
+  const { data: members } = useMembers({});
   const { openCreateModal, setOpenCreateModal } = useAllergiesStore();
+
+  const memberOptions = useMemo(() => {
+    return members
+      ? members.map(({ memberID,fullName }) => ({
+          value: memberID,
+          label: `${fullName}`,
+        }))
+      : [];
+  }, [members]);
+
 
   const mutation = useCreateAllergy({
     onSuccess: () => {
@@ -65,11 +75,17 @@ const CreateAllergyModal = () => {
           </Col>
           <Col span={12}>
             <Form.Item
-              label="MemberId"
+              label="Member"
               name="memberID"
-              rules={[{ required: true, message: "Please enter memberId" }]}
+              rules={[{ required: true, message: "Please choose a member" }]}
             >
-              <Input placeholder="Enter memberId..." />
+              <Select
+                showSearch
+                placeholder="Choose a member..."
+                optionFilterProp="label"
+                options={memberOptions} 
+                notFoundContent="Loading members..."
+              />
             </Form.Item>
           </Col>
         </Row>

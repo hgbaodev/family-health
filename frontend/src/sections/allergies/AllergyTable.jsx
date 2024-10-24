@@ -4,6 +4,7 @@ import useAllergyColumns from "./AllergyColumns";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
 import { useAllergies } from "../../api/allergies/get-allergies";
+import { useMembers } from "~/api/members/get-members";
 
 export const AllergyTable = () => {
   const columns = useAllergyColumns();
@@ -15,12 +16,24 @@ export const AllergyTable = () => {
     size: ROW_PER_PAGE,
     keyword,
   });
+  const {data:members} = useMembers({}) 
+  const memberMap = (members || []).reduce((map, member) => {
+    map[member.memberID] = member.fullName;
+    return map;
+  }, {});
+  let dataSource = [];
+  if (allergies !== undefined) {
+    dataSource = allergies.map(allergy => ({
+      ...allergy,
+      memberName: memberMap[allergy.memberID] || "",
+    }));
+  }
 
   return (
     <>
       <Table
         columns={columns}
-        dataSource={allergies}
+        dataSource={dataSource}
         size="middle"
         rowKey={(record) => record.allergyID}
         pagination={{

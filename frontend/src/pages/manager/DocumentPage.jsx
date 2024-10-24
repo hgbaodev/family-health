@@ -7,7 +7,6 @@ import { DocumentTable } from "~/sections/documents/DocumentTable";
 import UpdateDocumentModal from "~/sections/documents/UpdateDocumentModal";
 import { useDocumentsStore } from "~/stores/documents/documentStore";
 
-
 const DocumentPage = () => {
   const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useDocumentsStore((state) => state);
 

@@ -39,6 +39,11 @@ const useAllergyColumns = () => {
         align: "center",
       },
       {
+        title: "Member name",
+        dataIndex: "memberName",
+        key: "memberName",
+      },
+      {
         title: t("AllergyPage.MemberID"),
         dataIndex: "memberID",
         key: "memberID",
@@ -47,8 +52,7 @@ const useAllergyColumns = () => {
       {
         title: t("AllergyPage.AllergyType"),
         dataIndex: "allergyType",
-        key: "allergyType",
-        align: "center",
+        key: "allergyType", 
       },
       {
         title: t("AllergyPage.Severity"),

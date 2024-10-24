@@ -3,6 +3,7 @@ import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteDocument } from "~/api/documents/delete-documents";
 import { useDocumentsStore } from "~/stores/documents/documentStore";
+import { getFileExtension } from "./FileExtensions";
 
 const useDocumentColumns = () => {
   const { setOpenUpdateModal, setDocument } = useDocumentsStore(
@@ -51,6 +52,7 @@ const useDocumentColumns = () => {
         title: "File type",
         dataIndex: "fileType",
         key: "fileType",
+        render: (fileType) => getFileExtension(fileType),
       },
       {
         title: "File content",

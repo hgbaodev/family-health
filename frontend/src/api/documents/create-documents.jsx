@@ -3,18 +3,18 @@ import { getDocumentsQueryOptions } from "~/api/documents/get-documents";
 import { api } from "~/axios/api";
 
 export const createDocument = ({
-     recordID,
-     fileName,
-     fileType,
-     fileContent,
-     uploadDate
+  recordID,
+  fileName,
+  fileType,
+  fileContent,
+  uploadDate,
 }) => {
   return api.post(`/documents`, {
-     recordID,
-     fileName,
-     fileType,
-     fileContent,
-     uploadDate
+    recordID,
+    fileName,
+    fileType,
+    fileContent,
+    uploadDate,
   });
 };
 
@@ -32,6 +32,7 @@ export const useCreateDocument = (options = {}) => {
       onSuccess?.(data, ...args);
     },
     onError: (error, ...args) => {
+      console.error("Error details:", error.response?.data);
       onError?.(error, ...args);
     },
     ...restConfig,
