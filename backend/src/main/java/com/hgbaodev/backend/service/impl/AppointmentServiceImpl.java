@@ -21,22 +21,37 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
 
     @Override
-    Appointment addAppointment(Appointment appointment){
+    public Appointment addAppointment(Appointment appointment){
         return appointmentRepository.save(appointment);
     }
 
-    
-    Appointment updateAppointment(Appointment appointment){
-
+    @Override
+    public Appointment updateAppointment(Appointment appointment){
+        Appointment check = appointmentRepository.findById(appointment.getAppointmentID())
+                .orElseThrow(() -> new IllegalArgumentException("Appointment not found"));
+        return appointmentRepository.save(appointment);
     }
-    void deleteAppointment(Integer appointmentID){
 
+    @Override
+    public void deleteAppointment(Integer appointmentID){
+        Appointment check = appointmentRepository.findById(appointmentID)
+                .orElseThrow(() -> new IllegalArgumentException("Appointment not found"));
+        appointmentRepository.deleteById(appointmentID);
     }
-    Appointment getAppointmentById(Integer appointmentID){
 
+    @Override
+    public Appointment getAppointmentById(Integer appointmentID){
+        return appointmentRepository.findById(appointmentID)
+                .orElseThrow(() -> new IllegalArgumentException("Appointment not found"));
     }
-    Page<Appointment> getAllAppointments(int page, int size, String keyword){
 
+    @Override
+    public Page<Appointment> getAllAppointments(int page, int size, String keyword){
+        Pageable pageable = PageRequest.of(page - 1, size);
+        if (keyword != null && !keyword.isEmpty()) {
+            return appointmentRepository.findByKeyword(keyword, pageable);
+        }
+        return appointmentRepository.findAll(pageable);
     }
 
 }
