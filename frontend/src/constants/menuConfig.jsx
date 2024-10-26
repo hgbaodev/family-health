@@ -9,7 +9,8 @@ import {
   SettingOutlined,
   BarChartOutlined,
   QuestionCircleOutlined,
-  SolutionOutlined 
+  SolutionOutlined, 
+  RobotOutlined
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
@@ -88,6 +89,12 @@ const MenuConfig = () => {
       icon: <QuestionCircleOutlined />,
       label: t("Help & Support"),
       path: "/manager/help-support",
+    },
+    {
+      key: "13",
+      icon: <RobotOutlined />,
+      label: t("ChatAi"),
+      path: "/manager/chat-ai",
     }
   ];
   return menuItems;

@@ -33,5 +33,5 @@ application:
 
 openai:
   api:
-    key: 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
-    url: https://api.openai.com/v1/chat/completions
+    key: AIzaSyCJNSKklG_4YnphbCk7S9k3tGSnlC9SGW8
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent

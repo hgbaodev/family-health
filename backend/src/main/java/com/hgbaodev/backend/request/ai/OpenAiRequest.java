@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.request.ai;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,8 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OpenAiRequest {
-    private String model;
-    private String prompt;
-    private int maxTokens;
-    private double temperature;
+    @NotBlank(message = "Ask content is required")
+    public String ask;
 }
