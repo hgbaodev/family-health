@@ -17,7 +17,9 @@
     "Pro": "Chuyên nghiệp",
     "ProDescription": "$9.99/tháng",
     "Enterprise": "Doanh nghiệp",
-    "EnterpriseDescription": "Liên hệ chúng tôi để biết giá"
+    "EnterpriseDescription": "Liên hệ chúng tôi để biết giá",
+    "AISupport": "Hỗ trợ AI",
+    "AISupportDescription": "Nhận khuyến nghị và thông tin sức khỏe cá nhân hóa."
   },
   "LoginPage": {
     "Name": "FamilyHealth",
@@ -76,8 +78,6 @@
     "AllergyType": "Kiểu dị ứng",
     "Severity": "Mức độ nghiêm trọng",
     "Symptoms": "Triệu chứng"
-
-
   },
   "EmergencyContactPage": {
     "Name": "Tên",
@@ -121,11 +121,7 @@
   "warning delete": "Bạn có chắc chắn muốn xóa ?",
   "Coming Soon" : "Sắp ra mắt",
   "ID": "#Mã",
-  "Action": "Hành động"
-
-
-
-
-
+  "Action": "Hành động",
+  "ChatAi": "Trò chuyện Ai"
 }
 

@@ -1,12 +1,17 @@
 import { Typography, Card, Row, Col } from "antd";
-import { HeartOutlined, SafetyOutlined, TeamOutlined } from "@ant-design/icons";
+import {
+  HeartOutlined,
+  RobotOutlined,
+  SafetyOutlined,
+  TeamOutlined,
+} from "@ant-design/icons";
 import SphereCanvas from "~/components/SphereCanvas";
 import { useTranslation } from "react-i18next"; // Correct import
 
 const { Title, Paragraph } = Typography;
 
 const HomePage = () => {
-  const { t } = useTranslation(); // Correct hook
+  const { t } = useTranslation();
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
       <Row gutter={[32, 32]} align="middle">
@@ -57,7 +62,7 @@ const HomePage = () => {
         </Col>
       </Row>
       <Row gutter={[32, 32]} className="mt-16">
-        <Col xs={24} md={8}>
+        <Col xs={24} md={6}>
           <FeatureCard
             title={t("LandingPage.HealthTracking")}
             description={t("LandingPage.HealthTrackingDescription")}
@@ -66,7 +71,7 @@ const HomePage = () => {
             }
           />
         </Col>
-        <Col xs={24} md={8}>
+        <Col xs={24} md={6}>
           <FeatureCard
             title={t("LandingPage.DataSecurity")}
             description={t("LandingPage.DataSecurityDescription")}
@@ -75,12 +80,21 @@ const HomePage = () => {
             }
           />
         </Col>
-        <Col xs={24} md={8}>
+        <Col xs={24} md={6}>
           <FeatureCard
             title={t("LandingPage.FamilyManagement")}
             description={t("LandingPage.FamilyManagementDescription")}
             icon={
               <TeamOutlined style={{ fontSize: "3rem", color: "#7c3aed" }} />
+            }
+          />
+        </Col>
+        <Col xs={24} md={6}>
+          <FeatureCard
+            title={t("LandingPage.AISupport")}
+            description={t("LandingPage.AISupportDescription")}
+            icon={
+              <RobotOutlined style={{ fontSize: "3rem", color: "#ff5722" }} />
             }
           />
         </Col>
