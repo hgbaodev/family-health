@@ -23,7 +23,7 @@ export const AuthRoutes = {
         },
         {
           path: "forgot-password",
-          element: <AuthRoute component={ForgotPasswordPage} />
+          element: <AuthRoute component={ForgotPasswordPage} />,
         },
       ]
     }

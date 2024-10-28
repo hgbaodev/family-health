@@ -1,0 +1,19 @@
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  
+  .table-container {
+    flex: 1;
+    padding-right: 10px;
+  }
+  
+  .chart-container {
+    flex: 1;
+    padding-left: 10px;
+  }
+  

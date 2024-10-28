@@ -8,7 +8,8 @@ import {
   FileSearchOutlined,
   SettingOutlined,
   BarChartOutlined,
-  QuestionCircleOutlined
+  QuestionCircleOutlined,
+  HeartOutlined
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
@@ -81,6 +82,12 @@ const MenuConfig = () => {
       icon: <QuestionCircleOutlined />,
       label: t("Help & Support"),
       path: "/manager/help-support",
+    },
+    {
+      key: "12",
+      icon: <HeartOutlined />,
+      label: t("Health Stats"),
+      path: "/manager/health-stats",
     }
   ];
   return menuItems;
