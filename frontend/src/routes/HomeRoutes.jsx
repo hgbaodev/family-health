@@ -1,7 +1,7 @@
 import React from "react";
 import HomeLayout from "~/layouts/HomeLayout";
 import Loadable from "~/components/Loadable";
-import ChatPage from "~/pages/manager/ChatPage";
+import TestPage from "~/pages/home/TestPage";
 
 const HomePage = Loadable(React.lazy(() => import("~/pages/home/HomePage")));
 
@@ -17,7 +17,7 @@ export const HomeRoutes = {
         },
         {
           path: "test",
-          element: <ChatPage />
+          element: <TestPage />
         }
       ]
     }

@@ -1,138 +1,189 @@
-import { Button, Form, Input, Space } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Col, Form, Input, message, Row, Space } from "antd";
 import Title from "antd/es/typography/Title";
+import { ReloadOutlined, CheckCircleOutlined } from "@ant-design/icons";
+import { useEffect, useRef, useState } from "react";
+import { useSendOTP } from "~/api/auth/sendOTP";
+import { useSendNewPassword } from "~/api/auth/sendNewPassword";
+import { useNavigate } from "react-router-dom";
 
 const ForgotPasswordPage = () => {
-  return <EnterEmail></EnterEmail>;
+  return <EnterEmail />;
 };
 
 const EnterEmail = () => {
   const [form] = Form.useForm();
+  const [otpForm] = Form.useForm();
+  const navigate = useNavigate();
+  const [otpValues, setOtpValues] = useState(Array(6).fill("")); // Khởi tạo giá trị OTP
+  const [loading, setLoading] = useState(false);
+  const [loadingComfirm, setLoadingComfirm] = useState(false);
+  const [otpSent, setOtpSent] = useState(false); // State để hiển thị form OTP
+  const [emailCurrent, setEmailCurrent] = useState("");
+  const firstInputRef = useRef(null); // Tạo ref cho ô nhập đầu tiên
+
+  const sendOTPMutation = useSendOTP({
+    onSuccess: () => {
+      message.success("OTP has been sent! Please check your email.");
+      form.resetFields();
+      setOtpSent(true); // Bật form OTP khi gửi thành công
+      setLoading(false); // Reset loading khi thành công
+    },
+    onError: (error) => {
+      message.error(error.message || "Your email is invalid!");
+      setLoading(false); // Reset loading khi có lỗi
+    },
+  });
+
+  const sendNewPasswordMutation = useSendNewPassword({
+    onSuccess: () => {
+      message.success("New password has been sent! Please check your email.");
+      form.resetFields();
+      navigate(`/auth/login`);
+    },
+    onError: (error) => {
+      message.error(error.message || "Your email is invalid!");
+      setLoadingComfirm(false); // Reset loading khi có lỗi
+    },
+  });
+
+  const onEmailSubmit = (values) => {
+      setEmailCurrent(values);
+      setLoading(true); // Bắt đầu loading cho email submit
+      sendOTPMutation.mutate(values);
+  };
+
+  const onSubmitOTP = () => {
+    const email = emailCurrent.email;
+    const otp = otpValues.join(""); 
+    setLoadingComfirm(true);
+    sendNewPasswordMutation.mutate({ email, otp});
+  };
+
+  // Focus vào ô nhập đầu tiên khi OTP form mount
+  useEffect(() => {
+    if (otpSent && firstInputRef.current) {
+      firstInputRef.current.focus();
+    }
+  }, [otpSent]);
+
+  // Xử lý nhập mã OTP
+  const onInputChange = (index, value) => {
+    const newOtpValues = [...otpValues];
+
+    if (/^\d?$/.test(value)) {
+      newOtpValues[index] = value.slice(0, 1);
+      setOtpValues(newOtpValues);
+
+      if (value && index < 5) {
+        const nextInput = document.getElementById(`otp-input-${index + 1}`);
+        if (nextInput) {
+          nextInput.focus();
+        }
+      }
+    }
+  };
+
+  // Xử lý button gửi lại mã OTP
+  const handleResendOtp = () => {
+    setOtpValues(Array(6).fill("")); // Reset giá trị OTP
+    console.log("OTP has been resent.");
+    // Đặt lại focus vào ô nhập đầu tiên sau khi gửi lại OTP
+    if (firstInputRef.current) {
+      firstInputRef.current.focus();
+    }
+    setLoading(true); // Bắt đầu loading cho email submit
+    sendOTPMutation.mutate(emailCurrent);
+  };
 
   return (
-    <Space direction="vertical" className="p-10 w-full bg-white rounded-xl">
-      <Title level={3}>Forgot Password</Title>
+    <Space direction="vertical" className="p-10 w-full bg-white rounded-xl" style={{ width: "fit-content" }}>
+      <Title level={3}>{otpSent ? "Enter OTP" : "Forgot Password"}</Title>
       <p>
-        Please enter your email address, the system will send a verification code to reset your password.
+        {otpSent
+          ? "OTP takes effect within 60s."
+          : "Please enter your email address. A verification code will be sent to reset your password."}
       </p>
-      <Form
-        form={form}
-        layout="vertical"
-        requiredMark="optional"
-        validateTrigger="onBlur"
-      >
-        <Form.Item
-          label="Email"
-          name="email"
-          rules={[
-            {
-              required: true,
-              whitespace: true,
-              message: "Please enter your email!",
-            },
-          ]}
+
+      {/* Form nhập email */}
+      {!otpSent && (
+        <Form
+          form={form}
+          layout="vertical"
+          requiredMark="optional"
+          validateTrigger="onBlur"
+          onFinish={onEmailSubmit}
         >
-          <Input variant="filled" placeholder="Enter your account email" />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit" className="w-full">
-            Reset Password
-          </Button>
-        </Form.Item>
-      </Form>
-      <p className="mb-2">
-        <Link className="text-primary" to="/auth/login">
-          Login
-        </Link>
-      </p>
+          <Form.Item
+            label="Email"
+            name="email"
+            rules={[{ required: true, message: "Please enter your email!" }]}
+          >
+            <Input placeholder="Enter your account email" />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit" className="w-full" loading={loading}>
+              Reset Password
+            </Button>
+          </Form.Item>
+        </Form>
+      )}
+
+      {/* Form nhập OTP (hiện khi OTP đã gửi thành công) */}
+      {otpSent && (
+        <Form form={otpForm} layout="vertical" requiredMark="optional" onFinish={onSubmitOTP}>
+          <Form.Item required>
+            <Space>
+              {otpValues.map((value, index) => (
+                <Input
+                  key={index}
+                  id={`otp-input-${index}`}
+                  maxLength={1}
+                  value={value}
+                  onChange={(e) => onInputChange(index, e.target.value)}
+                  style={{ width: "50px", textAlign: "center" }}
+                  ref={index === 0 ? firstInputRef : null} // Gán ref cho ô nhập đầu tiên
+                />
+              ))}
+            </Space>
+          </Form.Item>
+
+          <Row gutter={16} justify="center">
+            <Col>
+              <Button
+                type="default"
+                onClick={handleResendOtp}
+                icon={<ReloadOutlined />}
+                style={{
+                  width: 160,
+                  backgroundColor: "#f0f2f5",
+                  color: "#36a851",
+                  border: "1px solid #36a851",
+                }}
+                loading={loading}
+              >
+                Resend OTP
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                type="primary"
+                htmlType="submit"
+                icon={<CheckCircleOutlined />}
+                style={{
+                  width: 160,
+                  backgroundColor: "#1890ff",
+                  border: "none",
+                }}
+                loading={loadingComfirm}
+              >
+                Confirm
+              </Button>
+            </Col>
+          </Row>
+        </Form>
+      )}
     </Space>
   );
 };
-
-// const EnterOTP = () => {
-//   const onChange = (text: string) => {
-//     console.log("onChange:", text);
-//   };
-//   const sharedProps = {
-//     onChange,
-//   };
-//   return (
-//     <Space direction="vertical" className="p-10 w-full">
-//       <Title level={3}>Enter OTP</Title>
-//       <p>
-//         A 7-character OTP has been sent to your email. Please enter the OTP to confirm.
-//       </p>
-//       <Form layout="vertical" requiredMark="optional">
-//         <Form.Item
-//           className="text-center"
-//           label="OTP"
-//           name="otp"
-//           rules={[
-//             {
-//               required: true,
-//               whitespace: true,
-//               message: "Please enter the OTP!",
-//             },
-//           ]}
-//         >
-//           <Input.OTP
-//             variant="filled"
-//             size="large"
-//             length={7}
-//             formatter={(str) => str.toUpperCase()}
-//             {...sharedProps}
-//           />
-//         </Form.Item>
-//         <Form.Item>
-//           <Button type="primary" className="w-full">
-//             Confirm
-//           </Button>
-//         </Form.Item>
-//       </Form>
-//     </Space>
-//   );
-// };
-
-// const ResetPassword = () => {
-//   const [form] = Form.useForm();
-  
-//   return (
-//     <Space direction="vertical" className="p-10 w-full">
-//       <Title level={3}>Reset Password</Title>
-//       <p>
-//         Please enter your new password. The password must be at least 6 characters long.
-//       </p>
-//       <Form
-//         form={form}
-//         layout="vertical"
-//         requiredMark="optional"
-//         validateTrigger="onBlur"
-//       >
-//         <Form.Item
-//           label="New Password"
-//           name="password"
-//           rules={[
-//             { required: true, message: "Please enter the password!" },
-//             {
-//               min: 6,
-//               message: "The password must be at least 6 characters long.",
-//             },
-//           ]}
-//         >
-//           <Input.Password variant="filled" placeholder="Enter your new password" />
-//         </Form.Item>
-//         <Form.Item>
-//           <Button
-//             type="primary"
-//             htmlType="submit"
-//             className="w-full"
-//           >
-//             Reset Password
-//           </Button>
-//         </Form.Item>
-//       </Form>
-//     </Space>
-//   );
-// };
 
 export default ForgotPasswordPage;

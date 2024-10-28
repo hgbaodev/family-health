@@ -9,6 +9,7 @@ import {
   SettingOutlined,
   BarChartOutlined,
   QuestionCircleOutlined,
+  HeartOutlined,
   SolutionOutlined, 
   RobotOutlined
 } from "@ant-design/icons";
@@ -89,6 +90,12 @@ const MenuConfig = () => {
       icon: <QuestionCircleOutlined />,
       label: t("Help & Support"),
       path: "/manager/help-support",
+    },
+    {
+      key: "12",
+      icon: <HeartOutlined />,
+      label: t("Health Stats"),
+      path: "/manager/health-stats",
     },
     {
       key: "13",

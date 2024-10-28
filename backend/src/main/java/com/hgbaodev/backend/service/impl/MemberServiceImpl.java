@@ -10,6 +10,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 @Slf4j
@@ -48,6 +50,11 @@ public class MemberServiceImpl implements MemberService {
             return memberRepository.findByKeyword(keyword, pageable, userID);
         }
         return memberRepository.findAllByUserID(pageable, userID);
+    }
+
+    @Override
+    public List<Member> getAllMembersByUserID(Integer userID) {
+        return memberRepository.findAllByUserID(userID);
     }
 
 }
