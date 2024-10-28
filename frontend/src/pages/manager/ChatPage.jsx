@@ -13,7 +13,6 @@ const ChatPage = () => {
   const mutate = useChatAi({
     onSuccess: (data) => {
       setLoading(false);
-      console.log(data);
       let text = data?.data;
       addMessage({
         sender: "ai",
