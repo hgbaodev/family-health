@@ -1,14 +1,57 @@
-import { Button, Form, Input, Modal, Select, Row, Col, message,DatePicker} from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Row,
+  Col,
+  message,
+  DatePicker,
+  Upload,
+} from "antd";
 import { Flex } from "antd";
 import { useCreateDocument } from "~/api/documents/create-documents";
 import { useDocumentsStore } from "~/stores/documents/documentStore";
-
-const { Option } = Select;
+import { fileExtensions } from "./FileExtensions";
+import { UploadOutlined } from "@ant-design/icons";
+import moment from "moment";
 
 const CreateDocumentModal = () => {
   const [form] = Form.useForm();
-
   const { openCreateModal, setOpenCreateModal } = useDocumentsStore();
+
+  const handleFileChange = (info) => {
+    const file = info.fileList[0].originFileObj;
+    if (file && file.size > 0) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        const fileContent = e.target.result;
+        const formattedDate = moment(file.lastModifiedDate);
+        const fileInfo = {
+          fileName: file.name,
+          fileType: file.type || "Unknown",
+          fileContent: fileContent.substring(0, 50) + "...", 
+          uploadDate: formattedDate, 
+        };
+
+        form.setFieldsValue({
+          fileName: fileInfo.fileName,
+          fileType: fileInfo.fileType,
+          fileContent: fileInfo.fileContent,
+          uploadDate: fileInfo.uploadDate,
+        });
+        message.success(`${file.name} uploaded successfully.`);
+      };
+
+      reader.onerror = () => {
+        message.error("Error while reading file");
+      };
+
+      reader.readAsText(file);
+    }
+  };
 
   const mutation = useCreateDocument({
     onSuccess: () => {
@@ -22,7 +65,12 @@ const CreateDocumentModal = () => {
   });
 
   const onFinish = (values) => {
-    mutation.mutate(values);
+    const {uploadFile,...filteredValues} = values;
+    const formattedValues = {
+      ...filteredValues,
+      uploadDate: filteredValues.uploadDate ? filteredValues.uploadDate.format("YYYY-MM-DD") : null,
+    };
+    mutation.mutate(formattedValues);
   };
 
   return (
@@ -68,14 +116,18 @@ const CreateDocumentModal = () => {
                 { required: true, message: "Please choose type of file" },
               ]}
             >
-              <Input placeholder="Choose type of file..." />
+              <Select
+                showSearch
+                placeholder="Select a file type..."
+                optionFilterProp="label"
+                options={fileExtensions}
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
               label="File content"
               name="fileContent"
-              rules={[{ required: true, message: "Please enter file content" }]}
             >
               <Input placeholder="Enter file content..." />
             </Form.Item>
@@ -92,6 +144,17 @@ const CreateDocumentModal = () => {
                 placeholder="Select date..."
                 style={{ width: "100%" }}
               />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label="Using file" name="uploadFile">
+              <Upload
+                maxCount={1}
+                beforeUpload={() => false}
+                onChange={handleFileChange}
+              >
+                <Button icon={<UploadOutlined />}>Upload File</Button>
+              </Upload>
             </Form.Item>
           </Col>
         </Row>

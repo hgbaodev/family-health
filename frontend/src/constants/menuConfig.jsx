@@ -9,7 +9,9 @@ import {
   SettingOutlined,
   BarChartOutlined,
   QuestionCircleOutlined,
-  HeartOutlined
+  HeartOutlined,
+  SolutionOutlined, 
+  RobotOutlined
 } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
@@ -37,48 +39,54 @@ const MenuConfig = () => {
     },
     {
       key: "4",
+      icon: <SolutionOutlined />,
+      label: t("Documents"),
+      path: "/manager/documents",
+    },
+    {
+      key: "5",
       icon: <CalendarOutlined />,
       label: t("Appointments"),
       path: "/manager/appointments",
     },
     {
-      key: "5",
+      key: "6",
       icon: <MedicineBoxOutlined />,
       label: t("Medications"),
       path: "/manager/medications",
     },
     {
-      key: "6",
+      key: "7",
       icon: <ExclamationCircleOutlined />,
       label: t("Emergency Contacts"),
       path: "/manager/emergency-contacts",
     },
     {
-      key: "7",
+      key: "8",
       icon: <FileSearchOutlined />,
       label: t("Allergies"),
       path: "/manager/allergies",
     },
     {
-      key: "8",
+      key: "9",
       icon: <CalendarOutlined />,
       label: t("Vaccinations"),
       path: "/manager/vaccinations",
     },
     {
-      key: "9",
+      key: "10",
       icon: <SettingOutlined />,
       label: t("Account Settings"),
       path: "/manager/account-settings",
     },
     {
-      key: "10",
+      key: "11",
       icon: <BarChartOutlined />,
       label: t("Reports & Stats"),
       path: "/manager/reports-stats",
     },
     {
-      key: "11",
+      key: "12",
       icon: <QuestionCircleOutlined />,
       label: t("Help & Support"),
       path: "/manager/help-support",
@@ -88,6 +96,12 @@ const MenuConfig = () => {
       icon: <HeartOutlined />,
       label: t("Health Stats"),
       path: "/manager/health-stats",
+    },
+    {
+      key: "13",
+      icon: <RobotOutlined />,
+      label: t("ChatAi"),
+      path: "/manager/chat-ai",
     }
   ];
   return menuItems;

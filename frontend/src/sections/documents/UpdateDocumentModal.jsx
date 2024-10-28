@@ -1,47 +1,93 @@
-import { Button, Form, Input, Modal, Select, Row,DatePicker, Col, message } from "antd";
+import {
+  Button,
+  Form,
+  Input,
+  Modal,
+  Select,
+  Row,
+  DatePicker,
+  Col,
+  Upload,
+  message,
+} from "antd";
 import { Flex } from "antd";
 import { useUpdateDocument } from "~/api/documents/update-documents";
 import { useDocumentsStore } from "~/stores/documents/documentStore";
 import moment from "moment";
 import { useEffect } from "react";
+import { fileExtensions } from "./FileExtensions";
+import { UploadOutlined } from "@ant-design/icons";
 
-const { Option } = Select;
 
 const UpdateDocumentModal = () => {
-     const [form] = Form.useForm();
-     const { openUpdateModal, setOpenUpdateModal, document } = useDocumentsStore(
-       (state) => state
-     );
+  const [form] = Form.useForm();
+  const { openUpdateModal, setOpenUpdateModal, document } = useDocumentsStore(
+    (state) => state
+  );
+  const handleFileChange = (info) => {
+    const file = info.fileList[0].originFileObj;
+    if (file && file.size > 0) {
+      const reader = new FileReader();
 
-     const mutation = useUpdateDocument({
-          onSuccess: () => {
-            message.success("Document changes recorded successfully");
-          },
-          onError: () => {
-            message.error("Failed to update document changes");
-          },
-        });
-      
-        const onFinish = (values) => {
-          const formattedValues = {
-            ...values,
-            uploadDate: values.uploadDate ? values.uploadDate.format("YYYY-MM-DD") : null,
-          };
-          mutation.mutate({
-            id: document.id,
-            data: formattedValues,
-          });
-          setOpenUpdateModal(false);
+      reader.onload = (e) => {
+        const fileContent = e.target.result;
+        const formattedDate = moment(file.lastModifiedDate);
+        const fileInfo = {
+          fileName: file.name,
+          fileType: file.type || "Unknown",
+          fileContent: fileContent.substring(0, 50) + "...",
+          uploadDate: formattedDate,
         };
-      
-        useEffect(() => {
-          if (document) {
-            form.setFieldsValue({
-              ...document,
-              date: document.uploadDate ? moment(document.uploadDate) : null,
-            });
-          }
-        }, [document, form]);
+
+        form.setFieldsValue({
+          fileName: fileInfo.fileName,
+          fileType: fileInfo.fileType,
+          fileContent: fileInfo.fileContent,
+          uploadDate: fileInfo.uploadDate,
+        });
+        message.success(`${file.name} uploaded successfully.`);
+      };
+
+      reader.onerror = () => {
+        message.error("Error while reading file");
+      };
+
+      reader.readAsText(file);
+    }
+  };
+
+  const mutation = useUpdateDocument({
+    onSuccess: () => {
+      message.success("Document changes recorded successfully");
+    },
+    onError: () => {
+      message.error("Failed to update document changes");
+    },
+  });
+
+  const onFinish = (values) => {
+    const {uploadFile,...filteredValues} = values;
+    const formattedValues = {
+      ...filteredValues,
+      uploadDate: filteredValues.uploadDate
+        ? filteredValues.uploadDate.format("YYYY-MM-DD")
+        : null,
+    };
+    mutation.mutate({
+      id: document.documentID,
+      data: formattedValues,
+    });
+    setOpenUpdateModal(false);
+  };
+
+  useEffect(() => {
+    if (document) {
+      form.setFieldsValue({
+        ...document,
+        uploadDate: document.uploadDate ? moment(document.uploadDate) : null,
+      });
+    }
+  }, [document, form]);
 
   return (
     <Modal
@@ -86,15 +132,16 @@ const UpdateDocumentModal = () => {
                 { required: true, message: "Please choose type of file" },
               ]}
             >
-              <Input placeholder="Choose type of file..." />
+              <Select
+                showSearch
+                placeholder="Select a file type..."
+                optionFilterProp="label"
+                options={fileExtensions}
+              />
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
-              label="File content"
-              name="fileContent"
-              rules={[{ required: true, message: "Please enter file content" }]}
-            >
+            <Form.Item label="File content" name="fileContent">
               <Input placeholder="Enter file content..." />
             </Form.Item>
           </Col>
@@ -110,6 +157,17 @@ const UpdateDocumentModal = () => {
                 placeholder="Select date..."
                 style={{ width: "100%" }}
               />
+            </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item label="Using file" name="uploadFile">
+              <Upload
+                maxCount={1}
+                beforeUpload={() => false}
+                onChange={handleFileChange}
+              >
+                <Button icon={<UploadOutlined />}>Upload File</Button>
+              </Upload>
             </Form.Item>
           </Col>
         </Row>

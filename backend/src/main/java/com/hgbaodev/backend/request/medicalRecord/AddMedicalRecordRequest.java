@@ -15,7 +15,7 @@ public class AddMedicalRecordRequest {
     private Integer memberID;
 
     @NotNull(message = "Date is required")
-    @Past(message = "Date must be a date")
+    @PastOrPresent(message = "Upload date must be a date in the past or present")
     private java.time.LocalDate date;
 
     @NotBlank(message = "Doctor's name is required")

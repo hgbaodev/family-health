@@ -17,7 +17,9 @@
     "Pro": "Pro",
     "ProDescription": "$9.99/month",
     "Enterprise": "Enterprise",
-    "EnterpriseDescription": "Contact us for pricing"
+    "EnterpriseDescription": "Contact us for pricing",
+    "AISupport": "AI Support",
+    "AISupportDescription": "Get personalized health recommendations and insights."
   },
   "LoginPage": {
     "Name": "FamilyHealth",
@@ -59,7 +61,6 @@
     "Description": "Here you can manage your content and settings"
 
   },
-
   "MemberPage": {
     "CreateMember": "Create Member",
     "FullName": "Full Name",
@@ -91,19 +92,13 @@
     "Start Date": "Start Date",
     "End Date": "End Date",
     "Note" : "Note"
-
-
   },
-
-
-
   "VaccinationPage": {
     "Date Administered": "Date Administered",
     "Member Name": "Member Name",
     "Vaccine Name": "Vaccine Name"
 
   },
-
   "Dashboard": "Dashboard",
   "Members": "Members",
   "Medical Records": "Medical Records",
@@ -119,8 +114,6 @@
   "Coming Soon" : "Coming Soon",
   "ID": "#ID",
   "Action": "Action",
-  "MemberID": "MemberID"
-
-
-
+  "MemberID": "MemberID",
+  "ChatAi": "Chat Ai"
 }

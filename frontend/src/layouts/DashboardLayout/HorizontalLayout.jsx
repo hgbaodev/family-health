@@ -14,7 +14,7 @@ const HorizontalLayout = () => {
       <ResponsiveSider collapsed={collapsed} setCollapsed={setCollapsed} />
       <Layout>
         <HeaderLayout collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Content className="px-6 py-6">
+        <Content className="px-6 py-6 content">
           <Outlet />
         </Content>
         <FooterLayout />

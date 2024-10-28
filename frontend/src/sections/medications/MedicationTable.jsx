@@ -18,6 +18,7 @@ const MedicationTable = () => {
         columns={columns}
         dataSource={medications}
         size="middle"
+        rowKey={(record) => record.medicationID}
         pagination={{
           current: page,
           pageSize: ROW_PER_PAGE,

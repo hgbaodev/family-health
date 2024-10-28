@@ -30,7 +30,7 @@ public class MedicalRecordController {
     @PostMapping
 
     public ResponseEntity<ApiResponse<?>> addMedicalRecord(@Valid @RequestBody AddMedicalRecordRequest addMedicalRecordRequest) {
-        User user = authenticationService.getCurrentUser();
+
         MedicalRecord medicalRecord = MedicalRecord.builder()
                 .memberID(addMedicalRecordRequest.getMemberID())
                 .date(addMedicalRecordRequest.getDate())

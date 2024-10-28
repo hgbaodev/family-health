@@ -2,6 +2,8 @@ package com.hgbaodev.backend.controller;
 
 import com.hgbaodev.backend.model.Allergy;
 import com.hgbaodev.backend.model.User;
+import com.hgbaodev.backend.model.Member;
+import com.hgbaodev.backend.repository.MemberRepository;
 import com.hgbaodev.backend.request.allergy.AddAllergyRequest;
 import com.hgbaodev.backend.request.allergy.UpdateAllergyRequest;
 import com.hgbaodev.backend.response.ApiResponse;
@@ -25,12 +27,14 @@ import java.util.Optional;
 public class AllergyController {
     private final AllergyService allergyService;
     private final AuthenticationService authenticationService;
+    private final MemberRepository memberRepository;
 
     @PostMapping
     public ResponseEntity<ApiResponse<?>> addAllergy(@Valid @RequestBody AddAllergyRequest addAllergyRequest) {
-        User user = authenticationService.getCurrentUser();
+        Member member = memberRepository.findById(addAllergyRequest.getMemberID())
+                .orElseThrow(() -> new RuntimeException("Member not found"));
         Allergy allergy = Allergy.builder()
-                .memberID(addAllergyRequest.getMemberID())
+                .memberID(member.getMemberID())
                 .allergyType(addAllergyRequest.getAllergyType())
                 .severity(addAllergyRequest.getSeverity())
                 .symptoms(addAllergyRequest.getSymptoms())
@@ -49,9 +53,11 @@ public class AllergyController {
     public ResponseEntity<ApiResponse<?>> updateAllergy(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateAllergyRequest updateAllergyRequest) {
+        Member member = memberRepository.findById(updateAllergyRequest.getMemberID())
+                .orElseThrow(() -> new RuntimeException("Member not found"));
         Allergy allergy = Allergy.builder()
                 .allergyID(id)
-                .memberID(updateAllergyRequest.getMemberID())
+                .memberID(member.getMemberID())
                 .allergyType(updateAllergyRequest.getAllergyType())
                 .severity(updateAllergyRequest.getSeverity())
                 .symptoms(updateAllergyRequest.getSymptoms())

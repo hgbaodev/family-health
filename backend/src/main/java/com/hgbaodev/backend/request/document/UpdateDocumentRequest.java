@@ -23,10 +23,10 @@ public class UpdateDocumentRequest {
     private String fileType;
 
     @NotBlank(message = "File content is required")
-    @Size(max = 500, message = "File content must not exceed 500 characters")
+    @Size(max = 1000, message = "File content must not exceed 1000 characters")
     private String fileContent;
 
     @NotNull(message = "Upload date is required")
-    @Past(message = "Upload date must be a date")
+    @PastOrPresent(message = "Upload date must be a date in the past or present")
     private java.time.LocalDate uploadDate;
 }

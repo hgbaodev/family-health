@@ -9,6 +9,10 @@ import org.springframework.data.repository.query.Param;
 
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, Integer> {
     @Query("SELECT mr FROM MedicalRecord mr WHERE LOWER(mr.doctor) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
+            "OR LOWER(mr.diagnosis) LIKE LOWER(CONCAT('%', :keyword, '%'))"+
+            "OR LOWER(mr.symptoms) LIKE LOWER(CONCAT('%', :keyword, '%'))" +
+            "OR LOWER(mr.facilityName) LIKE LOWER(CONCAT('%', :keyword, '%'))" +
+            "OR LOWER(mr.treatment) LIKE LOWER(CONCAT('%', :keyword, '%'))" +
             "AND mr.memberID IN (SELECT m.memberID FROM Member m WHERE m.userID = :userID)")
     Page<MedicalRecord> findByKeyword(@Param("keyword") String keyword, Integer userID, Pageable pageable);
 
