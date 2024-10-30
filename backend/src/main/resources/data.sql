@@ -228,84 +228,84 @@ WHERE NOT EXISTS (SELECT 1 FROM medical_records WHERE member_id = 13 AND date = 
 ----Documents
 
 -- Thêm dữ liệu mẫu vào bảng documents
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 1, 'Hồ sơ sức khỏe 1.pdf', 'application/pdf', NULL, '2023-10-01 09:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 1, 'Hồ sơ sức khỏe 1.pdf', 'application/pdf', '2023-10-01 09:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 1 AND file_name = 'Hồ sơ sức khỏe 1.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 1, 'Kết quả xét nghiệm 1.jpg', 'image/jpeg', NULL, '2023-10-02 10:30:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 1, 'Kết quả xét nghiệm 1.jpg', 'image/jpeg', '2023-10-02 10:30:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 1 AND file_name = 'Kết quả xét nghiệm 1.jpg');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 2, 'Hồ sơ sức khỏe 2.pdf', 'application/pdf', NULL, '2023-10-03 11:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 2, 'Hồ sơ sức khỏe 2.pdf', 'application/pdf', '2023-10-03 11:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 2 AND file_name = 'Hồ sơ sức khỏe 2.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 2, 'Kết quả xét nghiệm 2.png', 'image/png', NULL, '2023-10-04 12:15:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 2, 'Kết quả xét nghiệm 2.png', 'image/png', '2023-10-04 12:15:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 2 AND file_name = 'Kết quả xét nghiệm 2.png');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 3, 'Hồ sơ sức khỏe 3.pdf', 'application/pdf', NULL, '2023-10-05 13:45:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 3, 'Hồ sơ sức khỏe 3.pdf', 'application/pdf', '2023-10-05 13:45:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 3 AND file_name = 'Hồ sơ sức khỏe 3.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 3, 'Kết quả xét nghiệm 3.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', NULL, '2023-10-06 14:30:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 3, 'Kết quả xét nghiệm 3.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '2023-10-06 14:30:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 3 AND file_name = 'Kết quả xét nghiệm 3.docx');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 4, 'Hồ sơ sức khỏe 4.pdf', 'application/pdf', NULL, '2023-10-07 15:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 4, 'Hồ sơ sức khỏe 4.pdf', 'application/pdf', '2023-10-07 15:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 4 AND file_name = 'Hồ sơ sức khỏe 4.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 4, 'Kết quả xét nghiệm 4.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', NULL, '2023-10-08 16:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 4, 'Kết quả xét nghiệm 4.xlsx', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', '2023-10-08 16:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 4 AND file_name = 'Kết quả xét nghiệm 4.xlsx');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 5, 'Hồ sơ sức khỏe 5.pdf', 'application/pdf', NULL, '2023-10-09 17:30:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 5, 'Hồ sơ sức khỏe 5.pdf', 'application/pdf', '2023-10-09 17:30:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 5 AND file_name = 'Hồ sơ sức khỏe 5.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 5, 'Kết quả xét nghiệm 5.jpg', 'image/jpeg', NULL, '2023-10-10 18:45:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 5, 'Kết quả xét nghiệm 5.jpg', 'image/jpeg', '2023-10-10 18:45:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 5 AND file_name = 'Kết quả xét nghiệm 5.jpg');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 6, 'Hồ sơ sức khỏe 6.pdf', 'application/pdf', NULL, '2023-10-11 19:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 6, 'Hồ sơ sức khỏe 6.pdf', 'application/pdf', '2023-10-11 19:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 6 AND file_name = 'Hồ sơ sức khỏe 6.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 6, 'Kết quả xét nghiệm 6.png', 'image/png', NULL, '2023-10-12 20:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 6, 'Kết quả xét nghiệm 6.png', 'image/png', '2023-10-12 20:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 6 AND file_name = 'Kết quả xét nghiệm 6.png');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 7, 'Hồ sơ sức khỏe 7.pdf', 'application/pdf', NULL, '2023-10-13 21:30:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 7, 'Hồ sơ sức khỏe 7.pdf', 'application/pdf', '2023-10-13 21:30:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 7 AND file_name = 'Hồ sơ sức khỏe 7.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 8, 'Kết quả xét nghiệm 7.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', NULL, '2023-10-14 22:30:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 8, 'Kết quả xét nghiệm 7.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '2023-10-14 22:30:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 8 AND file_name = 'Kết quả xét nghiệm 7.docx');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 9, 'Hồ sơ sức khỏe 8.pdf', 'application/pdf', NULL, '2023-10-15 23:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 9, 'Hồ sơ sức khỏe 8.pdf', 'application/pdf', '2023-10-15 23:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 9 AND file_name = 'Hồ sơ sức khỏe 8.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 10, 'Kết quả xét nghiệm 8.jpg', 'image/jpeg', NULL, '2023-10-16 08:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 10, 'Kết quả xét nghiệm 8.jpg', 'image/jpeg', '2023-10-16 08:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 10 AND file_name = 'Kết quả xét nghiệm 8.jpg');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 11, 'Hồ sơ sức khỏe 9.pdf', 'application/pdf', NULL, '2023-10-17 09:00:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 11, 'Hồ sơ sức khỏe 9.pdf', 'application/pdf', '2023-10-17 09:00:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 11 AND file_name = 'Hồ sơ sức khỏe 9.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 12, 'Kết quả xét nghiệm 9.png', 'image/png', NULL, '2023-10-18 10:15:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 12, 'Kết quả xét nghiệm 9.png', 'image/png', '2023-10-18 10:15:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 12 AND file_name = 'Kết quả xét nghiệm 9.png');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 13, 'Hồ sơ sức khỏe 10.pdf', 'application/pdf', NULL, '2023-10-19 11:30:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 13, 'Hồ sơ sức khỏe 10.pdf', 'application/pdf', '2023-10-19 11:30:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 13 AND file_name = 'Hồ sơ sức khỏe 10.pdf');
 
-INSERT INTO documents (record_id, file_name, file_type, file_content, upload_date)
-SELECT 14, 'Kết quả xét nghiệm 10.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', NULL, '2023-10-20 12:45:00'
+INSERT INTO documents (record_id, file_name, file_type, upload_date)
+SELECT 14, 'Kết quả xét nghiệm 10.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', '2023-10-20 12:45:00'
 WHERE NOT EXISTS (SELECT 1 FROM documents WHERE record_id = 14 AND file_name = 'Kết quả xét nghiệm 10.docx');
 --------Medications
 -- V8__insert_medications.sql

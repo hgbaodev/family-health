@@ -15,15 +15,18 @@ import { useCreateDocument } from "~/api/documents/create-documents";
 import { useDocumentsStore } from "~/stores/documents/documentStore";
 import { fileExtensions } from "./FileExtensions";
 import { UploadOutlined } from "@ant-design/icons";
+import { useState } from "react";
 import moment from "moment";
 
 const CreateDocumentModal = () => {
   const [form] = Form.useForm();
   const { openCreateModal, setOpenCreateModal } = useDocumentsStore();
+  const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (info) => {
     const file = info.fileList[0].originFileObj;
     if (file && file.size > 0) {
+      setSelectedFile(file);
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -56,7 +59,7 @@ const CreateDocumentModal = () => {
   const mutation = useCreateDocument({
     onSuccess: () => {
       form.resetFields();
-      setOpenCreateModal(false);
+      setSelectedFile(null);
       message.success("Document added successfully");
     },
     onFinish: () => {
@@ -65,12 +68,13 @@ const CreateDocumentModal = () => {
   });
 
   const onFinish = (values) => {
-    const {uploadFile,...filteredValues} = values;
     const formattedValues = {
-      ...filteredValues,
-      uploadDate: filteredValues.uploadDate ? filteredValues.uploadDate.format("YYYY-MM-DD") : null,
+      ...values,
+      file:selectedFile,
+      uploadDate: values.uploadDate ? values.uploadDate.format("YYYY-MM-DD") : null,
     };
     mutation.mutate(formattedValues);
+    setOpenCreateModal(false);
   };
 
   return (
@@ -126,16 +130,6 @@ const CreateDocumentModal = () => {
           </Col>
           <Col span={12}>
             <Form.Item
-              label="File content"
-              name="fileContent"
-            >
-              <Input placeholder="Enter file content..." />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
               label="Upload date"
               name="uploadDate"
               rules={[{ required: true, message: "Please select date" }]}
@@ -146,6 +140,8 @@ const CreateDocumentModal = () => {
               />
             </Form.Item>
           </Col>
+        </Row>
+        <Row gutter={16}>
           <Col span={12}>
             <Form.Item label="Using file" name="uploadFile">
               <Upload
