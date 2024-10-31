@@ -14,19 +14,21 @@ import { Flex } from "antd";
 import { useUpdateDocument } from "~/api/documents/update-documents";
 import { useDocumentsStore } from "~/stores/documents/documentStore";
 import moment from "moment";
+import { useState } from "react";
 import { useEffect } from "react";
 import { fileExtensions } from "./FileExtensions";
 import { UploadOutlined } from "@ant-design/icons";
 
-
 const UpdateDocumentModal = () => {
   const [form] = Form.useForm();
+  const [selectedFile, setSelectedFile] = useState(null);
   const { openUpdateModal, setOpenUpdateModal, document } = useDocumentsStore(
     (state) => state
   );
   const handleFileChange = (info) => {
     const file = info.fileList[0].originFileObj;
     if (file && file.size > 0) {
+      setSelectedFile(file);
       const reader = new FileReader();
 
       reader.onload = (e) => {
@@ -66,16 +68,15 @@ const UpdateDocumentModal = () => {
   });
 
   const onFinish = (values) => {
-    const {uploadFile,...filteredValues} = values;
+    const {uploadFile, ...filteredValues} = values;
     const formattedValues = {
       ...filteredValues,
-      uploadDate: filteredValues.uploadDate
-        ? filteredValues.uploadDate.format("YYYY-MM-DD")
-        : null,
+      uploadDate: filteredValues.uploadDate ? filteredValues.uploadDate.format("YYYY-MM-DD") : null,
     };
     mutation.mutate({
       id: document.documentID,
-      data: formattedValues,
+      file: selectedFile,
+      data: formattedValues
     });
     setOpenUpdateModal(false);
   };
@@ -141,13 +142,6 @@ const UpdateDocumentModal = () => {
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item label="File content" name="fileContent">
-              <Input placeholder="Enter file content..." />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
             <Form.Item
               label="Upload date"
               name="uploadDate"
@@ -159,6 +153,8 @@ const UpdateDocumentModal = () => {
               />
             </Form.Item>
           </Col>
+        </Row>
+        <Row gutter={16}>
           <Col span={12}>
             <Form.Item label="Using file" name="uploadFile">
               <Upload

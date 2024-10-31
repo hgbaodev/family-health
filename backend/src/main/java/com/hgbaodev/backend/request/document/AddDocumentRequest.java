@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.request.document;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -21,10 +22,6 @@ public class AddDocumentRequest {
     @NotBlank(message = "File type is required")
     @Size(max = 20, message = "File type must not exceed 20 characters")
     private String fileType;
-
-    @NotBlank(message = "File content is required")
-    @Size(max = 1000, message = "File content must not exceed 1000 characters")
-    private String fileContent;
 
     @NotNull(message = "Upload date is required")
     @PastOrPresent(message = "Upload date must be a date in the past or present")

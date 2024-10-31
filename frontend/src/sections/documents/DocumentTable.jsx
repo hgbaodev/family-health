@@ -1,6 +1,7 @@
 import { ExportOutlined } from "@ant-design/icons";
 import { Button, Input, Table, Tag } from "antd";
 import useDocumentColumns from "./DocumentColumn";
+import DocumentDetail from "./DocumentDetail";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
 import { useDocuments } from "~/api/documents/get-documents";
@@ -9,12 +10,19 @@ export const DocumentTable = () => {
   const columns = useDocumentColumns();
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { data: documents, isLoading } = useDocuments({
     page,
     size: ROW_PER_PAGE,
     keyword,
   });
+
+  const doubleClickHandler = (item) =>{
+    setSelectedItem(item);
+    setIsModalVisible(true);
+  }
 
   return (
     <>
@@ -23,7 +31,9 @@ export const DocumentTable = () => {
         dataSource={documents}
         onRow={(item) => {
           return {
-            onDoubleClick: () => console.log(item)
+            onDoubleClick: () => {
+              doubleClickHandler(item);
+            }
           }
         }}
         size="middle"
@@ -52,6 +62,11 @@ export const DocumentTable = () => {
           </div>
         )}
       />
+      <DocumentDetail
+        visible={isModalVisible}
+        item={selectedItem}
+        onCancel={() => setIsModalVisible(false)}
+      /> 
     </>
   );
 };
