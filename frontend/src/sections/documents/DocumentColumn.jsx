@@ -55,11 +55,6 @@ const useDocumentColumns = () => {
         render: (fileType) => getFileExtension(fileType),
       },
       {
-        title: "File content",
-        dataIndex: "fileContent",
-        key: "fileContent",
-      },
-      {
         title: "Upload date",
         dataIndex: "uploadDate",
         key: "uploadDate",

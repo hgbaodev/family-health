@@ -6,15 +6,16 @@ export const createDocument = ({
   recordID,
   fileName,
   fileType,
-  fileContent,
   uploadDate,
+  file
 }) => {
-  return api.post(`/documents`, {
-    recordID,
-    fileName,
-    fileType,
-    fileContent,
-    uploadDate,
+  const formData = new FormData();
+  formData.append("request", JSON.stringify({ recordID, fileName, fileType, uploadDate }));
+  formData.append("file", file);
+  return api.post(`/documents`,formData, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
   });
 };
 
@@ -32,6 +33,7 @@ export const useCreateDocument = (options = {}) => {
       onSuccess?.(data, ...args);
     },
     onError: (error, ...args) => {
+      console.log(error);
       console.error("Error details:", error.response?.data);
       onError?.(error, ...args);
     },

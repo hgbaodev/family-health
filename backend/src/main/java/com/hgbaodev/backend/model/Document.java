@@ -31,23 +31,9 @@ public class Document {
     @Column(name = "file_type",nullable = false)
     private String fileType;
 
-    @Column(name = "file_content")
-    private String fileContent;
-
     @Column(name = "upload_date")
     private LocalDate uploadDate;
 
-    //    @ManyToOne
-//    @JoinColumn(name = "record_id", nullable = false)
-//    @JsonIgnore
-//    private MedicalRecord medicalRecord;
-//
-//    @Transient
-//    @JsonProperty("recordID")
-//    private int recordID;
-//
-//    @PostLoad
-//    public void onLoad() {
-//        this.recordID = this.medicalRecord.getRecordID();
-//    }
+    @Transient  // Không lưu thuộc tính này vào cơ sở dữ liệu
+    private String path;
 }

@@ -4,9 +4,7 @@
 
 .ant-form-item-explain-error {
   font-size: 13px;
-}@tailwind base;
-@tailwind components;
-@tailwind utilities;
+}
 
 .ant-form-item-explain-error {
   font-size: 13px;
