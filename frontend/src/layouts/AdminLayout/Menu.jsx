@@ -3,13 +3,13 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
-import MenuDashboardConfig from "~/constants/menuDashboardConfig";
+import MenuAdminConfig from "~/constants/menuAdminConfig";
 
 
 const MenuCustom = ({ isMobile, onClose, theme = "light", ...props }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const menuItems = MenuDashboardConfig();
+  const menuItems = MenuAdminConfig();
 
   const findItemByPath = useCallback((items, path) => {
     for (const item of items) {

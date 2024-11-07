@@ -2,9 +2,10 @@ import React from 'react';
 import DashboardLayout from '~/layouts/DashboardLayout';
 import Loadable from '~/components/Loadable';
 import VaccinationPage from '~/pages/manager/VaccinationPage';
-import PrivateRoute from '~/guards/PrivateRoute';
+// import PrivateRoute from '~/guards/PrivateRoute';
 import AppointmentPage from '~/pages/manager/AppointmentPage';
 import ChatPage from '~/pages/manager/ChatPage';
+import NotePage from '~/pages/manager/NotePage';
 
 const DashBoardPage = Loadable(React.lazy(() => import('~/pages/manager/DashBoardPage')));
 const MemberPage = Loadable(React.lazy(() => import('~/pages/manager/MemberPage')));
@@ -20,7 +21,8 @@ export const DashboardRoutes = {
   children: [
     {
       path: '/manager',
-      element: <PrivateRoute component={DashboardLayout} />,
+      // element: <PrivateRoute component={DashboardLayout} />,
+      element: <DashboardLayout />,
       children: [
         {
           path: '',
@@ -73,6 +75,10 @@ export const DashboardRoutes = {
         {
           path: 'appointments',
           element: <AppointmentPage />
+        },
+        {
+          path: 'notes',
+          element: <NotePage />
         },
         {
           path: 'chat-ai',
