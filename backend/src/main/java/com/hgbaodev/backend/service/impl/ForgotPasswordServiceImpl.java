@@ -1,8 +1,7 @@
 package com.hgbaodev.backend.service.impl;
 
 import com.github.benmanes.caffeine.cache.Cache;
-import com.github.benmanes.caffeine.cache.Caffeine;
-import com.hgbaodev.backend.model.dto.DataMailDTO;
+import com.hgbaodev.backend.dto.response.DataMailDTO;
 import com.hgbaodev.backend.repository.UserRepository;
 import com.hgbaodev.backend.service.ForgotPasswordService;
 import com.hgbaodev.backend.service.MailService;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor

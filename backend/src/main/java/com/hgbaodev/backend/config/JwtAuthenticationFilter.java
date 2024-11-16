@@ -38,6 +38,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
   // Định nghĩa các đường dẫn được phép truy cập mà không cần xác thực
   private static final String[] WHITELIST_URLS = {
           "/api/v1/auth/**",
+          "/api/v1/oauth2/**",
           "/v2/api-docs",
           "/v3/api-docs/**",
           "/swagger-resources/**",

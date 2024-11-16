@@ -26,6 +26,7 @@ const MenuCustom = ({ isMobile, onClose, theme = "light", ...props }) => {
   const selectedKeys = useMemo(() => {
     const item = findItemByPath(menuItems, location.pathname);
     return item ? [item.key] : [];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname, findItemByPath]);
 
   const handleMenuClick = useCallback(

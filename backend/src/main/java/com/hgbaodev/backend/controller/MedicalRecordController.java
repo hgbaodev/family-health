@@ -3,9 +3,9 @@ package com.hgbaodev.backend.controller;
 
 import com.hgbaodev.backend.model.MedicalRecord;
 import com.hgbaodev.backend.model.User;
-import com.hgbaodev.backend.request.medicalRecord.UpdateMedicalRecordRequest;
-import com.hgbaodev.backend.request.medicalRecord.AddMedicalRecordRequest;
-import com.hgbaodev.backend.response.ApiResponse;
+import com.hgbaodev.backend.dto.request.medicalRecord.UpdateMedicalRecordRequest;
+import com.hgbaodev.backend.dto.request.medicalRecord.AddMedicalRecordRequest;
+import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.MedicalRecordService;
 import jakarta.validation.Valid;

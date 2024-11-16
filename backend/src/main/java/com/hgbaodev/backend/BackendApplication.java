@@ -1,7 +1,7 @@
 package com.hgbaodev.backend;
 
 import com.hgbaodev.backend.service.AuthenticationService;
-import com.hgbaodev.backend.request.auth.RegisterRequest;
+import com.hgbaodev.backend.dto.request.auth.RegisterRequest;
 import com.hgbaodev.backend.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

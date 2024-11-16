@@ -4,7 +4,6 @@ import { useUpdateAllergy } from "~/api/allergies/update-allergies";
 import { useMembers } from "../../api/members/get-members";
 import { useAllergiesStore } from "~/stores/allergies/allergyStore";
 import { useEffect,useMemo } from "react";
-import moment from "moment";
 
 const UpdateAllergyModal = () => {
   const [form] = Form.useForm();

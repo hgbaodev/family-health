@@ -2,9 +2,9 @@
 
     import com.hgbaodev.backend.model.Medication;
     import com.hgbaodev.backend.model.User;
-    import com.hgbaodev.backend.request.medication.AddMedicationRequest;
-    import com.hgbaodev.backend.request.medication.UpdateMedicationRequest;
-    import com.hgbaodev.backend.response.ApiResponse;
+    import com.hgbaodev.backend.dto.request.medication.AddMedicationRequest;
+    import com.hgbaodev.backend.dto.request.medication.UpdateMedicationRequest;
+    import com.hgbaodev.backend.dto.response.ApiResponse;
     import com.hgbaodev.backend.service.AuthenticationService;
     import com.hgbaodev.backend.service.MedicationService;
     import jakarta.validation.Valid;

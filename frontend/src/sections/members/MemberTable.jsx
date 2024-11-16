@@ -8,21 +8,27 @@ import { useMembers } from "../../api/members/get-members";
 export const MemberTable = () => {
   const columns = useMemberColumns();
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(ROW_PER_PAGE);
   const [keyword, setKeyword] = useState("");
-
-  const { data: members, isLoading } = useMembers({ page, size: ROW_PER_PAGE, keyword });
+  const { data, isLoading } = useMembers({ page, size: pageSize, keyword });
 
   return (
     <>
       <Table
         columns={columns}
-        dataSource={members}
-        size="middle"
+        dataSource={data?.items || []}
+        size="small"
         rowKey={(record) => record.memberID}
         pagination={{
-          current: page,
-          pageSize: ROW_PER_PAGE,
-          total: members?.length || 0,
+          current: data?.meta?.current_page,
+          pageSize: data?.meta?.per_page,
+          total: data?.meta?.total_elements,
+          showSizeChanger: true,
+          pageSizeOptions: ["8", "10", "20", "50", "100"],
+          onShowSizeChange: (current, size) => {
+            setPageSize(size);
+            setPage(1);
+          },
           onChange: (newPage) => setPage(newPage),
         }}
         loading={isLoading}

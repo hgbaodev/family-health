@@ -8,11 +8,16 @@ import UpdateMemberModal from "~/sections/members/UpdateMemberModal";
 import { useMembersStore } from "~/stores/members/memberStore";
 import { useTranslation } from "react-i18next";
 
-
-
 const MemberPage = () => {
-  const { openDeleteModal, openCreateModal, openUpdateModal, setOpenDeleteModal, setOpenCreateModal, setOpenUpdateModal } = useMembersStore((state) => state);
-  const {t} = useTranslation();
+  const {
+    openDeleteModal,
+    openCreateModal,
+    openUpdateModal,
+    setOpenDeleteModal,
+    setOpenCreateModal,
+    setOpenUpdateModal,
+  } = useMembersStore((state) => state);
+  const { t } = useTranslation();
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);
   };
@@ -31,10 +36,13 @@ const MemberPage = () => {
 
   return (
     <>
-      <Flex align="center" justify="space-between" className="mb-2">
+      <Flex align="center" justify="space-between" className="mb-1">
         <PageHeader
           heading={t("Members")}
-          links={[{ title: t("Dashboard"), href: "/manager" }, { title: t("Members") }]}
+          links={[
+            { title: t("Dashboard"), href: "/manager" },
+            { title: t("Members") },
+          ]}
         />
         <Space>
           <Button
@@ -46,12 +54,10 @@ const MemberPage = () => {
           </Button>
         </Space>
       </Flex>
-      <div style={{ paddingTop: 20 }}>
-        <MemberTable/>
-      </div>
+      <MemberTable />
       <ConfirmModal
         title={'t("warning_delete.Member")'}
-        content={'Coming Soon'}
+        content={"Coming Soon"}
         open={openDeleteModal}
         handleCancel={handleDeleteCancel}
         handleOk={() => {}}

@@ -1,10 +1,10 @@
 package com.hgbaodev.backend.service;
 
-import com.hgbaodev.backend.request.auth.RegisterRequest;
-import com.hgbaodev.backend.request.auth.LoginRequest;
+import com.hgbaodev.backend.dto.request.auth.RegisterRequest;
+import com.hgbaodev.backend.dto.request.auth.LoginRequest;
 import com.hgbaodev.backend.model.User;
-import com.hgbaodev.backend.response.ApiResponse;
-import com.hgbaodev.backend.response.AuthenticationResponse;
+import com.hgbaodev.backend.dto.response.ApiResponse;
+import com.hgbaodev.backend.dto.response.AuthenticationResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;

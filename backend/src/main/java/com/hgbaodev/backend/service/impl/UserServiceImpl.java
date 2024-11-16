@@ -2,7 +2,7 @@ package com.hgbaodev.backend.service.impl;
 
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.repository.UserRepository;
-import com.hgbaodev.backend.request.users.ChangePasswordRequest;
+import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
 import com.hgbaodev.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

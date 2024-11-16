@@ -2,11 +2,12 @@
 
     import com.hgbaodev.backend.model.Member;
     import com.hgbaodev.backend.model.User;
-    import com.hgbaodev.backend.request.member.AddMemberRequest;
-    import com.hgbaodev.backend.request.member.UpdateMemberRequest;
-    import com.hgbaodev.backend.response.ApiResponse;
+    import com.hgbaodev.backend.dto.request.member.AddMemberRequest;
+    import com.hgbaodev.backend.dto.request.member.UpdateMemberRequest;
+    import com.hgbaodev.backend.dto.response.ApiResponse;
     import com.hgbaodev.backend.service.AuthenticationService;
     import com.hgbaodev.backend.service.MemberService;
+    import com.hgbaodev.backend.utils.CustomPagination;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
@@ -14,8 +15,6 @@
     import org.springframework.http.HttpStatus;
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
-
-    import java.util.List;
 
     @RestController
     @RequestMapping("/api/v1/members")
@@ -39,7 +38,6 @@
                     .height(addMemberRequest.getHeight())
                     .weight(addMemberRequest.getWeight())
                     .build();
-            log.info(member.toString());
             Member createdMember = memberService.addMember(member);
             ApiResponse<Member> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
@@ -90,21 +88,18 @@
         }
 
         @GetMapping
-        public ResponseEntity<ApiResponse<List<Member>>> getAllMembers(
+        public ResponseEntity<ApiResponse<CustomPagination<Member>>> getAllMembers(
                 @RequestParam(defaultValue = "1") int page,
                 @RequestParam(defaultValue = "8") int size,
                 @RequestParam(defaultValue = "") String keyword) {
             User user = authenticationService.getCurrentUser();
             Page<Member> membersPage = memberService.getAllMembers(page, size, keyword, user.getId());
-
-            List<Member> membersContent = membersPage.getContent();
-
-            ApiResponse<List<Member>> response = new ApiResponse<>(
+            CustomPagination<Member> membersContent = new CustomPagination<>(membersPage);
+            ApiResponse<CustomPagination<Member>> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Get list member successfully",
                     membersContent
             );
-
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }

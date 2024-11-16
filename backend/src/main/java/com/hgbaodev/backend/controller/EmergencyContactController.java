@@ -2,9 +2,9 @@ package com.hgbaodev.backend.controller;
 
 import com.hgbaodev.backend.model.EmergencyContact;
 import com.hgbaodev.backend.model.User;
-import com.hgbaodev.backend.request.emergencyContact.AddEmergencyContactRequest;
-import com.hgbaodev.backend.request.emergencyContact.UpdateEmergencyContactRequest;
-import com.hgbaodev.backend.response.ApiResponse;
+import com.hgbaodev.backend.dto.request.emergencyContact.AddEmergencyContactRequest;
+import com.hgbaodev.backend.dto.request.emergencyContact.UpdateEmergencyContactRequest;
+import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.EmergencyContactService;
 import jakarta.validation.Valid;

@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.service;
 
-import com.hgbaodev.backend.model.dto.DataMailDTO;
+import com.hgbaodev.backend.dto.response.DataMailDTO;
 import jakarta.mail.MessagingException;
 
 public interface MailService {

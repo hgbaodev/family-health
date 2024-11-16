@@ -1,26 +1,23 @@
 package com.hgbaodev.backend.service.impl;
 
-import com.hgbaodev.backend.model.Member;
-import com.hgbaodev.backend.model.dto.DataMailDTO;
+import com.hgbaodev.backend.dto.response.DataMailDTO;
 import com.hgbaodev.backend.service.JwtService;
 import com.hgbaodev.backend.enums.TokenType;
 import com.hgbaodev.backend.model.Token;
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.repository.TokenRepository;
 import com.hgbaodev.backend.repository.UserRepository;
-import com.hgbaodev.backend.request.auth.LoginRequest;
-import com.hgbaodev.backend.request.auth.RegisterRequest;
-import com.hgbaodev.backend.response.ApiResponse;
-import com.hgbaodev.backend.response.AuthenticationResponse;
-import com.hgbaodev.backend.response.UserResponse;
+import com.hgbaodev.backend.dto.request.auth.LoginRequest;
+import com.hgbaodev.backend.dto.request.auth.RegisterRequest;
+import com.hgbaodev.backend.dto.response.ApiResponse;
+import com.hgbaodev.backend.dto.response.AuthenticationResponse;
+import com.hgbaodev.backend.dto.response.UserResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.MailService;
 import com.hgbaodev.backend.utils.Const;
-import io.jsonwebtoken.Claims;
 import jakarta.mail.MessagingException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +33,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 

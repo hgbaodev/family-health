@@ -26,6 +26,7 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
           styles={{ header: { display: "none" }, body: { padding: "10px" } }}
           width={300}
         >
+          <img src={logo} onClick={() => navigate('/')} className="w-14 h-14" />
           <MenuCustom
             mode="inline"
             isMobile={isMobile}
@@ -45,7 +46,7 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
             <Space
               className="flex flex-col items-center justify-center p-4 cursor-pointer"
               onClick={() => {
-                navigate("/manager");
+                navigate("/");
               }}
             >
               <img src={logo} className="w-14 h-14" />
