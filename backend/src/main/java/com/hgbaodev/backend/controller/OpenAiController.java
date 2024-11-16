@@ -1,7 +1,6 @@
 package com.hgbaodev.backend.controller;
 
-import com.hgbaodev.backend.model.Member;
-import com.hgbaodev.backend.response.ApiResponse;
+import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.service.OpenAiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

@@ -2,15 +2,11 @@
 
     import com.hgbaodev.backend.model.Appointment;
     import com.hgbaodev.backend.model.Member;
-    import com.hgbaodev.backend.model.Vaccination;
-    import com.hgbaodev.backend.request.appointment.AddAppointmentRequest;
-    import com.hgbaodev.backend.request.appointment.UpdateAppointmentRequest;
-    import com.hgbaodev.backend.request.vaccication.AddVaccinationRequest;
-    import com.hgbaodev.backend.request.vaccication.UpdateVaccinationRequest;
-    import com.hgbaodev.backend.response.ApiResponse;
+    import com.hgbaodev.backend.dto.request.appointment.AddAppointmentRequest;
+    import com.hgbaodev.backend.dto.request.appointment.UpdateAppointmentRequest;
+    import com.hgbaodev.backend.dto.response.ApiResponse;
     import com.hgbaodev.backend.service.AppointmentService;
     import com.hgbaodev.backend.service.MemberService;
-    import com.hgbaodev.backend.service.VaccinationService;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;

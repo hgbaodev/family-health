@@ -1,14 +1,10 @@
     package com.hgbaodev.backend.controller;
 
     import com.hgbaodev.backend.model.Member;
-    import com.hgbaodev.backend.model.User;
     import com.hgbaodev.backend.model.Vaccination;
-    import com.hgbaodev.backend.request.member.AddMemberRequest;
-    import com.hgbaodev.backend.request.member.UpdateMemberRequest;
-    import com.hgbaodev.backend.request.vaccication.AddVaccinationRequest;
-    import com.hgbaodev.backend.request.vaccication.UpdateVaccinationRequest;
-    import com.hgbaodev.backend.response.ApiResponse;
-    import com.hgbaodev.backend.service.AuthenticationService;
+    import com.hgbaodev.backend.dto.request.vaccication.AddVaccinationRequest;
+    import com.hgbaodev.backend.dto.request.vaccication.UpdateVaccinationRequest;
+    import com.hgbaodev.backend.dto.response.ApiResponse;
     import com.hgbaodev.backend.service.MemberService;
     import com.hgbaodev.backend.service.VaccinationService;
     import jakarta.validation.Valid;

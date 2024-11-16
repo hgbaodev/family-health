@@ -4,20 +4,20 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import ResponsiveSider from "./Sider";
 import HeaderLayout from "./Header";
-import FooterLayout from "./Footer";
+// import FooterLayout from "./Footer";
 
 
 const HorizontalLayout = () => {
   const [collapsed, setCollapsed] = useState(false);
   return (
-    <Layout hasSider>
+    <Layout hasSider className="h-screen">
       <ResponsiveSider collapsed={collapsed} setCollapsed={setCollapsed} />
       <Layout>
         <HeaderLayout collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Content className="px-6 py-6 content">
+        <Content className="px-3 py-3 content">
           <Outlet />
         </Content>
-        <FooterLayout />
+        {/* <FooterLayout /> */}
       </Layout>
     </Layout>
   );

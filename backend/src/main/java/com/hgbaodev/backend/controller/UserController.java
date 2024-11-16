@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.controller;
 
-import com.hgbaodev.backend.request.users.ChangePasswordRequest;
+import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
 import com.hgbaodev.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

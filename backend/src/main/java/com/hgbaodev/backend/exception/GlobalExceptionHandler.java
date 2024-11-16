@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.exception;
 
-import com.hgbaodev.backend.response.ApiResponse;
+import com.hgbaodev.backend.dto.response.ApiResponse;
 import io.jsonwebtoken.MalformedJwtException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
