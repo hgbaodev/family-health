@@ -1,0 +1,1 @@
+ví dụ như tôi muốn làm một chức năng người dùng upload file lên server thì server sẽ lưu file về server và hiển thị lên thông qua tên file, và để cho người dùng khác có thể tải file đó về, làm bằng react hoặc sử dụng các thư viện liên quan react , backend là java spring boot 3. 

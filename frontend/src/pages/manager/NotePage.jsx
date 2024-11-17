@@ -1,98 +1,109 @@
-import {  PlusSquareOutlined } from "@ant-design/icons";
+import { PlusSquareOutlined } from "@ant-design/icons";
 import { closestCenter, DndContext } from "@dnd-kit/core";
-import { arrayMove, SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
-import { Button, Flex, Form, Input, Modal, Row, Space } from "antd";
-import { useState } from "react";
+import {
+  arrayMove,
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { Button, Flex, Row, Space, Spin } from "antd";
+import { useState, useEffect } from "react";
 import PageHeader from "~/components/page-header";
 import SortableItem from "~/sections/notes/SortableItem";
 
-const listNotes = [
-  {
-    user_id: 1,
-    index: 1,
-    title: "Hôm nay",
-    content: "Thật yêu đời",
-    created_at: "2024/10/12 12:00:00",
-  },
-  {
-    index: 2,
-    title: "Hôm nay 2",
-    content: "Thật yêu đời 2",
-    created_at: "2024/10/12 12:00:00",
-  },
-  {
-    index: 3,
-    title: "Hôm nay 3",
-    content: "Thật yêu đời 3",
-    created_at: "2024/10/12 12:00:00",
-  },
-  {
-    index: 4,
-    title: "Hôm nay 4",
-    content: "Thật yêu đời 4",
-    created_at: "2024/10/12 12:00:00",
-  },
-  {
-    index: 5,
-    title: "Hôm nay 5",
-    content: "Thật yêu đời 5",
-    created_at: "2024/10/12 12:00:00",
-  },
-];
-
-
+import { ROW_PER_PAGE } from "../../config/constants";
+import { useNotes } from "~/api/notes/get-notes";
+import { useUpdateNote } from "~/api/notes/update-note";
+import CreateNoteModal from "~/sections/notes/CreateNoteModal";
+import UpdateNoteModal from "~/sections/notes/UpdateNoteModal";
+import { useNotesStore } from "~/stores/notes/noteStore";
 
 const NotePage = () => {
-  const [notes, setNotes] = useState(listNotes);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-  const [isEditMode, setIsEditMode] = useState(false);
-  const [currentNote, setCurrentNote] = useState(null);
+  const [page, setPage] = useState(1);
+  const [keyword, setKeyword] = useState("");
+  const { data: notes, isLoading } = useNotes({
+    page,
+    size: ROW_PER_PAGE,
+    keyword,
+  });
+  const {
+    openCreateModal,
+    setOpenCreateModal,
+    openUpdateModal,
+    setOpenUpdateModal,
+    openDeleteModal,
+    setOpenDeleteModal,
+    setNote,
+  } = useNotesStore((state) => state);
+  const [list, setList] = useState([]);
+  const [isDragging, setIsDragging] = useState(false);
+  useEffect(() => {
+    if (notes) {
+      setList(notes);
+    }
+  }, [notes]);
+  const handleDeleteCancel = () => {
+    setOpenDeleteModal(false);
+  };
 
-  console.log("notes", notes);
+  const handleCreate = () => {
+    setOpenCreateModal(true);
+  };
 
-  const handleAdd = () => {
-    setIsEditMode(false);
-    setCurrentNote({
-      index: notes.length + 1,
-      title: '',
-      content: '',
-      created_at: new Date().toISOString(),
-    });
-    setIsModalVisible(true);
+  const handleCreateCancel = () => {
+    setOpenCreateModal(false);
+  };
+
+  const handleUpdateCancel = () => {
+    setOpenUpdateModal(false);
   };
 
   const handleEdit = (note) => {
-    setIsEditMode(true);
-    setCurrentNote(note);
-    setIsModalVisible(true);
+    console.log(note);
+    console.log("Edit")
+    setNote(note);
+    setOpenUpdateModal(true);
   };
-
-  const handleDelete = (index) => {
-    setNotes(notes.filter(note => note.index !== index));
+  const mutation = useUpdateNote();
+  const updateIndex = (value) => {
+    const { noteID, userID, ...formattedValues } = value;
+    mutation.mutate({
+      id: noteID,
+      data: formattedValues,
+    });
   };
-
-  const handleOk = (values) => {
-    if (isEditMode) {
-      setNotes(notes.map(note => (note.index === currentNote.index ? { ...currentNote, ...values } : note)));
-    } else {
-      setNotes([...notes, { ...currentNote, ...values }]);
-    }
-    setIsModalVisible(false);
+  const saveOrder = (changes) => {
+    const temp = [...changes];
+    const updatedList = temp.map((item, index) => {
+      if (item.noteIndex !== index + 1) {
+        item.noteIndex = index + 1;
+        updateIndex(item);
+      }
+      return item;
+    });
   };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
+  const swap = (arr, old_index, new_index) => {
+    const temp = [...arr];
+    [temp[old_index], temp[new_index]] = [temp[new_index], temp[old_index]];
+    return temp;
   };
-
+  // const handleDragStart = (event) => {
+  //   const {active, over} = event;
+  //   setIsDragging(true);
+  // };
   const handleDragEnd = (event) => {
-    const { active, over } = event;
-    if (active.id !== over.id) {
-      setNotes((items) => {
-        const oldIndex = items.findIndex(item => item.index === active.id);
-        const newIndex = items.findIndex(item => item.index === over.id);
-        return arrayMove(items, oldIndex, newIndex);
-      });
+    if (isDragging) {
+      const { active, over } = event;
+      if (active.id !== over.id) {
+        const oldIndex = list.findIndex((item) => item.noteIndex === active.id);
+        const newIndex = list.findIndex((item) => item.noteIndex === over.id);
+        if (oldIndex !== -1 && newIndex !== -1) {
+          const updatedList = swap(list, oldIndex, newIndex);
+          setList(updatedList);
+          saveOrder(updatedList);
+        }
+      }
     }
+    setIsDragging(false);
   };
 
   return (
@@ -103,47 +114,53 @@ const NotePage = () => {
           links={[{ title: "Dashboard", href: "/manager" }, { title: "Notes" }]}
         />
         <Space>
-          <Button type="primary" icon={<PlusSquareOutlined />} onClick={handleAdd}>
+          <Button
+            type="primary"
+            icon={<PlusSquareOutlined />}
+            onClick={handleCreate}
+          >
             Add
           </Button>
         </Space>
       </Flex>
-      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={notes.map(note => note.index)} strategy={verticalListSortingStrategy}>
-          <Row gutter={16}>
-            {notes.map((note) => (
-              <SortableItem key={note.index} id={note.index} note={note} onEdit={handleEdit} onDelete={handleDelete} />
-            ))}
-          </Row>
-        </SortableContext>
-      </DndContext>
-      <Modal
-        title={isEditMode ? "Edit Note" : "Add Note"}
-        visible={isModalVisible}
-        onCancel={handleCancel}
-        footer={null}
-      >
-        <Form
-          initialValues={currentNote}
-          onFinish={handleOk}
+      {isLoading ? (
+        <Spin tip="Loading...." />
+      ) : (
+        <DndContext
+        
+          collisionDetection={closestCenter}
+          onDragMove={handleDragStart}
+          onDragEnd={handleDragEnd}
         >
-          <Form.Item name="title" label="Title" rules={[{ required: true, message: 'Please input the title!' }]}>
-            <Input />
-          </Form.Item>
-          <Form.Item name="content" label="Content" rules={[{ required: true, message: 'Please input the content!' }]}>
-            <Input.TextArea />
-          </Form.Item>
-          <Form.Item>
-            <Button type="primary" htmlType="submit">
-              {isEditMode ? "Save" : "Add"}
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+          <SortableContext
+            items={list.map((note) => note.noteIndex)}
+            strategy={verticalListSortingStrategy}
+          >
+            <Row gutter={16}>
+              {list.map((note) => (
+                <SortableItem
+                  key={note.noteID}
+                  id={note.noteIndex}
+                  note={note}
+                  onEdit={() => handleEdit(note)}
+                  onDelete={null}
+                />
+              ))}
+            </Row>
+          </SortableContext>
+        </DndContext>
+      )}
+      <CreateNoteModal
+        open={openCreateModal}
+        handleCancel={handleCreateCancel}
+      />
+      <UpdateNoteModal
+        open={openUpdateModal}
+        handleCancel={handleUpdateCancel}
+        selectedMember={null}
+      />
     </>
   );
 };
-
-
 
 export default NotePage;

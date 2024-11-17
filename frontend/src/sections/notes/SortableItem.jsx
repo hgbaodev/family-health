@@ -1,10 +1,10 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useSortable } from "@dnd-kit/sortable";
 import { Card, Col } from "antd";
-
+import {memo} from "react";
 import { CSS } from "@dnd-kit/utilities";
 
-const SortableItem = ({ id, note, onEdit, onDelete }) => {
+const SortableItem = memo(({ id, note, onEdit, onDelete }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
@@ -12,7 +12,6 @@ const SortableItem = ({ id, note, onEdit, onDelete }) => {
     transform: transform ? CSS.Transform.toString(transform) : undefined,
     transition,
   };
-
   return (
     <Col
       ref={setNodeRef}
@@ -26,14 +25,20 @@ const SortableItem = ({ id, note, onEdit, onDelete }) => {
         className="w-full"
         title={note.title}
         actions={[
-          <EditOutlined key="edit" onClick={() => onEdit(note)} />,
-          <DeleteOutlined key="delete" onClick={() => onDelete(note.index)} />,
+          <EditOutlined key="edit" onClick={
+            (e) => {
+              e.stopPropagation(); // prevent
+              onEdit(note);
+            }
+          } 
+          />,
+          <DeleteOutlined key="delete" onClick={() => onDelete(note.noteID)} />,
         ]}
       >
         {note.content}
       </Card>
     </Col>
   );
-};
+});
 
 export default SortableItem;

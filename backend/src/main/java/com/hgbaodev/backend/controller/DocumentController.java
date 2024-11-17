@@ -42,7 +42,7 @@ public class DocumentController {
     private final DocumentService documentService;
     private final AuthenticationService authenticationService;
     private final MedicalRecordRepository medicalRecordRepository;
-    private final String BASE_DIRECTORY = "../documents";
+    private final String BASE_DIRECTORY = "../resources/static/uploads/documents";
     private final String BASE_URL = "/documents/download/";
     private User user;
     @Autowired
@@ -62,7 +62,7 @@ public class DocumentController {
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
-            String fileName = file.getOriginalFilename();
+            String fileName = addDocumentRequest.getFileName();
             Path filePath = directoryPath.resolve(fileName);
             Files.write(filePath, file.getBytes());
             Document document = Document.builder()
@@ -103,7 +103,7 @@ public class DocumentController {
             if (!Files.exists(directoryPath)) {
                 Files.createDirectories(directoryPath);
             }
-            String fileName = file.getOriginalFilename();
+            String fileName = updateDocumentRequest.getFileName();
             Path filePath = directoryPath.resolve(fileName);
             Files.write(filePath, file.getBytes());
             Document document = Document.builder()
