@@ -2,9 +2,10 @@ package com.hgbaodev.backend.controller;
 
 import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
 import com.hgbaodev.backend.dto.response.ApiResponse;
+import com.hgbaodev.backend.dto.response.ContactResponse;
 import com.hgbaodev.backend.dto.response.UserResponse;
-import com.hgbaodev.backend.model.Member;
-import com.hgbaodev.backend.model.User;
+import com.hgbaodev.backend.model.Contact;
+import com.hgbaodev.backend.service.ContactService;
 import com.hgbaodev.backend.service.UserService;
 import com.hgbaodev.backend.utils.CustomPagination;
 import lombok.RequiredArgsConstructor;
@@ -14,28 +15,27 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
-@RequestMapping("/api/v1/users")
+@RequestMapping("/api/v1/contacts")
 @RequiredArgsConstructor
-public class UserController {
+public class ContactController {
 
-    private final UserService service;
+    private final ContactService service;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<CustomPagination<UserResponse>>> getAllMembers(
+    public ResponseEntity<ApiResponse<CustomPagination<ContactResponse>>> getAllMembers(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "8") int size,
             @RequestParam(defaultValue = "") String keyword) {
-        Page<UserResponse> usersPage = service.getAllUsers(page, size, keyword);
+        Page<ContactResponse> contactsPage = service.getAllContacts(page, size, keyword);
 
-        CustomPagination<UserResponse> usersContent = new CustomPagination<>(usersPage);
+        CustomPagination<ContactResponse> contactsContent = new CustomPagination<>(contactsPage);
 
-        ApiResponse<CustomPagination<UserResponse>> response = new ApiResponse<>(
+        ApiResponse<CustomPagination<ContactResponse>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
-                "Get list users successfully",
-                usersContent
+                "Get list contacts successfully",
+                contactsContent
         );
 
         return new ResponseEntity<>(response, HttpStatus.OK);
@@ -44,21 +44,12 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<?>> updateBlockState(
             @PathVariable("id") Integer id) {
-        UserResponse updateUser = service.updateBlockStateUser(id);
-        ApiResponse<UserResponse> response = new ApiResponse<>(
+        Contact updateContact = service.updateSeenStateUser(id);
+        ApiResponse<Contact> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
-                "Update member successfully",
-                updateUser
+                "Update seen state of contacts successfully",
+                updateContact
         );
         return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    @PatchMapping
-    public ResponseEntity<?> changePassword(
-          @RequestBody ChangePasswordRequest request,
-          Principal connectedUser
-    ) {
-        service.changePassword(request, connectedUser);
-        return ResponseEntity.ok().build();
     }
 }

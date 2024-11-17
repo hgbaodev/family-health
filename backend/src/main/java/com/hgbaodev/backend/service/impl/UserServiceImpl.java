@@ -1,10 +1,15 @@
 package com.hgbaodev.backend.service.impl;
 
+import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
+import com.hgbaodev.backend.dto.response.UserResponse;
+import com.hgbaodev.backend.mapper.UserMapper;
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.repository.UserRepository;
-import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
 import com.hgbaodev.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +22,24 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository repository;
+    private final UserMapper userMapper;
+
+    public Page<UserResponse> getAllUsers(int page, int size, String keyword) {
+        Pageable pageable = PageRequest.of(page - 1, size);
+        if (keyword != null && !keyword.isEmpty()) {
+            return userMapper.toUsersResponse(repository.findByKeyword(keyword, pageable));
+        }
+        return userMapper.toUsersResponse(repository.findAll(pageable));
+    }
+
+    @Override
+    public UserResponse updateBlockStateUser(Integer id) {
+        User user = repository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("User is not found!!!"));
+        user.set_block(!user.is_block());
+        return userMapper.toUserResponse(repository.save(user));
+    }
+
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {
 
         var user = (User) ((UsernamePasswordAuthenticationToken) connectedUser).getPrincipal();

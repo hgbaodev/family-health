@@ -55,7 +55,7 @@ const LoginPage = () => {
     if (username) {
       verifyMutation.mutate(username);
     }
-  }, [username, verifyMutation]);
+  }, [username]);
 
   const mutation = useLogin({
     onSuccess: () => {

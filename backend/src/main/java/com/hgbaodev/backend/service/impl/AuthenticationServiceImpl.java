@@ -111,7 +111,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
-        if(!user.is_verify()) {
+        if(!user.is_verify() || user.is_block()) {
             return null;
         }
         var jwtToken = jwtService.generateToken(user);
