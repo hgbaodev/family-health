@@ -14,6 +14,4 @@ public interface AllergyService {
     Page<Allergy> getAllAllergies(int page, int size,String keyword,Integer userID);
     //Search
     Optional <Allergy> findAllergyById(Integer allergyID);
-//    Page<Allergy> findBySeverity(String severity,Pageable pageable);
-//    Page<Allergy> findByAllergyType(String allergyType, Pageable pageable);
 }

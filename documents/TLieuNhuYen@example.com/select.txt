@@ -1,7 +1,0 @@
-select * 
-from medications m 
-where m.record_id in
-	(SELECT mr.record_id 
-		from medical_records  mr
-     	join members on mr.member_id = members.memberid
-     	where members.user_id = 3)
