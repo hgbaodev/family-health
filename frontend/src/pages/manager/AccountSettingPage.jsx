@@ -1,18 +1,14 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import UpdateUserModal from "~/sections/users/UpdateUserModal";
 import UserProfileForm from "~/sections/users/UserProfileForm";
-import ChangePasswordForm from "~/sections/users/ChangePasswordForm"; // Import modal ChangePasswordForm
-import { useUserStore } from "~/stores/users/userStore";
+
 import PageHeader from "~/components/page-header";
 import { Button } from "antd"; // Import các component cần thiết từ Ant Design
+import ChangePasswordForm from '~/sections/users/ChangePasswordForm';
 
 const AccountSettingPage = () => {
   const [openUpdateModal, setOpenUpdateModal] = useState(false); // Trạng thái để quản lý hiển thị modal cập nhật thông tin
-  const [openChangePasswordModal, setOpenChangePasswordModal] = useState(false); // Trạng thái để quản lý hiển thị modal đổi mật khẩu
-
-  const handleCreate = () => {
-    // Thêm logic cho handleCreate nếu cần
-  };
+  const [openChangePasswordModal, setOpenChangePasswordModal] = useState((false)); // Trạng thái để quản lý hiển thị modal đổi mật khẩu
 
   return (
     <>
@@ -39,7 +35,7 @@ const AccountSettingPage = () => {
       <UpdateUserModal openUpdateModal={openUpdateModal} setOpenUpdateModal={setOpenUpdateModal} />
 
       {/* Modal cho việc đổi mật khẩu */}
-{/*       <ChangePasswordForm open={openChangePasswordModal} setOpen={setOpenChangePasswordModal} />  */}
+      <ChangePasswordForm openChangePasswordModal={openChangePasswordModal} setOpenChangePasswordModal={setOpenChangePasswordModal} /> 
     </>
   );
 };

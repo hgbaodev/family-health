@@ -1,36 +1,37 @@
 import React from 'react';
-import { Form, Input, Button, message } from 'antd';
-import { useUserStore } from '~/stores/users/userStore';
-import { useChangePassword } from '~/api/users/changePassword'; // Giả sử bạn có hook API để thay đổi mật khẩu
+import { Form, Input, Button, message, Modal } from 'antd';
+import { useChangePassword } from '~/api/accountSettings/changePassword';
 
-const ChangePasswordForm = () => {
-  const { user } = useUserStore((state) => state); // Lấy thông tin người dùng từ store
-  const [form] = Form.useForm(); // Khởi tạo form từ Ant Design
-
-  const mutateChangePassword = useChangePassword({
-    onSuccess: () => {
-      message.success('Đổi mật khẩu thành công!');
-      form.resetFields(); // Reset form sau khi thành công
-    },
-    onError: (error) => {
-      message.error(`Đổi mật khẩu thất bại. Lý do: ${error.message}`);
-    },
-  });
-
-  const handleFinish = (values) => {
-    // Gọi API để thay đổi mật khẩu
-    mutateChangePassword.mutate({
-      userId: user.id, // Giả sử có ID người dùng
-      currentPassword: values.currentPassword,
-      newPassword: values.newPassword,
+const ChangePasswordForm = ({ openChangePasswordModal, setOpenChangePasswordModal }) => {
+    const [form] = Form.useForm();
+  
+    const mutation = useChangePassword({
+      onSuccess: () => {
+        form.resetFields();
+        message.success("Change password successfully");
+      },
+      onError: () => {
+        message.error("Failed to change password");
+      },
     });
-  };
+  
+    const onFinish = (values) => {
+      mutation.mutate({ data: values }); 
+      setOpenChangePasswordModal(false)
+    };
+    
 
   return (
-    <Form
+    <Modal
+      title="Update Member"
+      open={openChangePasswordModal}
+      onCancel={() => setOpenChangePasswordModal(false)}
+      footer={null}
+    >
+      <Form
       form={form}
       layout="vertical"
-      onFinish={handleFinish}
+      onFinish={onFinish}
       style={{ maxWidth: 600, margin: '0 auto' }} // Căn giữa form
     >
       <Form.Item
@@ -54,7 +55,7 @@ const ChangePasswordForm = () => {
 
       <Form.Item
         label="Xác nhận mật khẩu mới"
-        name="confirmPassword"
+        name="confirmationPassword"
         dependencies={['newPassword']} // Phụ thuộc vào trường mật khẩu mới
         rules={[
           { required: true, message: 'Vui lòng xác nhận mật khẩu mới!' },
@@ -77,6 +78,8 @@ const ChangePasswordForm = () => {
         </Button>
       </Form.Item>
     </Form>
+    </Modal>
+    
   );
 };
 

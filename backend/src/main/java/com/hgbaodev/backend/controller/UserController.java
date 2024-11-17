@@ -13,24 +13,4 @@ import java.security.Principal;
 @RequiredArgsConstructor
 public class UserController {
 
-    private final UserService service;
-
-
-//    @PutMapping("/{id}")
-//    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
-//        User user = service.updateUser(id, updatedUser);
-//        return ResponseEntity.ok(user);
-//    }
-
-    @PatchMapping
-    public ResponseEntity<?> changePassword(
-          @RequestBody ChangePasswordRequest request,
-          Principal connectedUser
-    ) {
-        service.changePassword(request);
-        return ResponseEntity.ok().build();
-    }
-
-
-
 }

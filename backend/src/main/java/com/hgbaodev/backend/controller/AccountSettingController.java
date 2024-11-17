@@ -82,18 +82,16 @@
         }
 
         @PostMapping("/change-password")
-        public ResponseEntity<ApiResponse<Void>> changePassword(
+        public ResponseEntity<ApiResponse<String>> changePassword(
                 @Valid @RequestBody ChangePasswordRequest request) {
 
             userService.changePassword(request);
 
-            ApiResponse<Void> response = new ApiResponse<>(
+            ApiResponse<String> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Password changed successfully",
-                    null
+                    "Password changed successfully"
             );
-            log.info("Password changed successfully for user with email: {}");
-
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
 

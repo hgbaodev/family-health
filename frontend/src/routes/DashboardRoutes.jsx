@@ -44,7 +44,6 @@ export const DashboardRoutes = {
         },
         {
           path: 'account-settings',
-//           element: <PrivateRoute component= {AccountSettingPage} />
            element: <AccountSettingPage />
         },
         {
