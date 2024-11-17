@@ -3,37 +3,30 @@ import { useUserStore } from "~/stores/users/userStore";
 import { useUpdateInfo } from "~/api/accountSettings/update-info";
 import { useGetInfo } from "~/api/accountSettings/get-info";
 import { Form, Input, message, Skeleton, Modal, Button, Typography } from 'antd';
-import { UserOutlined, PhoneOutlined } from '@ant-design/icons';
+import { UserOutlined, PhoneOutlined, CheckCircleOutlined } from '@ant-design/icons';
 
-const { Title } = Typography;
+const { Title, Text } = Typography;
 
 const UpdateUserModal = ({ openUpdateModal, setOpenUpdateModal }) => {
   const { user: userFromStore, setUser } = useUserStore();
   const { data: userData, isLoading } = useGetInfo();
   const [form] = Form.useForm();
 
-  // Sử dụng useUpdateInfo
   const mutation = useUpdateInfo({
-      onSuccess: (data) => {
-          setUser(data.data); // Cập nhật thông tin người dùng trong store
-          form.resetFields();
-          message.success("User information updated successfully");
-          setOpenUpdateModal(false);
-
-//           form.setFieldsValue({
-//             firstname: data.data.firstname,
-//             lastname: data.data.lastname,
-//             phoneNumber: data.data.phoneNumber,
-//           });
-      },
-      onError: (error) => {
-          message.error("Failed to update user information");
-          console.error("Error details:", error);
-      },
+    onSuccess: (data) => {
+      setUser(data.data);
+      form.resetFields();
+      message.success("User information updated successfully");
+      setOpenUpdateModal(false);
+    },
+    onError: (error) => {
+      message.error("Failed to update user information");
+      console.error("Error details:", error);
+    },
   });
 
   const onFinish = (values) => {
-      mutation.mutate(values); // Gửi dữ liệu trực tiếp dưới dạng { firstname, lastname, phoneNumber }
+    mutation.mutate(values);
   };
 
   useEffect(() => {
@@ -48,49 +41,71 @@ const UpdateUserModal = ({ openUpdateModal, setOpenUpdateModal }) => {
 
   return (
     <Modal
-      title={<Title level={3} className="text-blue-600">UPDATE USER INFORMATION</Title>}
+      title={
+        <div className="flex items-center space-x-2">
+          <CheckCircleOutlined className="text-blue-500 text-lg" />
+          <Title level={3} className="text-blue-600">
+            Update User Information
+          </Title>
+        </div>
+      }
       open={openUpdateModal}
       onCancel={() => setOpenUpdateModal(false)}
       footer={null}
       centered
-      bodyStyle={{ padding: '24px' }}
+      bodyStyle={{ padding: '24px', background: 'linear-gradient(to right, #f0f9ff, #e0f2fe)' }}
       width={500}
     >
       <Skeleton loading={isLoading} active>
+        <Text className="block mb-4 text-gray-700 text-center">
+          Please update your information below.
+        </Text>
         <Form form={form} layout="vertical" onFinish={onFinish} className="space-y-4">
           <Form.Item
-            label="First name"
+            label={
+              <span className="font-semibold text-gray-700">
+                First Name <span className="text-red-500">*</span>
+              </span>
+            }
             name="firstname"
-            rules={[{ required: true, message: 'Please enter first name!' }]}
+            rules={[{ required: true, message: 'Please enter your first name!' }]}
           >
             <Input
-              placeholder="First Name"
-              prefix={<UserOutlined />}
-              className="rounded-md"
+              placeholder="John"
+              prefix={<UserOutlined className="text-blue-500" />}
+              className="rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </Form.Item>
 
           <Form.Item
-            label="Last Name"
+            label={
+              <span className="font-semibold text-gray-700">
+                Last Name <span className="text-red-500">*</span>
+              </span>
+            }
             name="lastname"
-            rules={[{ required: true, message: 'Please enter last name!' }]}
+            rules={[{ required: true, message: 'Please enter your last name!' }]}
           >
             <Input
-              placeholder="Last Name"
-              prefix={<UserOutlined />}
-              className="rounded-md"
+              placeholder="Doe"
+              prefix={<UserOutlined className="text-blue-500" />}
+              className="rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </Form.Item>
 
           <Form.Item
-            label="Phone Number"
+            label={
+              <span className="font-semibold text-gray-700">
+                Phone Number <span className="text-red-500">*</span>
+              </span>
+            }
             name="phoneNumber"
-            rules={[{ required: true, message: 'Please enter phone number!' }]}
+            rules={[{ required: true, message: 'Please enter your phone number!' }]}
           >
             <Input
-              placeholder="Phone Number"
-              prefix={<PhoneOutlined />}
-              className="rounded-md"
+              placeholder="123-456-7890"
+              prefix={<PhoneOutlined className="text-blue-500" />}
+              className="rounded-md shadow-sm border-gray-300 focus:border-blue-500 focus:ring-blue-500"
             />
           </Form.Item>
 
@@ -98,9 +113,9 @@ const UpdateUserModal = ({ openUpdateModal, setOpenUpdateModal }) => {
             <Button
               type="primary"
               htmlType="submit"
-              className="bg-blue-600 text-white hover:bg-blue-700 rounded-md"
+              className="bg-blue-600 text-white hover:bg-blue-700 rounded-md shadow-lg"
             >
-              SUBMIT
+              Submit
             </Button>
           </Form.Item>
         </Form>
