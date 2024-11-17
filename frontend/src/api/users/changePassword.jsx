@@ -15,7 +15,7 @@ export const useChangePassword = (options = {}) => {
 
   return useMutation({
     // mutationFn gọi hàm API updatePassword
-    mutationFn: ({ id, newPassword }) => updatePassword(id, newPassword),
+    mutationFn: ({ id, newPassword }) => changePassword(id, newPassword),
 
     // Xử lý khi cập nhật thành công
     onSuccess: (data, ...args) => {

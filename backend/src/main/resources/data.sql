@@ -12,7 +12,9 @@ WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'haonhienau23@example.com');
 
 INSERT INTO user (id, email, firstname, lastname, password, role,is_verify)
 SELECT 6, 'vuong8dan@example.com', 'Vương', 'Bát Đản', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
-WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'vuong8dan@example.com');    
+WHERE NOT EXISTS (SELECT 1 FROM user WHERE email = 'vuong8dan@example.com');
+
+
 -- Dữ liệu tương ứng cho 5 user có user_id từ 2->6
 -- Thêm dữ liệu mẫu vào bảng members
 INSERT INTO members (user_id, full_name, date_of_birth, gender, relationship, blood_type, height, weight)

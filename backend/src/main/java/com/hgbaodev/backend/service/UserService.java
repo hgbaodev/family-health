@@ -5,7 +5,7 @@ import com.hgbaodev.backend.request.users.ChangePasswordRequest;
 import java.security.Principal;
 
 public interface UserService {
-    public void changePassword(ChangePasswordRequest request, Principal connectedUser);
-    public User getUserById(Integer id);
-    public User updateUser(Integer id, User updateUser);
+    public void changePassword(ChangePasswordRequest request);
+    public User getInfoCurrentUser();
+    User updateInfoCurrentUser(User updateUser);
 }
