@@ -800,7 +800,124 @@ INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
 SELECT 14, 'Vaccine ngừa cúm mùa', '2024-02-14'
 WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 14 AND vaccine_name = 'Vaccine ngừa cúm mùa');
 
--- Seed dữ liệu cho bảng health_stats
+-- Seed dữ liệu cho bảng contact
+-- Dữ liệu cho user_id = 3 với thời gian ngẫu nhiên
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 15', true, '2023-10-10 09:30:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 15');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 16', false, '2023-10-12 11:00:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 16');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 17', true, '2023-10-14 14:15:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 17');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 18', true, '2023-10-16 15:45:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 18');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 19', false, '2023-10-18 10:30:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 19');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 20', true, '2023-10-20 16:00:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 20');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 3, 'Message from user 3 - Contact 21', false, '2023-10-22 12:30:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 3 AND content = 'Message from user 3 - Contact 21');
+
+-- Dữ liệu cho user_id = 4 với thời gian ngẫu nhiên
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 22', true, '2023-10-10 08:40:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 22');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 23', false, '2023-10-12 10:25:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 23');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 24', true, '2023-10-14 13:30:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 24');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 25', true, '2023-10-16 11:15:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 25');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 26', false, '2023-10-18 14:50:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 26');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 27', true, '2023-10-20 17:05:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 27');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 4, 'Message from user 4 - Contact 28', false, '2023-10-22 18:20:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 4 AND content = 'Message from user 4 - Contact 28');
+
+---- Dữ liệu cho user_id = 5
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 29', true, '2023-10-10 09:45:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 29');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 30', false, '2023-10-12 11:20:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 30');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 31', true, '2023-10-14 14:10:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 31');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 32', true, '2023-10-16 15:05:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 32');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 33', false, '2023-10-18 13:50:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 33');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 34', true, '2023-10-20 16:35:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 34');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 5, 'Message from user 5 - Contact 35', false, '2023-10-22 17:25:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 5 AND content = 'Message from user 5 - Contact 35');
+
+-- Dữ liệu cho user_id = 6 với thời gian tự chọn từ ngày 10/10/2023 đến hôm nay
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 36', true, '2023-10-10 08:30:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 36');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 37', false, '2023-10-12 10:15:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 37');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 38', true, '2023-10-15 14:45:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 38');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 39', true, '2023-10-18 16:00:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 39');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 40', false, '2023-10-20 09:00:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 40');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 41', true, '2023-10-25 13:30:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 41');
+
+INSERT INTO contacts (user_id, content, status, date)
+SELECT 6, 'Message from user 6 - Contact 42', false, '2023-10-28 11:15:00'
+WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 42');
+
+
 
 
 

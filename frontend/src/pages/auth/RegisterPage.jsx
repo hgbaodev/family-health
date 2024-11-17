@@ -1,4 +1,5 @@
 import { Form, Input, Space, Button, message } from "antd";
+import { useState } from "react";
 import Title from "antd/es/typography/Title";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
@@ -8,6 +9,7 @@ import { useTranslation } from "react-i18next";
 const RegisterPage = () => {
   const [form] = Form.useForm();
   const navigate = useNavigate();
+  const [loadingComfirm, setLoadingComfirm] = useState(false);
 
   const { t } = useTranslation();
   
@@ -19,10 +21,12 @@ const RegisterPage = () => {
     },
     onError: (error) => {
       message.error(error.message || "Registration failed");
+      setLoadingComfirm(false);
     },
   });
 
   const onFinish = (values) => {
+    setLoadingComfirm(true);
     registerMutation.mutate(values);
   };
 
@@ -106,7 +110,7 @@ const RegisterPage = () => {
         </Form.Item>
 
         <Form.Item>
-          <Button type="primary" htmlType="submit" className="w-full">
+          <Button type="primary" htmlType="submit" className="w-full" loading={loadingComfirm}>
             {t("RegisterPage.Register")}
           </Button>
         </Form.Item>

@@ -82,6 +82,10 @@ public class ForgotPasswordServiceImpl implements ForgotPasswordService {
         var userWithEmail = userRepository.findByEmail(email)
                 .orElseThrow(() -> new RuntimeException("Email is not exits!"));
 
+        if(userWithEmail.is_block()) throw new RuntimeException("Your account has been locked!!!");
+
+        if(!userWithEmail.is_verify()) throw new RuntimeException("Your account has not been verified!!!");
+
         String otp = generateAndStoreOTP(userWithEmail.getEmail());
 
         // Gửi mail xác thực

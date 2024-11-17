@@ -33,6 +33,9 @@ public class User implements UserDetails {
   @Column(name = "is_verify", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
   private boolean is_verify;
 
+  @Column(name = "is_block", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+  private boolean is_block;
+
   @Enumerated(EnumType.STRING)
   private Role role;
 

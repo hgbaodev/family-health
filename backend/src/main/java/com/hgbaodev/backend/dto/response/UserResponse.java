@@ -1,6 +1,7 @@
 package com.hgbaodev.backend.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,12 +12,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponse {
-
-    private String firstname;
-
-    private String lastname;
+    Integer id;
+    String firstname;
+    String lastname;
 
     @JsonProperty("email")
-    private String email;
+    String email;
+
+    Boolean is_verify;
+    Boolean is_block;
 
 }
