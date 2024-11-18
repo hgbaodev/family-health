@@ -55,6 +55,7 @@ const LoginPage = () => {
     if (username) {
       verifyMutation.mutate(username);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
   const mutation = useLogin({
@@ -74,7 +75,7 @@ const LoginPage = () => {
   };
 
   return (
-    <Space direction="vertical" className="p-10 w-full bg-white rounded-xl">
+    <Space direction="vertical" className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-lg">
       <Link to="/" className="cursor-pointer">
         <img src={logo} alt="logo" className="w-24 mx-auto" />
       </Link>

@@ -12,23 +12,14 @@ import {
 import { Flex } from "antd";
 import { useUpdateMedicalRecord } from "~/api/medicalRecords/update-medical-records";
 import { useMedicalRecordsStore } from "~/stores/medical-records/medicalRecordStore";
-import { useMembers } from "../../api/members/get-members";
 import moment from "moment";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 
 const UpdateMedicalRecordModal = () => {
   const [form] = Form.useForm();
-  const { data: members } = useMembers({});
   const { openUpdateModal, setOpenUpdateModal, medicalRecord } = useMedicalRecordsStore((state) => state);
 
-  const memberOptions = useMemo(() => {
-    return members
-      ? members.map(({ memberID, fullName }) => ({
-          value: memberID,
-          label: `${fullName}`,
-        }))
-      : [];
-  }, [members]);
+  const memberOptions = [];
 
   const mutation = useUpdateMedicalRecord({
     onSuccess: () => {
@@ -62,6 +53,7 @@ const UpdateMedicalRecordModal = () => {
 
   return (
     <Modal
+      width={800}
       title="Update medical record"
       open={openUpdateModal}
       onCancel={() => setOpenUpdateModal(false)}

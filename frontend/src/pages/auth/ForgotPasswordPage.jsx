@@ -96,7 +96,7 @@ const EnterEmail = () => {
   };
 
   return (
-    <Space direction="vertical" className="p-10 w-full bg-white rounded-xl" style={{ width: "fit-content" }}>
+    <Space direction="vertical" className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-lg">
       <Title level={3}>{otpSent ? "Enter OTP" : "Forgot Password"}</Title>
       <p>
         {otpSent

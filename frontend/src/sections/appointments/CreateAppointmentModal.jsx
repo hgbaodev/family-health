@@ -1,6 +1,6 @@
 import { Button, Form, Input, Modal, DatePicker, Row, Col, Select, message } from "antd";
 import { Flex } from "antd";
-import { useMembers } from "~/api/members/get-members";
+import { useMembersByUser } from "~/api/members/get-members";
 import { useEffect } from "react";
 import { useAppointmentsStore } from "~/stores/appointments/appointmentStore";
 import { useCreateAppointment } from "~/api/appointments/create-appointment";
@@ -12,7 +12,7 @@ const CreateAppointmentModal = () => {
 
   const { openCreateModal, setOpenCreateModal } = useAppointmentsStore();
 
-  const { data: members } = useMembers({});
+  const { data: members } = useMembersByUser();
 
   useEffect(() => {
     if (openCreateModal) {

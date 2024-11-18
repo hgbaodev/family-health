@@ -3,7 +3,7 @@ import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
-import MenuAdminConfig from "~/constants/menuAdminConfig";
+import MenuAdminConfig from "~/layouts/AdminLayout/menuAdminConfig";
 
 
 const MenuCustom = ({ isMobile, onClose, theme = "light", ...props }) => {

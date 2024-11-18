@@ -1,13 +1,10 @@
 import React from 'react';
 import DashboardLayout from '~/layouts/DashboardLayout';
 import Loadable from '~/components/Loadable';
-import VaccinationPage from '~/pages/manager/VaccinationPage';
-// import PrivateRoute from '~/guards/PrivateRoute';
-import AppointmentPage from '~/pages/manager/AppointmentPage';
-import ChatPage from '~/pages/manager/ChatPage';
-import NotePage from '~/pages/manager/NotePage';
 
 const DashBoardPage = Loadable(React.lazy(() => import('~/pages/manager/DashBoardPage')));
+const VaccinationPage = Loadable(React.lazy(() => import('~/pages/manager/VaccinationPage')));
+const AppointmentPage = Loadable(React.lazy(() => import('~/pages/manager/AppointmentPage')));
 const MemberPage = Loadable(React.lazy(() => import('~/pages/manager/MemberPage')));
 const AllergyPage = Loadable(React.lazy(() => import('~/pages/manager/AllergyPage')));
 const MedicationPage = Loadable(React.lazy(() => import('~/pages/manager/MedicationPage')));
@@ -16,7 +13,10 @@ const MedicalRecordPage = Loadable(React.lazy(() => import('~/pages/manager/Medi
 const DocumentPage = Loadable(React.lazy(() => import('~/pages/manager/DocumentPage')));
 const HelpPage = Loadable(React.lazy(() => import('~/pages/manager/HelpPage')));
 const HealthStatsPage = Loadable(React.lazy(() => import('~/pages/manager/HealthStatsPage')))
-// const AccountSetting =Loadable(React.lazy(() => import('~/pages/manager/AccountSettingPage')));
+const AccountSettingPage = Loadable(React.lazy(() => import('~/pages/manager/AccountSettingPage')))
+const ChatPage = Loadable(React.lazy(() => import('~/pages/manager/ChatPage')))
+const NotePage = Loadable(React.lazy(() => import('~/pages/manager/NotePage')))
+
 export const DashboardRoutes = {
   children: [
     {
@@ -48,10 +48,10 @@ export const DashboardRoutes = {
             path: 'emergency-contacts',
             element: <EmergencyContactPage />
         },
-//         {
-//           path: 'account-settings',
-//           element: <PrivateRoute component= {AccountSettingPage} />
-//         },
+        {
+          path: 'account-settings',
+          element: <AccountSettingPage />
+        },
         {
           path: 'medical-records',
           element: <MedicalRecordPage />

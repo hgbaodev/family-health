@@ -28,7 +28,7 @@ const MenuDashboardConfig = () => {
     },
     {
       key: "b",
-      label: "Quản lý",
+      label: t("Manager"),
       icon: <HeatMapOutlined />,
       children: [
         {
@@ -80,6 +80,12 @@ const MenuDashboardConfig = () => {
           label: t("Health Stats"),
           path: "/manager/health-stats",
         },
+        {
+          key: "7",
+          icon: <ExclamationCircleOutlined />,
+          label: t("Emergency Contacts"),
+          path: "/manager/emergency-contacts",
+        },
       ],
     },
     {
@@ -93,12 +99,6 @@ const MenuDashboardConfig = () => {
       icon: <RobotOutlined />,
       label: t("ChatAi"),
       path: "/manager/chat-ai",
-    },
-    {
-      key: "7",
-      icon: <ExclamationCircleOutlined />,
-      label: t("Emergency Contacts"),
-      path: "/manager/emergency-contacts",
     },
     {
       key: "10",

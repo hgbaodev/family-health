@@ -1,7 +1,6 @@
 import { PlusSquareOutlined } from "@ant-design/icons";
 import { closestCenter, DndContext } from "@dnd-kit/core";
 import {
-  arrayMove,
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
@@ -30,7 +29,6 @@ const NotePage = () => {
     setOpenCreateModal,
     openUpdateModal,
     setOpenUpdateModal,
-    openDeleteModal,
     setOpenDeleteModal,
     setNote,
   } = useNotesStore((state) => state);

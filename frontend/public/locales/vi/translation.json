@@ -62,7 +62,6 @@
     "Welcome": "Chào mừng đến với bảng điều khiển của bạn",
     "Description": "Tại đây bạn có thể quản lý nội dung và cài đặt của mình"
   },
-
   "MemberPage": {
     "CreateMember": "Tạo thành viên",
     "FullName": "Họ và tên",
@@ -84,30 +83,22 @@
     "Relationship": "Mối quan hệ",
     "Phone Number": "Số điện thoại",
     "User ID": "Mã user"
-
-
   },
-
   "MedicationPage": {
     "Medication Name": "Tên thuốc",
     "Frequency": "Tính thường xuyên",
     "Start Date": "Ngày bắt đầu",
     "End Date": "Ngày kết thúc",
     "Note" : "Ghi chú"
-
-
   },
-
-
   "VaccinationPage": {
     "Date Administered": "Ngày quản lý",
     "Member Name": "Tên thành viên",
     "Vaccine Name": "Tên Vac-xin"
 
   },
-
-
   "Dashboard": "Bảng điều khiển",
+  "Manager": "Quản lý",
   "Members": "Thành viên",
   "Medical Records": "Hồ sơ y tế",
   "Appointments": "Cuộc hẹn",
