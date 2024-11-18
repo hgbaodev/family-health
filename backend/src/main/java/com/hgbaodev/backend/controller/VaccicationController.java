@@ -1,12 +1,17 @@
     package com.hgbaodev.backend.controller;
 
+    import com.hgbaodev.backend.dto.response.VaccicationResponse;
+    import com.hgbaodev.backend.mapper.VaccicationMapper;
     import com.hgbaodev.backend.model.Member;
-    import com.hgbaodev.backend.model.Vaccination;
+    import com.hgbaodev.backend.model.User;
+    import com.hgbaodev.backend.model.Vaccication;
     import com.hgbaodev.backend.dto.request.vaccication.AddVaccinationRequest;
     import com.hgbaodev.backend.dto.request.vaccication.UpdateVaccinationRequest;
     import com.hgbaodev.backend.dto.response.ApiResponse;
+    import com.hgbaodev.backend.service.AuthenticationService;
     import com.hgbaodev.backend.service.MemberService;
     import com.hgbaodev.backend.service.VaccinationService;
+    import com.hgbaodev.backend.utils.CustomPagination;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
@@ -24,7 +29,9 @@
     public class VaccicationController {
 
         private final VaccinationService vaccinationService;
+        private final AuthenticationService authenticationService;
         private final MemberService memberService;
+        private final VaccicationMapper vaccinationMapper;
 
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addVaccination(@Valid @RequestBody AddVaccinationRequest addVaccinationRequest) {
@@ -37,13 +44,13 @@
                 );
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
-            Vaccination vaccination = Vaccination.builder()
+            Vaccication vaccination = Vaccication.builder()
                     .member(checkMember)
                     .vaccineName(addVaccinationRequest.getVaccineName())
                     .dateAdministered(addVaccinationRequest.getDateAdministered())
                     .build();
-            Vaccination createdVaccination = vaccinationService.addVaccication(vaccination);
-            ApiResponse<Vaccination> response = new ApiResponse<>(
+            Vaccication createdVaccination = vaccinationService.addVaccication(vaccination);
+            ApiResponse<Vaccication> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Add vaccination successfully",
                     createdVaccination
@@ -64,14 +71,14 @@
                 );
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
-            Vaccination vaccination = Vaccination.builder()
+            Vaccication vaccination = Vaccication.builder()
                     .vaccinationID(id)
                     .member(checkMember)
                     .vaccineName(updateVaccinationRequest.getVaccineName())
                     .dateAdministered(updateVaccinationRequest.getDateAdministered())
                     .build();
-            Vaccination updatedVaccination = vaccinationService.updateVaccication(vaccination);
-            ApiResponse<Vaccination> response = new ApiResponse<>(
+            Vaccication updatedVaccination = vaccinationService.updateVaccication(vaccination);
+            ApiResponse<Vaccication> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Update vaccination successfully",
                     updatedVaccination
@@ -87,8 +94,8 @@
 
         @GetMapping("/{id}")
         public ResponseEntity<ApiResponse<?>> getMemberById(@PathVariable("id") Integer id) {
-            Vaccination vaccination = vaccinationService.getVaccicationById(id);
-            ApiResponse<Vaccination> response = new ApiResponse<>(
+            Vaccication vaccination = vaccinationService.getVaccicationById(id);
+            ApiResponse<Vaccication> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Get vaccination successfully",
                     vaccination
@@ -97,20 +104,20 @@
         }
 
         @GetMapping
-        public ResponseEntity<ApiResponse<List<Vaccination>>> getAllMembers(
+        public ResponseEntity<ApiResponse<CustomPagination<VaccicationResponse>>> getVaccications(
                 @RequestParam(defaultValue = "1") int page,
                 @RequestParam(defaultValue = "8") int size,
-                @RequestParam(defaultValue = "") String keyword) {
-            Page<Vaccination> vaccinationPage = vaccinationService.getAllVaccications(page, size, keyword);
-
-            List<Vaccination> vaccinationContent = vaccinationPage.getContent();
-
-            ApiResponse<List<Vaccination>> response = new ApiResponse<>(
+                @RequestParam(defaultValue = "") String keyword,
+                @RequestParam(required = false) Long memberId) {
+            User user = authenticationService.getCurrentUser();
+            Page<Vaccication> vaccicationPage = vaccinationService.getAllVaccications(page, size, user.getId() ,keyword, memberId);
+            Page<VaccicationResponse> vaccicationResponsePage = vaccicationPage.map(vaccinationMapper::toVaccicationResponse);
+            CustomPagination<VaccicationResponse> vaccinationContent = new CustomPagination<>(vaccicationResponsePage);
+            ApiResponse<CustomPagination<VaccicationResponse>> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Get list vaccination successfully",
                     vaccinationContent
             );
-
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
     }

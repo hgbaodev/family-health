@@ -1,6 +1,6 @@
 import { Button, Form, Input, Modal, DatePicker, Row, Col, Select, message } from "antd";
 import { Flex } from "antd";
-import { useMembers } from "~/api/members/get-members";
+import { useMembersByUser } from "~/api/members/get-members";
 import { useVaccinationsStore } from "~/stores/vaccinations/vaccinationStore";
 import { useEffect } from "react";
 import { useCreateVaccination } from "~/api/vaccinations/create-vaccinaion";
@@ -12,7 +12,7 @@ const CreateVaccinationModal = () => {
 
   const { openCreateModal, setOpenCreateModal } = useVaccinationsStore();
 
-  const { data: members } = useMembers({});
+  const { data: members } = useMembersByUser();
 
   useEffect(() => {
     if (openCreateModal) {

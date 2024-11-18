@@ -26,7 +26,6 @@ function App() {
             defaultProps: {
               size: 'middle',
               bordered: true,
-              scroll: { x: true },
             },
           },
         },

@@ -1,13 +1,13 @@
 package com.hgbaodev.backend.service;
 
-import com.hgbaodev.backend.model.Vaccination;
+import com.hgbaodev.backend.model.Vaccication;
 import org.springframework.data.domain.Page;
 
 
 public interface VaccinationService {
-    Vaccination addVaccication(Vaccination member);
-    Vaccination updateVaccication(Vaccination member);
+    Vaccication addVaccication(Vaccication member);
+    Vaccication updateVaccication(Vaccication member);
     void deleteVaccication(Integer memberID);
-    Vaccination getVaccicationById(Integer memberID);
-    Page<Vaccination> getAllVaccications(int page, int size, String keyword);
+    Vaccication getVaccicationById(Integer memberID);
+    Page<Vaccication> getAllVaccications(int page, int size, int userId, String keyword, Long memberId);
 }
