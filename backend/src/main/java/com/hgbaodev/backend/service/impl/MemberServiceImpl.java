@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.service.impl;
 
+import com.hgbaodev.backend.mapper.MemberMapper;
 import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.repository.MemberRepository;
 import com.hgbaodev.backend.service.MemberService;
@@ -18,6 +19,7 @@ import java.util.List;
 public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepository;
+    private final MemberMapper memberMapper;
 
     @Override
     public Member addMember(Member member) {
@@ -28,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
     public Member updateMember(Member member) {
         Member check = memberRepository.findById(member.getMemberID())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
-        member.setUserID(check.getUserID());
+        member.setUser(check.getUser());
         return memberRepository.save(member);
     }
 

@@ -51,13 +51,6 @@ public class AuthenticationController {
       @Valid @RequestBody LoginRequest request
   ) {
     AuthenticationResponse authResponse = service.authenticate(request);
-    if(authResponse == null) {
-      return new ResponseEntity<>(new ApiResponse<>(
-              HttpStatus.UNAUTHORIZED.value(),
-              "Login Failed",
-              authResponse
-      ), HttpStatus.UNAUTHORIZED);
-    }
     ApiResponse<AuthenticationResponse> response = new ApiResponse<>(
             HttpStatus.OK.value(),
             "Login successful",
@@ -70,8 +63,6 @@ public class AuthenticationController {
   public ResponseEntity<ApiResponse<String>> authenticateWithUsername(
           @RequestParam("username") String username
   ) {
-    log.info(username);
-    // Gọi service để xác thực với username
     service.verifyEmail(username);
 
     ApiResponse<String> response = new ApiResponse<>(

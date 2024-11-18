@@ -1,4 +1,4 @@
-package com.hgbaodev.backend.request.note;
+package com.hgbaodev.backend.dto.request.note;
 
 import jakarta.validation.constraints.*;
 import lombok.*;

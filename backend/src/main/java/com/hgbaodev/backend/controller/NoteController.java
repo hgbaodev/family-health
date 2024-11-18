@@ -1,11 +1,11 @@
 package com.hgbaodev.backend.controller;
 
+import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.model.Note;
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.repository.NoteRepository;
-import com.hgbaodev.backend.request.note.UpdateNoteRequest;
-import com.hgbaodev.backend.request.note.AddNoteRequest;
-import com.hgbaodev.backend.response.ApiResponse;
+import com.hgbaodev.backend.dto.request.note.UpdateNoteRequest;
+import com.hgbaodev.backend.dto.request.note.AddNoteRequest;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.NoteService;
 import jakarta.validation.Valid;

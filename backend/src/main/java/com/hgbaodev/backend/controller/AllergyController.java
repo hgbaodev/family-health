@@ -101,6 +101,4 @@ public class AllergyController {
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-
-
 }

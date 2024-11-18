@@ -12,10 +12,12 @@ import java.util.List;
 
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Integer> {
-    @Query("SELECT m FROM Member m WHERE m.userID = :userID AND LOWER(m.fullName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
-    Page<Member> findByKeyword(@Param("keyword") String keyword, Pageable pageable, Integer userID);
+    @Query("SELECT m FROM Member m WHERE m.user.id = :userID AND LOWER(m.fullName) LIKE LOWER(CONCAT('%', :keyword, '%'))")
+    Page<Member> findByKeyword(@Param("keyword") String keyword, Pageable pageable, @Param("userID") Integer userID);
 
+    @Query("SELECT m FROM Member m WHERE m.user.id = :userID")
     Page<Member> findAllByUserID(Pageable pageable, @Param("userID") Integer userID);
 
+    @Query("SELECT m FROM Member m WHERE m.user.id = :userID")
     List<Member> findAllByUserID(@Param("userID") Integer userID);
 }

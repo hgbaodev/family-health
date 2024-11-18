@@ -1,4 +1,4 @@
-package com.hgbaodev.backend.dto.response.member;
+package com.hgbaodev.backend.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserResponse {
+public class UserDTO {
     private Integer id;
     private String firstName;
     private String lastName;
