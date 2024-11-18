@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Builder
@@ -18,11 +17,9 @@ public class MedicalRecord {
     @Column(name="record_id")
     private int recordID;
 
-//    @OneToMany(mappedBy = "medicalRecord")
-//    private List<Document> documents;
-
-    @Column(name = "member_id", nullable = false)
-    private int memberID;
+    @ManyToOne
+    @JoinColumn(name = "member_id", nullable = false)
+    private Member member;
 
     @Column(name = "date")
     private LocalDate date;
@@ -41,6 +38,4 @@ public class MedicalRecord {
 
     @Column(name="facility_name")
     private String facilityName;
-
-
 }

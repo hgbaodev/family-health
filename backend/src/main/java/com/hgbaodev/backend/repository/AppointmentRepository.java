@@ -11,6 +11,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Integer> {
-    @Query("SELECT m FROM Appointment m WHERE LOWER(m.doctor) LIKE LOWER(CONCAT('%', :keyword, '%'))")
-    Page<Appointment> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
+    @Query("SELECT m FROM Appointment m " +
+            "WHERE LOWER(m.doctor) LIKE LOWER(CONCAT('%', :keyword, '%')) ")
+    Page<Appointment> findByKeyword(@Param("keyword") String keyword,
+                                    Pageable pageable);
 }

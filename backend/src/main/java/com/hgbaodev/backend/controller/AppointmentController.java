@@ -1,5 +1,8 @@
     package com.hgbaodev.backend.controller;
 
+    import com.hgbaodev.backend.dto.response.AppointmentResponse;
+    import com.hgbaodev.backend.dto.response.MemberResponse;
+    import com.hgbaodev.backend.mapper.AppointmentMapper;
     import com.hgbaodev.backend.model.Appointment;
     import com.hgbaodev.backend.model.Member;
     import com.hgbaodev.backend.dto.request.appointment.AddAppointmentRequest;
@@ -7,6 +10,7 @@
     import com.hgbaodev.backend.dto.response.ApiResponse;
     import com.hgbaodev.backend.service.AppointmentService;
     import com.hgbaodev.backend.service.MemberService;
+    import com.hgbaodev.backend.utils.CustomPagination;
     import jakarta.validation.Valid;
     import lombok.RequiredArgsConstructor;
     import lombok.extern.slf4j.Slf4j;
@@ -25,6 +29,7 @@
 
         private final AppointmentService appointmentService;
         private final MemberService memberService;
+        private final AppointmentMapper appointmentMapper;
 
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addAppointment(@Valid @RequestBody AddAppointmentRequest addAppointmentRequest) {
@@ -77,16 +82,17 @@
         }
 
         @GetMapping("")
-        public ResponseEntity<ApiResponse<?>> getAllAppointments(
+        public ResponseEntity<ApiResponse<CustomPagination<AppointmentResponse>>> getAllAppointments(
                 @RequestParam(name = "page", defaultValue = "1") int page,
                 @RequestParam(name = "size", defaultValue = "10") int size,
                 @RequestParam(name = "keyword", required = false) String keyword) {
             Page<Appointment> appointments = appointmentService.getAllAppointments(page, size, keyword);
-            List<Appointment> appointmentsList = appointments.getContent();
-            ApiResponse<List<Appointment>> response = new ApiResponse<>(
+            Page<AppointmentResponse> appointmentsList = appointmentMapper.toAppointmentsResponse(appointments);
+            CustomPagination<AppointmentResponse> appointmentResponseCustomPagination = new CustomPagination<AppointmentResponse>(appointmentsList);
+            ApiResponse<CustomPagination<AppointmentResponse> > response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Get all appointments successfully",
-                    appointmentsList
+                    appointmentResponseCustomPagination
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

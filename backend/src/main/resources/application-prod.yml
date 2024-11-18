@@ -1,6 +1,73 @@
+server:
+  port: 3001
+
+#SETUP spring boot
 spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 150MB
+  sql:
+    init:
+      mode: always
+      data-locations: classpath:/data.sql
+  mvc:
+    throw-exception-if-no-handler-found: true
+  web:
+    resources:
+      add-mappings: false
   datasource:
-    url: jdbc:mysql://${DATABASE_URI}
-    username: ${DATABASE_USERNAME}
-    password: ${DATABASE_PASSWORD}
+    url: jdbc:mysql://localhost:3306/family_health
+    username: hgbaodev
+    password: secret
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    defer-datasource-initialization: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ad3121410155@gmail.com
+    password: cvtw mzti ffal ceol
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 622494579867-8igtkg8u1i20sllcgvc01jf80gcrumff.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: "${GOOGLE_REDIRECT_URI:http://localhost:3001/api/oauth2/google/callback}"
+            scope: openid, profile, email
+
+#SETUP spring logging
+logging:
+  level:
+    org.springframework: INFO
+    com.hgbaodev.backend: INFO
+
+#JWT
+application:
+  security:
+    jwt:
+      secret-key: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+      expiration: 86400000 # 1 day in milliseconds
+      refresh-token:
+        expiration: 604800000 # 7 days in milliseconds
+
+#SETUP spring openai
+openai:
+  api:
+    key: AIzaSyCJNSKklG_4YnphbCk7S9k3tGSnlC9SGW8
+    url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent
+
 

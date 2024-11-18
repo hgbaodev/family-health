@@ -2,12 +2,14 @@ package com.hgbaodev.backend.controller;
 
 
 import com.hgbaodev.backend.model.MedicalRecord;
+import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.dto.request.medicalRecord.UpdateMedicalRecordRequest;
 import com.hgbaodev.backend.dto.request.medicalRecord.AddMedicalRecordRequest;
 import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.MedicalRecordService;
+import com.hgbaodev.backend.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -26,13 +28,14 @@ import java.util.Optional;
 public class MedicalRecordController {
     private final AuthenticationService authenticationService;
     private final MedicalRecordService medicalRecordService;
+    private final MemberService memberService;
 
     @PostMapping
 
     public ResponseEntity<ApiResponse<?>> addMedicalRecord(@Valid @RequestBody AddMedicalRecordRequest addMedicalRecordRequest) {
-
+        Member member = memberService.getMemberById(addMedicalRecordRequest.getMemberID());
         MedicalRecord medicalRecord = MedicalRecord.builder()
-                .memberID(addMedicalRecordRequest.getMemberID())
+                .member(member)
                 .date(addMedicalRecordRequest.getDate())
                 .doctor(addMedicalRecordRequest.getDoctor())
                 .symptoms(addMedicalRecordRequest.getSymptoms())
@@ -40,7 +43,6 @@ public class MedicalRecordController {
                 .treatment(addMedicalRecordRequest.getTreatment())
                 .facilityName(addMedicalRecordRequest.getFacilityName())
                 .build();
-        log.info(medicalRecord.toString());
         MedicalRecord createdMedicalRecord = medicalRecordService.addMedicalRecord(medicalRecord);
         ApiResponse<MedicalRecord> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
@@ -54,9 +56,10 @@ public class MedicalRecordController {
     public ResponseEntity<ApiResponse<?>> updateMedicalRecord(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateMedicalRecordRequest updateMedicalRecordRequest) {
+        Member member = memberService.getMemberById(updateMedicalRecordRequest.getMemberID());
         MedicalRecord medicalRecord = MedicalRecord.builder()
                 .recordID(id)
-                .memberID(updateMedicalRecordRequest.getMemberID())
+                .member(member)
                 .date(updateMedicalRecordRequest.getDate())
                 .doctor(updateMedicalRecordRequest.getDoctor())
                 .symptoms(updateMedicalRecordRequest.getSymptoms())

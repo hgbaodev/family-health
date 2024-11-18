@@ -1,5 +1,7 @@
     package com.hgbaodev.backend.controller;
 
+    import com.hgbaodev.backend.dto.response.MemberResponse;
+    import com.hgbaodev.backend.mapper.MemberMapper;
     import com.hgbaodev.backend.model.Member;
     import com.hgbaodev.backend.model.User;
     import com.hgbaodev.backend.dto.request.member.AddMemberRequest;
@@ -16,6 +18,8 @@
     import org.springframework.http.ResponseEntity;
     import org.springframework.web.bind.annotation.*;
 
+    import java.util.List;
+
     @RestController
     @RequestMapping("/api/v1/members")
     @RequiredArgsConstructor
@@ -24,12 +28,13 @@
 
         private final MemberService memberService;
         private final AuthenticationService authenticationService;
+        private final MemberMapper memberMapper;
 
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addMember(@Valid @RequestBody AddMemberRequest addMemberRequest) {
             User user = authenticationService.getCurrentUser();
             Member member = Member.builder()
-                    .userID(user.getId())
+                    .user(user)
                     .fullName(addMemberRequest.getFullName())
                     .dateOfBirth(addMemberRequest.getDateOfBirth())
                     .gender(addMemberRequest.getGender())
@@ -88,17 +93,31 @@
         }
 
         @GetMapping
-        public ResponseEntity<ApiResponse<CustomPagination<Member>>> getAllMembers(
+        public ResponseEntity<ApiResponse<CustomPagination<MemberResponse>>> getAllMembers(
                 @RequestParam(defaultValue = "1") int page,
                 @RequestParam(defaultValue = "8") int size,
                 @RequestParam(defaultValue = "") String keyword) {
             User user = authenticationService.getCurrentUser();
             Page<Member> membersPage = memberService.getAllMembers(page, size, keyword, user.getId());
-            CustomPagination<Member> membersContent = new CustomPagination<>(membersPage);
-            ApiResponse<CustomPagination<Member>> response = new ApiResponse<>(
+            Page<MemberResponse> memberResponses = memberMapper.toMembersResponse(membersPage);
+            CustomPagination<MemberResponse> membersContent = new CustomPagination<>(memberResponses);
+            ApiResponse<CustomPagination<MemberResponse>> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
                     "Get list member successfully",
                     membersContent
+            );
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+
+        @GetMapping("/all")
+        public ResponseEntity<ApiResponse<List<MemberResponse>>> getAllMembersByUser() {
+            User user = authenticationService.getCurrentUser();
+            List<Member> members = memberService.getAllMembersByUserID(user.getId());
+            List<MemberResponse> memberResponses = memberMapper.toMembersList(members);
+            ApiResponse<List<MemberResponse>> response = new ApiResponse<>(
+                    HttpStatus.OK.value(),
+                    "Get list member successfully",
+                    memberResponses
             );
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

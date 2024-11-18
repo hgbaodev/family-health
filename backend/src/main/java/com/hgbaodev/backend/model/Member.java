@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,14 +11,16 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "members")
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int memberID;
 
-    @Column(name = "user_id", nullable = false)
-    private int userID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "full_name", nullable = false)
     private String fullName;
@@ -39,5 +42,4 @@ public class Member {
 
     @Column(name = "weight")
     private float weight;
-
 }

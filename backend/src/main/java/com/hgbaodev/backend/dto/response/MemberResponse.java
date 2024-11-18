@@ -1,6 +1,5 @@
-package com.hgbaodev.backend.dto.response.member;
+package com.hgbaodev.backend.dto.response;
 
-import com.hgbaodev.backend.model.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,8 +12,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberResponse {
-    private int memberID;
-    UserResponse user;
+    int memberID;
+    UserDTO user;
     String fullName;
     LocalDate dateOfBirth;
     String gender;
