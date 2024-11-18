@@ -35,7 +35,7 @@ export const getMembersByUser = async () => {
 
 export const useMembersByUser = () => {
   return useQuery({
-    queryKey: "membersByUser",
+    queryKey: ["membersByUser"],
     queryFn: getMembersByUser,
   });
 }

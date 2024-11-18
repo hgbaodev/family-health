@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.service.impl;
 
-import com.hgbaodev.backend.model.Vaccination;
+import com.hgbaodev.backend.model.Vaccication;
 import com.hgbaodev.backend.repository.VaccicationRepository;
 import com.hgbaodev.backend.service.VaccinationService;
 import lombok.RequiredArgsConstructor;
@@ -18,13 +18,13 @@ public class VaccinationServiceImpl implements VaccinationService {
     private final VaccicationRepository vaccicationRepository;
 
     @Override
-    public Vaccination addVaccication(Vaccination vaccination) {
+    public Vaccication addVaccication(Vaccication vaccination) {
         return vaccicationRepository.save(vaccination);
     }
 
     @Override
-    public Vaccination updateVaccication(Vaccination vaccination) {
-        Vaccination check = vaccicationRepository.findById(vaccination.getVaccinationID())
+    public Vaccication updateVaccication(Vaccication vaccination) {
+        Vaccication check = vaccicationRepository.findById(vaccination.getVaccinationID())
                 .orElseThrow(() -> new IllegalArgumentException("Vaccication not found"));
         vaccination.setVaccinationID(check.getVaccinationID());
         return vaccicationRepository.save(vaccination);
@@ -36,18 +36,19 @@ public class VaccinationServiceImpl implements VaccinationService {
     }
 
     @Override
-    public Vaccination getVaccicationById(Integer vaccicationID) {
+    public Vaccication getVaccicationById(Integer vaccicationID) {
         return vaccicationRepository.findById(vaccicationID)
                 .orElseThrow(() -> new IllegalArgumentException("Vaccication not found"));
     }
 
     @Override
-    public Page<Vaccination> getAllVaccications(int page, int size, String keyword) {
+    public Page<Vaccication> getAllVaccications(int page, int size, int userId, String keyword, Long memberId) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        if (keyword != null && !keyword.isEmpty()) {
-            return vaccicationRepository.findByKeyword(keyword, pageable);
+        if (memberId != null) {
+            return vaccicationRepository.findByKeywordAndMember(memberId, keyword, userId, pageable);
+        } else {
+            return vaccicationRepository.findByKeyword(keyword, userId, pageable);
         }
-        return vaccicationRepository.findAll(pageable);
     }
 
 }

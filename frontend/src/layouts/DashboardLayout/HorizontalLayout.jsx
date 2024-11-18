@@ -14,7 +14,7 @@ const HorizontalLayout = () => {
       <ResponsiveSider collapsed={collapsed} setCollapsed={setCollapsed} />
       <Layout>
         <HeaderLayout collapsed={collapsed} setCollapsed={setCollapsed} />
-        <Content className="px-3 py-3 content">
+        <Content className="px-3 py-3 content overflow-auto">
           <Outlet />
         </Content>
         {/* <FooterLayout /> */}

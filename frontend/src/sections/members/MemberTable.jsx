@@ -32,6 +32,7 @@ export const MemberTable = () => {
           onChange: (newPage) => setPage(newPage),
         }}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         title={() => (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Input.Search

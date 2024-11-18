@@ -13,8 +13,8 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "vaccinations")
-public class Vaccination {
+@Table(name = "vaccications")
+public class Vaccication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer vaccinationID;

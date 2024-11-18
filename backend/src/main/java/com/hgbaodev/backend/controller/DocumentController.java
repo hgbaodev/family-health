@@ -42,7 +42,7 @@ public class DocumentController {
     private final DocumentService documentService;
     private final AuthenticationService authenticationService;
     private final MedicalRecordRepository medicalRecordRepository;
-    private final String BASE_DIRECTORY = "../resources/static/uploads/documents";
+    private final String BASE_DIRECTORY = "./src/main/resources/static/uploads/documents";
     private final String BASE_URL = "/documents/download/";
     private User user;
     @Autowired

@@ -751,62 +751,62 @@ INSERT INTO medications (record_id, name,  frequency, start_date, end_date)
 SELECT 14, 'Gabapentin', '300mg', '2024-01-10', '2024-02-10'
 WHERE NOT EXISTS (SELECT 1 FROM medications WHERE name = 'Gabapentin' AND record_id = 14);
 ------Vacinations
--- Dữ liệu tương ứng cho các thành viên trong bảng vaccinations
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+-- Dữ liệu tương ứng cho các thành viên trong bảng vaccications
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 1, 'Vaccine ngừa cúm', '2024-01-15'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 1 AND vaccine_name = 'Vaccine ngừa cúm');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 1 AND vaccine_name = 'Vaccine ngừa cúm');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 2, 'Vaccine ngừa viêm gan B', '2024-02-20'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 2 AND vaccine_name = 'Vaccine ngừa viêm gan B');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 2 AND vaccine_name = 'Vaccine ngừa viêm gan B');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 3, 'Vaccine ngừa sởi', '2024-03-10'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 3 AND vaccine_name = 'Vaccine ngừa sởi');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 3 AND vaccine_name = 'Vaccine ngừa sởi');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 4, 'Vaccine ngừa tả', '2024-04-05'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 4 AND vaccine_name = 'Vaccine ngừa tả');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 4 AND vaccine_name = 'Vaccine ngừa tả');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 5, 'Vaccine ngừa rubella', '2024-05-18'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 5 AND vaccine_name = 'Vaccine ngừa rubella');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 5 AND vaccine_name = 'Vaccine ngừa rubella');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 6, 'Vaccine ngừa ho gà', '2024-06-22'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 6 AND vaccine_name = 'Vaccine ngừa ho gà');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 6 AND vaccine_name = 'Vaccine ngừa ho gà');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 7, 'Vaccine ngừa quai bị', '2024-07-15'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 7 AND vaccine_name = 'Vaccine ngừa quai bị');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 7 AND vaccine_name = 'Vaccine ngừa quai bị');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 8, 'Vaccine ngừa COVID-19', '2024-08-10'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 8 AND vaccine_name = 'Vaccine ngừa COVID-19');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 8 AND vaccine_name = 'Vaccine ngừa COVID-19');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 9, 'Vaccine ngừa sốt xuất huyết', '2024-09-05'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 9 AND vaccine_name = 'Vaccine ngừa sốt xuất huyết');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 9 AND vaccine_name = 'Vaccine ngừa sốt xuất huyết');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 10, 'Vaccine ngừa bạch hầu', '2024-10-01'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 10 AND vaccine_name = 'Vaccine ngừa bạch hầu');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 10 AND vaccine_name = 'Vaccine ngừa bạch hầu');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 11, 'Vaccine ngừa HPV', '2024-11-12'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 11 AND vaccine_name = 'Vaccine ngừa HPV');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 11 AND vaccine_name = 'Vaccine ngừa HPV');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 12, 'Vaccine ngừa viêm não Nhật Bản', '2024-12-20'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 12 AND vaccine_name = 'Vaccine ngừa viêm não Nhật Bản');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 12 AND vaccine_name = 'Vaccine ngừa viêm não Nhật Bản');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 13, 'Vaccine ngừa bệnh dại', '2024-01-05'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 13 AND vaccine_name = 'Vaccine ngừa bệnh dại');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 13 AND vaccine_name = 'Vaccine ngừa bệnh dại');
 
-INSERT INTO vaccinations (member_id, vaccine_name, date_administered )
+INSERT INTO vaccications (member_id, vaccine_name, date_administered )
 SELECT 14, 'Vaccine ngừa cúm mùa', '2024-02-14'
-WHERE NOT EXISTS (SELECT 1 FROM vaccinations WHERE member_id = 14 AND vaccine_name = 'Vaccine ngừa cúm mùa');
+WHERE NOT EXISTS (SELECT 1 FROM vaccications WHERE member_id = 14 AND vaccine_name = 'Vaccine ngừa cúm mùa');
 
 -- Seed dữ liệu cho bảng contact
 -- Dữ liệu cho user_id = 3 với thời gian ngẫu nhiên
