@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Layout, Drawer, Grid, Space, Typography } from "antd";
+import { Layout, Drawer, Grid, Space } from "antd";
 import MenuCustom from "./Menu";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
@@ -26,7 +26,15 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
           styles={{ header: { display: "none" }, body: { padding: "10px" } }}
           width={300}
         >
-          <img src={logo} onClick={() => navigate('/')} className="w-14 h-14" />
+          <Space
+            className="flex flex-col items-center justify-center p-4 cursor-pointer"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <img src={logo} className="w-14 h-14" />
+            <span className="text-xl font-bold text-primary">FamilyHealth</span>
+          </Space>
           <MenuCustom
             mode="inline"
             isMobile={isMobile}
@@ -50,9 +58,9 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
               }}
             >
               <img src={logo} className="w-14 h-14" />
-              <Typography.Title level={4} color="text-green-600">
+              <span className="text-xl font-bold text-primary">
                 FamilyHealth
-              </Typography.Title>
+              </span>
             </Space>
             <MenuCustom
               mode="inline"

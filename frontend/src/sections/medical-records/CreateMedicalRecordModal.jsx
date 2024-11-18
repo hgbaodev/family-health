@@ -12,21 +12,11 @@ import {
 import { Flex } from "antd";
 import { useCreateMedicalRecord } from "~/api/medicalRecords/create-medical-records";
 import { useMedicalRecordsStore } from "~/stores/medical-records/medicalRecordStore";
-import { useMembers } from "../../api/members/get-members";
-import { useMemo } from "react";
 
 const CreateMedicalRecordModal = () => {
   const [form] = Form.useForm();
-  const { data: members } = useMembers({});
   const { openCreateModal, setOpenCreateModal } = useMedicalRecordsStore();
-  const memberOptions = useMemo(() => {
-    return members
-      ? members.map(({ memberID,fullName }) => ({
-          value: memberID,
-          label: `${fullName}`,
-        }))
-      : [];
-  }, [members]);
+  const memberOptions = [];
 
   const mutation = useCreateMedicalRecord({
     onSuccess: () => {

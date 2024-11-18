@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Select, DatePicker, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useEffect } from "react";
-import { useMembers } from "~/api/members/get-members";
+import { useMembersByUser } from "~/api/members/get-members";
 import moment from "moment";
 import { useAppointmentsStore } from "~/stores/appointments/appointmentStore";
 import { useUpdateAppointment } from "~/api/appointments/update-appointment";
@@ -11,10 +11,7 @@ const { Option } = Select;
 const UpdateAppointmentModal = () => {
   const [form] = Form.useForm();
   const { openUpdateModal, setOpenUpdateModal, appointment } = useAppointmentsStore((state) => state);
-
-  console.log(appointment);
-  
-  const { data: members } = useMembers({});
+  const { data: members } = useMembersByUser();
 
   const mutation = useUpdateAppointment({
     onSuccess: () => {

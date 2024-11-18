@@ -26,3 +26,16 @@ export const useMembers = ({ queryConfig, page, size, keyword }) => {
     ...queryConfig,
   });
 };
+
+
+export const getMembersByUser = async () => {
+  const response = await api.get(`/members/all`);
+  return response.data;
+};
+
+export const useMembersByUser = () => {
+  return useQuery({
+    queryKey: "membersByUser",
+    queryFn: getMembersByUser,
+  });
+}

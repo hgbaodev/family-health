@@ -30,6 +30,7 @@ const CreateMemberModal = () => {
 
   return (
     <Modal
+      width={800}
       title={t("MemberPage.CreateMember")}
       open={openCreateModal}
       onCancel={() => setOpenCreateModal(false)}

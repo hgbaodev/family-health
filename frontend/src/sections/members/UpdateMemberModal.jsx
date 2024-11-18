@@ -44,6 +44,7 @@ const UpdateMemberModal = () => {
 
   return (
     <Modal
+    width={800}
       title="Update Member"
       open={openUpdateModal}
       onCancel={() => setOpenUpdateModal(false)}
