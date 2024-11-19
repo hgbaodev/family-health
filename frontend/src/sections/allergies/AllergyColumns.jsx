@@ -39,15 +39,10 @@ const useAllergyColumns = () => {
         align: "center",
       },
       {
-        title: "Member name",
-        dataIndex: "memberName",
+        title: "Member",
         key: "memberName",
-      },
-      {
-        title: t("AllergyPage.MemberID"),
-        dataIndex: "memberID",
-        key: "memberID",
         align: "center",
+        render: (_, vaccination) => vaccination.member.fullName,
       },
       {
         title: t("AllergyPage.AllergyType"),
@@ -86,6 +81,7 @@ const useAllergyColumns = () => {
         ),
       },
     ],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [t]
   );
 };

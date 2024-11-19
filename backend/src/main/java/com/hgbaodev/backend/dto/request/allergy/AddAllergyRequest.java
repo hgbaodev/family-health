@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.dto.request.allergy;
 
+import com.hgbaodev.backend.model.Member;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
@@ -13,6 +14,8 @@ public class AddAllergyRequest {
     private Integer allergyID;
 
     private Integer memberID;
+
+    private Member member;
 
     @NotBlank(message = "Allergy type is required")
     @Size(max = 100, message = "Allergy type must not exceed 100 characters")

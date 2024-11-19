@@ -2,23 +2,14 @@ import { Button, Form, Input, Modal, Select, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useCreateAllergy } from "~/api/allergies/create-allergy";
 import { useAllergiesStore } from "~/stores/allergies/allergyStore";
-import { useMembers } from "../../api/members/get-members";
-import { useMemo } from "react";
+import { useMembersByUser } from "../../api/members/get-members";
+
+const { Option } = Select;
 
 const CreateAllergyModal = () => {
   const [form] = Form.useForm();
-  const { data: members } = useMembers({});
+  const { data: members } = useMembersByUser();
   const { openCreateModal, setOpenCreateModal } = useAllergiesStore();
-
-  const memberOptions = useMemo(() => {
-    return members
-      ? members.map(({ memberID,fullName }) => ({
-          value: memberID,
-          label: `${fullName}`,
-        }))
-      : [];
-  }, [members]);
-
 
   const mutation = useCreateAllergy({
     onSuccess: () => {
@@ -37,6 +28,7 @@ const CreateAllergyModal = () => {
 
   return (
     <Modal
+      width={800}
       title="Add allergy"
       open={openCreateModal}
       onCancel={() => setOpenCreateModal(false)}
@@ -44,7 +36,7 @@ const CreateAllergyModal = () => {
     >
       <Form form={form} onFinish={onFinish} className="pt-4" layout="vertical" variant="filled">
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Allergy type"
               name="allergyType"
@@ -53,7 +45,7 @@ const CreateAllergyModal = () => {
               <Input placeholder="Enter allergy type..." />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Severity"
               name="severity"
@@ -64,7 +56,7 @@ const CreateAllergyModal = () => {
           </Col>
         </Row>
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Symptoms"
               name="symptoms"
@@ -73,19 +65,15 @@ const CreateAllergyModal = () => {
                <Input placeholder="Describe symptoms..."/>
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Member"
               name="memberID"
               rules={[{ required: true, message: "Please choose a member" }]}
             >
-              <Select
-                showSearch
-                placeholder="Choose a member..."
-                optionFilterProp="label"
-                options={memberOptions} 
-                notFoundContent="Loading members..."
-              />
+              <Select placeholder="Select member...">
+                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+              </Select>
             </Form.Item>
           </Col>
         </Row>

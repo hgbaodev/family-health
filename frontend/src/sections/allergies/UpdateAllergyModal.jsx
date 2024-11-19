@@ -1,25 +1,17 @@
 import { Button, Form, Input, Modal, Row, Col, message,Select } from "antd";
 import { Flex } from "antd";
 import { useUpdateAllergy } from "~/api/allergies/update-allergies";
-import { useMembers } from "../../api/members/get-members";
+import { useMembersByUser } from "~/api/members/get-members";
 import { useAllergiesStore } from "~/stores/allergies/allergyStore";
-import { useEffect,useMemo } from "react";
+
+const { Option } = Select;
 
 const UpdateAllergyModal = () => {
   const [form] = Form.useForm();
-  const { data: members } = useMembers({});
+  const { data: members } = useMembersByUser();
   const { openUpdateModal, setOpenUpdateModal, allergy } = useAllergiesStore(
     (state) => state
   );
-
-  const memberOptions = useMemo(() => {
-    return members
-      ? members.map(({ memberID, fullName }) => ({
-          value: memberID,
-          label: `${fullName}`,
-        }))
-      : [];
-  }, [members]);
 
   const mutation = useUpdateAllergy({
     onSuccess: () => {
@@ -41,16 +33,9 @@ const UpdateAllergyModal = () => {
     setOpenUpdateModal(false);
   };
 
-  useEffect(() => {
-    if (allergy) {
-      form.setFieldsValue({
-        ...allergy,
-      });
-    }
-  }, [allergy, form]);
-
   return (
     <Modal
+      width={800}
       title="Update Allergy"
       open={openUpdateModal}
       onCancel={() => setOpenUpdateModal(false)}
@@ -64,7 +49,7 @@ const UpdateAllergyModal = () => {
         onFinish={onFinish}
       >
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Allergy type"
               name="allergyType"
@@ -75,7 +60,7 @@ const UpdateAllergyModal = () => {
               <Input placeholder="Enter allergy type..." />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Severity"
               name="severity"
@@ -88,7 +73,7 @@ const UpdateAllergyModal = () => {
           </Col>
         </Row>
         <Row gutter={16}>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Symptoms"
               name="symptoms"
@@ -102,19 +87,15 @@ const UpdateAllergyModal = () => {
               <Input placeholder="Describe symptoms..." />
             </Form.Item>
           </Col>
-          <Col span={12}>
+          <Col span={24}>
             <Form.Item
               label="Member"
               name="memberID"
               rules={[{ required: true, message: "Please choose a member" }]}
             >
-              <Select
-                showSearch
-                placeholder="Choose a member..."
-                optionFilterProp="label"
-                options={memberOptions} 
-                notFoundContent="Loading members..."
-              />
+              <Select placeholder="Select member...">
+                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+              </Select>
             </Form.Item>
           </Col>
         </Row>

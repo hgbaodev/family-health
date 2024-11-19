@@ -15,8 +15,9 @@
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int allergyID;
 
-        @Column(name = "member_id", nullable = false)
-        private int memberID;
+        @ManyToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "member_id", nullable = false)
+        private Member member;
 
         @Column(name="allergy_type")
         private String allergyType;
