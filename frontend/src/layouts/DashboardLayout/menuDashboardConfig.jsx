@@ -38,6 +38,24 @@ const MenuDashboardConfig = () => {
           path: "/manager/members",
         },
         {
+          key: "9",
+          icon: <CalendarOutlined />,
+          label: t("Vaccinations"),
+          path: "/manager/vaccinations",
+        },
+        {
+          key: "5",
+          icon: <CalendarOutlined />,
+          label: t("Appointments"),
+          path: "/manager/appointments",
+        },
+        {
+          key: "8",
+          icon: <FileSearchOutlined />,
+          label: t("Allergies"),
+          path: "/manager/allergies",
+        },
+        {
           key: "3",
           icon: <FileTextOutlined />,
           label: t("Medical Records"),
@@ -50,30 +68,11 @@ const MenuDashboardConfig = () => {
           path: "/manager/documents",
         },
         {
-          key: "5",
-          icon: <CalendarOutlined />,
-          label: t("Appointments"),
-          path: "/manager/appointments",
-        },
-        {
           key: "6",
           icon: <MedicineBoxOutlined />,
           label: t("Medications"),
           path: "/manager/medications",
         },
-        {
-          key: "8",
-          icon: <FileSearchOutlined />,
-          label: t("Allergies"),
-          path: "/manager/allergies",
-        },
-        {
-          key: "9",
-          icon: <CalendarOutlined />,
-          label: t("Vaccinations"),
-          path: "/manager/vaccinations",
-        },
-    
         {
           key: "12",
           icon: <HeartOutlined />,

@@ -1,8 +1,12 @@
 package com.hgbaodev.backend.service.impl;
 
+import com.hgbaodev.backend.dto.request.allergy.AddAllergyRequest;
+import com.hgbaodev.backend.dto.response.AllergyResponse;
+import com.hgbaodev.backend.mapper.AllergyMapper;
 import com.hgbaodev.backend.model.Allergy;
 import com.hgbaodev.backend.repository.AllergyRepository;
 import com.hgbaodev.backend.service.AllergyService;
+import com.hgbaodev.backend.utils.CustomPagination;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -19,7 +23,8 @@ public class AllergyServiceImpl implements AllergyService {
     private final AllergyRepository allergyRepository;
 
     @Override
-    public Allergy addAllergy(Allergy allergy) {
+    public Allergy addAllergy(AddAllergyRequest addAllergyRequest) {
+        Allergy allergy = AllergyMapper.INSTANCE.convectToAllergy(addAllergyRequest);
         return allergyRepository.save(allergy);
     }
 
@@ -38,13 +43,19 @@ public class AllergyServiceImpl implements AllergyService {
     }
 
     @Override
-    public Page<Allergy> getAllAllergies(int page, int size, String keyword,Integer userID) {
+    public CustomPagination<AllergyResponse> getAllAllergies(int page, int size, String keyword, Integer userID, Long memberId) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        if (keyword != null && !keyword.isEmpty()) {
-            return allergyRepository.findByKeyword(keyword, pageable,userID);
+        Page<Allergy> allergies;
+        if(memberId != null){
+            allergies = allergyRepository.findByKeywordAndMember(memberId, keyword, userID, pageable);
+        } else {
+            allergies = allergyRepository.findByKeyword(keyword, pageable, userID);
         }
-        return allergyRepository.getAllergiesByUserID(userID,pageable);
+        Page<AllergyResponse> allergyResponses = allergies.map(AllergyMapper.INSTANCE::toAllergyResponse);
+        CustomPagination<AllergyResponse> allergyContent = new CustomPagination<>(allergyResponses);
+        return allergyContent;
     }
+
     @Override
     public Optional<Allergy> findAllergyById(Integer allergyID){
         return allergyRepository.findById(allergyID);
