@@ -1,9 +1,9 @@
 import { useMembersSelect } from '~/api/health-stats/get-members-select';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 
 const MemberSelect = ({ onChange }) => {
   const { data: members, isLoading, isError } = useMembersSelect();
-  const isFirstLoad = useRef(true); // Biến cờ để kiểm tra lần đầu load
+  const isFirstLoad = useRef(true);
 
   useEffect(() => {
     // Chỉ gọi onChange với thành viên đầu tiên khi trang mới load

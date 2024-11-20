@@ -70,4 +70,14 @@ openai:
     key: AIzaSyCJNSKklG_4YnphbCk7S9k3tGSnlC9SGW8
     url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent
 
+swagger:
+  contact-name: Hoang Gia Bao
+  contact-mail: hgbaodevservice@gmail.com
+  contact-url: https://hgbaodev.id.vn
+  app-name: Family Health
+  app-description: "Family Health is built on Spring Boot + React"
+  app-version: 3.3.1
+  app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
+  app-license: Apache 2.0
+
 

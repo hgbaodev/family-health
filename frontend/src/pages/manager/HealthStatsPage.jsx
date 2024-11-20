@@ -1,33 +1,34 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { PlusSquareOutlined } from "@ant-design/icons";
-import { Button, Flex, Space } from "antd";
+import { Button, Flex, Select, Space } from "antd";
 import PageHeader from "~/components/page-header";
 import BloodPressureContainer from "~/sections/health-stats/BloodPressureContainer";
 import BloodGlucoseContainer from "~/sections/health-stats/BloodGlucoseContainer";
-import HeartRateContainer from '~/sections/health-stats/HeartRateContainer';
-import MemberSelect from "~/sections/health-stats/MemberSelect";
+import HeartRateContainer from "~/sections/health-stats/HeartRateContainer";
 import ConfirmModal from "~/components/modals/ConfirmModal";
 import CreateHealthStatModal from "~/sections/health-stats/CreateHealthStatModal";
 import { useHealthStatsStore } from "~/stores/health-stats/healthStatStore";
-import UpdateHealthStatModal from '~/sections/health-stats/UpdateHealthStatModal';
-// import { useTranslation } from "react-i18next";
+import UpdateHealthStatModal from "~/sections/health-stats/UpdateHealthStatModal";
+import { useMembersByUser } from "~/api/members/get-members";
+
+const { Option } = Select;
 
 const HealthStatsPage = () => {
-  // const { t } = useTranslation();
-  const { 
-    openDeleteModal, 
-    openCreateModal, 
-    openUpdateModal, 
-    setOpenDeleteModal, 
-    setOpenCreateModal, 
-    setOpenUpdateModal 
+  const {
+    openDeleteModal,
+    openCreateModal,
+    openUpdateModal,
+    setOpenDeleteModal,
+    setOpenCreateModal,
+    setOpenUpdateModal,
   } = useHealthStatsStore();
-  
+
   const [selectedMemberId, setSelectedMemberId] = useState(null);
+
+  const { data: members } = useMembersByUser();
 
   const handleMemberChange = (memberId) => {
     setSelectedMemberId(memberId);
-    // Có thể thêm logic gọi API để tải thống kê sức khỏe cho memberId đã chọn
   };
 
   const handleCreate = () => setOpenCreateModal(true);
@@ -41,12 +42,24 @@ const HealthStatsPage = () => {
         <PageHeader
           heading={"Health Stats"}
           links={[
-            { title: "Dashboard", href: "/manager" }, 
-            { title: "Health Stats" }
+            { title: "Dashboard", href: "/manager" },
+            { title: "Health Stats" },
           ]}
         />
         <Space>
-          <MemberSelect onChange={handleMemberChange} />
+          <Select
+            className="w-[250px]"
+            placeholder="Select member..."
+            value={selectedMemberId}
+            onChange={handleMemberChange}
+          >
+            <Option value="">All Members</Option>
+            {members?.map((member) => (
+              <Option key={member.memberID} value={member.memberID}>
+                {member.fullName}
+              </Option>
+            ))}
+          </Select>
           <Button
             onClick={handleCreate} // Đảm bảo rằng hàm này được gọi khi nhấn nút
             type="primary"
@@ -58,13 +71,13 @@ const HealthStatsPage = () => {
         </Space>
       </Flex>
       <div style={{ paddingTop: 20 }}>
-        <BloodPressureContainer selectedMemberId={selectedMemberId}/>  
+        <BloodPressureContainer selectedMemberId={selectedMemberId} />
       </div>
       <div style={{ paddingTop: 20 }}>
-        <BloodGlucoseContainer selectedMemberId={selectedMemberId}/>  
+        <BloodGlucoseContainer selectedMemberId={selectedMemberId} />
       </div>
       <div style={{ paddingTop: 20 }}>
-        <HeartRateContainer selectedMemberId={selectedMemberId}/>  
+        <HeartRateContainer selectedMemberId={selectedMemberId} />
       </div>
 
       <ConfirmModal
