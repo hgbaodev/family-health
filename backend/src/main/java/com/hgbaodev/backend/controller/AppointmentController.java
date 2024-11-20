@@ -85,7 +85,8 @@
         public ResponseEntity<ApiResponse<CustomPagination<AppointmentResponse>>> getAllAppointments(
                 @RequestParam(name = "page", defaultValue = "1") int page,
                 @RequestParam(name = "size", defaultValue = "10") int size,
-                @RequestParam(name = "keyword", required = false) String keyword) {
+                @RequestParam(name = "keyword", required = false) String keyword,
+                @RequestParam(required = false) Long memberId) {
             Page<Appointment> appointments = appointmentService.getAllAppointments(page, size, keyword);
             Page<AppointmentResponse> appointmentsList = appointmentMapper.toAppointmentsResponse(appointments);
             CustomPagination<AppointmentResponse> appointmentResponseCustomPagination = new CustomPagination<AppointmentResponse>(appointmentsList);

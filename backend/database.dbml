@@ -1,0 +1,99 @@
+Project "Family-health" {
+  database_type: 'MySQL'
+}
+
+Table users {
+  id int [pk, increment]
+  email varchar
+  password varchar
+  phone_number varchar
+  created_at timestamp
+  preferred_language varchar
+}
+
+Table family_members {
+  id int [pk, increment]
+  user_id int [ref: > users.id]
+  full_name varchar
+  date_of_birth date
+  gender varchar
+  relationship varchar
+  blood_type varchar
+  height float
+  weight float
+}
+
+Table medical_records {
+  id int [pk, increment]
+  member_id int [ref: > family_members.id]
+  date date
+  doctor varchar
+  symptoms text
+  diagnosis text
+  treatment text
+  facility_name varchar
+}
+
+Table documents {
+  id int [pk, increment]
+  record_id int [ref: > medical_records.id]
+  file_name varchar
+  file_type varchar
+  file_content blob
+  upload_date timestamp
+}
+
+Table appointments {
+  id int [pk, increment]
+  member_id int [ref: > family_members.id]
+  date date
+  time time
+  doctor varchar
+  location varchar
+  reminder boolean
+  appointment_type varchar
+  notes text
+}
+
+Table health_stats {
+  id int [pk, increment]
+  member_id int [ref: > family_members.id]
+  stat_type varchar
+  stat_value float
+  date date
+  time time
+}
+
+Table medications {
+  id int [pk, increment]
+  record_id int [ref: > medical_records.id]
+  name varchar
+  dosage varchar
+  frequency varchar
+  start_date date
+  end_date date
+}
+
+Table emergency_contacts {
+  id int [pk, increment]
+  user_id int [ref: > users.id]
+  name varchar
+  relationship varchar
+  phone_number varchar
+}
+
+Table allergies {
+  id int [pk, increment]
+  member_id int [ref: > family_members.id]
+  allergy_type varchar
+  severity varchar
+  symptoms text
+}
+
+Table vaccinations {
+  id int [pk, increment]
+  member_id int [ref: > family_members.id]
+  vaccine_name varchar
+  date_administered date
+  next_due_date date
+}
