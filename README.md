@@ -22,14 +22,14 @@
 - **Database**: MySql for robust data storage.  
 - **Authentication**: OAuth 2.0 for Google Sign-In.  
 - **Email Service**: Spring Mail for notification management.  
-- **Drag-and-Drop**: Leveraging a modern library for file management UX.  
+- **Drag-and-Drop**: Leveraging a modern library for file management UX.
 
 ## 🌐 Getting Started  
 
 ### Prerequisites  
 - Node.js & npm  
 - Java (JDK 11 or later)  
-- MySql  
+- MySql -> https://dbdocs.io/hgbaodev/Family-health
 
 ### Installation  
 
