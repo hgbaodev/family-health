@@ -15,8 +15,6 @@ export const AllergyTable = () => {
   const [keyword, setKeyword] = useState("");
   const [memberId, setMemberId] = useState("");
 
-  console.log("memberId", memberId);
-
   const { data: members } = useMembersByUser();
 
   const { data, isLoading } = useAllergies({
