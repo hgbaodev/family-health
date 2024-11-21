@@ -34,8 +34,8 @@ const useAllergyColumns = () => {
     () => [
       {
         title: t("ID"),
-        dataIndex: "allergyID",
-        key: "allergyID",
+        dataIndex: "id",
+        key: "id",
         align: "center",
       },
       {
@@ -71,7 +71,7 @@ const useAllergyColumns = () => {
             <Popconfirm
               title="Remove allergy"
               description="Are you sure to remove this allergy ?"
-              onConfirm={() => handleDelete(allergy.allergyID)}
+              onConfirm={() => handleDelete(allergy.id)}
               okText="Yes"
               cancelText="No"
             >

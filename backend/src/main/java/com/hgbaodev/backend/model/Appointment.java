@@ -19,7 +19,7 @@ import java.util.Date;
 public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int appointmentID;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "member_id", nullable = false)

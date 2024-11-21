@@ -3,7 +3,7 @@ import { getMedicalRecordsQueryOptions } from "~/api/medicalRecords/get-medical-
 import { api } from "~/axios/api";
 
 export const createMedicalRecord = ({
-     memberID,
+     memberId,
      date,
      doctor,
      symptoms,
@@ -12,7 +12,7 @@ export const createMedicalRecord = ({
      facilityName
 }) => {
   return api.post(`/medical-records`, {
-     memberID,
+     memberId,
      date,
      doctor,
      symptoms,

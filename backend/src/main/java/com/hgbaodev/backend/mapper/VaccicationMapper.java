@@ -8,7 +8,7 @@ import org.springframework.data.domain.Page;
 
 @Mapper(componentModel = "spring")
 public interface VaccicationMapper {
-    @Mapping(source = "member.memberID", target = "member.memberID")
+    @Mapping(source = "member.id", target = "member.id")
     VaccicationResponse toVaccicationResponse(Vaccication vaccication);
 
     default Page<VaccicationResponse> toVaccicationsResponse(Page<Vaccication> vaccications) {

@@ -9,7 +9,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class MemberDTO {
+public class EmergencyContactResponse {
     int id;
-    String fullName;
+    UserDTO user;
+    String name;
+    String relationship;
+    String phoneNumber;
 }

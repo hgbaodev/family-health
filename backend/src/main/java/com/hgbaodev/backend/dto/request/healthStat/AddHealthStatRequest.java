@@ -21,9 +21,9 @@ import java.util.Date;
 @Setter
 public class AddHealthStatRequest {
 
-    private Integer statID;
+    private Integer id;
 
-    private Integer memberID;
+    private Integer memberId;
 
     private String statType;
 

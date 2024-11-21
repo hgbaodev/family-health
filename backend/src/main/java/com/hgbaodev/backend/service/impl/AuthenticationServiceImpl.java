@@ -45,9 +45,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
-
-    @Autowired
-    MailService mailService;
+    private final MailService mailService;
 
     public AuthenticationResponse register(RegisterRequest request) {
         if(repository.existsByEmail(request.getEmail())) {
@@ -61,7 +59,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .role(request.getRole())
                 .build();
         var savedUser = repository.save(user);
-        // Gửi mail xác nhận
         try {
             DataMailDTO dataMail = new DataMailDTO();
 
@@ -79,7 +76,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             e.printStackTrace();
         }
 
-        // Tạo đối tượng UserResponse để đưa vào phản hồi
         UserResponse userResponse = UserResponse.builder()
                 .firstname(savedUser.getFirstname())
                 .lastname(savedUser.getLastname())
@@ -140,6 +136,29 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .revoked(false)
                 .build();
         tokenRepository.save(token);
+    }
+
+    public AuthenticationResponse authenticateWithEmail(String email) {
+        var user = repository.findByEmail(email)
+                .orElseThrow();
+        if(!user.is_verify() || user.is_block()) {
+            return null;
+        }
+        var jwtToken = jwtService.generateToken(user);
+        var refreshToken = jwtService.generateRefreshToken(user);
+        revokeAllUserTokens(user);
+        saveUserToken(user, jwtToken);
+        UserResponse userResponse = UserResponse.builder()
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
+                .email(user.getEmail())
+                .build();
+
+        return AuthenticationResponse.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .user(userResponse)
+                .build();
     }
 
     public void revokeAllUserTokens(User user) {

@@ -11,8 +11,6 @@ import lombok.*;
 @Setter
 public class AddMedicationRequest {
 
-  private Integer recordID = 1;
-
   @NotBlank(message = "Medication name is required")
   @Size(max = 100, message = "Medication name must not exceed 100 characters")
   private String name;

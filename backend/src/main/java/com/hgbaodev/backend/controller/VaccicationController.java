@@ -35,7 +35,7 @@
 
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addVaccination(@Valid @RequestBody AddVaccinationRequest addVaccinationRequest) {
-            Member checkMember = memberService.getMemberById(addVaccinationRequest.getMemberID());
+            Member checkMember = memberService.getMemberById(addVaccinationRequest.getMemberId());
             if(checkMember == null) {
                 ApiResponse<Member> response = new ApiResponse<>(
                         HttpStatus.NOT_FOUND.value(),
@@ -62,7 +62,7 @@
         public ResponseEntity<ApiResponse<?>> updateVaccination(
                 @PathVariable("id") Integer id,
                 @Valid @RequestBody UpdateVaccinationRequest updateVaccinationRequest) {
-            Member checkMember = memberService.getMemberById(updateVaccinationRequest.getMemberID());
+            Member checkMember = memberService.getMemberById(updateVaccinationRequest.getMemberId());
             if(checkMember == null) {
                 ApiResponse<Member> response = new ApiResponse<>(
                         HttpStatus.NOT_FOUND.value(),
@@ -72,7 +72,7 @@
                 return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
             }
             Vaccication vaccination = Vaccication.builder()
-                    .vaccinationID(id)
+                    .id(id)
                     .member(checkMember)
                     .vaccineName(updateVaccinationRequest.getVaccineName())
                     .dateAdministered(updateVaccinationRequest.getDateAdministered())

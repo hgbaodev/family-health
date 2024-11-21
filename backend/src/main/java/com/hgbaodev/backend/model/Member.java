@@ -16,7 +16,7 @@ import java.time.LocalDate;
 public class Member {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int memberID;
+    private int id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

@@ -56,6 +56,12 @@ const MenuDashboardConfig = () => {
           path: "/manager/allergies",
         },
         {
+          key: "12",
+          icon: <HeartOutlined />,
+          label: t("Health Stats"),
+          path: "/manager/health-stats",
+        },
+        {
           key: "3",
           icon: <FileTextOutlined />,
           label: t("Medical Records"),
@@ -72,12 +78,6 @@ const MenuDashboardConfig = () => {
           icon: <MedicineBoxOutlined />,
           label: t("Medications"),
           path: "/manager/medications",
-        },
-        {
-          key: "12",
-          icon: <HeartOutlined />,
-          label: t("Health Stats"),
-          path: "/manager/health-stats",
         },
         {
           key: "7",

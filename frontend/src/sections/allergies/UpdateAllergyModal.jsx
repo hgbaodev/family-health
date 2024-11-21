@@ -1,5 +1,6 @@
 import { Button, Form, Input, Modal, Row, Col, message,Select } from "antd";
 import { Flex } from "antd";
+import { useEffect } from "react";
 import { useUpdateAllergy } from "~/api/allergies/update-allergies";
 import { useMembersByUser } from "~/api/members/get-members";
 import { useAllergiesStore } from "~/stores/allergies/allergyStore";
@@ -27,11 +28,21 @@ const UpdateAllergyModal = () => {
       ...values,
     };
     mutation.mutate({
-      id: allergy.memberID,
+      id: allergy.id,
       data: formattedValues,
     });
     setOpenUpdateModal(false);
   };
+
+  useEffect(() => {
+    form.resetFields();
+    if (allergy) {
+      form.setFieldsValue({
+        ...allergy,
+        memberId: allergy.member.id,
+      });
+    }
+  }, [allergy, form]);
 
   return (
     <Modal
@@ -90,11 +101,11 @@ const UpdateAllergyModal = () => {
           <Col span={24}>
             <Form.Item
               label="Member"
-              name="memberID"
+              name="memberId"
               rules={[{ required: true, message: "Please choose a member" }]}
             >
               <Select placeholder="Select member...">
-                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+                {members?.map((member) => (<Option key={member.id} value={member.id}>{member.fullName}</Option>))}
               </Select>
             </Form.Item>
           </Col>

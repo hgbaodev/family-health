@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AppointmentResponse {
-    int appointmentID;
+    int id;
     MemberDTO member;
     Date time;
     String doctor;

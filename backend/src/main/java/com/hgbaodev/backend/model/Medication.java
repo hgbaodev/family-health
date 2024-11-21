@@ -17,10 +17,11 @@ import java.time.LocalDate;
 public class Medication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int medicationID;
+    private int id;
 
-    @Column(name = "record_id", nullable = false)
-    private int recordID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "record_id", nullable = false)
+    private MedicalRecord record;
 
     @Column(name = "name", nullable = false)
     private String name;

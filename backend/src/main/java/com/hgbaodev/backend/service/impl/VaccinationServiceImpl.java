@@ -24,20 +24,20 @@ public class VaccinationServiceImpl implements VaccinationService {
 
     @Override
     public Vaccication updateVaccication(Vaccication vaccination) {
-        Vaccication check = vaccicationRepository.findById(vaccination.getVaccinationID())
+        Vaccication check = vaccicationRepository.findById(vaccination.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Vaccication not found"));
-        vaccination.setVaccinationID(check.getVaccinationID());
+        vaccination.setId(check.getId());
         return vaccicationRepository.save(vaccination);
     }
 
     @Override
-    public void deleteVaccication(Integer vaccicationID) {
-        vaccicationRepository.deleteById(vaccicationID);
+    public void deleteVaccication(Integer id) {
+        vaccicationRepository.deleteById(id);
     }
 
     @Override
-    public Vaccication getVaccicationById(Integer vaccicationID) {
-        return vaccicationRepository.findById(vaccicationID)
+    public Vaccication getVaccicationById(Integer id) {
+        return vaccicationRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Vaccication not found"));
     }
 

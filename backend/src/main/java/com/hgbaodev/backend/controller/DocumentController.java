@@ -55,7 +55,7 @@ public class DocumentController {
         try {
             user = authenticationService.getCurrentUser();
             AddDocumentRequest addDocumentRequest = objectMapper.readValue(json, AddDocumentRequest.class);
-            MedicalRecord medicalRecord = medicalRecordRepository.findById(addDocumentRequest.getRecordID())
+            MedicalRecord medicalRecord = medicalRecordRepository.findById(addDocumentRequest.getId())
                     .orElseThrow(() -> new RuntimeException("MedicalRecord not found"));
             String subFolder = user.getEmail();
             Path directoryPath = Paths.get(BASE_DIRECTORY, subFolder);
@@ -66,7 +66,7 @@ public class DocumentController {
             Path filePath = directoryPath.resolve(fileName);
             Files.write(filePath, file.getBytes());
             Document document = Document.builder()
-                    .recordID(addDocumentRequest.getRecordID())
+//                    .recordID(addDocumentRequest.getRecordID())
                     .fileName(addDocumentRequest.getFileName())
                     .fileType(addDocumentRequest.getFileType())
                     .uploadDate(addDocumentRequest.getUploadDate())
@@ -96,7 +96,7 @@ public class DocumentController {
         try {
             user = authenticationService.getCurrentUser();
             UpdateDocumentRequest updateDocumentRequest = objectMapper.readValue(json, UpdateDocumentRequest.class);
-            MedicalRecord medicalRecord = medicalRecordRepository.findById(updateDocumentRequest.getRecordID())
+            MedicalRecord medicalRecord = medicalRecordRepository.findById(updateDocumentRequest.getRecordId())
                     .orElseThrow(() -> new RuntimeException("MedicalRecord not found"));
             String subFolder = user.getEmail();
             Path directoryPath = Paths.get(BASE_DIRECTORY, subFolder);
@@ -107,8 +107,8 @@ public class DocumentController {
             Path filePath = directoryPath.resolve(fileName);
             Files.write(filePath, file.getBytes());
             Document document = Document.builder()
-                    .documentID(id)
-                    .recordID(updateDocumentRequest.getRecordID())
+                    .id(id)
+//                    .record(updateDocumentRequest.getRecordID())
                     .fileName(updateDocumentRequest.getFileName())
                     .fileType(updateDocumentRequest.getFileType())
                     .uploadDate(updateDocumentRequest.getUploadDate())

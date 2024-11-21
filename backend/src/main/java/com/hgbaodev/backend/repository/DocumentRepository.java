@@ -8,17 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 public interface DocumentRepository extends JpaRepository<Document, Integer> {
-    @Query("SELECT d FROM Document d WHERE d.fileName LIKE LOWER(CONCAT('%', :keyword, '%')) AND d.recordID IN (" +
-            "SELECT mr.recordID FROM MedicalRecord mr " +
-            "JOIN mr.member m " +
-            "JOIN m.user u " +
-            "WHERE u.id = :userID)")
-    Page<Document> findByKeyword(@Param("keyword") String keyword, Pageable pageable, @Param("userID") Integer userID);
+    @Query("SELECT d FROM Document d WHERE d.fileName LIKE LOWER(CONCAT('%', :keyword, '%')) AND d.record.member.user.id = :userId")
+    Page<Document> findByKeyword(@Param("keyword") String keyword, Pageable pageable, @Param("userId") Integer userId);
 
-    @Query("SELECT d FROM Document d WHERE d.recordID IN (" +
-            "SELECT mr.recordID FROM MedicalRecord mr " +
-            "JOIN mr.member m " +
-            "JOIN m.user u " +
-            "WHERE u.id = :userID)")
-    Page<Document> getAllBaseOnUserID(Pageable pageable, @Param("userID") Integer userID);
+    @Query("SELECT d FROM Document d WHERE d.record.member.user.id = :userId")
+    Page<Document> getAllBaseOnUserID(Pageable pageable, @Param("userId") Integer userId);
 }

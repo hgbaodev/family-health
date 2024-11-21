@@ -19,11 +19,11 @@ import java.time.LocalDate;
 public class Document {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="document_id")
-    private int documentID;
+    private int id;
 
-    @Column(name="record_id")
-    private int recordID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "record_id", nullable = false)
+    private MedicalRecord record;
 
     @Column(name = "file_name", nullable = false)
     private String fileName;

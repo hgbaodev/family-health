@@ -55,7 +55,7 @@ const HealthStatsPage = () => {
           >
             <Option value="">All Members</Option>
             {members?.map((member) => (
-              <Option key={member.memberID} value={member.memberID}>
+              <Option key={member.id} value={member.id}>
                 {member.fullName}
               </Option>
             ))}

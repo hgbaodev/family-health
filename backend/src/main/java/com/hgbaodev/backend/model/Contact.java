@@ -19,11 +19,11 @@ public class Contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-    @Column(name="contact_id")
-    private int contactID;
+    private int id;
 
-    @Column(name = "user_id", nullable = false)
-    private int userID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "content", nullable = false)
     private String content;

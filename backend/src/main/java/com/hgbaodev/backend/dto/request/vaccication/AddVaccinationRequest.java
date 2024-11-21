@@ -14,10 +14,10 @@ import java.util.Date;
 @Setter
 public class AddVaccinationRequest {
 
-    private Integer vaccinationID;
+    private Integer vaccinationId;
 
     @NotNull(message = "MemberId is required")
-    private Integer memberID;
+    private Integer memberId;
 
     @NotBlank(message = "VaccineName is required")
     private String vaccineName;

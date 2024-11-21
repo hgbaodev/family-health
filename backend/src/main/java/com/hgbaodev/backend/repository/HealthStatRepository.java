@@ -17,20 +17,20 @@ public interface HealthStatRepository extends JpaRepository<HealthStat, Integer>
 
     @Query("SELECT h \n" +
             "FROM HealthStat h \n" +
-            "WHERE h.memberID = :memberID \n" +
+            "WHERE h.member.id = :memberId \n" +
             "  AND h.statType = :statType \n" +
             "  AND DATE(h.date) >= :date \n" +
             "  AND DATE(h.date) <= CURRENT_DATE\n" +
             "ORDER BY h.date ASC\n")
     List<HealthStat> getAllHealthStatsByStatTypeHasDate
-            (@Param("memberID") Integer memberID,
+            (@Param("memberId") Integer memberId,
              @Param("statType") String statType,
              @Param("date") LocalDate date);
 
-    @Query("SELECT h FROM HealthStat h WHERE h.memberID = :memberID AND h.statType = :statType ORDER BY h.date DESC")
+    @Query("SELECT h FROM HealthStat h WHERE h.member.id = :memberId AND h.statType = :statType ORDER BY h.date DESC")
     List<HealthStat> getAllHealthStatsByStatType
-            (@Param("memberID") Integer memberID,
+            (@Param("memberId") Integer memberId,
              @Param("statType") String statType);
 
-    List<HealthStat> findAllByMemberID(Integer memberID);
+    List<HealthStat> findAllById(Integer id);
 }

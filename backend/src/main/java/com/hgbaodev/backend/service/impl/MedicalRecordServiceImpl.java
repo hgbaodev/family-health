@@ -25,7 +25,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
     @Override
     public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
-        MedicalRecord check = medicalRecordRepository.findById(medicalRecord.getRecordID())
+        MedicalRecord check = medicalRecordRepository.findById(medicalRecord.getId())
                 .orElseThrow(() -> new IllegalArgumentException("MedicalRecord not found "));
         return medicalRecordRepository.save(medicalRecord);
     }
@@ -34,7 +34,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     public void deleteMedicalRecord(Integer medicalRecordID){
         MedicalRecord check = medicalRecordRepository.findById(medicalRecordID)
                 .orElseThrow(() -> new IllegalArgumentException("Medical Record not found"));
-        medicalRecordRepository.deleteById(check.getRecordID());
+        medicalRecordRepository.deleteById(check.getId());
     }
 
     @Override

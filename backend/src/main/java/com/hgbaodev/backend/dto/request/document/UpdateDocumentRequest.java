@@ -10,9 +10,9 @@ import lombok.*;
 @Getter
 @Setter
 public class UpdateDocumentRequest {
-    private Integer documentID;
+    private Integer id;
 
-    private Integer recordID;
+    private Integer recordId;
 
     @NotBlank(message = "fileName type is required")
     @Size(max = 50, message = "File name type must not exceed 50 characters")

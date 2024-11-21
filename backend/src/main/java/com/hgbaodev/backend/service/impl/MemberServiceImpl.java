@@ -28,15 +28,15 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public Member updateMember(Member member) {
-        Member check = memberRepository.findById(member.getMemberID())
+        Member check = memberRepository.findById(member.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Member not found"));
         member.setUser(check.getUser());
         return memberRepository.save(member);
     }
 
     @Override
-    public void deleteMember(Integer memberID) {
-        memberRepository.deleteById(memberID);
+    public void deleteMember(Integer id) {
+        memberRepository.deleteById(id);
     }
 
     @Override

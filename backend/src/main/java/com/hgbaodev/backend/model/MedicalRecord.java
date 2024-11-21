@@ -1,5 +1,7 @@
 package com.hgbaodev.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,12 +12,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name="medical_records")
 public class MedicalRecord {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="record_id")
-    private int recordID;
+    private int id;
 
     @ManyToOne
     @JoinColumn(name = "member_id", nullable = false)
@@ -38,4 +40,5 @@ public class MedicalRecord {
 
     @Column(name="facility_name")
     private String facilityName;
+
 }

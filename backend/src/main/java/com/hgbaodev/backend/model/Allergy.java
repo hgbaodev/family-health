@@ -13,7 +13,7 @@
     public class Allergy {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int allergyID;
+        private int id;
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "member_id", nullable = false)

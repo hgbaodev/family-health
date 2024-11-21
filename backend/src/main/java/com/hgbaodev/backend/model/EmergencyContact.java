@@ -16,10 +16,11 @@ import lombok.NoArgsConstructor;
 public class EmergencyContact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int contactID;
+    private int id;
 
-    @Column(name = "user_id", nullable = false)
-    private int userID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "name", nullable = false)
     private String name;

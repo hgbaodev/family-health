@@ -23,7 +23,7 @@ public interface AllergyRepository extends JpaRepository<Allergy, Integer> {
             "(LOWER(a.allergyType) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(a.severity) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(a.symptoms) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
-            "AND a.member.memberID = :memberId " +
+            "AND a.member.id = :memberId " +
             "AND a.member.user.id = :userID")
     Page<Allergy> findByKeywordAndMember(@Param("memberId") Long memberId, @Param("keyword") String keyword, @Param("userID") Integer userID, Pageable pageable);
 
