@@ -30,7 +30,7 @@
         public ResponseEntity<ApiResponse<?>> addMedication(@Valid @RequestBody AddMedicationRequest addMedicationRequest) {
 //          Lấy recordID từ record được chọn
             Medication medication = Medication.builder()
-                    .recordID(addMedicationRequest.getRecordID())
+//                    .record(addMedicationRequest.get())
                     .name(addMedicationRequest.getName())
                     .frequency(addMedicationRequest.getFrequency())
                     .startDate(addMedicationRequest.getStartDate())
@@ -51,7 +51,7 @@
                 @PathVariable("id") Integer id,
                 @Valid @RequestBody UpdateMedicationRequest updateMedicationRequest) {
             Medication medication = Medication.builder()
-                    .medicationID(id)
+                    .id(id)
                     .name(updateMedicationRequest.getName())
                     .frequency(updateMedicationRequest.getFrequency())
                     .startDate(updateMedicationRequest.getStartDate())

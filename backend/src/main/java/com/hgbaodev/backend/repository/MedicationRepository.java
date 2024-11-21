@@ -10,11 +10,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MedicationRepository extends JpaRepository<Medication, Integer> {
-    @Query("SELECT m FROM Medication m WHERE LOWER(m.name) LIKE LOWER(CONCAT('%', :keyword, '%')) AND m.recordID IN " +
-            "(SELECT mr.recordID FROM MedicalRecord mr JOIN mr.member mem WHERE mem.user.id = :userID)")
-    Page<Medication> findByKeyword(@Param("keyword") String keyword, Pageable pageable, @Param("userID") Integer userID);
+    @Query("SELECT m FROM Medication m WHERE LOWER(m.name) LIKE LOWER(CONCAT('%', :keyword, '%')) AND m.record.member.user.id = :userId")
+    Page<Medication> findByKeyword(@Param("keyword") String keyword, Pageable pageable, @Param("userId") Integer userId);
 
-    @Query("SELECT m FROM Medication m WHERE m.recordID IN " +
-            "(SELECT mr.recordID FROM MedicalRecord mr JOIN mr.member mem WHERE mem.user.id = :userID)")
-    Page<Medication> getAllByUserID(Pageable pageable, @Param("userID") Integer userID);
+    @Query("SELECT m FROM Medication m WHERE m.record.member.user.id = :userId")
+    Page<Medication> getAllByUserID(Pageable pageable, @Param("userId") Integer userId);
 }

@@ -11,9 +11,9 @@ import lombok.*;
 @Getter
 @Setter
 public class AddAllergyRequest {
-    private Integer allergyID;
+    private Integer id;
 
-    private Integer memberID;
+    private Integer memberId;
 
     private Member member;
 

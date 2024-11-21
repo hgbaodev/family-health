@@ -16,7 +16,8 @@ const useMemberColumns = () => {
       message.success("Delete member successfully");
     },
     onError: (error) => {
-      message.error(`Delete member failed. Reason: ${error.message}`);
+      console.log("Error:", error);
+      message.error(`This member that is in use cannot be deleted`);
     },
   });
 
@@ -33,8 +34,8 @@ const useMemberColumns = () => {
     () => [
       {
         title: t("ID"),
-        dataIndex: "memberID",
-        key: "memberID",
+        dataIndex: "id",
+        key: "id",
         align: "center",
       },
       {
@@ -85,7 +86,7 @@ const useMemberColumns = () => {
             <Popconfirm
               title="Delete the member"
               description="Are you sure to delete this member?"
-              onConfirm={() => handleDelete(member.memberID)}
+              onConfirm={() => handleDelete(member.id)}
               okText="Yes"
               cancelText="No"
             >

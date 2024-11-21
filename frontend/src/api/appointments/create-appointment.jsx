@@ -2,9 +2,9 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAppointmentsQueryOptions } from "~/api/appointments/get-appointment";
 import { api } from "~/axios/api";
 
-export const createAppointment = ({ memberID, time, doctor, location }) => {
+export const createAppointment = ({ memberId, time, doctor, location }) => {
   return api.post(`/appointments`, {
-    memberID,
+    memberId,
     time,
     doctor,
     location,

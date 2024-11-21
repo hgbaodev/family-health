@@ -13,6 +13,6 @@ public interface VaccicationRepository extends JpaRepository<Vaccication, Intege
     @Query("SELECT m FROM Vaccication m WHERE LOWER(m.vaccineName) LIKE LOWER(CONCAT('%', :keyword, '%')) AND m.member.user.id = :userId")
     Page<Vaccication> findByKeyword(@Param("keyword") String keyword, @Param("userId") int userId, Pageable pageable);
 
-    @Query("SELECT m FROM Vaccication m WHERE m.member.memberID = :memberId AND LOWER(m.vaccineName) LIKE LOWER(CONCAT('%', :keyword, '%')) AND m.member.user.id = :userId")
+    @Query("SELECT m FROM Vaccication m WHERE m.member.id = :memberId AND LOWER(m.vaccineName) LIKE LOWER(CONCAT('%', :keyword, '%')) AND m.member.user.id = :userId")
     Page<Vaccication> findByKeywordAndMember(@Param("memberId") Long memberId, @Param("keyword") String keyword, @Param("userId") int userId, Pageable pageable);
 }

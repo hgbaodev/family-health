@@ -1,29 +1,29 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
 import { api } from "~/axios/api";
 
-export const getAppointments = async ({ page, size, keyword, memberID }) => {
+export const getAppointments = async ({ page, size, keyword, memberId }) => {
   const response = await api.get(`/appointments`, {
     params: { 
       page,
       size,
       keyword,
-      memberID
+      memberId
     },
   });
   return response.data;
 };
 
-export const getAppointmentsQueryOptions = ({ page, size, keyword, memberID }) => {
+export const getAppointmentsQueryOptions = ({ page, size, keyword, memberId }) => {
   return queryOptions({
-    queryKey: page ? ["appointments", { page, size, keyword, memberID }] : ["appointments"],
-    queryFn: () => getAppointments({ page, size, keyword, memberID }),
+    queryKey: page ? ["appointments", { page, size, keyword, memberId }] : ["appointments"],
+    queryFn: () => getAppointments({ page, size, keyword, memberId }),
   });
 };
 
 
-export const useAppointments = ({ queryConfig, page, size, keyword, memberID }) => {
+export const useAppointments = ({ queryConfig, page, size, keyword, memberId }) => {
   return useQuery({
-    ...getAppointmentsQueryOptions({ page, size, keyword, memberID }),
+    ...getAppointmentsQueryOptions({ page, size, keyword, memberId }),
     ...queryConfig,
   });
 };

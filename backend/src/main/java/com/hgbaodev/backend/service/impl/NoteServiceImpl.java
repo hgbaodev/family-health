@@ -25,7 +25,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Note updateNote(Note note) {
-        Note check = noteRepository.findById(note.getNoteID())
+        Note check = noteRepository.findById(note.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Note not found "));
         return noteRepository.save(note);
     }
@@ -34,7 +34,7 @@ public class NoteServiceImpl implements NoteService {
     public void deleteNote(Integer noteID){
         Note check = noteRepository.findById(noteID)
                 .orElseThrow(() -> new IllegalArgumentException("Allergy not found"));
-        noteRepository.deleteById(check.getNoteID());
+        noteRepository.deleteById(check.getId());
     }
 
     @Override

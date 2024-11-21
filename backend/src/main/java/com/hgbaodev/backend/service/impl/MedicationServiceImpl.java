@@ -27,9 +27,9 @@ public class MedicationServiceImpl implements MedicationService {
 
     @Override
     public Medication updateMedication(Medication medication) {
-        Medication check = medicationRepository.findById(medication.getMedicationID())
+        Medication check = medicationRepository.findById(medication.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Medication not found"));
-        medication.setMedicationID(check.getMedicationID());
+        medication.setId(check.getId());
         return medicationRepository.save(medication);
     }
 

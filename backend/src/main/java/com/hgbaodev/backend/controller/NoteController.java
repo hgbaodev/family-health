@@ -31,7 +31,7 @@ public class NoteController {
     @PostMapping
     public ResponseEntity<ApiResponse<?>> addNote(@Valid @RequestBody AddNoteRequest addNoteRequest) {
         Note note = Note.builder()
-                .userID(authenticationService.getCurrentUser().getId())
+                .user(authenticationService.getCurrentUser())
                 .title(addNoteRequest.getTitle())
                 .content(addNoteRequest.getContent())
                 .createAt(addNoteRequest.getCreateAt())
@@ -52,8 +52,8 @@ public class NoteController {
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateNoteRequest updateNoteRequest) {
         Note note = Note.builder()
-                .noteID(id)
-                .userID(authenticationService.getCurrentUser().getId())
+                .id(id)
+                .user(authenticationService.getCurrentUser())
                 .title(updateNoteRequest.getTitle())
                 .content(updateNoteRequest.getContent())
                 .createAt(updateNoteRequest.getCreateAt())

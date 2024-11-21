@@ -10,13 +10,12 @@ public interface NoteRepository extends JpaRepository<Note, Integer> {
     @Query("SELECT n FROM Note n WHERE " +
             "LOWER(n.title) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
             "LOWER(n.content) LIKE LOWER(CONCAT('%', :keyword, '%'))" +
-            "AND n.userID in (SELECT u.id from User u where u.id = :userID)" +
+            "AND n.user.id = :userID " +
             "ORDER BY n.noteIndex ASC"
     )
     Page<Note> findByKeyword(@Param("keyword") String keyword, Pageable pageable, Integer userID);
 
-    @Query("SELECT n FROM Note n WHERE n.userID in " +
-            "(SELECT u.id from User u where u.id = :userID)" +
+    @Query("SELECT n FROM Note n WHERE n.user.id = :userID " +
             "ORDER BY n.noteIndex ASC"
     )
     Page<Note> getNotesByUserID(@Param("userID") Integer userID, Pageable pageable);

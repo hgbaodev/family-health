@@ -10,9 +10,9 @@ import lombok.*;
 @Getter
 @Setter
 public class UpdateAllergyRequest {
-    private Integer allergyID;
+    private Integer id;
 
-    private Integer memberID;
+    private Integer memberId;
 
     @NotBlank(message = "Allergy type is required")
     @Size(max = 100, message = "Allergy type must not exceed 100 characters")

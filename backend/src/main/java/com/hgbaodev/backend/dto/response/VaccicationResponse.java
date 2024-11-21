@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class VaccicationResponse {
-    int vaccinationID;
+    int id;
     MemberDTO member;
     String vaccineName;
     Date dateAdministered;

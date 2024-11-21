@@ -14,8 +14,8 @@ import java.util.Date;
 @Setter
 public class UpdateAppointmentRequest {
 
-  @NotNull(message = "MemberID is required")
-  private Integer memberID;
+  @NotNull(message = "MemberId is required")
+  private Integer memberId;
 
   @NotNull(message = "Time is required")
   private Date time;

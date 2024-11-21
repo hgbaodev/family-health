@@ -8,7 +8,7 @@ const MemberSelect = ({ onChange }) => {
   useEffect(() => {
     // Chỉ gọi onChange với thành viên đầu tiên khi trang mới load
     if (isFirstLoad.current && members && members.length > 0) {
-      onChange(members[0].memberID);
+      onChange(members[0].memberId);
       isFirstLoad.current = false; // Đặt lại cờ sau lần gọi đầu tiên
     }
   }, [members, onChange]);
@@ -23,7 +23,7 @@ const MemberSelect = ({ onChange }) => {
       style={{ height: 37, borderRadius: 5 }}
     >
       {members?.map((member) => (
-        <option key={member.memberID} value={member.memberID}>
+        <option key={member.id} value={member.id}>
           {member.fullName}
         </option>
       ))}

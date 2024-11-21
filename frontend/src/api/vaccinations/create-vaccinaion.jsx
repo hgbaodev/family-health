@@ -3,12 +3,12 @@ import { getVaccinationsQueryOptions } from "~/api/vaccinations/get-vaccination"
 import { api } from "~/axios/api";
 
 export const createVaccination = ({
-  memberID,
+  memberId,
   vaccineName,
   dateAdministered,
 }) => {
   return api.post(`/vaccinations`, {
-    memberID,
+    memberId,
     vaccineName,
     dateAdministered,
   });

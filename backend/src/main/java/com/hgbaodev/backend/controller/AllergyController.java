@@ -34,7 +34,7 @@ public class AllergyController {
 
     @PostMapping
     public ResponseEntity<ApiResponse<?>> addAllergy(@Valid @RequestBody AddAllergyRequest addAllergyRequest) {
-        Member member = memberRepository.findById(addAllergyRequest.getMemberID())
+        Member member = memberRepository.findById(addAllergyRequest.getMemberId())
                 .orElseThrow(() -> new RuntimeException("Member not found"));
         addAllergyRequest.setMember(member);
         Allergy createdAllergy = allergyService.addAllergy(addAllergyRequest);
@@ -50,10 +50,10 @@ public class AllergyController {
     public ResponseEntity<ApiResponse<?>> updateAllergy(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateAllergyRequest updateAllergyRequest) {
-        Member member = memberRepository.findById(updateAllergyRequest.getMemberID())
+        Member member = memberRepository.findById(updateAllergyRequest.getMemberId())
                 .orElseThrow(() -> new RuntimeException("Member not found"));
         Allergy allergy = Allergy.builder()
-                .allergyID(id)
+                .id(id)
                 .member(member)
                 .allergyType(updateAllergyRequest.getAllergyType())
                 .severity(updateAllergyRequest.getSeverity())

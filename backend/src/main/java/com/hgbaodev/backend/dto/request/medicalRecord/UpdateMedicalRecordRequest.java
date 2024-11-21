@@ -10,9 +10,9 @@ import lombok.*;
 @Getter
 @Setter
 public class UpdateMedicalRecordRequest {
-    private Integer recordID;
+    private Integer id;
 
-    private Integer memberID;
+    private Integer memberId;
 
     @NotNull(message = "Date is required")
     @PastOrPresent(message = "Upload date must be a date in the past or present")

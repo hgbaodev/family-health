@@ -8,9 +8,6 @@ import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -37,10 +34,10 @@ public class HealthStatServiceImpl implements HealthStatService {
 
     @Override
     public HealthStat updateHealthStat(HealthStat healthStat) {
-        HealthStat check = healthStatRepository.findById(healthStat.getStatID())
+        HealthStat check = healthStatRepository.findById(healthStat.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Health status not found"));
-        healthStat.setStatID(check.getStatID());
-        healthStat.setMemberID(check.getMemberID());
+        healthStat.setId(check.getId());
+        healthStat.setMember(check.getMember());
         return healthStatRepository.save(healthStat);
     }
 
@@ -56,7 +53,7 @@ public class HealthStatServiceImpl implements HealthStatService {
     }
 
     @Override
-    public List<HealthStat> getAllHealthStats(Integer memberID, String date) {
+    public List<HealthStat> getAllHealthStats(Integer memberId, String date) {
         if (date != null && !date.isEmpty()) {
             try {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-DD HH-mm");
@@ -66,7 +63,7 @@ public class HealthStatServiceImpl implements HealthStatService {
                 System.out.println("Date format is invalid: " + e.getMessage());
             }
         }
-        return healthStatRepository.findAllByMemberID(memberID);
+        return healthStatRepository.findAllById(memberId);
     }
 
     @Override
@@ -85,7 +82,7 @@ public class HealthStatServiceImpl implements HealthStatService {
     }
 
     @Override
-    public List<HealthStat> getHealthStatsToDisplayChart(Integer memberID, String statType, String date) {
+    public List<HealthStat> getHealthStatsToDisplayChart(Integer memberId, String statType, String date) {
         List<HealthStat> results;
         TypedQuery<HealthStat> query;
         if (date != null && !date.isEmpty()) {
@@ -93,13 +90,13 @@ public class HealthStatServiceImpl implements HealthStatService {
             query = entityManager.createQuery(
                     "SELECT h \n" +
                             "FROM HealthStat h \n" +
-                            "WHERE h.memberID = :memberID \n" +
+                            "WHERE h.member.id = :memberId \n" +
                             "  AND h.statType = :statType \n" +
                             "  AND DATE(h.date) >= :date \n" +
                             "  AND DATE(h.date) <= CURRENT_DATE\n" +
                             "ORDER BY h.date ASC\n",
                     HealthStat.class);
-            query.setParameter("memberID", memberID);
+            query.setParameter("memberId", memberId);
             query.setParameter("statType", statType);
             query.setParameter("date", sqlDate);
             query.setFirstResult(0); // Bắt đầu từ dòng đầu tiên
@@ -109,11 +106,11 @@ public class HealthStatServiceImpl implements HealthStatService {
             query = entityManager.createQuery(
                     "SELECT h \n" +
                             "FROM HealthStat h \n" +
-                            "WHERE h.memberID = :memberID \n" +
+                            "WHERE h.member.id = :memberId \n" +
                             "   AND h.statType = :statType \n" +
                             "ORDER BY h.date DESC",
                     HealthStat.class);
-            query.setParameter("memberID", memberID);
+            query.setParameter("memberId", memberId);
             query.setParameter("statType", statType);
             query.setFirstResult(0); // Bắt đầu từ dòng đầu tiên
             query.setMaxResults(5); // Giới hạn trả về 5 bản ghi

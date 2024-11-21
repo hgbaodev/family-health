@@ -12,7 +12,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AllergyResponse {
-    int allergyID;
+    int id;
     MemberDTO member;
     String allergyType;
     String severity;

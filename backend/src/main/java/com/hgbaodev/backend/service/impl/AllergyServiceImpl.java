@@ -30,7 +30,7 @@ public class AllergyServiceImpl implements AllergyService {
 
     @Override
     public Allergy updateAllergy(Allergy allergy) {
-        Allergy check = allergyRepository.findById(allergy.getAllergyID())
+        Allergy check = allergyRepository.findById(allergy.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Allergy not found "));
         return allergyRepository.save(allergy);
     }
@@ -39,7 +39,7 @@ public class AllergyServiceImpl implements AllergyService {
     public void deleteAllergy(Integer allergyID){
         Allergy check = allergyRepository.findById(allergyID)
                 .orElseThrow(() -> new IllegalArgumentException("Allergy not found"));
-        allergyRepository.deleteById(check.getAllergyID());
+        allergyRepository.deleteById(check.getId());
     }
 
     @Override

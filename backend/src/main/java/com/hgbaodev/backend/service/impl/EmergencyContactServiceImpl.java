@@ -41,9 +41,9 @@ public class EmergencyContactServiceImpl implements EmergencyContactService {
 
     @Override
     public EmergencyContact updateEmergencyContact (EmergencyContact emergencyContact) {
-        EmergencyContact check = emergencyContactRepository.findById(emergencyContact.getContactID())
+        EmergencyContact check = emergencyContactRepository.findById(emergencyContact.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Emergency contact not found"));
-        emergencyContact.setUserID(check.getUserID());
+        emergencyContact.setUser(check.getUser());
         return emergencyContactRepository.save(emergencyContact);
     }
 

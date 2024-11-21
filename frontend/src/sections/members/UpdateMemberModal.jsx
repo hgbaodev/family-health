@@ -27,7 +27,7 @@ const UpdateMemberModal = () => {
       dateOfBirth: values.dateOfBirth ? values.dateOfBirth.format("YYYY-MM-DD") : null,
     };
     mutation.mutate({
-      id: member.memberID,
+      id: member.id,
       data: formattedValues,
     });
     setOpenUpdateModal(false);

@@ -68,11 +68,11 @@ const CreateAllergyModal = () => {
           <Col span={24}>
             <Form.Item
               label="Member"
-              name="memberID"
+              name="memberId"
               rules={[{ required: true, message: "Please choose a member" }]}
             >
               <Select placeholder="Select member...">
-                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+                {members?.map((member) => (<Option key={member.id} value={member.id}>{member.fullName}</Option>))}
               </Select>
             </Form.Item>
           </Col>

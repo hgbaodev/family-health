@@ -33,16 +33,8 @@
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addMember(@Valid @RequestBody AddMemberRequest addMemberRequest) {
             User user = authenticationService.getCurrentUser();
-            Member member = Member.builder()
-                    .user(user)
-                    .fullName(addMemberRequest.getFullName())
-                    .dateOfBirth(addMemberRequest.getDateOfBirth())
-                    .gender(addMemberRequest.getGender())
-                    .relationship(addMemberRequest.getRelationship())
-                    .bloodType(addMemberRequest.getBloodType())
-                    .height(addMemberRequest.getHeight())
-                    .weight(addMemberRequest.getWeight())
-                    .build();
+            Member member = MemberMapper.INSTANCE.toMember(addMemberRequest);
+            member.setUser(user);
             Member createdMember = memberService.addMember(member);
             ApiResponse<Member> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
@@ -56,16 +48,8 @@
         public ResponseEntity<ApiResponse<?>> updateMember(
                 @PathVariable("id") Integer id,
                 @Valid @RequestBody UpdateMemberRequest updateMemberRequest) {
-            Member member = Member.builder()
-                    .memberID(id)
-                    .fullName(updateMemberRequest.getFullName())
-                    .dateOfBirth(updateMemberRequest.getDateOfBirth())
-                    .gender(updateMemberRequest.getGender())
-                    .relationship(updateMemberRequest.getRelationship())
-                    .bloodType(updateMemberRequest.getBloodType())
-                    .height(updateMemberRequest.getHeight())
-                    .weight(updateMemberRequest.getWeight())
-                    .build();
+            Member member = MemberMapper.INSTANCE.toMember(updateMemberRequest);
+            member.setId(id);
             Member updatedMember = memberService.updateMember(member);
             ApiResponse<Member> response = new ApiResponse<>(
                     HttpStatus.OK.value(),

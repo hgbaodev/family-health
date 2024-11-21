@@ -18,7 +18,7 @@ export const MemberTable = () => {
         columns={columns}
         dataSource={data?.items || []}
         size="small"
-        rowKey={(record) => record.memberID}
+        rowKey={(record) => record.id}
         pagination={{
           current: data?.meta?.current_page,
           pageSize: data?.meta?.per_page,

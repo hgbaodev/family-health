@@ -11,9 +11,9 @@ import lombok.*;
 @Setter
 public class AddMemberRequest {
 
-  private Integer memberID;
+  private Integer id;
 
-  private Integer userID;
+  private Integer userId;
 
   @NotBlank(message = "FullName is required")
   @Size(max = 100, message = "FullName must not exceed 100 characters")

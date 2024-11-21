@@ -11,15 +11,15 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
-  @Query("SELECT new com.hgbaodev.backend.dto.response.ContactResponse(c.contactID, c.userID, u.email, c.content, c.date, c.status) " +
-          "FROM Contact c JOIN User u ON c.userID = u.id " +
+  @Query("SELECT new com.hgbaodev.backend.dto.response.ContactResponse(c.id, c.user.id, u.email, c.content, c.date, c.status) " +
+          "FROM Contact c JOIN User u ON c.user.id = u.id " +
           "WHERE LOWER(c.content) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
           "OR LOWER(u.email) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
           "ORDER BY c.date DESC")
   Page<ContactResponse> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
-  @Query("SELECT new com.hgbaodev.backend.dto.response.ContactResponse(c.contactID, c.userID, u.email, c.content, c.date, c.status) " +
-          "FROM Contact c JOIN User u ON c.userID = u.id " +
+  @Query("SELECT new com.hgbaodev.backend.dto.response.ContactResponse(c.id, c.user.id, u.email, c.content, c.date, c.status) " +
+          "FROM Contact c JOIN User u ON c.user.id = u.id " +
           "ORDER BY c.date DESC")
   Page<ContactResponse> findAllContacts(Pageable pageable);
 }

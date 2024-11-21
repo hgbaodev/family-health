@@ -24,7 +24,7 @@ const UpdateAppointmentModal = () => {
   });
 
   const onFinish = (values) => {
-    mutation.mutate({ id: appointment.appointmentID, data: values });
+    mutation.mutate({ id: appointment.id, data: values });
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const UpdateAppointmentModal = () => {
       form.setFieldsValue({
         ...appointment,
         time: appointment.time ? moment(appointment.time) : null,
-        memberID: appointment.member.memberID,
+        memberId: appointment.member.id,
       });
     }
   }, [appointment, form]);
@@ -56,11 +56,11 @@ const UpdateAppointmentModal = () => {
           <Col span={24}>
             <Form.Item
               label="Member"
-              name="memberID"
+              name="memberId"
               rules={[{ required: true, message: "Please select member" }]}
             >
               <Select placeholder="Select member...">
-                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+                {members?.map((member) => (<Option key={member.id} value={member.id}>{member.fullName}</Option>))}
               </Select>
             </Form.Item>
           </Col>

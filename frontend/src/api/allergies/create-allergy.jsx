@@ -6,13 +6,13 @@ export const createAllergy = ({
   allergyType,
   severity,
   symptoms,
-  memberID,
+  memberId,
 }) => {
   return api.post(`/allergies`, {
     allergyType,
     severity,
     symptoms,
-    memberID,
+    memberId,
   });
 };
 

@@ -1,10 +1,10 @@
 INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 1, 'admin@mail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'Admin',1
-    WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'admin@mail.com');
+SELECT 1, 'admin@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'Admin',1
+    WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'admin@gmail.com');
 
 INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 2, 'hgbaodevservice@mail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
-    WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'hgbaodevservice@mail.com');
+SELECT 2, 'hgbaodevservice@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
+    WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'hgbaodevservice@gmail.com');
 
 INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
 SELECT 3, 'TLieuNhuYen@example.com', 'Trần Liễu', 'Như Yên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
@@ -87,373 +87,373 @@ WHERE NOT EXISTS (SELECT 1 FROM members WHERE full_name = 'Long Kim Ngọc' AND 
 -- userID: 3 - TLieuNhuYen@example.com
 -- memberID : 4
 -- Dòng 1
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 1, 'Blood Pressure', '184', '2024-10-07 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 1);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 1);
 
 -- Dòng 2
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 2, 'Blood Pressure', '100', '2024-10-01 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 2);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 2);
 
 -- Dòng 3
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 3, 'Blood Pressure', '114', '2024-10-02 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 3);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 3);
 
 -- Dòng 4
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 4, 'Blood Pressure', '128', '2024-10-03 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 4);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 4);
 
 -- Dòng 5
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 5, 'Blood Pressure', '142', '2024-10-04 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 5);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 5);
 
 -- Dòng 6
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 6, 'Blood Pressure', '156', '2024-10-05 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 6);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 6);
 
 -- Dòng 7
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 7, 'Blood Pressure', '170', '2024-10-06 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 7);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 7);
 
 -- Dòng 1
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 8, 'Blood Glucose', '95', '2024-10-08 08:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 8);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 8);
 
 -- Dòng 2
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 9, 'Blood Glucose', '130', '2024-10-09 08:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 9);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 9);
 
 -- Dòng 3
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 10, 'Blood Glucose', '110', '2024-10-10 08:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 10);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 10);
 
 -- Dòng 4
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 11, 'Blood Glucose', '125', '2024-10-11 08:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 11);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 11);
 
 -- Dòng 5
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 12, 'Blood Glucose', '145', '2024-10-12 09:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 12);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 12);
 
 -- Dòng 6
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 13, 'Blood Glucose', '88', '2024-10-13 09:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 13);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 13);
 
 -- Dòng 7
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 14, 'Blood Glucose', '120', '2024-10-14 09:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 14);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 14);
 
 -- Dòng 1
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 15, 'Heart Rate', '72', '2024-10-15 10:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 15);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 15);
 
 -- Dòng 2
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 16, 'Heart Rate', '85', '2024-10-16 10:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 16);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 16);
 
 -- Dòng 3
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 17, 'Heart Rate', '78', '2024-10-17 10:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 17);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 17);
 
 -- Dòng 4
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 18, 'Heart Rate', '90', '2024-10-18 10:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 18);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 18);
 
 -- Dòng 5
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 19, 'Heart Rate', '66', '2024-10-19 11:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 19);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 19);
 
 -- Dòng 6
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 20, 'Heart Rate', '75', '2024-10-20 11:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 20);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 20);
 
 -- Dòng 7
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 4, 21, 'Heart Rate', '82', '2024-10-21 11:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 21);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 21);
 
 --memberID : 5
 -- Blood Pressure (Dòng 1 - 7)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 22, 'Blood Pressure', '118', '2024-10-01 07:28'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 22);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 22);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 23, 'Blood Pressure', '135', '2024-10-02 08:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 23);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 23);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 24, 'Blood Pressure', '126', '2024-10-03 07:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 24);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 24);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 25, 'Blood Pressure', '140', '2024-10-05 09:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 25);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 25);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 26, 'Blood Pressure', '112', '2024-10-06 08:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 26);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 26);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 27, 'Blood Pressure', '144', '2024-10-07 08:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 27);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 27);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 28, 'Blood Pressure', '132', '2024-10-08 09:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 28);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 28);
 
 -- Blood Glucose (Dòng 8 - 14)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 29, 'Blood Glucose', '98', '2024-10-09 08:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 29);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 29);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 30, 'Blood Glucose', '105', '2024-10-10 07:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 30);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 30);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 31, 'Blood Glucose', '140', '2024-10-11 09:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 31);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 31);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 32, 'Blood Glucose', '115', '2024-10-12 08:25'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 32);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 32);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 33, 'Blood Glucose', '110', '2024-10-13 09:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 33);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 33);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 34, 'Blood Glucose', '135', '2024-10-14 08:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 34);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 34);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 35, 'Blood Glucose', '120', '2024-10-15 10:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 35);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 35);
 
 -- Heart Rate (Dòng 15 - 21)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 36, 'Heart Rate', '75', '2024-10-16 11:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 36);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 36);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 37, 'Heart Rate', '82', '2024-10-17 10:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 37);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 37);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 38, 'Heart Rate', '70', '2024-10-18 11:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 38);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 38);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 39, 'Heart Rate', '92', '2024-10-19 09:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 39);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 39);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 40, 'Heart Rate', '68', '2024-10-20 10:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 40);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 40);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 41, 'Heart Rate', '86', '2024-10-21 09:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 41);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 41);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 5, 42, 'Heart Rate', '80', '2024-10-22 11:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 42);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 42);
 
 --memberID : 6
 -- Blood Pressure (Dòng 1 - 7)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 43, 'Blood Pressure', '125', '2024-10-01 07:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 43);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 43);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 44, 'Blood Pressure', '132', '2024-10-02 08:20'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 44);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 44);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 45, 'Blood Pressure', '118', '2024-10-03 09:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 45);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 45);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 46, 'Blood Pressure', '144', '2024-10-04 10:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 46);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 46);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 47, 'Blood Pressure', '128', '2024-10-05 07:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 47);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 47);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 48, 'Blood Pressure', '135', '2024-10-06 08:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 48);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 48);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 49, 'Blood Pressure', '142', '2024-10-07 08:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 49);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 49);
 
 -- Blood Glucose (Dòng 8 - 14)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 50, 'Blood Glucose', '110', '2024-10-08 09:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 50);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 50);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 51, 'Blood Glucose', '95', '2024-10-09 08:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 51);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 51);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 52, 'Blood Glucose', '125', '2024-10-10 07:50'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 52);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 52);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 53, 'Blood Glucose', '130', '2024-10-11 09:20'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 53);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 53);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 54, 'Blood Glucose', '115', '2024-10-12 08:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 54);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 54);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 55, 'Blood Glucose', '100', '2024-10-13 08:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 55);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 55);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 56, 'Blood Glucose', '105', '2024-10-14 09:40'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 56);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 56);
 
 -- Heart Rate (Dòng 15 - 21)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 57, 'Heart Rate', '75', '2024-10-15 10:00'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 57);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 57);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 58, 'Heart Rate', '82', '2024-10-16 10:20'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 58);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 58);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 59, 'Heart Rate', '88', '2024-10-17 09:55'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 59);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 59);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 60, 'Heart Rate', '70', '2024-10-18 11:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 60);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 60);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 61, 'Heart Rate', '92', '2024-10-19 10:05'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 61);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 61);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 62, 'Heart Rate', '65', '2024-10-20 10:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 62);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 62);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 6, 63, 'Heart Rate', '85', '2024-10-21 09:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 63);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 63);
 
 --memberID : 7
 -- Blood Pressure (Dòng 1 - 7)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 64, 'Blood Pressure', '138', '2024-10-01 07:40'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 64);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 64);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 65, 'Blood Pressure', '126', '2024-10-02 08:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 65);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 65);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 66, 'Blood Pressure', '145', '2024-10-03 08:50'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 66);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 66);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 67, 'Blood Pressure', '120', '2024-10-04 09:30'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 67);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 67);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 68, 'Blood Pressure', '133', '2024-10-05 07:55'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 68);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 68);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 69, 'Blood Pressure', '140', '2024-10-06 08:35'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 69);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 69);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 70, 'Blood Pressure', '128', '2024-10-07 09:20'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 70);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 70);
 
 -- Blood Glucose (Dòng 8 - 14)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 71, 'Blood Glucose', '105', '2024-10-08 08:05'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 71);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 71);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 72, 'Blood Glucose', '110', '2024-10-09 08:55'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 72);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 72);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 73, 'Blood Glucose', '118', '2024-10-10 07:35'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 73);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 73);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 74, 'Blood Glucose', '95', '2024-10-11 09:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 74);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 74);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 75, 'Blood Glucose', '125', '2024-10-12 10:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 75);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 75);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 76, 'Blood Glucose', '102', '2024-10-13 09:05'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 76);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 76);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 77, 'Blood Glucose', '108', '2024-10-14 08:20'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 77);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 77);
 
 -- Heart Rate (Dòng 15 - 21)
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 78, 'Heart Rate', '72', '2024-10-15 07:45'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 78);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 78);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 79, 'Heart Rate', '85', '2024-10-16 08:25'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 79);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 79);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 80, 'Heart Rate', '90', '2024-10-17 09:50'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 80);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 80);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 81, 'Heart Rate', '78', '2024-10-18 10:40'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 81);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 81);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 82, 'Heart Rate', '88', '2024-10-19 09:10'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 82);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 82);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 83, 'Heart Rate', '76', '2024-10-20 08:50'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 83);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 83);
 
-INSERT INTO health_stats (member_id, stat_id, stat_type, stat_value, date)
+INSERT INTO health_stats (member_id, id, stat_type, stat_value, date)
 SELECT 7, 84, 'Heart Rate', '81', '2024-10-21 09:15'
-WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE stat_id = 84);
+WHERE NOT EXISTS (SELECT 1 FROM health_stats WHERE id = 84);
 
 
 

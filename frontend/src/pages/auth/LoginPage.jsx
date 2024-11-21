@@ -1,12 +1,4 @@
-import {
-  Form,
-  Input,
-  Space,
-  Button,
-  message,
-  Divider,
-  Flex,
-} from "antd";
+import { Form, Input, Space, Button, message, Divider, Flex } from "antd";
 import Title from "antd/es/typography/Title";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
@@ -37,13 +29,14 @@ const LoginPage = () => {
   });
 
   const googleLoginMutation = useGoogleLoginMutation({
-    mutationConfig: {
-      onSuccess: (data) => {
-        console.log(data);
-      },
-      onError: ({ response }) => {
-        message.error(response?.data?.detail || "Something went wrong!");
-      },
+    onSuccess: () => {
+      message.success("Login successful");
+      form.resetFields();
+      navigate("/manager");
+    },
+    onError: (error) => {
+      console.log("Error:", error);
+      message.error("Email or password is incorrect");
     },
   });
 
@@ -55,7 +48,7 @@ const LoginPage = () => {
     if (username) {
       verifyMutation.mutate(username);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username]);
 
   const mutation = useLogin({
@@ -65,7 +58,8 @@ const LoginPage = () => {
       navigate("/manager");
     },
     onError: (error) => {
-      message.error(error.message || "Login failed");
+      console.log("Error:", error);
+      message.error("Email or password is incorrect");
     },
   });
 
@@ -75,7 +69,10 @@ const LoginPage = () => {
   };
 
   return (
-    <Space direction="vertical" className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-lg">
+    <Space
+      direction="vertical"
+      className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-lg"
+    >
       <Link to="/" className="cursor-pointer">
         <img src={logo} alt="logo" className="w-24 mx-auto" />
       </Link>

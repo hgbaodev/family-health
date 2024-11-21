@@ -30,7 +30,7 @@ export const AllergyTable = () => {
         columns={columns}
         dataSource={data?.items || []}
         size="small"
-        rowKey={(record) => record.allergyID}
+        rowKey={(record) => record.id}
         pagination={{
           current: data?.meta?.current_page,
           pageSize: data?.meta?.per_page,
@@ -59,7 +59,7 @@ export const AllergyTable = () => {
               />
               <Select className="w-[250px]" placeholder="Select member..." value={memberId} onChange={(e) => setMemberId(e)}>
                 <Option value="">All Members</Option>
-                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+                {members?.map((member) => (<Option key={member.id} value={member.id}>{member.fullName}</Option>))}
               </Select>
             </Space>
             <Button icon={<ExportOutlined />}>

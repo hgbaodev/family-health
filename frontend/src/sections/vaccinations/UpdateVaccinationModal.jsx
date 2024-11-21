@@ -27,7 +27,7 @@ const UpdateVaccinationModal = () => {
   });
 
   const onFinish = (values) => {
-    mutation.mutate({ id: vaccination.vaccinationID, data: values });
+    mutation.mutate({ id: vaccination.id, data: values });
   };
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const UpdateVaccinationModal = () => {
       form.setFieldsValue({
         ...vaccination,
         dateAdministered: vaccination.dateAdministered ? moment(vaccination.dateAdministered) : null,
-        memberID: vaccination.member.memberID,
+        memberId: vaccination.member.id,
       });
     }
   }, [vaccination, form]);
@@ -59,11 +59,11 @@ const UpdateVaccinationModal = () => {
           <Col span={24}>
             <Form.Item
               label="Member"
-              name="memberID"
+              name="memberId"
               rules={[{ required: true, message: "Please select member" }]}
             >
               <Select placeholder="Select member...">
-                {members?.map((member) => (<Option key={member.memberID} value={member.memberID}>{member.fullName}</Option>))}
+                {members?.map((member) => (<Option key={member.id} value={member.id}>{member.fullName}</Option>))}
               </Select>
             </Form.Item>
           </Col>

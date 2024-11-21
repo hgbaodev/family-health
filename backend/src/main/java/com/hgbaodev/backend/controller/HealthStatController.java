@@ -31,16 +31,10 @@
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addHealthStat
                 (@Valid @RequestBody AddHealthStatRequest addHealthStatRequest) {
-            if(memberService.getMemberById(addHealthStatRequest.getMemberID()) == null) {
-                ApiResponse<Member> response = new ApiResponse<>(
-                        HttpStatus.NOT_FOUND.value(),
-                        "Member not found",
-                        null
-                );
-                return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-            }
+            Member member = memberService.getMemberById(addHealthStatRequest.getMemberId());
+
             HealthStat healthStat = HealthStat.builder()
-                    .memberID(addHealthStatRequest.getMemberID())
+                    .member(member)
                     .statType(addHealthStatRequest.getStatType())
                     .statValue(addHealthStatRequest.getStatValue())
                     .date(addHealthStatRequest.getDate())
@@ -59,7 +53,7 @@
                 @PathVariable("id") Integer id,
                 @Valid @RequestBody UpdateHealthStatRequest updateHealthStatRequest) {
             HealthStat healthStat = HealthStat.builder()
-                    .statID(id)
+                    .id(id)
                     .statType(updateHealthStatRequest.getStatType())
                     .statValue(updateHealthStatRequest.getStatValue())
                     .date(updateHealthStatRequest.getDate())

@@ -25,7 +25,7 @@ public class DocumentServiceImpl implements DocumentService {
 
     @Override
     public Document updateDocument(Document document) {
-        Document check = documentRepository.findById(document.getDocumentID())
+        Document check = documentRepository.findById(document.getId())
                 .orElseThrow(() -> new IllegalArgumentException("Document not found "));
         return documentRepository.save(document);
     }
@@ -34,7 +34,7 @@ public class DocumentServiceImpl implements DocumentService {
     public void deleteDocument(Integer documentID){
         Document check = documentRepository.findById(documentID)
                 .orElseThrow(() -> new IllegalArgumentException("Document not found"));
-        documentRepository.deleteById(check.getDocumentID());
+        documentRepository.deleteById(check.getId());
     }
 
     @Override

@@ -33,7 +33,7 @@
 
         @PostMapping
         public ResponseEntity<ApiResponse<?>> addAppointment(@Valid @RequestBody AddAppointmentRequest addAppointmentRequest) {
-            Member member = memberService.getMemberById(addAppointmentRequest.getMemberID());
+            Member member = memberService.getMemberById(addAppointmentRequest.getMemberId());
             Appointment appointment = Appointment.builder()
                     .member(member)
                     .doctor(addAppointmentRequest.getDoctor())
@@ -53,9 +53,9 @@
         public ResponseEntity<ApiResponse<?>> updateAppointment(
                 @PathVariable("id") Integer id,
                 @Valid @RequestBody UpdateAppointmentRequest updateAppointmentRequest) {
-            Member member = memberService.getMemberById(updateAppointmentRequest.getMemberID());
+            Member member = memberService.getMemberById(updateAppointmentRequest.getMemberId());
             Appointment appointment = Appointment.builder()
-                    .appointmentID(id)
+                    .id(id)
                     .member(member)
                     .doctor(updateAppointmentRequest.getDoctor())
                     .time(updateAppointmentRequest.getTime())

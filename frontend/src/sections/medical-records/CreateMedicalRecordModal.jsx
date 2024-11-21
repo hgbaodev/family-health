@@ -51,7 +51,7 @@ const CreateMedicalRecordModal = () => {
           <Col span={12}>
             <Form.Item
               label="Member"
-              name="memberID"
+              name="memberId"
               rules={[{ required: true, message: "Please choose a member" }]}
             >
               <Select

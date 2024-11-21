@@ -25,7 +25,7 @@ const CreateHealthStatModal = ({ selectedMemberId }) => {
           ...values,
           statType: selectedStatType,
           date: values.date ? values.date.format('YYYY-MM-DD HH:mm') : null,
-          memberID : selectedMemberId,
+          memberId : selectedMemberId,
         }
         mutation.mutate(formattedValues)
     };

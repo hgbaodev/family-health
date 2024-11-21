@@ -17,7 +17,7 @@ import java.util.Date;
 public class Vaccication {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer vaccinationID;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
