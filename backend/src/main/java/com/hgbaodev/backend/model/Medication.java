@@ -35,7 +35,4 @@ public class Medication {
     @Column(name = "end_date")
     private LocalDate endDate;
 
-    @Column(name = "note")
-    private String note;
-
 }
