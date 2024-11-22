@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getMembersQueryOptions } from "~/api/members/get-members";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 
 export const createMember = ({
   gender,

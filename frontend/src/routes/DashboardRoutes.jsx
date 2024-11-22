@@ -7,15 +7,12 @@ const VaccinationPage = Loadable(React.lazy(() => import('~/pages/manager/Vaccin
 const AppointmentPage = Loadable(React.lazy(() => import('~/pages/manager/AppointmentPage')));
 const MemberPage = Loadable(React.lazy(() => import('~/pages/manager/MemberPage')));
 const AllergyPage = Loadable(React.lazy(() => import('~/pages/manager/AllergyPage')));
-const MedicationPage = Loadable(React.lazy(() => import('~/pages/manager/MedicationPage')));
 const EmergencyContactPage = Loadable(React.lazy(() => import('~/pages/manager/EmergencyContactPage')));
 const MedicalRecordPage = Loadable(React.lazy(() => import('~/pages/manager/MedicalRecordPage')));
-const DocumentPage = Loadable(React.lazy(() => import('~/pages/manager/DocumentPage')));
 const HelpPage = Loadable(React.lazy(() => import('~/pages/manager/HelpPage')));
 const HealthStatsPage = Loadable(React.lazy(() => import('~/pages/manager/HealthStatsPage')))
 const AccountSettingPage = Loadable(React.lazy(() => import('~/pages/manager/AccountSettingPage')))
 const ChatPage = Loadable(React.lazy(() => import('~/pages/manager/ChatPage')))
-const NotePage = Loadable(React.lazy(() => import('~/pages/manager/NotePage')))
 
 export const DashboardRoutes = {
   children: [
@@ -37,10 +34,6 @@ export const DashboardRoutes = {
           element: <AllergyPage />
         },
         {
-          path: 'medications' ,
-          element: <MedicationPage />
-        },
-        {
           path: 'vaccinations',
           element: <VaccinationPage />
         },
@@ -57,10 +50,6 @@ export const DashboardRoutes = {
           element: <MedicalRecordPage />
         },
         {
-          path: 'documents',
-          element: <DocumentPage />
-        },
-        {
             path: 'help-support',
             element: <HelpPage />
         },
@@ -75,10 +64,6 @@ export const DashboardRoutes = {
         {
           path: 'appointments',
           element: <AppointmentPage />
-        },
-        {
-          path: 'notes',
-          element: <NotePage />
         },
         {
           path: 'chat-ai',

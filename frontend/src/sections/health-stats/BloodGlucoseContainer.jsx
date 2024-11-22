@@ -1,7 +1,7 @@
 import BloodGlucoseTable from "./BloodGlucoseTable";
 import BloodGlucoseChart from "./BloodGlucoseChart";
-import '../../assets/css/health-stats.css'
 import { useState } from "react";
+import { Flex } from "antd";
 
 const BloodGlucoseContainer = ({ selectedMemberId }) => {
   const [date, setDate] = useState("");
@@ -9,8 +9,8 @@ const BloodGlucoseContainer = ({ selectedMemberId }) => {
 
   return (
       <>
-        <div className="flex-container" >
-          <div className="table-container" >
+        <Flex justify="space-between" className="w-full bg-white p-5 rounded-md" >
+          <div className="flex-1" >
             <BloodGlucoseTable
               selectedMemberId={selectedMemberId} 
               selectedStatType={selectedStatType}
@@ -18,14 +18,14 @@ const BloodGlucoseContainer = ({ selectedMemberId }) => {
               onDateChange={setDate}
             />
           </div>
-          <div className="chart-container" >
+          <div className="flex-1 pl-2" >
             <BloodGlucoseChart
               selectedMemberId={selectedMemberId} 
               selectedStatType={selectedStatType}
               date={date}
             /> 
           </div>
-        </div>
+        </Flex>
       </>
   );
 };

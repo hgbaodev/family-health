@@ -10,8 +10,8 @@ import {
   message,
 } from "antd";
 import { Flex } from "antd";
-import { useUpdateMedicalRecord } from "~/api/medicalRecords/update-medical-records";
-import { useMedicalRecordsStore } from "~/stores/medical-records/medicalRecordStore";
+import { useUpdateMedicalRecord } from "~/api/medical-records/update-medical-records";
+import { useMedicalRecordsStore } from "~/stores/medicalRecordStore";
 import moment from "moment";
 import { useEffect } from "react";
 

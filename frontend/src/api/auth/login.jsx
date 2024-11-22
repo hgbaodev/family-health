@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "~/axios/api";
-import { useAuthStore } from "~/stores/auth/authStore";
+import { api } from "~/config/api";
+import { useAuthStore } from "~/stores/authStore";
 
 export const login = ({ email, password }) => {
   return api.post(`/auth/login`, {

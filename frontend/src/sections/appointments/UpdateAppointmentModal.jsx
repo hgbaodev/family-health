@@ -3,7 +3,7 @@ import { Flex } from "antd";
 import { useEffect } from "react";
 import { useMembersByUser } from "~/api/members/get-members";
 import moment from "moment";
-import { useAppointmentsStore } from "~/stores/appointments/appointmentStore";
+import { useAppointmentsStore } from "~/stores/appointmentStore";
 import { useUpdateAppointment } from "~/api/appointments/update-appointment";
 
 const { Option } = Select;

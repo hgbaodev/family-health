@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAllergiesQueryOptions } from "~/api/allergies/get-allergies";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 
 export const deleteAllergy = (id) => {
   return api.delete(`/allergies/${id}`);

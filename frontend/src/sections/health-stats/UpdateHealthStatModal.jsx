@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Form, Input, Modal, DatePicker, Row, Col, message, Select } from "antd";
 import { useUpdateHealthStat } from "~/api/health-stats/update-health-stat";
-import { useHealthStatsStore } from "~/stores/health-stats/healthStatStore";
+import { useHealthStatsStore } from "~/stores/healthStatStore";
 import moment from "moment";
 
 const UpdateHealthStatModal = () => {

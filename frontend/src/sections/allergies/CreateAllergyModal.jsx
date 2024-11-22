@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Select, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useCreateAllergy } from "~/api/allergies/create-allergy";
-import { useAllergiesStore } from "~/stores/allergies/allergyStore";
+import { useAllergiesStore } from "~/stores/allergyStore";
 import { useMembersByUser } from "../../api/members/get-members";
 
 const { Option } = Select;

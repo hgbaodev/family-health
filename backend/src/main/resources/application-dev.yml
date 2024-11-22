@@ -69,7 +69,7 @@ openai:
   api:
     key: AIzaSyCJNSKklG_4YnphbCk7S9k3tGSnlC9SGW8
     url: https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent
-
+#SETUP swagger
 swagger:
   contact-name: Hoang Gia Bao
   contact-mail: hgbaodevservice@gmail.com
@@ -79,5 +79,11 @@ swagger:
   app-version: 3.3.1
   app-license-url: https://www.apache.org/licenses/LICENSE-2.0.html
   app-license: Apache 2.0
+
+#SETUP Cloudinary
+cloudinary:
+  cloud-name: dbpmgfsqf
+  api-key: 426457797134772
+  api-secret: -XO1BWyQTQLbtt5QdUr-K-go1yc
 
 

@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 
 export const chatAi = ({
   question,

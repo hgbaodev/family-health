@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuthStore } from "~/stores/auth/authStore";
+import { useAuthStore } from "~/stores/authStore";
 
 const AuthRoute = ({ component: Component }) => {
   const { isAuthenticated } = useAuthStore((state) => state);

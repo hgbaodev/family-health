@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getVaccinationsQueryOptions } from "~/api/vaccinations/get-vaccination";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 
 export const deleteVaccination = (id) => {
   return api.delete(`/vaccinations/${id}`);

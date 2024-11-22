@@ -2,8 +2,8 @@ import { Flex } from "antd";
 import ConfirmModal from "~/components/modals/ConfirmModal";
 import PageHeader from "~/components/page-header";
 import { useTranslation } from "react-i18next";
-import { useContactsStore } from "~/stores/contacts/userStore";
 import { ContactTable } from "~/sections/contacts/ContactTable";
+import { useContactsStore } from "~/stores/contactStore";
 
 const ContactPage = () => {
   const {

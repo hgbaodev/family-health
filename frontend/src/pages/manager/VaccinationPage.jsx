@@ -5,7 +5,7 @@ import PageHeader from "~/components/page-header";
 import CreateVaccinationModal from "~/sections/vaccinations/CreateVaccinationModal";
 import UpdateVaccinationModal from "~/sections/vaccinations/UpdateVaccinationModal";
 import { VaccinationTable } from "~/sections/vaccinations/VaccinationTable";
-import { useVaccinationsStore } from "~/stores/vaccinations/vaccinationStore";
+import { useVaccinationsStore } from "~/stores/vaccinationStore";
 import { useTranslation } from "react-i18next";
 
 const VaccinationPage = () => {

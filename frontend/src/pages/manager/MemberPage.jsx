@@ -5,7 +5,7 @@ import PageHeader from "~/components/page-header";
 import CreateMemberModal from "~/sections/members/CreateMemberModal";
 import { MemberTable } from "~/sections/members/MemberTable";
 import UpdateMemberModal from "~/sections/members/UpdateMemberModal";
-import { useMembersStore } from "~/stores/members/memberStore";
+import { useMembersStore } from "~/stores/memberStore";
 import { useTranslation } from "react-i18next";
 
 const MemberPage = () => {

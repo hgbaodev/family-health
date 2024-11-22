@@ -2,7 +2,7 @@ import { Button, Form, Input, Modal, DatePicker, Row, Col, message, Select} from
 import { Flex } from "antd";
 import { useState } from "react";
 import { useCreateHealthStat } from "~/api/health-stats/create-health-stat";
-import { useHealthStatsStore } from "~/stores/health-stats/healthStatStore";
+import { useHealthStatsStore } from "~/stores/healthStatStore";
 
 const CreateHealthStatModal = ({ selectedMemberId }) => {
     const [form] = Form.useForm();

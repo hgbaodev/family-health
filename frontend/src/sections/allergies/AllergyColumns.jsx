@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteAllergy } from "~/api/allergies/delete-allergies";
-import { useAllergiesStore } from "~/stores/allergies/allergyStore";
+import { useAllergiesStore } from "~/stores/allergyStore";
 import { useTranslation } from "react-i18next";
 
 const useAllergyColumns = () => {

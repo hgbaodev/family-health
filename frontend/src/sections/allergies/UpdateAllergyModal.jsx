@@ -3,7 +3,7 @@ import { Flex } from "antd";
 import { useEffect } from "react";
 import { useUpdateAllergy } from "~/api/allergies/update-allergies";
 import { useMembersByUser } from "~/api/members/get-members";
-import { useAllergiesStore } from "~/stores/allergies/allergyStore";
+import { useAllergiesStore } from "~/stores/allergyStore";
 
 const { Option } = Select;
 

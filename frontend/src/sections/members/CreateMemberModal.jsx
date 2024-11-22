@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Select, DatePicker, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useCreateMember } from "~/api/members/create-member";
-import { useMembersStore } from "~/stores/members/memberStore";
+import { useMembersStore } from "~/stores/memberStore";
 import { useTranslation } from "react-i18next";
 
 const { Option } = Select;

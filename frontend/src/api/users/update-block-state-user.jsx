@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 import { getUsersQueryOptions } from "./get-users";
 
 export const updateBlockStateUser = (id) => {
