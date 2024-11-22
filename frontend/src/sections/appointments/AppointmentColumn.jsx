@@ -5,7 +5,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import moment from "moment";
 import { useTranslation } from "react-i18next";
 import { useDeleteAppointment } from "~/api/appointments/delete-appointment";
-import { useAppointmentsStore } from "~/stores/appointments/appointmentStore";
+import { useAppointmentsStore } from "~/stores/appointmentStore";
 
 const useAppointmentColumns = () => {
   const { t } = useTranslation();

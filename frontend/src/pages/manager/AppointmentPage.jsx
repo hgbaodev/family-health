@@ -3,7 +3,7 @@ import { Button, Flex, Space } from "antd";
 import ConfirmModal from "~/components/modals/ConfirmModal";
 import PageHeader from "~/components/page-header";
 import { useTranslation } from "react-i18next";
-import { useAppointmentsStore } from "~/stores/appointments/appointmentStore";
+import { useAppointmentsStore } from "~/stores/appointmentStore";
 import CreateAppointmentModal from "~/sections/appointments/CreateAppointmentModal";
 import UpdateAppointmentModal from "~/sections/appointments/UpdateAppointmentModal";
 import { AppointmentTable } from "~/sections/appointments/AppointmentTable";

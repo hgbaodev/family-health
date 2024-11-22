@@ -3,7 +3,7 @@ import { Button, Input, Table, Tag } from "antd";
 import useMedicalRecordColumn from "./MedialRecordColumns";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useState } from "react";
-import { useMedicalRecords } from "~/api/medicalRecords/get-medical-records";
+import { useMedicalRecords } from "~/api/medical-records/get-medical-records";
 
 export const MedicalRecordTable = () => {
   const columns = useMedicalRecordColumn();

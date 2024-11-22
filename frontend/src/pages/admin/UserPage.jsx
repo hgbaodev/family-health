@@ -3,7 +3,7 @@ import ConfirmModal from "~/components/modals/ConfirmModal";
 import PageHeader from "~/components/page-header";
 import { useTranslation } from "react-i18next";
 import { UserTable } from "~/sections/users/UserTable";
-import { useUsersStore } from "~/stores/users/userStore";
+import { useUsersStore } from "~/stores/userStore";
 
 const UserPage = () => {
   const {

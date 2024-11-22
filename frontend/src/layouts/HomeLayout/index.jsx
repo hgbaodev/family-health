@@ -7,7 +7,7 @@ import {
   TwitterOutlined,
   FacebookOutlined,
 } from "@ant-design/icons";
-import { useAuthStore } from "~/stores/auth/authStore";
+import { useAuthStore } from "~/stores/authStore";
 import LanguageSwitcher from "~/components/LanguageSwitcher";
 import { useTranslation } from "react-i18next";
 

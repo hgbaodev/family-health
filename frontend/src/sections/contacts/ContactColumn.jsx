@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
-import { CheckCircleOutlined, DeleteOutlined, LockOutlined, UnlockOutlined} from "@ant-design/icons";
+import { CheckCircleOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useUpdateSeenStateContact } from "~/api/contacts/update-seen-state-contact";
 

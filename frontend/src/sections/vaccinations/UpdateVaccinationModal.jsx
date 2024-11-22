@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Select, DatePicker, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useEffect } from "react";
-import { useVaccinationsStore } from "~/stores/vaccinations/vaccinationStore";
+import { useVaccinationsStore } from "~/stores/vaccinationStore";
 import { useMembersByUser } from "~/api/members/get-members";
 import moment from "moment";
 import { useUpdateVaccination } from "~/api/vaccinations/update-vaccination";

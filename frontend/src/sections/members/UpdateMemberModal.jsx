@@ -1,7 +1,7 @@
 import { Button, Form, Input, Modal, Select, DatePicker, Row, Col, message } from "antd";
 import { Flex } from "antd";
 import { useUpdateMember } from "~/api/members/update-member";
-import { useMembersStore } from "~/stores/members/memberStore";
+import { useMembersStore } from "~/stores/memberStore";
 import moment from "moment";
 import { useEffect } from "react";
 

@@ -1,5 +1,5 @@
 import { queryOptions, useQuery } from "@tanstack/react-query";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 
 export const getMembers = async ({ page="", size="", keyword="" }) => {
   const response = await api.get(`/members`, {

@@ -1,13 +1,16 @@
 import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
-import { useDeleteMedicalRecord } from "~/api/medicalRecords/delete-medical-contacts";
-import { useMedicalRecordsStore } from "~/stores/medical-records/medicalRecordStore";
+import { useDeleteMedicalRecord } from "~/api/medical-records/delete-medical-contacts";
+import { useMedicalRecordsStore } from "~/stores/medicalRecordStore";
+import { useTranslation } from "react-i18next";
 
 const useMedicalRecordColumns = () => {
   const { setOpenUpdateModal, setMedicalRecord } = useMedicalRecordsStore(
     (state) => state
   );
+
+  const t = useTranslation();
 
   const mutateDelete = useDeleteMedicalRecord({
     onSuccess: () => {
@@ -95,7 +98,8 @@ const useMedicalRecordColumns = () => {
         ),
       },
     ],
-    []
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [t]
   );
 };
 

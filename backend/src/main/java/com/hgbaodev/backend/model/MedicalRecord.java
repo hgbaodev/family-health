@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @Builder
@@ -40,5 +41,13 @@ public class MedicalRecord {
 
     @Column(name="facility_name")
     private String facilityName;
+
+    @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Medication> medications;
+
+    @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Document> documents;
 
 }

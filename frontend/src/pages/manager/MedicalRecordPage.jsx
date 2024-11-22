@@ -5,7 +5,7 @@ import PageHeader from "~/components/page-header";
 import CreateMedicalRecordModal from "~/sections/medical-records/CreateMedicalRecordModal";
 import { MedicalRecordTable } from "~/sections/medical-records/MedicalRecordTable";
 import UpdateMedicalRecordModal from "~/sections/medical-records/UpdateMedicalRecordModal";
-import { useMedicalRecordsStore } from "~/stores/medical-records/medicalRecordStore";
+import { useMedicalRecordsStore } from "~/stores/medicalRecordStore";
 
 
 const MedicalRecordPage = () => {

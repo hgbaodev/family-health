@@ -2,10 +2,10 @@ import { PlusSquareOutlined } from "@ant-design/icons";
 import { Button, Flex, Space } from "antd";
 import ConfirmModal from "~/components/modals/ConfirmModal";
 import PageHeader from "~/components/page-header";
-import CreateEmergencyContactModal from "~/sections/emergencyContacts/CreateEmergencyContactModal";
-import { EmergencyContactTable } from "~/sections/emergencyContacts/EmergencyContactTable";
-import UpdateEmergencyContactModal from "~/sections/emergencyContacts/UpdateEmergencyContactModal";
-import { useEmergencyContactStore } from "~/stores/emergencyContacts/emergencyContactStore";
+import CreateEmergencyContactModal from "~/sections/emergency-contacts/CreateEmergencyContactModal";
+import { EmergencyContactTable } from "~/sections/emergency-contacts/EmergencyContactTable";
+import UpdateEmergencyContactModal from "~/sections/emergency-contacts/UpdateEmergencyContactModal";
+import { useEmergencyContactStore } from "~/stores/emergencyContactStore";
 import { useTranslation } from "react-i18next";
 
 

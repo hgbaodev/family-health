@@ -5,7 +5,7 @@ import PageHeader from "~/components/page-header";
 import CreateAllergyModal from "~/sections/allergies/CreateAllergyModal";
 import { AllergyTable } from "~/sections/allergies/AllergyTable";
 import UpdateAllergyModal from "~/sections/allergies/UpdateAllergyModal";
-import { useAllergiesStore } from "~/stores/allergies/allergyStore";
+import { useAllergiesStore } from "~/stores/allergyStore";
 import { useTranslation } from "react-i18next";
 
 

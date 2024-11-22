@@ -4,7 +4,7 @@ import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteHealthStat } from "~/api/health-stats/delete-health-stat";
 import { useTranslation } from "react-i18next";
-import { useHealthStatsStore } from "~/stores/health-stats/healthStatStore";
+import { useHealthStatsStore } from "~/stores/healthStatStore";
 
 const useHeartRateColumns = () => {
   const { t } = useTranslation();

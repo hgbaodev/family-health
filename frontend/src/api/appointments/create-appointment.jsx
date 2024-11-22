@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { getAppointmentsQueryOptions } from "~/api/appointments/get-appointment";
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 
 export const createAppointment = ({ memberId, time, doctor, location }) => {
   return api.post(`/appointments`, {

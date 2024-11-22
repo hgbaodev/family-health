@@ -1,4 +1,4 @@
-import { api } from "~/axios/api";
+import { api } from "~/config/api";
 import { useMutation } from "@tanstack/react-query";
 
 export const sendOTP = ({ email }) => {

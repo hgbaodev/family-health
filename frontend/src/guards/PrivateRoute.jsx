@@ -1,7 +1,7 @@
 import { startTransition } from "react";
 import { Navigate } from "react-router-dom";
 import { useMe } from "~/api/auth/me";
-import { useAuthStore } from "~/stores/auth/authStore";
+import { useAuthStore } from "~/stores/authStore";
 
 const PrivateRoute = ({ component: Component }) => {
   const setUser = useAuthStore((state) => state.setUser);

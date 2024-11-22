@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useDeleteMember } from "~/api/members/delete-member";
-import { useMembersStore } from "~/stores/members/memberStore";
+import { useMembersStore } from "~/stores/memberStore";
 import { useTranslation } from "react-i18next";
 
 const useMemberColumns = () => {

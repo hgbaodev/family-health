@@ -7,7 +7,7 @@ import BloodGlucoseContainer from "~/sections/health-stats/BloodGlucoseContainer
 import HeartRateContainer from "~/sections/health-stats/HeartRateContainer";
 import ConfirmModal from "~/components/modals/ConfirmModal";
 import CreateHealthStatModal from "~/sections/health-stats/CreateHealthStatModal";
-import { useHealthStatsStore } from "~/stores/health-stats/healthStatStore";
+import { useHealthStatsStore } from "~/stores/healthStatStore";
 import UpdateHealthStatModal from "~/sections/health-stats/UpdateHealthStatModal";
 import { useMembersByUser } from "~/api/members/get-members";
 
