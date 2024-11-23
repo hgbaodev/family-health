@@ -19,7 +19,4 @@ public class UserResponse {
     @JsonProperty("email")
     String email;
 
-    Boolean is_verify;
-    Boolean is_block;
-
 }

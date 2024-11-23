@@ -8,6 +8,7 @@ const { Sider } = Layout;
 const { useBreakpoint } = Grid;
 
 function ResponsiveSider({ collapsed, setCollapsed }) {
+
   const [isMobile, setIsMobile] = useState(false);
   const screens = useBreakpoint();
   const navigate = useNavigate();
@@ -32,7 +33,7 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
               navigate("/");
             }}
           >
-            <img src={logo} className="w-14 h-14" />
+            <img src={logo} className="w-20 h-20 object-fill" />
             <span className="text-xl font-bold text-primary">FamilyHealth</span>
           </Space>
           <MenuCustom
@@ -57,10 +58,11 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
                 navigate("/");
               }}
             >
-              <img src={logo} className="w-14 h-14" />
-              <span className="text-xl font-bold text-primary">
+              <img src={logo} className="w-20 h-20" />
+              {!collapsed && <span className="text-xl font-bold text-primary">
                 FamilyHealth
-              </span>
+              </span>}
+              
             </Space>
             <MenuCustom
               mode="inline"

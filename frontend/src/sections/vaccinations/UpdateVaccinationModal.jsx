@@ -12,8 +12,6 @@ const UpdateVaccinationModal = () => {
   const [form] = Form.useForm();
   const { openUpdateModal, setOpenUpdateModal, vaccination } = useVaccinationsStore((state) => state);
 
-  console.log(vaccination);
-  
   const { data: members } = useMembersByUser();
 
   const mutation = useUpdateVaccination({

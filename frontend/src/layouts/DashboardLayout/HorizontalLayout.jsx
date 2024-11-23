@@ -17,7 +17,6 @@ const HorizontalLayout = () => {
         <Content className="px-3 py-3 content overflow-auto">
           <Outlet />
         </Content>
-        {/* <FooterLayout /> */}
       </Layout>
     </Layout>
   );

@@ -74,7 +74,7 @@ const LoginPage = () => {
       className="p-8 rounded-[8px] w-[90%] md:w-[460px] bg-white border shadow-lg"
     >
       <Link to="/" className="cursor-pointer">
-        <img src={logo} alt="logo" className="w-24 mx-auto" />
+        <img src={logo} alt="logo" className="w-40 mx-auto" />
       </Link>
       <Title level={4} className="text-center">
         {t("LoginPage.Welcome")}{" "}

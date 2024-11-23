@@ -26,10 +26,10 @@ const HomeLayout = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-10 h-10 md:w-12 md:h-12 transition-transform duration-300 cursor-pointer"
+            className="w-20 h-20 transition-transform duration-300 cursor-pointer"
             onClick={() => navigate("/")}
           />
-          <span className="text-xs md:text-2xl font-bold ml-2 text-primary">
+          <span className="text-xs md:text-2xl font-bold text-primary">
             FamilyHealth
           </span>
         </div>

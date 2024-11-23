@@ -27,9 +27,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class AuthenticationController {
 
-  private static final Logger log = LoggerFactory.getLogger(AuthenticationController.class);
   private final AuthenticationService service;
-  private final JwtService jwtService;
   private final ForgotPasswordService forgotPasswordService;
 
   @PostMapping("/register")

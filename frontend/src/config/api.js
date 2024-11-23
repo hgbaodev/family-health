@@ -1,10 +1,12 @@
 import Axios from "axios";
+import Cookies from "js-cookie";
 import { BACKEND_ENDPOINT } from "~/config/env";
 
 function authRequestInterceptor(config) {
   if (config.headers) {
+    let token = Cookies.get("access_token");
     config.headers.Accept = "application/json";
-    config.headers["Authorization"] = `Bearer ${localStorage.getItem("access_token")}`;
+    config.headers["Authorization"] = `Bearer ${token}`;
   }
 
   config.withCredentials = true;

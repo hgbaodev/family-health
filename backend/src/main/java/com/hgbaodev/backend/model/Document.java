@@ -21,16 +21,22 @@ public class Document {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
+    @Column(name = "position", nullable = false)
+    private int position;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "record_id", nullable = false)
     private MedicalRecord record;
 
-    @Column(name = "file_name", nullable = false)
-    private String fileName;
+    @Column(name = "size", nullable = false)
+    private Long size;
 
-    @Column(name = "file_type",nullable = false)
-    private String fileType;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column
+    @Column(name = "type",nullable = false)
+    private String type;
+
+    @Column(name = "path", nullable = false)
     private String path;
 }
