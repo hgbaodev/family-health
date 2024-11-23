@@ -36,6 +36,7 @@ const UpdateMedicalRecordModal = () => {
       setListMedication(medicalRecord?.medications);
       setListDocument(medicalRecord?.documents);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [medicalRecord]);
 
   const onFinish = (values) => {
