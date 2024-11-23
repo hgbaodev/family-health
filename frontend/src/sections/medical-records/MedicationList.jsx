@@ -1,24 +1,77 @@
-import {
-  Button,
-  Input,
-  DatePicker,
-  Flex,
-  Card,
-  Typography
-} from "antd";
+import { Button, Flex, Card, Typography } from "antd";
 import { 
   MedicineBoxOutlined, 
-  CalendarOutlined,
   PlusOutlined,
-  DeleteOutlined
 } from "@ant-design/icons";
-import moment from "moment";
 import { useMedicalRecordsStore } from "~/stores/medicalRecordStore";
+import {
+  DndContext,
+  closestCenter,
+  KeyboardSensor,
+  PointerSensor,
+  useSensor,
+  useSensors,
+  DragOverlay
+} from '@dnd-kit/core';
+import {
+  arrayMove,
+  SortableContext,
+  sortableKeyboardCoordinates,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import { useState } from "react";
+import SortableItem from "~/sections/medical-records/SortableItem";
+import DraggableOverlay from "~/sections/medical-records/DraggableOverlay";
 
 const { Title } = Typography;
 
 const MedicationList = () => {
-  const { listMedication, addMedication, removeMedication, handleInputMedicationChange } = useMedicalRecordsStore((state) => state);
+  const { 
+    listMedication, 
+    addMedication, 
+    removeMedication, 
+    handleInputMedicationChange,
+    setListMedication,
+  } = useMedicalRecordsStore((state) => state);
+
+  const [activeId, setActiveId] = useState(null);
+
+  const sensors = useSensors(
+    useSensor(PointerSensor, {
+      activationConstraint: {
+        distance: 8,
+      },
+    }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragStart = (event) => {
+    setActiveId(event.active.id);
+  };
+
+  const handleDragEnd = (event) => {
+    const { active, over } = event;
+    setActiveId(null);
+
+    if (over && active.id !== over.id) {
+      const oldIndex = listMedication.findIndex(
+        item => item.position.toString() === active.id
+      );
+      const newIndex = listMedication.findIndex(
+        item => item.position.toString() === over.id
+      );
+
+      const newPositions = arrayMove(listMedication, oldIndex, newIndex);
+      setListMedication(newPositions);
+      console.log("newPositions", newPositions);
+    }
+  };
+
+  const activeForm = activeId 
+    ? listMedication.find(item => item.position.toString() === activeId)
+    : null;
 
   return (
     <Card className="shadow-sm">
@@ -27,72 +80,38 @@ const MedicationList = () => {
         Danh sách thuốc điều trị
       </Title>
       
-      <Flex vertical gap={4}>
-        {listMedication.map((form) => (
-            <Card
-              key={form.position}
-              className="bg-gray-50 border border-gray-200 hover:border-blue-400 transition-all duration-300 p-4"
-            >
-              <Flex align="center" gap={4}>
-                <span className="font-bold">{form.position}</span>
-                <Input
-                  placeholder="Tên thuốc"
-                  value={form.name}
-                  onChange={(e) =>
-                    handleInputMedicationChange(form.position, "name", e.target.value)
-                  }
-                  prefix={<MedicineBoxOutlined className="text-gray-400" />}
-                  className="w-64"
-                />
-                
-                <Input
-                  placeholder="Liều lượng"
-                  value={form.frequency}
-                  onChange={(e) =>
-                    handleInputMedicationChange(form.position, "frequency", e.target.value)
-                  }
-                  className="w-48"
-                />
-                
-                <DatePicker
-                  placeholder="Ngày bắt đầu"
-                  value={form.startDate ? moment(form.startDate) : null}
-                  onChange={(date) =>
-                    handleInputMedicationChange(
-                      form.position,
-                      "startDate",
-                      date ? date.format("YYYY-MM-DD") : ""
-                    )
-                  }
-                  prefix={<CalendarOutlined className="text-gray-400" />}
-                  className="w-40"
-                />
-                
-                <DatePicker
-                  placeholder="Ngày kết thúc"
-                  value={form.endDate ? moment(form.endDate) : null}
-                  onChange={(date) =>
-                    handleInputMedicationChange(
-                      form.position,
-                      "endDate",
-                      date ? date.format("YYYY-MM-DD") : ""
-                    )
-                  }
-                  prefix={<CalendarOutlined className="text-gray-400" />}
-                  className="w-40"
-                />
-                
-                <Button
-                  type="text"
-                  danger
-                  icon={<DeleteOutlined />}
-                  onClick={() => removeMedication(form.position)}
-                  className="ml-auto hover:bg-red-50"
-                />
-              </Flex>
-            </Card>
-          ))}
-      </Flex>
+      <DndContext
+        sensors={sensors}
+        collisionDetection={closestCenter}
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+      >
+        <SortableContext
+          items={listMedication.map(item => item.position.toString())}
+          strategy={verticalListSortingStrategy}
+        >
+          <Flex vertical gap={4}>
+            {listMedication.map((form) => (
+              <SortableItem
+                key={form.position}
+                form={form}
+                onRemove={removeMedication}
+                onInputChange={handleInputMedicationChange}
+              />
+            ))}
+          </Flex>
+        </SortableContext>
+
+        <DragOverlay>
+          {activeForm ? (
+            <DraggableOverlay
+              form={activeForm}
+              onRemove={removeMedication}
+              onInputChange={handleInputMedicationChange}
+            />
+          ) : null}
+        </DragOverlay>
+      </DndContext>
 
       <Flex justify="center" className="mt-6">
         <Button 

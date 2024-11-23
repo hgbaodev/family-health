@@ -10,6 +10,8 @@ const UserDropdown = () => {
   const navigate = useNavigate();
   const { user, clearUser } = useAuthStore();
 
+  console.log("user", user);
+
   const handleLogout = () => {
     Cookies.remove('token');
     clearUser();
@@ -69,7 +71,7 @@ const UserDropdown = () => {
           >
             <Flex vertical justify="start">
               <p className="text-primary font-medium text-sm">
-                {user?.firstName} {user?.lastName}
+                {user?.firstname} {user?.lastname}
               </p>
               <p className="text-[red]] text-xs">{user?.email}</p>
             </Flex>
