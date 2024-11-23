@@ -1,163 +1,72 @@
-import {
-  Button,
-  Form,
-  Input,
-  Modal,
-  Select,
-  Row,
-  DatePicker,
-  Col,
-  message,
-} from "antd";
-import { Flex } from "antd";
-import { useUpdateMedicalRecord } from "~/api/medical-records/update-medical-records";
-import { useMedicalRecordsStore } from "~/stores/medicalRecordStore";
+import { Form, Modal, Tabs } from "antd";
 import moment from "moment";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import DocumentList from "~/sections/medical-records/DocumenList";
+import FooterButtons from "~/sections/medical-records/FooterButtons";
+import MedicationList from "~/sections/medical-records/MedicationList";
+import MemberInfoForm from "~/sections/medical-records/MemberInfoForm";
+import { useMedicalRecordsStore } from "~/stores/medicalRecordStore";
 
 const UpdateMedicalRecordModal = () => {
   const [form] = Form.useForm();
-  const { openUpdateModal, setOpenUpdateModal, medicalRecord } = useMedicalRecordsStore((state) => state);
-
-  const memberOptions = [];
-
-  const mutation = useUpdateMedicalRecord({
-    onSuccess: () => {
-      message.success("Medical record changes recorded successfully");
-    },
-    onError: () => {
-      message.error("Failed to update medical record");
-    },
-  });
-
-  const onFinish = (values) => {
-    const formattedValues = {
-      ...values,
-      date: values.date ? values.date.format("YYYY-MM-DD") : null,
-    };
-    mutation.mutate({
-      id: medicalRecord.recordID,
-      data: formattedValues,
-    });
-    setOpenUpdateModal(false);
-  };
+  const [ tab, setTab ] = useState("0");
+  const {
+    medicalRecord,
+    setMedicalRecord,
+    openUpdateModal,
+    setOpenUpdateModal,
+    listDocument,
+    listMedication,
+    setListMedication,
+    setListDocument,
+    clearListMedication,
+    clearListDocument
+  } = useMedicalRecordsStore();
 
   useEffect(() => {
-    if (medicalRecord) {
-      form.setFieldsValue({
-        ...medicalRecord,
-        date: medicalRecord.date ? moment(medicalRecord.date) : null,
-      });
+    if(medicalRecord){
+      setTab("0");
+      form.setFieldValue("memberId", medicalRecord?.member.id);
+      form.setFieldValue("facilityName", medicalRecord?.facilityName);
+      form.setFieldValue("date", moment(medicalRecord?.date));
+      form.setFieldValue("doctor", medicalRecord?.doctor);
+      form.setFieldValue("symptoms", medicalRecord?.symptoms);
+      form.setFieldValue("diagnosis", medicalRecord?.diagnosis);
+      form.setFieldValue("treatment", medicalRecord?.treatment);
+      setListMedication(medicalRecord?.medications);
+      setListDocument(medicalRecord?.documents);
     }
-  }, [medicalRecord, form]);
+  }, [medicalRecord]);
+
+  const onFinish = (values) => {
+    values["medications"] = listMedication;
+    values["documents"] = listDocument;
+    console.log("Values", values);
+  };
+
+  const items = [
+    { key: "0", label: "Thông tin", children: <MemberInfoForm form={form} /> },
+    { key: "1", label: "Thuốc", children: <MedicationList /> },
+    { key: "2", label: "Tài liệu", children: <DocumentList /> },
+  ];
 
   return (
     <Modal
-      width={800}
-      title="Update medical record"
+      title="Hồ sơ y tế"
+      width={1000}
       open={openUpdateModal}
-      onCancel={() => setOpenUpdateModal(false)}
+      centered={true}
+      onCancel={() => {
+        setOpenUpdateModal(false),
+        setMedicalRecord(null),
+        clearListMedication();
+        clearListDocument();
+      }}
       footer={null}
     >
-      <Form
-        form={form}
-        onFinish={onFinish}
-        className="pt-4"
-        layout="vertical"
-        variant="filled"
-      >
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Member "
-              name="memberId"
-              rules={[{ required: true, message: "Please choose a member " }]}
-            >
-              <Select
-                showSearch
-                placeholder="Choose a member..."
-                optionFilterProp="label"
-                options={memberOptions} 
-                notFoundContent="Loading members..."
-              />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Date"
-              name="date"
-              rules={[{ required: true, message: "Please select date" }]}
-            >
-              <DatePicker
-                placeholder="Select date..."
-                style={{ width: "100%" }}
-              />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Doctor"
-              name="doctor"
-              rules={[{ required: true, message: "Please enter doctor" }]}
-            >
-              <Input placeholder="Enter doctor name..." />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Symptoms"
-              name="symptoms"
-              rules={[{ required: true, message: "Please describe symptoms" }]}
-            >
-              <Input placeholder="Describe symptoms..." />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Diagnosis"
-              name="diagnosis"
-              rules={[{ required: true, message: "Please enter diagnosis" }]}
-            >
-              <Input placeholder="Enter diagnosis ..." />
-            </Form.Item>
-          </Col>
-          <Col span={12}>
-            <Form.Item
-              label="Treatment"
-              name="treatment"
-              rules={[{ required: true, message: "Please describe treatment" }]}
-            >
-              <Input placeholder="Describe treatment..." />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Row gutter={16}>
-          <Col span={12}>
-            <Form.Item
-              label="Facility name"
-              name="facilityName"
-              rules={[
-                { required: true, message: "Please enter facility name" },
-              ]}
-            >
-              <Input placeholder="Enter facility name..." />
-            </Form.Item>
-          </Col>
-        </Row>
-        <Form.Item className="pt-4 m-0">
-          <Flex justify="end" className="gap-3">
-            <Button loading={false} type="default" htmlType="reset">
-              Reset
-            </Button>
-            <Button loading={false} type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Flex>
-        </Form.Item>
+      <Form form={form} onFinish={onFinish} className="pt-4" layout="vertical">
+        <Tabs activeKey={tab} items={items} onChange={(e) => setTab(e)} />
+        <FooterButtons />
       </Form>
     </Modal>
   );

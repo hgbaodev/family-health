@@ -1,7 +1,6 @@
 import React from 'react';
 import DashboardLayout from '~/layouts/DashboardLayout';
 import Loadable from '~/components/Loadable';
-import PrivateRoute from '~/guards/PrivateRoute';
 
 const VaccinationPage = Loadable(React.lazy(() => import('~/pages/manager/VaccinationPage')));
 const AppointmentPage = Loadable(React.lazy(() => import('~/pages/manager/AppointmentPage')));
@@ -17,7 +16,7 @@ export const DashboardRoutes = {
   children: [
     {
       path: '/manager',
-      element: <PrivateRoute component={DashboardLayout} />,
+      element: <DashboardLayout />,
       children: [
         {
           path: '',

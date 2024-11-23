@@ -10,15 +10,17 @@ import { useAuthStore } from "~/stores/authStore";
 import { useEffect } from "react";
 
 // Cấu hình QueryClient với options phù hợp
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      retry: 1,
-      refetchOnWindowFocus: false,
-      staleTime: 5 * 60 * 1000, // 5 phút
-    },
-  },
-});
+// const queryClient = new QueryClient({
+//   defaultOptions: {
+//     queries: {
+//       retry: 1,
+//       refetchOnWindowFocus: false,
+//       staleTime: 5 * 60 * 1000, // 5 phút
+//     },
+//   },
+// });
+
+const queryClient = new QueryClient();
 
 function App() {
   const router = createBrowserRouter(ThemeRoutes);
@@ -58,11 +60,7 @@ function App() {
 }
 
 const AuthProvider = ({ children }) => {
-  const { data, isSuccess, isFetching } = useMe({
-    refetchInterval: false,
-    refetchOnMount: true, 
-  });
-
+  const { data, isSuccess, isFetching } = useMe();
 
   const { setIsAuthenticated, setUser } = useAuthStore((state) => state);
 

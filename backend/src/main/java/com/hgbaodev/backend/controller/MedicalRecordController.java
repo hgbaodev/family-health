@@ -1,6 +1,7 @@
 package com.hgbaodev.backend.controller;
 
 
+import com.hgbaodev.backend.dto.response.MedicalRecordResponse;
 import com.hgbaodev.backend.model.MedicalRecord;
 import com.hgbaodev.backend.model.Member;
 import com.hgbaodev.backend.model.User;
@@ -10,6 +11,7 @@ import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.MedicalRecordService;
 import com.hgbaodev.backend.service.MemberService;
+import com.hgbaodev.backend.utils.CustomPagination;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -83,19 +85,17 @@ public class MedicalRecordController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping
-    public ResponseEntity<ApiResponse<List<MedicalRecord>>> getAllMedicalRecords(
+    public ResponseEntity<ApiResponse<?>> getAllMedicalRecords(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "8") int size,
             @RequestParam(defaultValue = "") String keyword) {
         User user = authenticationService.getCurrentUser();
-        Page<MedicalRecord> medicalRecordsPage = medicalRecordService.getAllMedicalRecords(page,size,keyword,user.getId());
-        List<MedicalRecord> medicalRecords = medicalRecordsPage.getContent();
-        ApiResponse<List<MedicalRecord>> response = new ApiResponse<>(
+        CustomPagination<MedicalRecordResponse> medicalRecordsPage = medicalRecordService.getAllMedicalRecords(page,size,keyword,user.getId());
+        ApiResponse<CustomPagination<MedicalRecordResponse>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
                 "Get list of medical record successfully",
-                medicalRecords
+                medicalRecordsPage
         );
-
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

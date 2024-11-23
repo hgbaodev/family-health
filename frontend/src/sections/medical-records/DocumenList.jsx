@@ -1,5 +1,5 @@
-import { Button, Empty, Flex, Input, message } from "antd";
-import { CloseOutlined, UploadOutlined, FileOutlined } from "@ant-design/icons";
+import { Button, Empty, Flex, Image, Input, message } from "antd";
+import { CloseOutlined, UploadOutlined, FileOutlined, DownloadOutlined } from "@ant-design/icons";
 import { useMedicalRecordsStore } from '~/stores/medicalRecordStore';
 import { useUploadFile } from "~/api/medical-records/upload-file-records";
 import { useState } from "react";
@@ -15,16 +15,14 @@ const DocumentList = () => {
     handleUrlFileChange
   } = useMedicalRecordsStore((state) => state);
 
-  console.log("listDocument", listDocument);
   const { mutate: uploadFile } = useUploadFile({
     onSuccess: (data) => {
       message.success("File uploaded successfully");
-      console.log("Data", data);
-      console.log("Position", position);
       handleUrlFileChange(position, data);
     },
     onError: (error) => {
       message.error(`Failed to upload file: ${error.message}`);
+      removeDocument(position);
     },
   });
 
@@ -37,7 +35,6 @@ const DocumentList = () => {
   const onFileChange = (position, file) => {
     if (file) {
       handleFileChange(position, file);
-      
       handleFileUpload(position, file);
     }
   };
@@ -91,12 +88,26 @@ const DocumentList = () => {
 
                 {document.path && (
                   <div className="w-12 h-12 rounded-lg overflow-hidden border border-gray-200">
-                    <img 
+                    <Image
+                      width={"100%"}
+                      height={"100$"}
                       src={document.path} 
                       alt={document.name} 
                       className="w-full h-full object-cover"
                     />
                   </div>
+                )}
+
+                {document.path && (
+                  <Button
+                    type="link"
+                    href={document.path}
+                    target="_blank"
+                    download
+                    icon={<DownloadOutlined />}
+                  >
+                    Tải xuống
+                  </Button>
                 )}
 
                 <Button
