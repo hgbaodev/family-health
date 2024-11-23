@@ -3,22 +3,26 @@ import { getMedicalRecordsQueryOptions } from "~/api/medical-records/get-medical
 import { api } from "~/config/api";
 
 export const createMedicalRecord = ({
-     memberId,
-     date,
-     doctor,
-     symptoms,
-     diagnosis,
-     treatment,
-     facilityName
+  memberId,
+  date,
+  doctor,
+  symptoms,
+  diagnosis,
+  treatment,
+  facilityName,
+  medications,
+  documents,
 }) => {
   return api.post(`/medical-records`, {
-     memberId,
-     date,
-     doctor,
-     symptoms,
-     diagnosis,
-     treatment,
-     facilityName
+    memberId,
+    date,
+    doctor,
+    symptoms,
+    diagnosis,
+    treatment,
+    facilityName,
+    medications,
+    documents,
   });
 };
 

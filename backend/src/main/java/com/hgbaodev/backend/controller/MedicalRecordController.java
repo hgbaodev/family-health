@@ -17,6 +17,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,24 +31,15 @@ public class MedicalRecordController {
     private final MedicalRecordService medicalRecordService;
     private final MemberService memberService;
 
-    @PostMapping
 
-    public ResponseEntity<ApiResponse<?>> addMedicalRecord(@Valid @RequestBody AddMedicalRecordRequest addMedicalRecordRequest) {
-        Member member = memberService.getMemberById(addMedicalRecordRequest.getMemberId());
-        MedicalRecord medicalRecord = MedicalRecord.builder()
-                .member(member)
-                .date(addMedicalRecordRequest.getDate())
-                .doctor(addMedicalRecordRequest.getDoctor())
-                .symptoms(addMedicalRecordRequest.getSymptoms())
-                .diagnosis(addMedicalRecordRequest.getDiagnosis())
-                .treatment(addMedicalRecordRequest.getTreatment())
-                .facilityName(addMedicalRecordRequest.getFacilityName())
-                .build();
-        MedicalRecord createdMedicalRecord = medicalRecordService.addMedicalRecord(medicalRecord);
+    @PostMapping
+    public ResponseEntity<ApiResponse<?>> addMedicalRecord(
+            @Valid @RequestBody AddMedicalRecordRequest addMedicalRecordRequest) {
+        MedicalRecord medicalRecord = medicalRecordService.addMedicalRecord(addMedicalRecordRequest);
         ApiResponse<MedicalRecord> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
                 "Adding new medical record successfully",
-                createdMedicalRecord
+                medicalRecord
         );
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

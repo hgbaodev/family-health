@@ -11,7 +11,7 @@ export const AuthRoutes = {
   children: [
     {
       path: "/auth",
-      element: <AuthLayout />,
+      element: <AuthRoute component={AuthLayout} />,
       children: [
         {
           path: "login",

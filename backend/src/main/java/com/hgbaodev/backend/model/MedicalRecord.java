@@ -43,11 +43,9 @@ public class MedicalRecord {
     private String facilityName;
 
     @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Medication> medications;
 
     @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
-    @JsonIgnore
     private List<Document> documents;
 
 }

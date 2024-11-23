@@ -13,19 +13,15 @@ import java.io.IOException;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/files")
+@RequestMapping("/api/v1/files")
 @RequiredArgsConstructor
 public class FileUploadController {
 
     private final CloudinaryService cloudinaryService;
 
     @PostMapping("/upload")
-    public ResponseEntity<Map<String, Object>> uploadFile(@RequestParam("file") MultipartFile file) {
-        try {
-            Map<String, Object> uploadResult = cloudinaryService.uploadFile(file);
-            return ResponseEntity.ok(uploadResult);
-        } catch (IOException e) {
-            return ResponseEntity.status(500).body(Map.of("error", "File upload failed"));
-        }
+    public ResponseEntity<String> uploadFile(@RequestParam("file") MultipartFile file) {
+        String url = cloudinaryService.uploadFile(file);
+        return ResponseEntity.ok(url);
     }
 }

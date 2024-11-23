@@ -31,7 +31,6 @@ const CreateVaccinationModal = () => {
   });
 
   const onFinish = (values) => {
-    console.log("Received values:", values);
     mutation.mutate(values);
   };
 

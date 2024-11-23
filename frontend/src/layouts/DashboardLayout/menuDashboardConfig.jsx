@@ -1,10 +1,8 @@
 import {
-  DashboardOutlined,
   UserOutlined,
   FileTextOutlined,
   CalendarOutlined,
   FileSearchOutlined,
-  SettingOutlined,
   QuestionCircleOutlined,
   HeartOutlined,
   RobotOutlined,
@@ -17,16 +15,10 @@ const MenuDashboardConfig = () => {
 
   const menuItems = [
     {
-      key: "0",
-      icon: <DashboardOutlined />,
-      label: t("Dashboard"),
-      path: "/manager",
-    },
-    {
       key: "1",
       icon: <UserOutlined />,
       label: t("Members"),
-      path: "/manager/members",
+      path: "/manager",
     },
     {
       key: "9",
@@ -69,12 +61,6 @@ const MenuDashboardConfig = () => {
       icon: <RobotOutlined />,
       label: t("ChatAi"),
       path: "/manager/chat-ai",
-    },
-    {
-      key: "10",
-      icon: <SettingOutlined />,
-      label: t("Account Settings"),
-      path: "/manager/account-settings",
     },
     {
       key: "11",

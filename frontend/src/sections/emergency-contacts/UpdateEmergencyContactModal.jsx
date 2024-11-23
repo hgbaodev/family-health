@@ -9,7 +9,6 @@ import { Flex } from "antd";
 const UpdateEmergencyContactModal = () => {
   const [form] = Form.useForm();
   const { openUpdateModal, setOpenUpdateModal, emergencyContact } = useEmergencyContactStore((state) => state);
-  console.log("emergencyContact:", emergencyContact);
 
   const mutation = useUpdateEmergencyContact({
     onSuccess: () => {

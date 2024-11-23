@@ -19,7 +19,7 @@ export const MedicalRecordTable = () => {
     <>
       <Table
         columns={columns}
-        dataSource={medicalRecords}
+        dataSource={[]}
         size="middle"
         rowKey={(record) => record.recordID}
         pagination={{

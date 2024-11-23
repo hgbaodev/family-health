@@ -31,8 +31,8 @@ const MedicalRecordPage = () => {
     <>
       <Flex align="center" justify="space-between" className="mb-2">
         <PageHeader
-          heading="Medical records"
-          links={[{ title: "DashBoard", href: "/medical-records" }, { title: "Medical record" }]}
+          heading="Hồ sơ y tế"
+          links={[{ title: "Thống kê", href: "/medical-records" }, { title: "Hồ sơ y tế" }]}
         />
         <Space>
           <Button
