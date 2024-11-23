@@ -36,14 +36,14 @@ const useMedicalRecordColumns = () => {
     () => [
       {
         title: "ID",
-        dataIndex: "recordID",
-        key: "recordID",
+        dataIndex: "id",
+        key: "id",
         align: "center",
       },
       {
         title: "Thành viên",
         dataIndex: "memberName",
-        key: "memberName"
+        render: (_, medicalRecord) => medicalRecord.member.fullName,
       },
       {
         title: "Tên cơ sở",
@@ -51,30 +51,15 @@ const useMedicalRecordColumns = () => {
         key: "facilityName",
       },
       {
+        title: "Triệu chứng",
+        dataIndex: "symptoms",
+        key: "symptoms"
+      },
+      {
         title: "Ngày",
         dataIndex: "date",
         key: "date",
         align: "center",
-      },
-      {
-        title: "Bác sĩ",
-        dataIndex: "doctor",
-        key: "doctor",
-      },
-      {
-        title: "Triệu chứng",
-        dataIndex: "symptoms",
-        key: "symptoms",
-      },
-      {
-        title: "Chuẩn đoán",
-        dataIndex: "diagnosis",
-        key: "diagnosis",
-      },
-      {
-        title: "Điều trị",
-        dataIndex: "treatment",
-        key: "treatment",
       },
       {
         title: "Action",

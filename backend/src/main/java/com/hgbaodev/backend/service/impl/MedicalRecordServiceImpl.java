@@ -3,6 +3,8 @@ package com.hgbaodev.backend.service.impl;
 import com.hgbaodev.backend.dto.request.medicalRecord.AddMedicalRecordRequest;
 import com.hgbaodev.backend.dto.request.medicalRecord.DocumentRequest;
 import com.hgbaodev.backend.dto.request.medicalRecord.MedicationRequest;
+import com.hgbaodev.backend.dto.response.MedicalRecordResponse;
+import com.hgbaodev.backend.mapper.MedicalRecordMapper;
 import com.hgbaodev.backend.model.Document;
 import com.hgbaodev.backend.model.MedicalRecord;
 import com.hgbaodev.backend.model.Medication;
@@ -13,6 +15,7 @@ import com.hgbaodev.backend.repository.MedicationRepository;
 import com.hgbaodev.backend.service.CloudinaryService;
 import com.hgbaodev.backend.service.MedicalRecordService;
 import com.hgbaodev.backend.service.MemberService;
+import com.hgbaodev.backend.utils.CustomPagination;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -32,7 +35,6 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     private final MedicationRepository medicationRepository;
     private final DocumentRepository documentRepository;
     private final MemberService memberService;
-    private final CloudinaryService cloudinaryService;
 
     @Override
     public MedicalRecord addMedicalRecord(AddMedicalRecordRequest addMedicalRecordRequest) {
@@ -87,13 +89,14 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public Page<MedicalRecord> getAllMedicalRecords(int page, int size, String keyword,Integer userID) {
+    public CustomPagination<MedicalRecordResponse> getAllMedicalRecords(int page, int size, String keyword, Integer userID) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        if (keyword != null && !keyword.isEmpty()) {
-            return medicalRecordRepository.findByKeyword(keyword, userID,pageable);
-        }
-        return medicalRecordRepository.findAllByUserID(pageable,userID);
+        Page<MedicalRecord> medicalRecords =  medicalRecordRepository.findByKeyword(keyword, userID,pageable);
+        Page<MedicalRecordResponse> medicalRecordResponses = MedicalRecordMapper.INSTANCE.toMedicalRecordsResponse(medicalRecords);
+        CustomPagination<MedicalRecordResponse> customPagination = new CustomPagination<>(medicalRecordResponses);
+        return customPagination;
     }
+
     @Override
     public Optional<MedicalRecord> findMedicalRecordById(Integer medicalRecordID){
         return medicalRecordRepository.findById(medicalRecordID);

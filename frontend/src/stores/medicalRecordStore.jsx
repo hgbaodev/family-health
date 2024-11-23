@@ -14,8 +14,9 @@ export const useMedicalRecordsStore = create((set) => ({
   setOpenUpdateModal: (openUpdateModal) => set({ openUpdateModal }),
   setOpenDeleteModal: (openDeleteModal) => set({ openDeleteModal }),
   setListDocument: (listDocument) => set({ listDocument }),
+  clearListDocument: () => set({ listDocument: [] }),
   setListMedication: (listMedication) => set({ listMedication }),
-
+  clearListMedication: () => set({ listMedication: [] }),
   addMedication: () => set((state) => ({
     listMedication: [
       ...state.listMedication,

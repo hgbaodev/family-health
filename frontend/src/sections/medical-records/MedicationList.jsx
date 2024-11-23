@@ -31,8 +31,7 @@ const MedicationList = () => {
         {listMedication.map((form) => (
             <Card
               key={form.position}
-              className="bg-gray-50 border border-gray-200 hover:border-blue-400 transition-all duration-300"
-              bodyStyle={{ padding: '16px' }}
+              className="bg-gray-50 border border-gray-200 hover:border-blue-400 transition-all duration-300 p-4"
             >
               <Flex align="center" gap={4}>
                 <span className="font-bold">{form.position}</span>

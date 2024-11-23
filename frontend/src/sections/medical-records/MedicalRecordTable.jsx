@@ -8,27 +8,35 @@ import { useMedicalRecords } from "~/api/medical-records/get-medical-records";
 export const MedicalRecordTable = () => {
   const columns = useMedicalRecordColumn();
   const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(ROW_PER_PAGE);
   const [keyword, setKeyword] = useState("");
 
-  const { data: medicalRecords, isLoading } = useMedicalRecords({
+  const { data, isLoading } = useMedicalRecords({
     page,
-    size: ROW_PER_PAGE,
+    size: pageSize,
     keyword,
   });
   return (
     <>
       <Table
         columns={columns}
-        dataSource={[]}
-        size="middle"
-        rowKey={(record) => record.recordID}
+        dataSource={data?.items || []}
+        size="small"
+        rowKey={(record) => record.id}
         pagination={{
-          current: page,
-          pageSize: ROW_PER_PAGE,
-          total: medicalRecords?.length || 0,
+          current: data?.meta?.current_page,
+          pageSize: data?.meta?.per_page,
+          total: data?.meta?.total_elements,
+          showSizeChanger: true,
+          pageSizeOptions: ["8", "10", "20", "50", "100"],
+          onShowSizeChange: (current, size) => {
+            setPageSize(size);
+            setPage(1);
+          },
           onChange: (newPage) => setPage(newPage),
         }}
         loading={isLoading}
+        scroll={{ x: "max-content" }}
         title={() => (
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <Input.Search
