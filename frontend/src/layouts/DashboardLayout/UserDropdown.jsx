@@ -10,8 +10,6 @@ const UserDropdown = () => {
   const navigate = useNavigate();
   const { user, clearUser } = useAuthStore();
 
-  console.log("user", user);
-
   const handleLogout = () => {
     Cookies.remove('token');
     clearUser();
@@ -19,11 +17,11 @@ const UserDropdown = () => {
   };
 
   const moveProfile = () => {
-    navigate('/admin/profile');
+    console.log("moveProfile");
   }
 
   const moveSetting = () => {
-    navigate('/admin/settings');
+    console.log("moveSetting");
   }
 
   const { token } = useToken();

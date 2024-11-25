@@ -22,14 +22,10 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder passwordEncoder;
     private final UserRepository repository;
-    private final UserMapper userMapper;
 
     public Page<UserResponse> getAllUsers(int page, int size, String keyword) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        if (keyword != null && !keyword.isEmpty()) {
-            return userMapper.toUsersResponse(repository.findByKeyword(keyword, pageable));
-        }
-        return userMapper.toUsersResponse(repository.findAll(pageable));
+        return UserMapper.INSTANCE.toUsersResponse(repository.findByKeyword(keyword, pageable));
     }
 
     @Override
@@ -37,7 +33,7 @@ public class UserServiceImpl implements UserService {
         User user = repository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("User is not found!!!"));
         user.set_block(!user.is_block());
-        return userMapper.toUserResponse(repository.save(user));
+        return UserMapper.INSTANCE.toUserResponse(repository.save(user));
     }
 
     public void changePassword(ChangePasswordRequest request, Principal connectedUser) {

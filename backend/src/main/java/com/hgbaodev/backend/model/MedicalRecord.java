@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -43,7 +44,7 @@ public class MedicalRecord {
     private String facilityName;
 
     @Column(name="deleted_at", nullable = true)
-    private LocalDate deletedAt;
+    private LocalDateTime deletedAt;
 
     @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
     private List<Medication> medications;
@@ -52,7 +53,7 @@ public class MedicalRecord {
     private List<Document> documents;
 
     public void delete() {
-        this.deletedAt = LocalDate.now();
+        this.deletedAt = LocalDateTime.now();
     }
 
 }
