@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
@@ -7,6 +8,8 @@ import { useMembersStore } from "~/stores/memberStore";
 import { useTranslation } from "react-i18next";
 
 const useMemberColumns = () => {
+  const { memberDetail } = useMembersStore((state) => state);
+
   const {t} = useTranslation();
 
   const { setOpenUpdateModal, setMember } = useMembersStore((state) => state);
@@ -29,6 +32,48 @@ const useMemberColumns = () => {
   const handleDelete = (id) => {
     mutateDelete.mutate(id);
   };
+
+  if(memberDetail) {
+    return useMemo(
+      () => [
+        {
+          title: t("ID"),
+          dataIndex: "id",
+          key: "id",
+          align: "center",
+        },
+        {
+          title: t("MemberPage.FullName"),
+          dataIndex: "fullName",
+          key: "fullName",
+          align: "center",
+        },
+        {
+          title: t("Action"),
+          key: "action",
+          render: (_, member) => (
+            <Space>
+              <Button
+                onClick={() => handleEdit(member)}
+                icon={<EditOutlined />}
+              />
+              <Popconfirm
+                title="Delete the member"
+                description="Are you sure to delete this member?"
+                onConfirm={() => handleDelete(member.id)}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button
+                  danger
+                  icon={<DeleteOutlined />}
+                />
+              </Popconfirm>
+            </Space>
+          ),
+        },
+      ], [t]);
+  }
 
   return useMemo(
     () => [
