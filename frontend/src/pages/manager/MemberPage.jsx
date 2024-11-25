@@ -7,6 +7,7 @@ import { MemberTable } from "~/sections/members/MemberTable";
 import UpdateMemberModal from "~/sections/members/UpdateMemberModal";
 import { useMembersStore } from "~/stores/memberStore";
 import { useTranslation } from "react-i18next";
+import MemberDetail from "~/sections/members/MemberDetail";
 
 const MemberPage = () => {
   const {
@@ -16,8 +17,10 @@ const MemberPage = () => {
     setOpenDeleteModal,
     setOpenCreateModal,
     setOpenUpdateModal,
+    memberDetail,
   } = useMembersStore((state) => state);
   const { t } = useTranslation();
+
   const handleDeleteCancel = () => {
     setOpenDeleteModal(false);
   };
@@ -37,7 +40,7 @@ const MemberPage = () => {
   return (
     <>
       <Row gutter={16}>
-        <Col span={24}>
+        <Col span={memberDetail ? 12 : 24}>
           <Flex align="center" justify="space-between" className="mb-1">
             <PageHeader
               heading={t("Members")}
@@ -58,6 +61,9 @@ const MemberPage = () => {
           </Flex>
           <MemberTable />
         </Col>
+        {memberDetail && (
+          <MemberDetail/>
+        )}
       </Row>
 
       <ConfirmModal
