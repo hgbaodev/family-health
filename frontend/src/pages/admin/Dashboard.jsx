@@ -1,98 +1,113 @@
-import React from 'react';
-import { Box, Card, Typography, Grid } from '@mui/material';
-import { Line, Bar } from 'react-chartjs-2';
-import { Chart as ChartJS, CategoryScale, LinearScale, PointElement, LineElement, BarElement } from 'chart.js';
+import { Card, Typography, Row, Col } from 'antd';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LineChart, Line, ResponsiveContainer } from 'recharts';
 import { useCountContactsReceivedToday } from '~/api/contacts/count-contacts-received-today';
 import { useCountUsersCreatedToday } from '~/api/users/count-users-created-today';
 
-ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, BarElement);
+const { Title, Text } = Typography;
 
 const Dashboard = () => {
   // Data for the bar chart (Website Views)
-  const barData = {
-    labels: ['M', 'T', 'W', 'T', 'F', 'S'],
-    datasets: [
-      {
-        label: 'Website Views',
-        data: [50, 20, 10, 22, 60, 40],
-        backgroundColor: '#3498db',
-      },
-    ],
-  };
+  const barData = [
+    { name: 'M', views: 50 },
+    { name: 'T', views: 20 },
+    { name: 'W', views: 10 },
+    { name: 'T', views: 22 },
+    { name: 'F', views: 60 },
+    { name: 'S', views: 40 },
+  ];
 
   // Data for the line chart (Monthly Website Feedback)
-  const feedbackData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Tháng trong năm
-    datasets: [
-      {
-        label: 'Monthly Website Feedback',
-        data: [120, 150, 180, 200, 220, 250, 280, 300, 350, 400, 420, 450], // Lượng phản hồi hàng tháng
-        borderColor: '#FF6347',  // Màu đường biểu đồ
-        backgroundColor: 'rgba(255, 99, 71, 0.2)',  // Màu nền biểu đồ
-        tension: 0.4,  // Độ cong của đường biểu đồ
-      },
-    ],
-  };
+  const feedbackData = [
+    { name: 'Jan', feedback: 120 },
+    { name: 'Feb', feedback: 150 },
+    { name: 'Mar', feedback: 180 },
+    { name: 'Apr', feedback: 200 },
+    { name: 'May', feedback: 220 },
+    { name: 'Jun', feedback: 250 },
+    { name: 'Jul', feedback: 280 },
+    { name: 'Aug', feedback: 300 },
+    { name: 'Sep', feedback: 350 },
+    { name: 'Oct', feedback: 400 },
+    { name: 'Nov', feedback: 420 },
+    { name: 'Dec', feedback: 450 },
+  ];
+
   // Gọi API cho số lượng người dùng tạo hôm nay
   const { data: userData } = useCountUsersCreatedToday();
   // Gọi API cho số lượng liên hệ hôm nay
   const { data: contactData } = useCountContactsReceivedToday();
 
   return (
-    <Box>
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Today's Users</Typography>
-            <Typography variant="h4">+{userData}</Typography>
-            <Typography>Just updated</Typography>
+    <div>
+      <Row gutter={[16, 16]}>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Title level={4}>Today Users</Title>
+            <Title level={2}>+{userData}</Title>
+            <Text>Just updated</Text>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Today's Contacts</Typography>
-            <Typography variant="h4">+{contactData}</Typography>
-            <Typography>Just updated</Typography>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Title level={4}>Today Contacts</Title>
+            <Title level={2}>+{contactData}</Title>
+            <Text>Just updated</Text>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Followers</Typography>
-            <Typography variant="h4">2,300</Typography>
-            <Typography color="green">+3% than last month</Typography>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Title level={4}>Followers</Title>
+            <Title level={2}>2,300</Title>
+            <Text type="success">+3% than last month</Text>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6} md={3}>
-          <Card sx={{ p: 2, textAlign: 'center' }}>
-            <Typography variant="h6">Bookings</Typography>
-            <Typography variant="h4">281</Typography>
-            <Typography color="green">+55% than last week</Typography>
+        </Col>
+        <Col xs={24} sm={12} md={6}>
+          <Card>
+            <Title level={4}>Bookings</Title>
+            <Title level={2}>281</Title>
+            <Text type="success">+55% than last week</Text>
           </Card>
-        </Grid>        
-
-        {/* Charts */}
-        <Grid item xs={12} sm={6}>
-          <Card sx={{ p: 2 }}>
-            <Typography variant="h6">Website Views</Typography>
-            <Typography color="textSecondary">Last Campaign Performance</Typography>
-            <Bar data={barData} />
-            <Typography color="textSecondary" mt={1}>
+        </Col>
+        <Col xs={24} sm={12}>
+          <Card>
+            <Title level={4}>Website Views</Title>
+            <Text type="secondary">Last Campaign Performance</Text>
+            <ResponsiveContainer width="100%" height={300}>
+              <BarChart data={barData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Bar dataKey="views" fill="#3498db" />
+              </BarChart>
+            </ResponsiveContainer>
+            <Text type="secondary" style={{ marginTop: '8px', display: 'block' }}>
               Campaign sent 2 days ago
-            </Typography>
+            </Text>
           </Card>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Card sx={{ p: 2 }}>
-            <Typography variant="h6">Website Feedback</Typography>
-            <Typography color="green">(+15%) increase in feedback this month</Typography>
-            <Line data={feedbackData} />
-            <Typography color="textSecondary" mt={1}>
+        </Col>
+        <Col xs={24} sm={12}>
+          <Card>
+            <Title level={4}>Website Feedback</Title>
+            <Text type="success">(+15%) increase in feedback this month</Text>
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={feedbackData}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="name" />
+                <YAxis />
+                <Tooltip />
+                <Legend />
+                <Line type="monotone" dataKey="feedback" stroke="#FF6347" fill="rgba(255, 99, 71, 0.2)" />
+              </LineChart>
+            </ResponsiveContainer>
+            <Text type="secondary" style={{ marginTop: '8px', display: 'block' }}>
               Updated 4 min ago
-            </Typography>
+            </Text>
           </Card>
-        </Grid>
-      </Grid>
-    </Box>
+        </Col>
+      </Row>
+    </div>
   );
 };
 
