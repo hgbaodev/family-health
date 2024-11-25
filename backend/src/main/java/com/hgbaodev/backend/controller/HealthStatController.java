@@ -1,5 +1,6 @@
     package com.hgbaodev.backend.controller;
 
+    import com.hgbaodev.backend.mapper.HealthStatMapper;
     import com.hgbaodev.backend.model.HealthStat;
     import com.hgbaodev.backend.model.Member;
     import com.hgbaodev.backend.model.User;
@@ -33,12 +34,9 @@
                 (@Valid @RequestBody AddHealthStatRequest addHealthStatRequest) {
             Member member = memberService.getMemberById(addHealthStatRequest.getMemberId());
 
-            HealthStat healthStat = HealthStat.builder()
-                    .member(member)
-                    .statType(addHealthStatRequest.getStatType())
-                    .statValue(addHealthStatRequest.getStatValue())
-                    .date(addHealthStatRequest.getDate())
-                    .build();
+            HealthStat healthStat = HealthStatMapper.INSTANCE.toHealthStat(addHealthStatRequest);
+            healthStat.setMember(member);
+
             HealthStat addHealthStat = healthStatService.addHealthStat(healthStat);
             ApiResponse<HealthStat> response = new ApiResponse<>(
                     HttpStatus.OK.value(),
@@ -52,12 +50,10 @@
         public ResponseEntity<ApiResponse<?>> updateVaccination(
                 @PathVariable("id") Integer id,
                 @Valid @RequestBody UpdateHealthStatRequest updateHealthStatRequest) {
-            HealthStat healthStat = HealthStat.builder()
-                    .id(id)
-                    .statType(updateHealthStatRequest.getStatType())
-                    .statValue(updateHealthStatRequest.getStatValue())
-                    .date(updateHealthStatRequest.getDate())
-                    .build();
+
+            HealthStat healthStat = HealthStatMapper.INSTANCE.toHealthStat(updateHealthStatRequest);
+            healthStat.setId(id);
+
             HealthStat updateHealthStat = healthStatService.updateHealthStat(healthStat);
             ApiResponse<HealthStat> response = new ApiResponse<>(
                     HttpStatus.OK.value(),

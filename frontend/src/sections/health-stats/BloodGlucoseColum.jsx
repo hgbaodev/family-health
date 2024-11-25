@@ -41,7 +41,7 @@ const useBloodGlucoseColumns = () => {
       },
       // {
       //   title: t("ID"),
-      //   dataIndex: "statID",
+      //   dataIndex: "id",
       //   key: "statID",
       //   align: "center",
       // },
@@ -71,7 +71,7 @@ const useBloodGlucoseColumns = () => {
             <Popconfirm
               title="Delete the health status"
               description="Are you sure to delete this health status?"
-              onConfirm={() => handleDelete(healthStat.statID)}
+              onConfirm={() => handleDelete(healthStat.id)}
               okText="Yes"
               cancelText="No"
             >

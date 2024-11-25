@@ -9,6 +9,7 @@ import com.hgbaodev.backend.service.ContactService;
 import com.hgbaodev.backend.service.UserService;
 import com.hgbaodev.backend.utils.CustomPagination;
 import lombok.RequiredArgsConstructor;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,17 @@ public class ContactController {
                 HttpStatus.OK.value(),
                 "Update seen state of contacts successfully",
                 updateContact
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @GetMapping("/contacts-received-today")
+    public ResponseEntity<ApiResponse<Long>> countContactsReceivedToday(){
+        long count = service.countContactsReceivedToday();
+        ApiResponse<Long> response = new ApiResponse<>(
+                HttpStatus.OK.value(),
+                "Contacts received today: ",
+                count
         );
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

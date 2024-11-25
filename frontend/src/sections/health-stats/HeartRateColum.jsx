@@ -71,7 +71,7 @@ const useHeartRateColumns = () => {
             <Popconfirm
               title="Delete the health status"
               description="Are you sure to delete this health status?"
-              onConfirm={() => handleDelete(healthStat.statID)}
+              onConfirm={() => handleDelete(healthStat.id)}
               okText="Yes"
               cancelText="No"
             >

@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo } from "react";
 import { Button, message, Popconfirm, Space } from "antd";
-import { DeleteOutlined, LockOutlined, UnlockOutlined} from "@ant-design/icons";
+import { LockOutlined, UnlockOutlined} from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 import { useUpdateBlockStateUser } from "~/api/users/update-block-state-user";
 
@@ -50,14 +50,14 @@ const useUserColumns = () => {
       },
       {
         title: t("Verified"),
-        dataIndex: "is_verify",
+        dataIndex: "_verify",
         key: "is_verify",
         align: "center",
         render: (isVerify) => (isVerify ? t("Yes") : t("No")),
       },
       {
         title: t("Status"),
-        dataIndex: "is_block",
+        dataIndex: "_block",
         key: "is_block",
         align: "center",
         render: (isBlock) => (isBlock ? t("Block") : t("Active")),
@@ -75,9 +75,9 @@ const useUserColumns = () => {
               cancelText={t("No")}
             >
               <Button
-                type={user.is_block ? "primary" : "default"} // Xanh lá cây khi active
-                danger={!user.is_block}
-                icon={user.is_block ? <UnlockOutlined /> : <LockOutlined />} // Đổi biểu tượng
+                type={user._block ? "primary" : "default"} // Xanh lá cây khi active
+                danger={!user._block}
+                icon={user._block ? <UnlockOutlined /> : <LockOutlined />} // Đổi biểu tượng
               />
             </Popconfirm>
           </Space>

@@ -1,6 +1,7 @@
 package com.hgbaodev.backend.service.impl;
 
 import com.hgbaodev.backend.dto.response.DataMailDTO;
+import com.hgbaodev.backend.mapper.UserMapper;
 import com.hgbaodev.backend.service.JwtService;
 import com.hgbaodev.backend.enums.TokenType;
 import com.hgbaodev.backend.model.Token;
@@ -51,13 +52,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         if(repository.existsByEmail(request.getEmail())) {
             throw new IllegalStateException("Email already exists");
         }
-        var user = User.builder()
-                .firstname(request.getFirstname())
-                .lastname(request.getLastname())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(request.getRole())
-                .build();
+
+        var user = UserMapper.INSTANCE.toUser(request);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
         var savedUser = repository.save(user);
         try {
             DataMailDTO dataMail = new DataMailDTO();
@@ -68,7 +66,6 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             Map<String, Object> props = new HashMap<>();
             props.put("name", request.getFirstname());
             props.put("username", request.getEmail());
-            props.put("password", request.getPassword());
             dataMail.setProps(props);
 
             mailService.sendHTMLMail(dataMail, Const.TEMPLATE_FILE_NAME.CLIENT_REGISTER);
@@ -76,11 +73,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             e.printStackTrace();
         }
 
-        UserResponse userResponse = UserResponse.builder()
-                .firstname(savedUser.getFirstname())
-                .lastname(savedUser.getLastname())
-                .email(savedUser.getEmail())
-                .build();
+
+        UserResponse userResponse = UserMapper.INSTANCE.toUserResponse(savedUser);
 
         return AuthenticationResponse.builder()
                 .user(userResponse)

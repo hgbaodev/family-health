@@ -1,5 +1,6 @@
 import AdminLayout from "~/layouts/AdminLayout";
 import ContactPage from "~/pages/admin/ContactPage";
+import Dashboard from "~/pages/admin/Dashboard";
 import UserPage from "~/pages/admin/UserPage";
 
 export const AdminRoutes = {
@@ -10,7 +11,7 @@ export const AdminRoutes = {
       children: [
         {
           path: "",
-          element: <p>Hello</p>
+          element: <Dashboard />
         },
         {
           path: "users",

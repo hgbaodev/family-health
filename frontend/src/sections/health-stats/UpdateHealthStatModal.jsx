@@ -41,7 +41,7 @@ const UpdateHealthStatModal = () => {
       date: values.date ? values.date.format("YYYY-MM-DD HH:mm") : null,
     };
     mutation.mutate({
-      id: healthStat.statID,
+      id: healthStat.id,
       data: formattedValues,
     });
     setOpenUpdateModal(false);
