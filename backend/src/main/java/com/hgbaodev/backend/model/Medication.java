@@ -23,8 +23,8 @@ public class Medication {
     private int position;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "record_id", nullable = false)
-    private MedicalRecord record;
+    @JoinColumn(name = "medical_record_id", nullable = false)
+    private MedicalRecord medicalRecord;
 
     @Column(name = "name", nullable = false)
     private String name;

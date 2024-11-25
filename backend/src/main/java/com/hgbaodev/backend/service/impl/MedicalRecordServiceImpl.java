@@ -3,6 +3,7 @@ package com.hgbaodev.backend.service.impl;
 import com.hgbaodev.backend.dto.request.medicalRecord.AddMedicalRecordRequest;
 import com.hgbaodev.backend.dto.request.medicalRecord.DocumentRequest;
 import com.hgbaodev.backend.dto.request.medicalRecord.MedicationRequest;
+import com.hgbaodev.backend.dto.request.medicalRecord.UpdateMedicalRecordRequest;
 import com.hgbaodev.backend.dto.response.MedicalRecordResponse;
 import com.hgbaodev.backend.mapper.MedicalRecordMapper;
 import com.hgbaodev.backend.model.Document;
@@ -16,8 +17,11 @@ import com.hgbaodev.backend.service.CloudinaryService;
 import com.hgbaodev.backend.service.MedicalRecordService;
 import com.hgbaodev.backend.service.MemberService;
 import com.hgbaodev.backend.utils.CustomPagination;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -51,7 +55,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         medicalRecord = medicalRecordRepository.save(medicalRecord);
         for(MedicationRequest medicationRequest : addMedicalRecordRequest.getMedications()){
             Medication medication = Medication.builder()
-                    .record(medicalRecord)
+                    .medicalRecord(medicalRecord)
                     .name(medicationRequest.getName())
                     .startDate(medicationRequest.getStartDate())
                     .endDate(medicationRequest.getEndDate())
@@ -62,7 +66,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
         }
         for (DocumentRequest documentRequest : addMedicalRecordRequest.getDocuments()){
             Document document = Document.builder()
-                    .record(medicalRecord)
+                    .medicalRecord(medicalRecord)
                     .name(documentRequest.getName())
                     .position(documentRequest.getPosition())
                     .size(documentRequest.getSize())
@@ -75,17 +79,54 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public MedicalRecord updateMedicalRecord(MedicalRecord medicalRecord) {
-        MedicalRecord check = medicalRecordRepository.findById(medicalRecord.getId())
-                .orElseThrow(() -> new IllegalArgumentException("MedicalRecord not found "));
-        return medicalRecordRepository.save(medicalRecord);
+    @Transactional
+    public MedicalRecord updateMedicalRecord(UpdateMedicalRecordRequest updateMedicalRecordRequest) {
+        MedicalRecord existingRecord = medicalRecordRepository.findById(updateMedicalRecordRequest.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Medical Record not found"));
+        existingRecord.setDate(updateMedicalRecordRequest.getDate());
+        existingRecord.setDoctor(updateMedicalRecordRequest.getDoctor());
+        existingRecord.setSymptoms(updateMedicalRecordRequest.getSymptoms());
+        existingRecord.setDiagnosis(updateMedicalRecordRequest.getDiagnosis());
+        existingRecord.setTreatment(updateMedicalRecordRequest.getTreatment());
+        existingRecord.setFacilityName(updateMedicalRecordRequest.getFacilityName());
+        medicalRecordRepository.save(existingRecord);
+
+        medicationRepository.deleteByMedicalRecordId(existingRecord.getId());
+        documentRepository.deleteByMedicalRecordId(existingRecord.getId());
+
+        for (MedicationRequest medicationRequest : updateMedicalRecordRequest.getMedications()) {
+            Medication medication = Medication.builder()
+                    .medicalRecord(existingRecord)
+                    .name(medicationRequest.getName())
+                    .startDate(medicationRequest.getStartDate())
+                    .endDate(medicationRequest.getEndDate())
+                    .position(medicationRequest.getPosition())
+                    .frequency(medicationRequest.getFrequency())
+                    .build();
+            medicationRepository.save(medication);
+        }
+
+        for (DocumentRequest documentRequest : updateMedicalRecordRequest.getDocuments()) {
+            Document document = Document.builder()
+                    .medicalRecord(existingRecord)
+                    .name(documentRequest.getName())
+                    .position(documentRequest.getPosition())
+                    .size(documentRequest.getSize())
+                    .type(documentRequest.getType())
+                    .path(documentRequest.getPath())
+                    .build();
+            documentRepository.save(document);
+        }
+
+        return existingRecord;
     }
 
     @Override
     public void deleteMedicalRecord(Integer medicalRecordID){
         MedicalRecord check = medicalRecordRepository.findById(medicalRecordID)
                 .orElseThrow(() -> new IllegalArgumentException("Medical Record not found"));
-        medicalRecordRepository.deleteById(check.getId());
+        check.delete();
+        medicalRecordRepository.save(check);
     }
 
     @Override

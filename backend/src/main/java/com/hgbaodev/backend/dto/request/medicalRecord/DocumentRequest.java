@@ -11,6 +11,9 @@ import org.springframework.web.multipart.MultipartFile;
 @Getter
 @Setter
 public class DocumentRequest {
+
+    private Integer id;
+
     @NotNull(message = "Position is required")
     private Integer position;
 

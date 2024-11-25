@@ -14,10 +14,7 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, In
             "OR LOWER(mr.symptoms) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "OR LOWER(mr.facilityName) LIKE LOWER(CONCAT('%', :keyword, '%')) " +
             "OR LOWER(mr.treatment) LIKE LOWER(CONCAT('%', :keyword, '%'))) " +
+            "AND mr.deletedAt IS NULL " +
             "AND mr.member.user.id = :userId")
     Page<MedicalRecord> findByKeyword(@Param("keyword") String keyword, @Param("userId") Integer userId, Pageable pageable);
-
-    @Query("SELECT mr FROM MedicalRecord mr " +
-            "WHERE mr.member.user.id = :userId")
-    Page<MedicalRecord> findAllByUserID(Pageable pageable, @Param("userId") Integer userID);
 }

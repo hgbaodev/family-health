@@ -12,6 +12,9 @@ import java.time.LocalDate;
 @Getter
 @Setter
 public class MedicationRequest {
+
+    private Integer id;
+
     @NotNull(message = "Position is required")
     private Integer position;
 

@@ -73,7 +73,7 @@ const useMedicalRecordColumns = () => {
             <Popconfirm
               title="Remove medical record"
               description="Are you sure to remove this medical record ?"
-              onConfirm={() => handleDelete(medicalRecord.recordID)}
+              onConfirm={() => handleDelete(medicalRecord.id)}
               okText="Yes"
               cancelText="No"
             >
