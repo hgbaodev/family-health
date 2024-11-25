@@ -42,10 +42,17 @@ public class MedicalRecord {
     @Column(name="facility_name")
     private String facilityName;
 
-    @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
+    @Column(name="deleted_at", nullable = true)
+    private LocalDate deletedAt;
+
+    @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
     private List<Medication> medications;
 
-    @OneToMany(mappedBy = "record", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.LAZY)
     private List<Document> documents;
+
+    public void delete() {
+        this.deletedAt = LocalDate.now();
+    }
 
 }

@@ -3,6 +3,9 @@ package com.hgbaodev.backend.dto.request.medicalRecord;
 import jakarta.validation.constraints.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 @Builder
 @AllArgsConstructor
@@ -37,4 +40,10 @@ public class UpdateMedicalRecordRequest {
     @NotBlank(message = "Facility name is required")
     @Size(max = 50, message = "Facility name must not exceed 50 characters")
     private String facilityName;
+
+    @NotNull(message = "Medications are required")
+    private List<MedicationRequest> medications = new ArrayList<>();
+
+    @NotNull(message = "Documents are required")
+    private List<DocumentRequest> documents = new ArrayList<>();
 }
