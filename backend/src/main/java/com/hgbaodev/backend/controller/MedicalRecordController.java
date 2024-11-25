@@ -31,8 +31,6 @@ import java.util.Optional;
 public class MedicalRecordController {
     private final AuthenticationService authenticationService;
     private final MedicalRecordService medicalRecordService;
-    private final MemberService memberService;
-
 
     @PostMapping
     public ResponseEntity<ApiResponse<?>> addMedicalRecord(

@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import Cookies from "js-cookie";
 import { api } from "~/config/api";
 
 export const me = () => {
@@ -7,11 +6,9 @@ export const me = () => {
 };
 
 export const useMe = (option) => {
-  const token = Cookies.get("token");
   return useQuery({
     queryKey: ['me'],
     queryFn: me,
-    enabled: !!token,
     ...option,
   });
 };

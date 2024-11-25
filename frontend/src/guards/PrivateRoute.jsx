@@ -6,7 +6,6 @@ const PrivateRoute = ({ component: Component }) => {
   if (!isAuthenticated) {
     return <Navigate to="/auth/login" replace />;
   }
-
   return <Component />;
 };
 
