@@ -34,4 +34,9 @@ public class ContactServiceImpl implements ContactService {
         contact.setStatus(true);
         return repository.save(contact);
     }
+
+    @Override
+    public long countContactsReceivedToday() {
+        return repository.countContactsReceivedToday();
+    }
 }

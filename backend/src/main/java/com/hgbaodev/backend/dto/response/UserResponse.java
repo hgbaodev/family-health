@@ -1,11 +1,14 @@
 package com.hgbaodev.backend.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.time.LocalDateTime;
 
 @Data
 @Builder
@@ -18,5 +21,11 @@ public class UserResponse {
 
     @JsonProperty("email")
     String email;
+
+    private boolean is_verify;
+    private boolean is_block;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    private LocalDateTime date;
 
 }

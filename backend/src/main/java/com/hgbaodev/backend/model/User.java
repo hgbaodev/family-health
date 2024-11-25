@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hgbaodev.backend.enums.Role;
@@ -11,6 +12,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
@@ -41,6 +43,10 @@ public class User implements UserDetails {
 
   @Enumerated(EnumType.STRING)
   private Role role;
+
+  @Column(name = "date", nullable = false)
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+  private LocalDateTime date;
 
   @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
   @JsonIgnore

@@ -7,5 +7,6 @@ import org.springframework.data.domain.Page;
 public interface ContactService {
     Page<ContactResponse> getAllContacts(int page, int size, String keyword);
     Contact updateSeenStateUser(Integer id);
+    long countContactsReceivedToday();
 }
 

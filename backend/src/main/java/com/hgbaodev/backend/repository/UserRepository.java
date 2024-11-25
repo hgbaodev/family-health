@@ -24,9 +24,12 @@ public interface UserRepository extends JpaRepository<User, Integer> {
   Page<User> findByKeyword(@Param("keyword") String keyword, Pageable pageable);
 
   @Query("SELECT u FROM User u " +
-          "WHERE u.email <> 'admin@mail.com' ")
+          "WHERE u.email <> 'admin@gmail.com' ")
   Page<User> findAll(Pageable pageable);
 
   Optional<User> findByEmail(String email);
   boolean existsByEmail(String email);
+
+  @Query("SELECT COUNT(u) FROM User u WHERE FUNCTION('DATE', u.date) = FUNCTION('DATE', CURRENT_DATE)")
+  long countUsersCreatedToday();
 }

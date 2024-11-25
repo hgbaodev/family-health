@@ -1,25 +1,25 @@
-INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 1, 'admin@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'Admin',1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
+SELECT 1, 'admin@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'Admin', '2024-10-10 09:30:00', 1
     WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'admin@gmail.com');
 
-INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 2, 'hgbaodevservice@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
+SELECT 2, 'hgbaodevservice@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-10-10 09:30:00', 1
     WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'hgbaodevservice@gmail.com');
 
-INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 3, 'TLieuNhuYen@example.com', 'Trần Liễu', 'Như Yên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
+SELECT 3, 'TLieuNhuYen@example.com', 'Trần Liễu', 'Như Yên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-10-10 09:30:00', 1
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'TLieuNhuYen@example.com');
 
-INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 4, 'LongNgaoThien@example.com', 'Long', 'Ngạo Thiên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
+SELECT 4, 'LongNgaoThien@example.com', 'Long', 'Ngạo Thiên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-11-25 09:30:00', 1
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'LongNgaoThien@example.com');
 
-INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 5, 'haonhienau23@example.com', 'Âu', 'Hạo Nhiên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
+SELECT 5, 'haonhienau23@example.com', 'Âu', 'Hạo Nhiên', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-11-25 09:30:00', 1
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'haonhienau23@example.com');
 
-INSERT INTO users (id, email, firstname, lastname, password, role,is_verify)
-SELECT 6, 'vuong8dan@example.com', 'Vương', 'Bát Đản', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User',1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
+SELECT 6, 'vuong8dan@example.com', 'Vương', 'Bát Đản', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-11-25 09:30:00', 1
 WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'vuong8dan@example.com');
 
 -- Dữ liệu tương ứng cho 5 user có user_id từ 2->6

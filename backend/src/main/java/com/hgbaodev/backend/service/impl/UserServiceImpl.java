@@ -59,4 +59,9 @@ public class UserServiceImpl implements UserService {
         // save the new password
         repository.save(user);
     }
+
+    @Override
+    public long countUsersCreatedToday() {
+        return repository.countUsersCreatedToday();
+    }
 }

@@ -22,4 +22,7 @@ public interface ContactRepository extends JpaRepository<Contact, Integer> {
           "FROM Contact c JOIN User u ON c.user.id = u.id " +
           "ORDER BY c.date DESC")
   Page<ContactResponse> findAllContacts(Pageable pageable);
+
+  @Query("SELECT COUNT(c) FROM Contact c WHERE FUNCTION('DATE', c.date) = FUNCTION('DATE', CURRENT_DATE)")
+  long countContactsReceivedToday();
 }

@@ -61,4 +61,15 @@ public class UserController {
         service.changePassword(request, connectedUser);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/users-created-today")
+    public ResponseEntity<ApiResponse<Long>> countContactsReceivedToday(){
+        long count = service.countUsersCreatedToday();
+        ApiResponse<Long> response = new ApiResponse<>(
+                HttpStatus.OK.value(),
+                "Users created today: ",
+                count
+        );
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 }

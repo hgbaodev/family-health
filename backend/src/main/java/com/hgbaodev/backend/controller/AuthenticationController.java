@@ -1,5 +1,6 @@
 package com.hgbaodev.backend.controller;
 
+import com.google.api.client.util.DateTime;
 import com.hgbaodev.backend.enums.Role;
 import com.hgbaodev.backend.dto.request.auth.LoginRequest;
 import com.hgbaodev.backend.dto.request.auth.NewPasswordRequest;
@@ -21,6 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/api/v1/auth")
@@ -35,6 +37,7 @@ public class AuthenticationController {
           @Valid @RequestBody RegisterRequest request
   ) {
     request.setRole(Role.USER);
+    request.setDate(LocalDateTime.now());
     AuthenticationResponse authResponse = service.register(request);
     ApiResponse<AuthenticationResponse> response = new ApiResponse<>(
             HttpStatus.OK.value(),
