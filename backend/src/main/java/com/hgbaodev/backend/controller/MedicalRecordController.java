@@ -31,8 +31,6 @@ import java.util.Optional;
 public class MedicalRecordController {
     private final AuthenticationService authenticationService;
     private final MedicalRecordService medicalRecordService;
-    private final MemberService memberService;
-
 
     @PostMapping
     public ResponseEntity<ApiResponse<?>> addMedicalRecord(
@@ -50,18 +48,8 @@ public class MedicalRecordController {
     public ResponseEntity<ApiResponse<?>> updateMedicalRecord(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UpdateMedicalRecordRequest updateMedicalRecordRequest) {
-        Member member = memberService.getMemberById(updateMedicalRecordRequest.getMemberId());
-        MedicalRecord medicalRecord = MedicalRecord.builder()
-                .id(id)
-                .member(member)
-                .date(updateMedicalRecordRequest.getDate())
-                .doctor(updateMedicalRecordRequest.getDoctor())
-                .symptoms(updateMedicalRecordRequest.getSymptoms())
-                .diagnosis(updateMedicalRecordRequest.getDiagnosis())
-                .treatment(updateMedicalRecordRequest.getTreatment())
-                .facilityName(updateMedicalRecordRequest.getFacilityName())
-                .build();
-        MedicalRecord updatedMedicalRecord = medicalRecordService.updateMedicalRecord(medicalRecord);
+        updateMedicalRecordRequest.setId(id);
+        MedicalRecord updatedMedicalRecord = medicalRecordService.updateMedicalRecord(updateMedicalRecordRequest);
         ApiResponse<MedicalRecord> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
                 "Update medical record successfully",

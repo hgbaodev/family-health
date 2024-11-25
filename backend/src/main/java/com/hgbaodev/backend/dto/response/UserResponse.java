@@ -2,6 +2,7 @@ package com.hgbaodev.backend.dto.response;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.hgbaodev.backend.enums.Role;
 import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,7 +16,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserResponse {
-    Integer id;
     String firstname;
     String lastname;
 
@@ -28,4 +28,5 @@ public class UserResponse {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime date;
 
+    Role role;
 }

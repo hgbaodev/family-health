@@ -5,9 +5,7 @@ import { ThemeRoutes } from "./routes";
 import "./i18n";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_OAUTH_CLIENT_ID } from "~/config/env";
-import { useMe } from "~/api/auth/me";
-import { useAuthStore } from "~/stores/authStore";
-import { useEffect } from "react";
+import AuthProvider from "~/AuthProvider";
 
 // Cấu hình QueryClient với options phù hợp
 // const queryClient = new QueryClient({
@@ -58,27 +56,5 @@ function App() {
     </ConfigProvider>
   );
 }
-
-const AuthProvider = ({ children }) => {
-  const { data, isSuccess, isFetching } = useMe();
-
-  const { setIsAuthenticated, setUser } = useAuthStore((state) => state);
-
-  useEffect(() => {
-    if (isSuccess && data) {
-      setIsAuthenticated(true);
-      setUser(data.user);
-    } else {
-      setIsAuthenticated(false);
-      setUser(null);
-    }
-  }, [isSuccess, data, setIsAuthenticated, setUser]);
-
-  if (isFetching) {
-    return null;
-  }
-
-  return children;
-};
 
 export default App;

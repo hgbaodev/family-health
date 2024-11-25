@@ -1,6 +1,7 @@
-import { Form, Modal, Tabs } from "antd";
+import { Form, message, Modal, Tabs } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
+import { useUpdateMedicalRecord } from "~/api/medical-records/update-medical-records";
 import DocumentList from "~/sections/medical-records/DocumenList";
 import FooterButtons from "~/sections/medical-records/FooterButtons";
 import MedicationList from "~/sections/medical-records/MedicationList";
@@ -23,6 +24,18 @@ const UpdateMedicalRecordModal = () => {
     clearListDocument
   } = useMedicalRecordsStore();
 
+  const mute = useUpdateMedicalRecord({
+    onSuccess: (data) => {
+      console.log("Update success", data);
+      setOpenUpdateModal(false);
+      message.success("Cập nhật hồ sơ y tế thành công");
+    },
+    onError: (error) => {
+      console.log("Update error", error);
+      message.error("Cập nhật hồ sơ y tế thất bại");
+    },
+  })
+
   useEffect(() => {
     if(medicalRecord){
       setTab("0");
@@ -43,6 +56,7 @@ const UpdateMedicalRecordModal = () => {
     values["medications"] = listMedication;
     values["documents"] = listDocument;
     console.log("Values", values);
+    mute.mutate({id: medicalRecord.id, data: values});
   };
 
   const items = [
@@ -53,7 +67,7 @@ const UpdateMedicalRecordModal = () => {
 
   return (
     <Modal
-      title="Hồ sơ y tế"
+      title="Cập nhật hồ sơ y tế"
       width={1000}
       open={openUpdateModal}
       centered={true}
