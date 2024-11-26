@@ -13,6 +13,6 @@ public interface MedicalRecordService {
     MedicalRecord addMedicalRecord(AddMedicalRecordRequest addMedicalRecordRequest);
     MedicalRecord updateMedicalRecord(UpdateMedicalRecordRequest updateMedicalRecordRequest);
     void deleteMedicalRecord(Integer medicalRecordID);
-    CustomPagination<MedicalRecordResponse> getAllMedicalRecords(int page, int size, String keyword, Integer userID);
+    CustomPagination<MedicalRecordResponse> getAllMedicalRecords(int page, int size, String keyword, Integer userID, Long memberId);
     Optional<MedicalRecord> findMedicalRecordById(Integer medicalRecordID);
 }
