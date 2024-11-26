@@ -72,7 +72,7 @@ const useMemberColumns = () => {
             </Space>
           ),
         },
-      ], [t]);
+      ], [t, memberDetail]);
   }
 
   return useMemo(
@@ -144,7 +144,7 @@ const useMemberColumns = () => {
         ),
       },
     ],
-    [t]
+    [t, memberDetail]
   );
 };
 

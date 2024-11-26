@@ -76,9 +76,10 @@ public class MedicalRecordController {
     public ResponseEntity<ApiResponse<?>> getAllMedicalRecords(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "8") int size,
-            @RequestParam(defaultValue = "") String keyword) {
+            @RequestParam(defaultValue = "") String keyword,
+            @RequestParam(required = false) Long memberId) {
         User user = authenticationService.getCurrentUser();
-        CustomPagination<MedicalRecordResponse> medicalRecordsPage = medicalRecordService.getAllMedicalRecords(page,size,keyword,user.getId());
+        CustomPagination<MedicalRecordResponse> medicalRecordsPage = medicalRecordService.getAllMedicalRecords(page,size,keyword,user.getId(), memberId);
         ApiResponse<CustomPagination<MedicalRecordResponse>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
                 "Get list of medical record successfully",

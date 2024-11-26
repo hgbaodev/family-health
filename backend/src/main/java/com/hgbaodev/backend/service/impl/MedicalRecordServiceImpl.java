@@ -130,9 +130,14 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     }
 
     @Override
-    public CustomPagination<MedicalRecordResponse> getAllMedicalRecords(int page, int size, String keyword, Integer userID) {
+    public CustomPagination<MedicalRecordResponse> getAllMedicalRecords(int page, int size, String keyword, Integer userID, Long memberId){
         Pageable pageable = PageRequest.of(page - 1, size);
-        Page<MedicalRecord> medicalRecords =  medicalRecordRepository.findByKeyword(keyword, userID,pageable);
+        Page<MedicalRecord> medicalRecords;
+        if (memberId != null) {
+            medicalRecords =  medicalRecordRepository.findByKeywordAndMemberId(keyword, userID, memberId, pageable);
+        } else {
+            medicalRecords =  medicalRecordRepository.findByKeyword(keyword, userID,pageable);
+        }
         Page<MedicalRecordResponse> medicalRecordResponses = MedicalRecordMapper.INSTANCE.toMedicalRecordsResponse(medicalRecords);
         CustomPagination<MedicalRecordResponse> customPagination = new CustomPagination<>(medicalRecordResponses);
         return customPagination;

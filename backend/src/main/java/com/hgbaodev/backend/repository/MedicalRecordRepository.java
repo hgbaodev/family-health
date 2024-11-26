@@ -27,5 +27,5 @@ public interface MedicalRecordRepository extends JpaRepository<MedicalRecord, In
             "AND mr.deletedAt IS NULL " +
             "AND mr.member.id = :memberId " +
             "AND mr.member.user.id = :userId")
-    Page<MedicalRecord> findByKeywordAndMemberId(@Param("keyword") String keyword, @Param("userId") Integer userId, @Param("memberId") Integer memberId,Pageable pageable);
+    Page<MedicalRecord> findByKeywordAndMemberId(@Param("keyword") String keyword, @Param("userId") Integer userId, @Param("memberId") Long memberId,Pageable pageable);
 }
