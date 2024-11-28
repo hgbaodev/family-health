@@ -24,7 +24,7 @@ public class MailServiceImpl implements MailService {
     SpringTemplateEngine templateEngine;
 
     @Override
-    public void sendHTMLMail(DataMailDTO dataMail, String templateName) throws MessagingException {
+    public void sendHTMLMail(DataMailDTO dataMail, String templateName)  {
         MimeMessage message = mailSender.createMimeMessage();
 
         MimeMessageHelper helper;

@@ -1,6 +1,7 @@
 package com.hgbaodev.backend.service.impl;
 
 import com.hgbaodev.backend.dto.response.DataMailDTO;
+import com.hgbaodev.backend.kafka.EmailProducer;
 import com.hgbaodev.backend.mapper.UserMapper;
 import com.hgbaodev.backend.service.JwtService;
 import com.hgbaodev.backend.enums.TokenType;
@@ -47,6 +48,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final JwtService jwtService;
     private final AuthenticationManager authenticationManager;
     private final MailService mailService;
+    private final EmailProducer emailProducer;
 
     public AuthenticationResponse register(RegisterRequest request) {
         if(repository.existsByEmail(request.getEmail())) {
@@ -56,25 +58,19 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         var user = UserMapper.INSTANCE.toUser(request);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        var savedUser = repository.save(user);
-        try {
-            DataMailDTO dataMail = new DataMailDTO();
+//        var savedUser = repository.save(user);
+        DataMailDTO dataMail = new DataMailDTO();
 
-            dataMail.setTo(request.getEmail());
-            dataMail.setSubject(Const.SEND_MAIL_SUBJECT.CLIENT_REGISTER);
+        dataMail.setTo(request.getEmail());
+        dataMail.setSubject(Const.SEND_MAIL_SUBJECT.CLIENT_REGISTER);
+        Map<String, Object> props = new HashMap<>();
+        props.put("name", request.getFirstname());
+        props.put("username", request.getEmail());
+        dataMail.setProps(props);
+        dataMail.setTemplate(Const.TEMPLATE_FILE_NAME.CLIENT_REGISTER);
+        emailProducer.sendEmailMessage(dataMail);
 
-            Map<String, Object> props = new HashMap<>();
-            props.put("name", request.getFirstname());
-            props.put("username", request.getEmail());
-            dataMail.setProps(props);
-
-            mailService.sendHTMLMail(dataMail, Const.TEMPLATE_FILE_NAME.CLIENT_REGISTER);
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-
-
-        UserResponse userResponse = UserMapper.INSTANCE.toUserResponse(savedUser);
+        UserResponse userResponse = UserMapper.INSTANCE.toUserResponse(null);
 
         return AuthenticationResponse.builder()
                 .user(userResponse)

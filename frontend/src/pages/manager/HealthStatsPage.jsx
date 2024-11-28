@@ -23,9 +23,8 @@ const HealthStatsPage = () => {
     setOpenUpdateModal,
   } = useHealthStatsStore();
 
-  const [selectedMemberId, setSelectedMemberId] = useState(null);
-
   const { data: members } = useMembersByUser();
+  const [selectedMemberId, setSelectedMemberId] = useState(members?.[0]?.id);
 
   const handleMemberChange = (memberId) => {
     setSelectedMemberId(memberId);

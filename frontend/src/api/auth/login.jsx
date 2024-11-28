@@ -46,16 +46,16 @@ export const useGoogleLoginMutation = (options = {}) => {
     onSuccess: (data, ...args) => {
       const result = data.data;
       setUser(result.user);
-      localStorage.setItem("access_token", result.access_token);
-      localStorage.setItem("refresh_token", result.refresh_token);
+      Cookies.set("access_token", result.access_token);
+      Cookies.set("refresh_token", result.refresh_token);
       setIsAuthenticated(true);
       onSuccess?.(data, ...args);
     },
     onError: (error, ...args) => {
       onError?.(error, ...args),
       setIsAuthenticated(false);
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("refresh_token");
+      Cookies.remove("access_token");
+      Cookies.remove("refresh_token");
     },
     ...restConfig,
     mutationFn: useGoogleLogin,

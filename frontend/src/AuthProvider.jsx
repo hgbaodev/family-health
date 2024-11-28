@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
-import Loader from '~/components/Loader';
-import { api } from '~/config/api';
-import { useAuthStore } from '~/stores/authStore';
+import { useEffect } from "react";
+import Loader from "~/components/Loader";
+import { api } from "~/config/api";
+import { useAuthStore } from "~/stores/authStore";
 
 const AuthProvider = ({ children }) => {
   const { isLoaded, setUser, setIsLoaded, setIsAuthenticated } = useAuthStore();
@@ -10,15 +10,14 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await api.get('/auth/me');
+        const response = await api.get("/auth/me");
         const userData = response.data;
-        
         setUser(userData?.user);
         setIsAuthenticated(true);
       } catch (error) {
         setUser(null);
         setIsAuthenticated(false);
-        console.error('Error fetching user data:', error);
+        console.error("Error fetching user data:", error);
       } finally {
         setIsLoaded(true);
       }
@@ -26,8 +25,7 @@ const AuthProvider = ({ children }) => {
 
     fetchUserData();
 
-    return () => {
-    };
+    return () => {};
   }, []);
 
   if (!isLoaded) {
