@@ -14,4 +14,5 @@ public class DataMailDTO {
     private String subject;
     private String content;
     private Map<String, Object> props;
+    private String template;
 }

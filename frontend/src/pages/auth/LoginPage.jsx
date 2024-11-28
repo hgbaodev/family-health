@@ -1,4 +1,14 @@
-import { Form, Input, Space, Button, message, Divider, Flex } from "antd";
+import {
+  Form,
+  Input,
+  Space,
+  Button,
+  message,
+  Divider,
+  Flex,
+  Row,
+  Col,
+} from "antd";
 import Title from "antd/es/typography/Title";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png";
@@ -7,6 +17,7 @@ import { useVerify } from "~/api/auth/verify";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { GoogleLogin } from "@react-oauth/google";
+import FacebookLogin from "@greatsumini/react-facebook-login";
 
 const LoginPage = () => {
   const [form] = Form.useForm();
@@ -145,15 +156,39 @@ const LoginPage = () => {
         </Link>
       </p>
       <Divider></Divider>
-      <Flex justify="center" align="center">
-        <GoogleLogin
-          text="Google"
-          onSuccess={handleGoogleLogin}
-          onError={() => {
-            console.log("Login Failed");
-          }}
-        />
-      </Flex>
+      <Flex justify="center" align="center"></Flex>
+      <Row gutter={16}>
+        <Col span={12}>
+          <GoogleLogin
+            onSuccess={handleGoogleLogin}
+            onError={() => {
+              console.log("Login Failed");
+            }}
+          />
+        </Col>
+        <Col span={12}>
+          <FacebookLogin
+            appId="1550119078967031"
+            style={{
+              backgroundColor: "#4267b2",
+              color: "#fff",
+              fontSize: "16px",
+              padding: "6px 12px",
+              border: "none",
+              borderRadius: "4px",
+            }}
+            onSuccess={(response) => {
+              console.log("Login Success!", response);
+            }}
+            onFail={(error) => {
+              console.log("Login Failed!", error);
+            }}
+            onProfileSuccess={(response) => {
+              console.log("Get Profile Success!", response);
+            }}
+          />
+        </Col>
+      </Row>
     </Space>
   );
 };

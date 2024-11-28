@@ -18,7 +18,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @RequiredArgsConstructor
 @Slf4j
-public class ApplicationConfig {
+class ApplicationConfig {
 
   private final UserRepository repository;
 
