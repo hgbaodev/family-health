@@ -48,11 +48,6 @@ spring:
             client-secret: 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
             redirect-uri: "${GOOGLE_REDIRECT_URI:http://localhost:3001/api/oauth2/google/callback}"
             scope: openid, profile, email
-  data:
-    redis:
-      host: localhost
-      port: 6379
-      timeout: 10000
 
   kafka:
     bootstrap-servers: kafka:29092,localhost:9092
@@ -67,12 +62,6 @@ spring:
     producer:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-
-#SETUP spring logging
-logging:
-  level:
-    org.springframework: INFO
-    com.hgbaodev.backend: INFO
 
 #JWT
 application:

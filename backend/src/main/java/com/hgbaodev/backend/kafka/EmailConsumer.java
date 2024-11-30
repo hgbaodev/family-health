@@ -2,7 +2,6 @@ package com.hgbaodev.backend.kafka;
 
 import com.hgbaodev.backend.dto.response.DataMailDTO;
 import com.hgbaodev.backend.service.MailService;
-import com.hgbaodev.backend.utils.Const;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
