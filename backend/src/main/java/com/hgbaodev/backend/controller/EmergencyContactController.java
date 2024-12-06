@@ -7,6 +7,7 @@ import com.hgbaodev.backend.dto.request.emergencyContact.UpdateEmergencyContactR
 import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.service.AuthenticationService;
 import com.hgbaodev.backend.service.EmergencyContactService;
+import com.hgbaodev.backend.utils.CustomPagination;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -74,7 +75,6 @@ public class EmergencyContactController {
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<String>> deleteEmergencyContact(@PathVariable("id") Integer id) {
         try {
-            // Kiểm tra xem liên hệ khẩn cấp có tồn tại hay không
             EmergencyContact contact = emergencyContactService.getEmergencyContactById(id);
             if (contact == null) {
                 return new ResponseEntity<>(new ApiResponse<>(HttpStatus.NOT_FOUND.value(), "Emergency contact not found", null), HttpStatus.NOT_FOUND);
@@ -90,18 +90,16 @@ public class EmergencyContactController {
     }
 
     @GetMapping
-    public  ResponseEntity<ApiResponse<List<EmergencyContact>>> getAllEmergencyContacts(
+    public  ResponseEntity<ApiResponse<CustomPagination<EmergencyContact>>> getAllEmergencyContacts(
             @RequestParam(defaultValue =  "1") int page,
             @RequestParam(defaultValue =  "8") int size,
             @RequestParam(defaultValue =  "")  String keyword){
 
-        Page<EmergencyContact> emergencyContactsPage = emergencyContactService.getAllEmergencyContacts(page, size, keyword);
-
-        List<EmergencyContact> emergencyContactsContent = emergencyContactsPage.getContent();
-        ApiResponse<List<EmergencyContact>> response = new ApiResponse<>(
+        CustomPagination<EmergencyContact> emergencyContactsPage = emergencyContactService.getAllEmergencyContacts(page, size, keyword);
+        ApiResponse<CustomPagination<EmergencyContact>> response = new ApiResponse<>(
                 HttpStatus.OK.value(),
                 "Get list emergency contact successfully",
-                emergencyContactsContent
+                emergencyContactsPage
         );
         return new ResponseEntity<>(response, HttpStatus.OK);
     }

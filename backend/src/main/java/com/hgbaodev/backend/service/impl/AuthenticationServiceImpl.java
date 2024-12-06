@@ -244,6 +244,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                         .firstname(user.getFirstname())
                         .lastname(user.getLastname())
                         .email(user.getEmail())
+                        .vip(user.isVip())
                         .build())
                 .build();
 

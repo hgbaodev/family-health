@@ -6,17 +6,21 @@ import { useEmergencyContactStore } from "~/stores/emergencyContactStore";
 import { useDeleteEmergencyContact } from "~/api/emergency-contacts/delete-emergencyContact";
 import { useTranslation } from "react-i18next";
 
-const useEmergencyContactColumns= () => {
+const useEmergencyContactColumns = () => {
   const { t } = useTranslation();
 
-  const { setOpenUpdateModal, setEmergencyContact } = useEmergencyContactStore((state) => state);
+  const { setOpenUpdateModal, setEmergencyContact } = useEmergencyContactStore(
+    (state) => state
+  );
 
   const mutateDelete = useDeleteEmergencyContact({
     onSuccess: () => {
       message.success("Delete emergency Contact successfully");
     },
     onError: (error) => {
-      message.error(`Delete emergency contact failed. Reason: ${error.message}`);
+      message.error(
+        `Delete emergency contact failed. Reason: ${error.message}`
+      );
     },
   });
 
@@ -32,15 +36,14 @@ const useEmergencyContactColumns= () => {
   return useMemo(
     () => [
       {
-        title: t("ID"),
-        dataIndex: "contactID",
-        key: "contactID",
+        title: "ID",
+        dataIndex: "id",
+        key: "id",
         align: "center",
       },
 
-
       {
-        title: t("EmergencyContactPage.Name"),
+        title: "Name",
         dataIndex: "name",
         key: "name",
         align: "center",
@@ -57,13 +60,6 @@ const useEmergencyContactColumns= () => {
         dataIndex: "phoneNumber",
         key: "phoneNumber",
       },
-
-    {
-        title: t("EmergencyContactPage.User ID"),
-        dataIndex: "userID",
-        key: "userID",
-        },
-
       {
         title: t("Action"),
         key: "action",
@@ -80,10 +76,7 @@ const useEmergencyContactColumns= () => {
               okText="Yes"
               cancelText="No"
             >
-              <Button
-                danger
-                icon={<DeleteOutlined />}
-              />
+              <Button danger icon={<DeleteOutlined />} />
             </Popconfirm>
           </Space>
         ),

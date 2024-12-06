@@ -1,4 +1,4 @@
-package com.hgbaodev.backend.dto.request.users;
+package com.hgbaodev.backend.dto.request.auth;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import lombok.Setter;
 @Setter
 @Builder
 public class ChangePasswordRequest {
-
     private String currentPassword;
     private String newPassword;
     private String confirmationPassword;

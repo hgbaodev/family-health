@@ -15,12 +15,14 @@ export const EmergencyContactTable = () => {
     setKeyword,
   } = useTable(useEmergencyContacts, ROW_PER_PAGE, columns);
 
+  console.log("emergencyContacts", emergencyContacts);
+
   return (
     <Table
       columns={columns}
       dataSource={emergencyContacts}
-      size="middle"
-      rowKey={(record) => record.emergencyContactID}
+      size="small"
+      rowKey={(record) => record.id}
       pagination={pagination}
       loading={isLoading}
       scroll={{ x: "max-content" }}

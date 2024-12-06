@@ -2,8 +2,8 @@ INSERT INTO users (id, email, firstname, lastname, password, role, date, is_veri
 SELECT 1, 'admin@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'Admin', '2024-10-10 09:30:00', 1
     WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'admin@gmail.com');
 
-INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
-SELECT 2, 'hgbaodevservice@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-10-10 09:30:00', 1
+INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify, vip)
+SELECT 2, 'hgbaodevservice@gmail.com', 'Hoang Gia', 'Bao', '$2a$10$hCYtqGLNDW9W374lnZLYq.NUOQU4NaE9HMpvaj47s1VSIbfCSyBGC', 'User', '2024-10-10 09:30:00', 1, 1
     WHERE NOT EXISTS (SELECT 1 FROM users WHERE email = 'hgbaodevservice@gmail.com');
 
 INSERT INTO users (id, email, firstname, lastname, password, role, date, is_verify)
@@ -749,6 +749,21 @@ INSERT INTO contacts (user_id, content, status, date)
 SELECT 6, 'Message from user 6 - Contact 42', false, '2023-10-28 11:15:00'
 WHERE NOT EXISTS (SELECT 1 FROM contacts WHERE user_id = 6 AND content = 'Message from user 6 - Contact 42');
 
+-- Liên hệ khẩn cấp
+INSERT INTO emergency_contacts (user_id, name, relationship, phone_number)
+SELECT * FROM (
+                  SELECT 2 AS user_id, 'Nguyen Van A' AS name, 'Brother' AS relationship, '0912345678' AS phone_number UNION ALL
+                  SELECT 2, 'Tran Thi B', 'Sister', '0912345679' UNION ALL
+                  SELECT 2, 'Le Van C', 'Father', '0912345680' UNION ALL
+                  SELECT 2, 'Pham Thi D', 'Mother', '0912345681' UNION ALL
+                  SELECT 2, 'Hoang Van E', 'Friend', '0912345682' UNION ALL
+                  SELECT 2, 'Nguyen Thi F', 'Colleague', '0912345683' UNION ALL
+                  SELECT 2, 'Do Van G', 'Neighbor', '0912345684' UNION ALL
+                  SELECT 2, 'Bui Thi H', 'Cousin', '0912345685' UNION ALL
+                  SELECT 2, 'Dang Van I', 'Uncle', '0912345686' UNION ALL
+                  SELECT 2, 'Vu Thi J', 'Aunt', '0912345687'
+              ) AS new_data
+WHERE NOT EXISTS (SELECT 1 FROM emergency_contacts);
 
 -- Dữ liệu thông tin bảng
 INSERT INTO appointments (id, member_id, time, doctor, location)

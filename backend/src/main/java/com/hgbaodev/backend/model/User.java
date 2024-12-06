@@ -36,6 +36,9 @@ public class User implements UserDetails {
   private String email;
   private String password;
 
+  @Column(name = "vip", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+  private boolean vip;
+
   @Column(name = "is_verify", nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
   private boolean is_verify;
 

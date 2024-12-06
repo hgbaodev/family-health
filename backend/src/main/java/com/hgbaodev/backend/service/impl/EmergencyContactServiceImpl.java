@@ -6,6 +6,7 @@ import com.hgbaodev.backend.repository.EmergencyContactRepository;
 import com.hgbaodev.backend.repository.MemberRepository;
 import com.hgbaodev.backend.service.EmergencyContactService;
 import com.hgbaodev.backend.service.MemberService;
+import com.hgbaodev.backend.utils.CustomPagination;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -61,12 +62,10 @@ public class EmergencyContactServiceImpl implements EmergencyContactService {
 
 
     @Override
-    public Page<EmergencyContact> getAllEmergencyContacts(int page, int size, String keyword) {
+    public CustomPagination<EmergencyContact> getAllEmergencyContacts(int page, int size, String keyword) {
         Pageable pageable = PageRequest.of(page - 1, size);
-        if (keyword != null && !keyword.isEmpty()) {
-            return emergencyContactRepository.findByKeyword(keyword,  pageable);
-        }
-        return emergencyContactRepository.findAll(pageable);
+        Page<EmergencyContact> emergencyContactPage = emergencyContactRepository.findByKeyword(keyword,  pageable);
+        CustomPagination<EmergencyContact> customPagination = new CustomPagination<>(emergencyContactPage);
+        return customPagination;
     }
-
 }

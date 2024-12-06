@@ -1,6 +1,7 @@
 package com.hgbaodev.backend.service;
 
 import com.hgbaodev.backend.model.EmergencyContact;
+import com.hgbaodev.backend.utils.CustomPagination;
 import org.springframework.data.domain.Page;
 
 public interface EmergencyContactService {
@@ -8,6 +9,6 @@ public interface EmergencyContactService {
     EmergencyContact updateEmergencyContact(EmergencyContact emergencyContact);
     void deleteEmergencyContact(Integer contactID);
     EmergencyContact getEmergencyContactById(Integer contactID);
-    Page<EmergencyContact> getAllEmergencyContacts(int page, int size, String keyword);
+    CustomPagination<EmergencyContact> getAllEmergencyContacts(int page, int size, String keyword);
 
 }

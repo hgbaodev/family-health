@@ -1,7 +1,6 @@
 server:
   port: 3001
 
-#SETUP spring boot
 spring:
   servlet:
     multipart:
@@ -93,5 +92,9 @@ cloudinary:
   cloud-name: dbpmgfsqf
   api-key: 426457797134772
   api-secret: -XO1BWyQTQLbtt5QdUr-K-go1yc
+
+stripe:
+  api:
+    key: sk_test_51QE6TrKbGoIIRrN3C2fBqSJplroGCSV9kTVZ5uB4ZLMrYMoee5bqAlngdX33LUhNaciVzxP4nD7UG9GHHUyjgll300th9gVbyI
 
 

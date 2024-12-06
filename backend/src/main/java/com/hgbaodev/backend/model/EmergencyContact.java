@@ -30,6 +30,4 @@ public class EmergencyContact {
 
     @Column(name = "phone_number" , nullable = false)
     private String phoneNumber;
-
-
 }
