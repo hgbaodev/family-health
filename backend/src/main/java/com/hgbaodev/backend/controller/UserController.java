@@ -1,10 +1,8 @@
 package com.hgbaodev.backend.controller;
 
-import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
+import com.hgbaodev.backend.dto.request.auth.ChangePasswordRequest;
 import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.dto.response.UserResponse;
-import com.hgbaodev.backend.model.Member;
-import com.hgbaodev.backend.model.User;
 import com.hgbaodev.backend.service.UserService;
 import com.hgbaodev.backend.utils.CustomPagination;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")

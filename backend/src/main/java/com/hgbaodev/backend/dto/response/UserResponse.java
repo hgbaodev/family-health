@@ -30,4 +30,6 @@ public class UserResponse {
     private LocalDateTime date;
 
     Role role;
+
+    boolean vip;
 }

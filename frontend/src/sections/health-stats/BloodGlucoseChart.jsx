@@ -10,7 +10,7 @@ const BloodGlucoseChart = ({ selectedMemberId, selectedStatType, date }) => {
 
   return (
     <div>
-      <h2>Blood Glucose Tracker</h2>
+      <h2>Máy theo giỏi đường huyết</h2>
       {/* ResponsiveContainer đảm bảo biểu đồ có thể điều chỉnh kích thước */}
       <ResponsiveContainer width="100%" height={400}>
         <LineChart
@@ -26,7 +26,7 @@ const BloodGlucoseChart = ({ selectedMemberId, selectedStatType, date }) => {
               day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'
             })}
           />
-          <YAxis yAxisId="left" label={{ value: 'Blood Glucose (mg/dL)', angle: -90, position: 'insideLeft' }} />
+          <YAxis yAxisId="left" label={{ value: 'Đường huyết (mg/dL)', angle: -90, position: 'insideLeft' }} />
           <Tooltip />
           <Line yAxisId="left" type="monotone" dataKey="statValue" stroke="#FFA500" strokeWidth={2} name={selectedStatType} />
         </LineChart>

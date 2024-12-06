@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
-import { Layout, Drawer, Grid, Space } from "antd";
+import { Layout, Drawer, Grid, Space, Button, Flex } from "antd";
 import MenuCustom from "./Menu";
 import logo from "../../assets/logo.png";
 import { useNavigate } from "react-router-dom";
+import { api } from "~/config/api";
 
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
 
-function ResponsiveSider({ collapsed, setCollapsed }) {
 
+function ResponsiveSider({ collapsed, setCollapsed }) {
   const [isMobile, setIsMobile] = useState(false);
   const screens = useBreakpoint();
   const navigate = useNavigate();
+  
 
   useEffect(() => {
     setIsMobile(!screens.lg);
   }, [screens]);
+
+  const handlePayment = async () => {
+    try {
+      const urlString = await api.post("/payments/create-checkout-session");
+      window.location.href = urlString;
+    } catch (error) {
+      console.log("Error fetching user data:", error);
+    }
+  };
 
   return (
     <>
@@ -42,6 +53,7 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
             theme="light"
             onClose={() => setCollapsed(false)}
           />
+          <Button onClick={handlePayment}>Nâng cấp</Button>
         </Drawer>
       ) : (
         <Sider
@@ -59,17 +71,21 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
               }}
             >
               <img src={logo} className="w-20 h-20" />
-              {!collapsed && <span className="text-xl font-bold text-primary">
-                FamilyHealth
-              </span>}
-              
+              {!collapsed && (
+                <span className="text-xl font-bold text-primary">
+                  FamilyHealth
+                </span>
+              )}
             </Space>
-            <MenuCustom
-              mode="inline"
-              theme="light"
-              isMobile={isMobile}
-              onClose={() => setCollapsed(false)}
-            />
+            <Flex vertical justify="space-between">
+              <MenuCustom
+                mode="inline"
+                theme="light"
+                isMobile={isMobile}
+                onClose={() => setCollapsed(false)}
+              />
+              <Button onClick={handlePayment} className="bg-green-400 text-white">Nâng cấp</Button>
+            </Flex>
           </>
         </Sider>
       )}

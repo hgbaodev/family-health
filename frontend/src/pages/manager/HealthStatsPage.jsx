@@ -39,16 +39,16 @@ const HealthStatsPage = () => {
     <>
       <Flex align="center" justify="space-between" className="mb-2">
         <PageHeader
-          heading={"Health Stats"}
+          heading={"Thống kê sức khoẻ"}
           links={[
             { title: "Dashboard", href: "/manager" },
-            { title: "Health Stats" },
+            { title: "Thóng kê sức khoẻ" },
           ]}
         />
         <Space>
           <Select
             className="w-[250px]"
-            placeholder="Select member..."
+            placeholder="Chọn thành viên..."
             value={selectedMemberId}
             onChange={handleMemberChange}
           >

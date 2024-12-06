@@ -1,6 +1,6 @@
 package com.hgbaodev.backend.service.impl;
 
-import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
+import com.hgbaodev.backend.dto.request.auth.ChangePasswordRequest;
 import com.hgbaodev.backend.dto.response.UserResponse;
 import com.hgbaodev.backend.mapper.UserMapper;
 import com.hgbaodev.backend.model.User;

@@ -7,17 +7,6 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { GOOGLE_OAUTH_CLIENT_ID } from "~/config/env";
 import AuthProvider from "~/AuthProvider";
 
-// Cấu hình QueryClient với options phù hợp
-// const queryClient = new QueryClient({
-//   defaultOptions: {
-//     queries: {
-//       retry: 1,
-//       refetchOnWindowFocus: false,
-//       staleTime: 5 * 60 * 1000, // 5 phút
-//     },
-//   },
-// });
-
 const queryClient = new QueryClient();
 
 function App() {
@@ -55,11 +44,11 @@ function App() {
     >
       <GoogleOAuthProvider clientId={GOOGLE_OAUTH_CLIENT_ID}>
         <QueryClientProvider client={queryClient}>
-          <AuthProvider>
-            <AntApp>
-              <RouterProvider router={router} />
-            </AntApp>
-          </AuthProvider>
+            <AuthProvider>
+              <AntApp>
+                <RouterProvider router={router} />
+              </AntApp>
+            </AuthProvider>
         </QueryClientProvider>
       </GoogleOAuthProvider>
     </ConfigProvider>

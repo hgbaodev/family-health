@@ -4,11 +4,15 @@ import "simplebar-react/dist/simplebar.min.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useCallback, useMemo } from "react";
 import MenuDashboardConfig from "~/layouts/DashboardLayout/menuDashboardConfig";
+import { useAuthStore } from "~/stores/authStore";
 
 const MenuCustom = ({ isMobile, onClose, theme = "light", ...props }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const menuItems = MenuDashboardConfig();
+  const { user } = useAuthStore();
+
+  console.log("user", user);
 
   const findItemByPath = useCallback((items, path) => {
     for (const item of items) {

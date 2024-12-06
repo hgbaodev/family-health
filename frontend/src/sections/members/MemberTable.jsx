@@ -1,10 +1,34 @@
 import { ExportOutlined } from "@ant-design/icons";
-import { Button, Input, Table, Tag } from "antd";
+import { Button, Input, Table } from "antd";
 import useMemberColumns from "./MemberColumn";
 import { ROW_PER_PAGE } from "../../config/constants";
 import { useMembers } from "../../api/members/get-members";
 import { useTable } from "~/hooks/useTable";
 import { useMembersStore } from "~/stores/memberStore";
+import * as XLSX from "xlsx"; // Thư viện xlsx
+import { saveAs } from "file-saver"; // Lưu file
+
+const handleExportExcel = (data) => {
+  if (!data || data.length === 0) {
+    console.warn("Không có dữ liệu để xuất.");
+    return;
+  }
+
+  // Chuẩn bị dữ liệu Excel
+  const worksheet = XLSX.utils.json_to_sheet(data); // Chuyển mảng dữ liệu thành worksheet
+  const workbook = XLSX.utils.book_new(); // Tạo workbook
+  XLSX.utils.book_append_sheet(workbook, worksheet, "Members"); // Thêm worksheet vào workbook
+
+  // Xuất file
+  const excelBuffer = XLSX.write(workbook, {
+    bookType: "xlsx",
+    type: "array",
+  });
+  saveAs(
+    new Blob([excelBuffer], { type: "application/octet-stream" }),
+    "Members.xlsx"
+  );
+};
 
 export const MemberTable = () => {
   const columns = useMemberColumns();
@@ -40,8 +64,10 @@ export const MemberTable = () => {
             allowClear
             onSearch={setKeyword}
           />
-          <Button icon={<ExportOutlined />}>
-            Export <Tag color="blue">Coming Soon</Tag>
+          <Button icon={<ExportOutlined />}
+          onClick={() => handleExportExcel(data)}
+          >
+            Export 
           </Button>
         </div>
       )}

@@ -1,21 +1,15 @@
 package com.hgbaodev.backend.controller;
 
-import com.hgbaodev.backend.dto.request.users.ChangePasswordRequest;
 import com.hgbaodev.backend.dto.response.ApiResponse;
 import com.hgbaodev.backend.dto.response.ContactResponse;
-import com.hgbaodev.backend.dto.response.UserResponse;
 import com.hgbaodev.backend.model.Contact;
 import com.hgbaodev.backend.service.ContactService;
-import com.hgbaodev.backend.service.UserService;
 import com.hgbaodev.backend.utils.CustomPagination;
 import lombok.RequiredArgsConstructor;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 @RestController
 @RequestMapping("/api/v1/contacts")

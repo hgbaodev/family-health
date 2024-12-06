@@ -7,10 +7,14 @@ import { useNavigate } from "react-router-dom";
 const { Sider } = Layout;
 const { useBreakpoint } = Grid;
 
+
+
 function ResponsiveSider({ collapsed, setCollapsed }) {
   const [isMobile, setIsMobile] = useState(false);
   const screens = useBreakpoint();
   const navigate = useNavigate();
+
+  
 
   useEffect(() => {
     setIsMobile(!screens.lg);
@@ -48,7 +52,7 @@ function ResponsiveSider({ collapsed, setCollapsed }) {
                 navigate("/manager");
               }}
             >
-              <img src={logo} className="w-14 h-14" />
+              <img src={logo} className="w-20 h-20 object-fill" />
               <Typography.Title level={4} color="text-green-600">
                 FamilyHealth
               </Typography.Title>
