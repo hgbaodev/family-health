@@ -57,19 +57,6 @@ npm run dev
 - **Email Service**: Provide SMTP details in the Spring Boot application properties.  
 - **OpenAI API**: Add your OpenAI API key to the backend configuration.  
 
-## 📂 Project Structure  
-
-```
-family-medical-log  
-├── backend/  
-│   ├── src/main/java/com/yourapp/...  
-│   └── src/main/java/com/...
-├── frontend/  
-│   ├── src/components/...  
-│   └── src/pages/...  
-└── README.md  
-```  
-
 ## 📸 Screenshots  
 
 ### TECHNICAL
