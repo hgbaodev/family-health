@@ -72,14 +72,20 @@ family-medical-log
 
 ## 📸 Screenshots  
 
-### 1. Dashboard  
-![Dashboard Screenshot](path/to/dashboard-screenshot.png)  
+### TECHNICAL
+![Technical](/z.document/image/Technical.png)
 
-### 2. Member Details  
-![Member Details Screenshot](path/to/member-details-screenshot.png)  
+### 1. Home  
+![Home](/z.document/image/home.png)  
+
+### 2. Dashboard  
+![Dasboard](/z.document/image/dashboard.png)
+
+### 2. Health stats  
+![HealthStats](/z.document/image/health-stats.png)  
 
 ### 3. AI Recommendations  
-![AI Recommendations Screenshot](path/to/ai-recommendations-screenshot.png)  
+![AI Recommendations](/z.document/image/chat-ai.png)  
 
 ## 📝 License  
 This project is licensed under the MIT License.  
