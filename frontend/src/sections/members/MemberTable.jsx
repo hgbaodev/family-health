@@ -14,12 +14,10 @@ const handleExportExcel = (data) => {
     return;
   }
 
-  // Chuẩn bị dữ liệu Excel
   const worksheet = XLSX.utils.json_to_sheet(data); // Chuyển mảng dữ liệu thành worksheet
   const workbook = XLSX.utils.book_new(); // Tạo workbook
   XLSX.utils.book_append_sheet(workbook, worksheet, "Members"); // Thêm worksheet vào workbook
 
-  // Xuất file
   const excelBuffer = XLSX.write(workbook, {
     bookType: "xlsx",
     type: "array",
