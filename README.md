@@ -84,6 +84,4 @@ Contributions are welcome! Feel free to fork the repository and submit a pull re
 - **Developer**: [hgbaodev](mailto:novutechvn@gmail.com)  
 - **GitHub**: [GitHub Profile](https://github.com/hgbaodev)  
 
----
-
 Let me know if you'd like to make any changes or add more details! 😊
