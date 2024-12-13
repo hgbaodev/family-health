@@ -40,7 +40,7 @@ const UpdateAppointmentModal = () => {
 
   return (
     <Modal
-      title="Update Member"
+      title="Update Appointments"
       open={openUpdateModal}
       onCancel={() => setOpenUpdateModal(false)}
       footer={null}

@@ -41,7 +41,7 @@ const UpdateVaccinationModal = () => {
 
   return (
     <Modal
-      title="Update Member"
+      title="Update Vaccinations"
       open={openUpdateModal}
       onCancel={() => setOpenUpdateModal(false)}
       footer={null}
