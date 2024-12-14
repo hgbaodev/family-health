@@ -36,7 +36,7 @@ const CreateAppointmentModal = () => {
 
   return (
     <Modal
-      title="Create Vaccination"
+      title="Create Appointment"
       open={openCreateModal}
       onCancel={() => setOpenCreateModal(false)}
       footer={null}
